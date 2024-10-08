@@ -7,6 +7,7 @@
 <Button />
 
 <!--Props-->
+<Button textColor=#000000 clickTextColor=#FFFFFF text='learning' color=#E09F3E />
 
 
 <h1>Welcome to SvelteKit</h1>

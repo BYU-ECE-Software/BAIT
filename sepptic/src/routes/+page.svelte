@@ -1,13 +1,16 @@
 <script lang="ts">
-    import Button from '$lib/components/atoms/Button.svelte';
+    // We can specify Components in the lib/indes.ts file to be imported using an Alias! pretty cool
+    import {RootButton} from '$lib';
+    import {ButtonOne} from '$lib';
 
 </script>
-<h1>custom button demo</h1>
-<!-- Default button -->
-<Button />
 
-<!--Props-->
-<Button textColor=#000000 clickTextColor=#FFFFFF text='learning' color=#E09F3E />
+
+<h1>custom button demo</h1>
+<RootButton />
+<ButtonOne />
+<!-- Default button -->
+
 
 
 <h1>Welcome to SvelteKit</h1>

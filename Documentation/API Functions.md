@@ -82,6 +82,15 @@ classDiagram
         message: string
     }
 
-    
+    style APIauthPOST fill:#008,color:#FFF
+    style APIauthDELETE fill:#008,color:#FFF
+    style APIregisterPOST fill:#008,color:#FFF
+    style APIprofileGET fill:#008,color:#FFF
+    style APIprofilePUT fill:#008,color:#FFF
+    style APIprogressGET fill:#008,color:#FFF
+    style APIprogressPOST fill:#008,color:#FFF
+    style APIcampaignGET fill:#008,color:#FFF
+    style APIchatGET fill:#008,color:#FFF
+    style APIchatPOST fill:#008,color:#FFF
 
 ```

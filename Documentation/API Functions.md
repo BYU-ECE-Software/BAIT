@@ -93,4 +93,70 @@ classDiagram
     style APIchatGET fill:#008,color:#FFF
     style APIchatPOST fill:#008,color:#FFF
 
+    class DB createUser{
+        email: string
+        password: string
+        name: string
+        -------------------
+        userId: int
+        message: string
+        status: int
+    }
+
+    class DB updateUser{
+        userId: int
+        email: string
+        password: string
+        name: string
+        -------------------
+        message: string
+        status: int
+    }
+
+    class DB getUser{
+        userId: int
+        -------------------
+        email: string
+        password: string
+        name: string
+        message: string
+        status: int
+    }
+
+    class DB createSession{
+        userId: int
+        -------------------
+        sessionId: int
+        token: string
+        expiration: datetime
+        message: string
+        status: int
+    }
+
+    class DB deleteSession{
+        sessionId: int
+        token: int
+        -------------------
+        message: string
+        status: int
+    }
+
+    class DB getSession{
+        sessionId: int
+        token: int
+        -------------------
+        userId: int
+        expiration: datetime
+        message: string
+        status: int
+    }
+
+    class DB purgeSessions{
+        -------------------
+        message: string
+        status: int
+    }
+
+    
+
 ```

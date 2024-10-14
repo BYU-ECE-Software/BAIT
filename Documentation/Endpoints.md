@@ -77,7 +77,7 @@
             - character: int
             - intel: int
 
-# /campaigns
+# /campaign
 ## GET
 - Description: Get a campaign
 - Request:

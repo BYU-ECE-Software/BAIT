@@ -14,10 +14,12 @@ classDiagram
         password: string
         -------------------
         token: string
+        sessionId: int
         message: string
     }
 
     class API auth DELETE{
+        SessionID: int
         Token: string
         -------------------
         message: string
@@ -131,6 +133,15 @@ classDiagram
         status: int
     }
 
+    class DB authUser{
+        email: string
+        password: string
+        -------------------
+        userId: int
+        message: string
+        status: int
+    }
+
     class DB createSession{
         userId: int
         -------------------
@@ -226,6 +237,7 @@ classDiagram
     style DBGetConversation fill:#F00,color:#FFF
     style DBAddMessage fill:#F00,color:#FFF
     style DBGetMessages fill:#F00,color:#FFF
+    style DBauthUser fill:#F00,color:#FFF
 
     class JSON Get{
         json: json
@@ -257,14 +269,44 @@ classDiagram
 
     style QueryAI fill:#0A0,color:#FFF
 
-    class CheckUserExists{
+
+
+
+
+
+    class LoginUser{
         email: string
+        password: string
         -------------------
-        exists: bool
+        token: int
+        sessionId: int
         message: string
         status: int
     }
 
+    class HashPassword{
+        password: string
+        -------------------
+        hash: string
+    }
+
+    class CheckUserExists{
+        email: string
+        -------------------
+        exists: bool
+    }
+
+    style LoginUser fill:#FF0,color:#000
+    style HashPassword fill:#FF0,color:#000
     style CheckUserExists fill:#FF0,color:#000
+
+    APIauthPOST --|> LoginUser
+    LoginUser --|> HashPassword
+    LoginUser --|> DBauthUser
+    LoginUser --|> DBcreateSession
+    APIauthDELETE --|> DBdeleteSession
+    APIregisterPOST --|> CheckUserExists
+    APIregisterPOST --|> HashPassword
+    APIregisterPOST --|> DBcreateUser
 
 ```

@@ -218,6 +218,24 @@ classDiagram
     style DBGetConversation fill:#F00,color:#FFF
     style DBAddMessage fill:#F00,color:#FFF
     style DBGetMessages fill:#F00,color:#FFF
+
+    class JSON Get{
+        json: json
+        -------------------
+        message: string
+        status: int
+    }
+
+    class JSON GetCampaign{
+        json: json
+        -------------------
+        message: string
+        status: int
+    }
     
+    style JSONGet fill:#F60,color:#FFF
+    style JSONGetCampaign fill:#F60,color:#FFF
+
+    JSONGet --|> JSONGetCampaign
 
 ```

@@ -61,6 +61,8 @@
 - Request:
     - headers:
         - Token: string
+        - CampaignID: int (Optional, required if CharacterID is provided)
+        - CharacterID: int (Optional)
 - Response:
     - body:
         - progress: json list

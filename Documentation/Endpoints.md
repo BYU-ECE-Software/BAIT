@@ -8,6 +8,7 @@
 - Response:
     - body:
         - token: string
+        - sessionId: int
         - message: string
 
 ## DELETE

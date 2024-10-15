@@ -56,6 +56,8 @@ classDiagram
 
     class API progress GET{
         Token: string
+        CampaignID: int
+        CharacterID: int
         -------------------
         progress: json list
         message: string
@@ -196,6 +198,23 @@ classDiagram
         intelIds: int list
     }
 
+    class DB GetCampaignIntel{
+        userId: int
+        campaignId: int
+        -------------------
+        message: string
+        status: int
+        intelIds: int list
+    }
+
+    class DB GetAllIntel{
+        userId: int
+        -------------------
+        message: string
+        status: int
+        intelIds: int list
+    }
+
     class DB GetConversation{
         userId: int
         campaignId: int
@@ -238,31 +257,32 @@ classDiagram
     style DBAddMessage fill:#F00,color:#FFF
     style DBGetMessages fill:#F00,color:#FFF
     style DBauthUser fill:#F00,color:#FFF
+    style DBGetAllIntel fill:#F00,color:#FFF
+    style DBGetCampaignIntel fill:#F00,color:#FFF
 
     class JSON Get{
-        json: json
         -------------------
         message: string
         status: int
+        json: json
     }
 
     class JSON GetCampaign{
-        json: json
         -------------------
         message: string
         status: int
+        json: json
     }
     
     style JSONGet fill:#F60,color:#FFF
     style JSONGetCampaign fill:#F60,color:#FFF
 
-    JSONGet --|> JSONGetCampaign
+    JSONGetCampaign --|> JSONGet
 
     class QueryAI{
-        conversationId: int
-        message: string
+        TBD
         -------------------
-        response: string
+        TBD
         status: int
         message: string
     }
@@ -274,15 +294,7 @@ classDiagram
 
 
 
-    class LoginUser{
-        email: string
-        password: string
-        -------------------
-        token: int
-        sessionId: int
-        message: string
-        status: int
-    }
+
 
     class HashPassword{
         password: string
@@ -296,17 +308,95 @@ classDiagram
         exists: bool
     }
 
-    style LoginUser fill:#FF0,color:#000
+    class GetUserIdFromToken{
+        token: string
+        -------------------
+        userId: int
+        message: string
+        status: int
+    }
+
+    class CalculateAchievements{
+        userId: int
+        -------------------
+        achievements: int list
+    }
+
+    class ValidateProgress{
+        progress: json
+        -------------------
+        valid: bool
+    }
+
+    class ValidateConversation{
+        conversationId: int
+        userId: int
+        -------------------
+        valid: bool
+    }
+
+    class GetConversationHistory{
+        conversationId: int
+        -------------------
+        history: json list
+    }
+
+    class HandleAiMessage{
+        message: string
+        conversationId: int
+        -------------------
+        response: string
+        message: string
+        status: int
+    }
+
     style HashPassword fill:#FF0,color:#000
     style CheckUserExists fill:#FF0,color:#000
+    style GetUserIdFromToken fill:#FF0,color:#000
+    style CalculateAchievements fill:#FF0,color:#000
+    style ValidateProgress fill:#FF0,color:#000
+    style ValidateConversation fill:#FF0,color:#000
+    style GetConversationHistory fill:#FF0,color:#000
+    style HandleAiMessage fill:#FF0,color:#000
 
-    APIauthPOST --|> LoginUser
-    LoginUser --|> HashPassword
-    LoginUser --|> DBauthUser
-    LoginUser --|> DBcreateSession
+    APIauthPOST --|> HashPassword
+    APIauthPOST --|> DBauthUser
+    APIauthPOST --|> DBcreateSession
     APIauthDELETE --|> DBdeleteSession
     APIregisterPOST --|> CheckUserExists
     APIregisterPOST --|> HashPassword
     APIregisterPOST --|> DBcreateUser
+    APIprofileGET --|> GetUserIdFromToken
+    APIprofileGET --|> DBgetUser
+    APIprofilePUT --|> GetUserIdFromToken
+    APIprofilePUT --|> HashPassword
+    APIprofilePUT --|> DBupdateUser
+    APIprogressGET --|> GetUserIdFromToken
+    APIprogressGET --|> CalculateAchievements
+    APIprogressGET --|> DBGetAllIntel
+    APIprogressGET --|> DBGetCampaignIntel
+    APIprogressGET --|> DBGetIntel
+    CalculateAchievements --|> DBGetAllIntel
+    ValidateProgress --|> JSONGetCampaign
+    APIprogressPOST --|> GetUserIdFromToken
+    APIprogressPOST --|> ValidateProgress
+    APIprogressPOST --|> DBAddIntel
+    GetUserIdFromToken --|> DBgetSession
+    APIauthPOST --|> DBpurgeSessions
+    APIcampaignGET --|> JSONGetCampaign
+    APIchatGET --|> GetUserIdFromToken
+    APIchatGET --|> ValidateConversation
+    ValidateConversation --|> DBGetConversation
+    APIchatGET --|> GetConversationHistory
+    APIchatGET --|> DBGetMessages
+    APIchatPOST --|> GetUserIdFromToken
+    APIchatPOST --|> ValidateConversation
+    APIchatPOST --|> DBAddMessage
+    APIchatPOST --|> HandleAiMessage
+    HandleAiMessage --|> QueryAI
+    HandleAiMessage --|> DBAddMessage
+    HandleAiMessage --|> GetConversationHistory
+
+
 
 ```

@@ -1,3 +1,11 @@
+# API Functions
+
+- <span style="color: #00F">**API**</span> - Functions that are called by the client to interact with the server.
+- <span style="color: #F00">**DB**</span> - Functions that are called by the server to interact with the database.
+- <span style="color: #F60">**JSON**</span> - Functions that are called by the server to interact with the JSON files.
+- <span style="color: #0A0">**AI API**</span> - Functions that are called by the server to interact with the AI.
+- <span style="color: #FF0">**Helper Functions**</span> - Functions that are called by other functions to abstract away common functionality.
+
 ```mermaid
 
 classDiagram
@@ -248,5 +256,15 @@ classDiagram
     }
 
     style QueryAI fill:#0A0,color:#FFF
+
+    class CheckUserExists{
+        email: string
+        -------------------
+        exists: bool
+        message: string
+        status: int
+    }
+
+    style CheckUserExists fill:#FF0,color:#000
 
 ```

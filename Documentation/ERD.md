@@ -13,10 +13,11 @@ erDiagram
         userId int FK
     }
     Intel {
-        campaignId int PK
-        characterId int PK
         intelId int PK
-        userId int PK FK
+        campaignId int
+        characterId int
+        intelId int
+        userId int FK
     }
     Conversation {
         conversationId int PK

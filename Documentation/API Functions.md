@@ -157,6 +157,67 @@ classDiagram
         status: int
     }
 
+    class DB AddIntel{
+        userId: int
+        campaignId: int
+        characterId: int
+        intelId: int
+        -------------------
+        message: string
+        status: int
+    }
+
+    class DB GetIntel{
+        userId: int
+        campaignId: int
+        characterId: int
+        -------------------
+        message: string
+        status: int
+        intelIds: int list
+    }
+
+    class DB GetConversation{
+        userId: int
+        campaignId: int
+        characterId: int
+        -------------------
+        conversationId: int
+        message: string
+        status: int
+    }
+
+    class DB AddMessage{
+        conversationId: int
+        userSent: bool
+        message: string
+        -------------------
+        messageId: int
+        timestamp: datetime
+        message: string
+        status: int
+    }
+
+    class DB GetMessages{
+        conversationId: int
+        -------------------
+        messages: json list
+        message: string
+        status: int
+    }
+
+    style DBcreateUser fill:#F00,color:#FFF
+    style DBupdateUser fill:#F00,color:#FFF
+    style DBgetUser fill:#F00,color:#FFF
+    style DBcreateSession fill:#F00,color:#FFF
+    style DBdeleteSession fill:#F00,color:#FFF
+    style DBgetSession fill:#F00,color:#FFF
+    style DBpurgeSessions fill:#F00,color:#FFF
+    style DBAddIntel fill:#F00,color:#FFF
+    style DBGetIntel fill:#F00,color:#FFF
+    style DBGetConversation fill:#F00,color:#FFF
+    style DBAddMessage fill:#F00,color:#FFF
+    style DBGetMessages fill:#F00,color:#FFF
     
 
 ```

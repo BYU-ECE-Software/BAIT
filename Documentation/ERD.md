@@ -16,7 +16,7 @@ erDiagram
         campaignId int PK
         characterId int PK
         intelId int PK
-        userId int FK
+        userId int PK FK
     }
     Conversation {
         conversationId int PK

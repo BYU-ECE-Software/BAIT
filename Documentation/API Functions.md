@@ -238,4 +238,15 @@ classDiagram
 
     JSONGet --|> JSONGetCampaign
 
+    class QueryAI{
+        conversationId: int
+        message: string
+        -------------------
+        response: string
+        status: int
+        message: string
+    }
+
+    style QueryAI fill:#0A0,color:#FFF
+
 ```

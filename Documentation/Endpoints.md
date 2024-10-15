@@ -16,6 +16,7 @@
 - Request:
     - headers:
         - Token: string
+        - SessionID: int
 - Response:
     - body:
         - message: string

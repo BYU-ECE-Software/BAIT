@@ -8,6 +8,7 @@
 - Response:
     - body:
         - token: string
+        - sessionId: int
         - message: string
 
 ## DELETE
@@ -15,6 +16,7 @@
 - Request:
     - headers:
         - Token: string
+        - SessionID: int
 - Response:
     - body:
         - message: string
@@ -59,6 +61,8 @@
 - Request:
     - headers:
         - Token: string
+        - CampaignID: int (Optional, required if CharacterID is provided)
+        - CharacterID: int (Optional)
 - Response:
     - body:
         - progress: json list
@@ -77,7 +81,7 @@
             - character: int
             - intel: int
 
-# /campaigns
+# /campaign
 ## GET
 - Description: Get a campaign
 - Request:

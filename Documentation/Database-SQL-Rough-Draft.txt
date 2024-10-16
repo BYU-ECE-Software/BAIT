@@ -1,0 +1,56 @@
+CREATE TABLE Intel
+(
+  Intel_ID INT NOT NULL,
+  Character_ID INT NOT NULL,
+  Campaign_ID INT NOT NULL,
+  PRIMARY KEY (Intel_ID),
+  UNIQUE (Character_ID),
+  UNIQUE (Campaign_ID)
+);
+
+CREATE TABLE User
+(
+  User_ID INT NOT NULL,
+  Password VARCHAR NOT NULL,
+  Name VARCHAR NOT NULL,
+  Email VARCHAR NOT NULL,
+  PRIMARY KEY (User_ID)
+);
+
+CREATE TABLE Conversation
+(
+  Conversation_ID INT NOT NULL,
+  User_ID INT NOT NULL,
+  PRIMARY KEY (Conversation_ID),
+  FOREIGN KEY (User_ID) REFERENCES User(User_ID)
+);
+
+CREATE TABLE Session
+(
+  Session_ID INT NOT NULL,
+  Token VARCHAR NOT NULL,
+  Expiration DATE NOT NULL,
+  User_ID INT NOT NULL,
+  PRIMARY KEY (Session_ID),
+  FOREIGN KEY (User_ID) REFERENCES User(User_ID)
+);
+
+CREATE TABLE knows
+(
+  User_ID INT NOT NULL,
+  Campaign_ID INT NOT NULL,
+  PRIMARY KEY (User_ID, Campaign_ID),
+  FOREIGN KEY (User_ID) REFERENCES User(User_ID),
+  FOREIGN KEY (Campaign_ID) REFERENCES Intel(Intel_ID)
+);
+
+CREATE TABLE Message
+(
+  User_Sent BOOL NOT NULL,
+  Message VARCHAR NOT NULL,
+  Timestamp DATE NOT NULL,
+  Message_ID INT NOT NULL,
+  Conversation_ID INT NOT NULL,
+  PRIMARY KEY (Message_ID),
+  FOREIGN KEY (Conversation_ID) REFERENCES Conversation(Conversation_ID)
+);

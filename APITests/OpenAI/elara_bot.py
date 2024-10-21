@@ -15,7 +15,7 @@ elara = client.beta.assistants.create(
 class EventHandler(AssistantEventHandler):    
   @override
   def on_text_created(self, text) -> None:
-    print(f"Elara: ", end="", flush=True)
+    print(f"\nElara: ", end="", flush=True)
       
   @override
   def on_text_delta(self, delta, snapshot):
@@ -26,7 +26,7 @@ thread = client.beta.threads.create()
 
 def chat():
   while True:
-    prompt=input("\nYou: ")
+    prompt=input("\n\nYou: ")
     if prompt.lower() == 'exit':
       break
     

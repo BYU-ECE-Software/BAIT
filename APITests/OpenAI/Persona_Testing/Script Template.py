@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from typing_extensions import override
 from openai import AssistantEventHandler
 #
-# Add description of persona here
+#
 #
 client = OpenAI(
     api_key=os.environ.get("OPENAI_API_KEY"),
@@ -13,6 +13,9 @@ client = OpenAI(
 elara = client.beta.assistants.create(
     model='gpt-4o',
 )
+
+# Insert prompt here
+instuctPrompt='',
 
 class EventHandler(AssistantEventHandler):    
   @override
@@ -31,7 +34,7 @@ def chat():
     prompt=input("\n\nYou: ")
     if prompt.lower() == 'exit':
       break
-    
+
     message = client.beta.threads.messages.create(
         thread_id=thread.id,
         role="user",
@@ -41,8 +44,7 @@ def chat():
     with client.beta.threads.runs.stream(
         thread_id=thread.id,
         assistant_id=elara.id,
-        # Change the instructions to alter the initial prompt #########################
-        instructions='',
+        instructions=instuctPrompt,
         event_handler=EventHandler(),
     ) as stream:
         stream.until_done()

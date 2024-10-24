@@ -4,10 +4,7 @@ from dotenv import load_dotenv
 from typing_extensions import override
 from openai import AssistantEventHandler
 #
-#
-# This is the script to run when testing the prompt for Elara, the receptionist. 
-# To chang the prompt itself, edit the 'insctructions' variable on line 48
-#
+# Elara is the receptionist, she only knows the name of the new project, 'SEPPTIC' for now, and she is susceptible to urgency.
 #
 client = OpenAI(
     api_key=os.environ.get("OPENAI_API_KEY"),

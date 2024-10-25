@@ -6,8 +6,9 @@ from openai import AssistantEventHandler
 #
 # Elara is the receptionist, she only knows the name of the new project, 'SEPPTIC' for now, and she is susceptible to urgency.
 #
+load_dotenv()
 client = OpenAI(
-    api_key=os.environ.get("OPENAI_API_KEY"),
+    api_key=os.getenv("OPENAI_API_KEY"),
 )
 
 elara = client.beta.assistants.create(

@@ -9,6 +9,6 @@ This folder is going to store all of the prompts for the different personas. If 
 
 `To use the scripts add your openai key to the .env file`
 
-## All of this is useless now. There is a GUI for this already on the openai website called playground. Go there to do prompt engineering
+## All of this is useless now. There is a GUI for this already on the openai website called playground (https://platform.openai.com/playground/). Go there to do prompt engineering
 
 If there are any atrifacts for what the general plot of the campaign will look like, put it here. Put the prompts and general ideas behind personas in Prompts.md

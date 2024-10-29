@@ -21,6 +21,5 @@
 	<button on:click={() => switchTheme('campaign1')}>Campaign 1</button>
 	<button on:click={() => switchTheme('campaign2')}>Campaign 2</button>
 	<button on:click={() => switchTheme('default')}>Default</button>
-
 	<slot />
 </main>

@@ -22,8 +22,8 @@ erDiagram
     Conversation {
         conversationId int PK
         userId int FK
-        campaignId
-        characterId
+        campaignId int
+        characterId int
     }
     Message {
         messageId int PK

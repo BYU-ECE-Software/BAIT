@@ -1,3 +1,6 @@
+import { PrismaClient } from '@prisma/client';
+import hashPassword from '$lib/logic/hashPassword';
+
 // Helper functions to validate email, password, and name. Returns true if input is valid, false otherwise.
 function validateEmail(email: string) {
     const re = /^[\w-+\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -21,15 +24,42 @@ function validateName(name: string) {
     if (name.length < 2) {
         return false;
     }
-    if (name.length > 75) {
+    if (name.length > 100) {
         return false;
     }
     return true;
 }
 
 
+// Helper function to write to the database. Returns the userId of the new user.
+async function writeToDatabase(email: string, hash: string, name: string) {
+    const prisma = new PrismaClient();
+    try {
+        const user = await prisma.user.create({
+            data: {
+                Email: email,
+                Password: hash,
+                Name: name
+            }
+        });
+        const userId = user.User_ID;
+        return {
+            userId: userId,
+            message: 'User created successfully',
+            status: 200
+        }
+    } catch (e) {
+        return {
+            userId: null,
+            message: 'Error creating user: ' + e,
+            status: 500
+        }
+    }
+}
+
+
 // Main function to create a new user in the database. Returns an object with the userId, message, and status.
-export default function dbCreateUser(email: string, password: string, name: string) {
+export default async function dbCreateUser(email: string, password: string, name: string) {
     // Validate email, password, and name
     if (!validateEmail(email)) {
         return {
@@ -50,11 +80,16 @@ export default function dbCreateUser(email: string, password: string, name: stri
     if (!validateName(name)) {
         return {
             userId: null,
-            message: 'Invalid name. Name must be between 2 and 75 characters long.',
+            message: 'Invalid name. Name must be between 2 and 100 characters long.',
             status: 400
         }
     }
 
+    // Hash the password
+    const hash = await hashPassword(password);
 
+    // Write to the database
+    const response = await writeToDatabase(email, hash, name);
 
+    return response;
 }

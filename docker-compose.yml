@@ -9,6 +9,8 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
       - mariadb_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
     networks:
       - backend
 

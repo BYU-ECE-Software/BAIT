@@ -4,8 +4,8 @@ import type { CampaignThemes, CampaignName, ThemeVariables } from './themeTypes'
 
 export const themes: CampaignThemes = {
   default: {
-    '--color-primary': '#9E2A2B',
-    '--color-secondary': '#E09F3E',
+    '--color-primary': '#4CAF50',
+    '--color-secondary': '#FFFFFF',
     '--color-tertiary': '#333333',
     '--color-four': '#F1F1F1',
     '--color-five': '#F44336',

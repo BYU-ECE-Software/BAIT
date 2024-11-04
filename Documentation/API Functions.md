@@ -27,7 +27,6 @@ classDiagram
 
     class API register POST{
         name: string
-        image: string
         email: string
         password: string
         -------------------
@@ -38,7 +37,6 @@ classDiagram
         Token: string
         -------------------
         name: string
-        image: string
         email: string
         achievements: int list
         message: string
@@ -47,7 +45,6 @@ classDiagram
     class API profile PUT{
         Token: string
         name: string
-        image: string
         email: string
         password: string
         -------------------

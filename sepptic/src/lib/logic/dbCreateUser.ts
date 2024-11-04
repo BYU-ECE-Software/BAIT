@@ -3,7 +3,7 @@ import hashPassword from '$lib/logic/hashPassword';
 
 // Helper functions to validate email, password, and name. Returns true if input is valid, false otherwise.
 function validateEmail(email: string) {
-    const re = /^[\w-+\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    const re: RegExp = /^[\w-\.+]+@([\w-]+\.)+[\w-]{2,4}$/;
     return re.test(email);
 }
 

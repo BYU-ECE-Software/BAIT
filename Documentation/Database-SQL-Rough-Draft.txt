@@ -16,7 +16,8 @@ CREATE TABLE User (
   Password VARCHAR(255) NOT NULL,
   Name VARCHAR(100) NOT NULL,
   Email VARCHAR(255) NOT NULL,
-  PRIMARY KEY (User_ID)
+  PRIMARY KEY (User_ID),
+  UNIQUE (Email)
 );
 
 CREATE TABLE Conversation (

@@ -47,7 +47,7 @@ model User {
   User_ID      Int            @id @default(autoincrement())
   Password     String         @db.VarChar(255)
   Name         String         @db.VarChar(100)
-  Email        String         @db.VarChar(255)
+  Email        String         @unique(map: "Email") @db.VarChar(255)
   Conversation Conversation[]
   Session      Session[]
 }

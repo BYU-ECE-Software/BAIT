@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import hashPassword from '$lib/logic/hashPassword';
+import { encodePassword } from '$lib/logic/crypto';
 
 // Helper functions to validate email, password, and name. Returns true if input is valid, false otherwise.
 async function uniqueEmail(email: string) {
@@ -106,7 +106,7 @@ export default async function dbCreateUser(email: string, password: string, name
     }
 
     // Hash the password
-    const hash = await hashPassword(password);
+    const hash = await encodePassword(password);
 
     // Write to the database
     const response = await writeToDatabase(email, hash, name);

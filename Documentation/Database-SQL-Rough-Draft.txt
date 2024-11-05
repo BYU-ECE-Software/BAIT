@@ -35,14 +35,6 @@ CREATE TABLE Session (
   FOREIGN KEY (User_ID) REFERENCES User(User_ID)
 );
 
-CREATE TABLE knows (
-  User_ID INT NOT NULL,
-  Campaign_ID INT NOT NULL,
-  PRIMARY KEY (User_ID, Campaign_ID),
-  FOREIGN KEY (User_ID) REFERENCES User(User_ID),
-  FOREIGN KEY (Campaign_ID) REFERENCES Intel(Intel_ID)
-);
-
 CREATE TABLE Message (
   Message_ID INT NOT NULL AUTO_INCREMENT,
   User_Sent BOOLEAN DEFAULT FALSE,

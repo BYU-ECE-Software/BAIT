@@ -2,7 +2,18 @@ import { PrismaClient } from '@prisma/client';
 import hashPassword from '$lib/logic/hashPassword';
 
 // Helper functions to validate email, password, and name. Returns true if input is valid, false otherwise.
-function validateEmail(email: string) {
+async function uniqueEmail(email: string) {
+    const prisma = new PrismaClient();
+    const user = await prisma.user.findFirst({
+        where: {
+            Email: email
+        }
+    });
+    console.log(user === null);
+    return user === null;
+}
+
+async function validateEmail(email: string) {
     const re: RegExp = /^[\w-\.+]+@([\w-]+\.)+[\w-]{2,4}$/;
     return re.test(email);
 }
@@ -60,6 +71,15 @@ async function writeToDatabase(email: string, hash: string, name: string) {
 
 // Main function to create a new user in the database. Returns an object with the userId, message, and status.
 export default async function dbCreateUser(email: string, password: string, name: string) {
+    // Ensure email is unique
+    if (!await uniqueEmail(email)) {
+        return {
+            userId: null,
+            message: 'Email already in use',
+            status: 400
+        }
+    }
+
     // Validate email, password, and name
     if (!validateEmail(email)) {
         return {

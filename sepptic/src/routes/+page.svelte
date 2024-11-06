@@ -2,6 +2,7 @@
     // We can specify Components in the lib/index.ts file to be imported using an Alias! pretty cool
     import { CampaignCard } from '$lib';
     import { LearnCard } from '$lib';
+    import { Testimonial } from '$lib'
 
 </script>
 
@@ -12,6 +13,9 @@
     <div class="w-full md:w-1/2 flex justify-center">
         <LearnCard />
     </div>
+</div>
+<div class="gap-6">
+    <Testimonial />
 </div>
 
 

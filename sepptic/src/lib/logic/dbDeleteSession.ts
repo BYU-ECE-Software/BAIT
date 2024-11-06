@@ -38,7 +38,7 @@ async function deleteSession(token: string) {
             }
         });
         return {
-            message: 'Session deleted',
+            message: 'Session deleted. User logged out.',
             status: 200
         }
     } catch (error) {

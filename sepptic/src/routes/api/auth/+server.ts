@@ -1,5 +1,6 @@
 import dbCreateSession from "$lib/logic/dbCreateSession";
 import dbAuthUser from "$lib/logic/dbAuthUser";
+import dbDeleteSession from "$lib/logic/dbDeleteSession";
 import type { RequestEvent } from '@sveltejs/kit';
 
 export async function POST(event: RequestEvent) {
@@ -15,5 +16,14 @@ export async function POST(event: RequestEvent) {
         return new Response(JSON.stringify(response), { status: result.status });
     }
     const sessionResponse = await dbCreateSession(result.userId);
+    return new Response(JSON.stringify(sessionResponse), { status: sessionResponse.status });
+}
+
+export async function DELETE(event: RequestEvent) {
+    const token = event.request.headers.get('token');
+    if (!token) {
+        return new Response(JSON.stringify({ message: 'No token provided', status: 400 }), { status: 400 });
+    }
+    const sessionResponse = await dbDeleteSession(token);
     return new Response(JSON.stringify(sessionResponse), { status: sessionResponse.status });
 }

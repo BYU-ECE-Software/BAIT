@@ -16,7 +16,8 @@ CREATE TABLE User (
   Password VARCHAR(255) NOT NULL,
   Name VARCHAR(100) NOT NULL,
   Email VARCHAR(255) NOT NULL,
-  PRIMARY KEY (User_ID)
+  PRIMARY KEY (User_ID),
+  UNIQUE (Email)
 );
 
 CREATE TABLE Conversation (
@@ -33,14 +34,6 @@ CREATE TABLE Session (
   User_ID INT NOT NULL,
   PRIMARY KEY (Session_ID),
   FOREIGN KEY (User_ID) REFERENCES User(User_ID)
-);
-
-CREATE TABLE knows (
-  User_ID INT NOT NULL,
-  Campaign_ID INT NOT NULL,
-  PRIMARY KEY (User_ID, Campaign_ID),
-  FOREIGN KEY (User_ID) REFERENCES User(User_ID),
-  FOREIGN KEY (Campaign_ID) REFERENCES Intel(Intel_ID)
 );
 
 CREATE TABLE Message (

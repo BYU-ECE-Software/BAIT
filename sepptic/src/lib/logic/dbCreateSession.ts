@@ -31,6 +31,7 @@ async function writeSession(userId: number, token: string, expiration: Date) {
         return {
             sessionId: sessionId,
             token: token,
+            expiration: expiration,
             message: 'Session created successfully',
             status: 200
         }
@@ -38,6 +39,7 @@ async function writeSession(userId: number, token: string, expiration: Date) {
         return {
             sessionId: null,
             token: null,
+            expiration: null,
             message: 'Error creating sessionL: ' + error,
             status: 500
         }

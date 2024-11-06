@@ -21,7 +21,8 @@ export default async function dbCreateUser(email: string, password: string) {
         return {
             success: false,
             message: 'Invalid email or password',
-            status: 400
+            status: 400,
+            userId: null
         }
     }
 
@@ -30,7 +31,8 @@ export default async function dbCreateUser(email: string, password: string) {
         return {
             success: false,
             message: 'Error: User was found by email but by ID',
-            status: 500
+            status: 500,
+            userId: null
         }
     }
 
@@ -38,13 +40,15 @@ export default async function dbCreateUser(email: string, password: string) {
         return {
             success: false,
             message: 'Invalid email or password',
-            status: 400
+            status: 400,
+            userId: null
         }
     }
 
     return {
         success: true,
         message: 'User authenticated successfully',
-        status: 200
+        status: 200,
+        userId: user.User_ID
     }
 }

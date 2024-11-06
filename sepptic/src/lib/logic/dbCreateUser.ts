@@ -9,7 +9,6 @@ async function uniqueEmail(email: string) {
             Email: email
         }
     });
-    console.log(user === null);
     return user === null;
 }
 

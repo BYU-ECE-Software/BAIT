@@ -1,0 +1,47 @@
+{
+    "Campaign Information": {
+        "Name": "Harvesta Foods",
+        "Description": "Corporate Espionage",
+        "Image": "",
+        "Website": "",
+        "Briefing Video": "",
+        "Success Video": "",
+        "Failure Video": ""
+    },
+    "Characters": {
+        "Character01": {
+            "ID": 1,
+            "Name": "Elara",
+            "Title": "Receptionist",
+            "Image": "",
+            "Intel": {
+                "Intel01": {
+                    "Intel ID": 1,
+                    "Intel Description": "Name of projects team lead for location acquisition project: Don Draper.",
+                    "Unlocks Character ID": 2
+                },
+                "Intel02": {
+                    "Intel ID": 2,
+                    "Intel Description": "Office gossip about the finance team lead blowing up at his secretary"
+                },
+                "Intel03": {
+                    "Intel ID": 3,
+                    "Intel Description": "Name of real estate contact to get EPA reports: Ben Dover",
+                    "Unlocks Charachter ID": 3
+                }
+
+            }
+        },
+        "Charachter02": {
+            "ID": 2,
+            "Name": "Don Draper",
+            "Title": "Projects Team Lead"
+        },
+        "Character03": {
+            "ID": 3,
+            "Name": "Ben Dover",
+            "Title": "Real Estate Intern"
+        }
+    }
+
+}

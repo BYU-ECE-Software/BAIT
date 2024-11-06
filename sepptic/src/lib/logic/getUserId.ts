@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 export default async function getUserId(email: string) {
     const prisma = new PrismaClient();
     try {
-        const user = await prisma.user.findUnique({
+        const user = await prisma.user.findFirst({
             where: {
                 Email: email
             }

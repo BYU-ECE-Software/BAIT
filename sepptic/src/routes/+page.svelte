@@ -1,16 +1,23 @@
 <script lang="ts">
     // We can specify Components in the lib/index.ts file to be imported using an Alias! pretty cool
-    import {RootButton} from '$lib';
-    import {ButtonOne} from '$lib';
-    import {InputField} from '$lib'
+    import { CampaignCard } from '$lib';
+    import { LearnCard } from '$lib';
+    import { Testimonial } from '$lib'
+
 </script>
 
+<div class="flex flex-col md:flex-row items-center justify-center gap-6 w-full max-w-4xl mx-auto">
+    <div class="w-full md:w-1/2 flex justify-center">
+        <CampaignCard />
+    </div>
+    <div class="w-full md:w-1/2 flex justify-center">
+        <LearnCard />
+    </div>
+</div>
+<div class="gap-6">
+    <Testimonial />
+</div>
 
-<h1>custom button demo</h1>
-<RootButton />
-<ButtonOne />
-<InputField />
 
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+

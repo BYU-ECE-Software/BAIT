@@ -1,4 +1,4 @@
-import dbCreateUser from '$lib/logic/dbCreateUser';
+import dbCreateUser from '../server/utils/dbCreateUser';
 
 // Test that the function dbCreateUser returns the correct userId when given valid input.
 const name: string = 'Ethan Beere';

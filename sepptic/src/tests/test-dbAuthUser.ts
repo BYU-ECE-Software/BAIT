@@ -1,4 +1,4 @@
-import dbAuthUser from '$lib/logic/dbAuthUser';
+import dbAuthUser from '../server/utils/dbAuthUser';
 
 // Test that the function dbAuthUser returns true or false when given valid input.
 const email = 'ethanbeere123@gmail.com';

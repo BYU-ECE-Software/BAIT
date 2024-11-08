@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { encodePassword } from '$lib/logic/crypto';
+import { encodePassword } from '../../server/utils/crypto';
 
 // Helper functions to validate email, password, and name. Returns true if input is valid, false otherwise.
 async function uniqueEmail(email: string) {
@@ -9,7 +9,6 @@ async function uniqueEmail(email: string) {
             Email: email
         }
     });
-    console.log(user === null);
     return user === null;
 }
 

@@ -35,16 +35,4 @@
 		padding: 2rem;
 		align-items: center;
 	}
-	.banner-top {
-		width: 100%;
-		height: 60px;
-		background-color: #d32f2f; /* Red color */
-	}
-
-	.banner-bottom {
-		width: 100%;
-		height: 100px;
-		background: linear-gradient(to top right, #ffd966, #37474f, #d32f2f);
-		clip-path: polygon(50% 0, 0% 100%, 100% 100%);
-	}
 </style>

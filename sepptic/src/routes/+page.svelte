@@ -1,11 +1,31 @@
 <script lang="ts">
     // We can specify Components in the lib/index.ts file to be imported using an Alias! pretty cool
-    import { CampaignCard } from '$lib';
-    import { LearnCard } from '$lib';
-    import { Testimonial } from '$lib'
+    import { CampaignCard, LearnCard, Testimonial, SignInModal } from '$lib';
+    import { isAuthenticated, signIn } from '$lib/stores/auth';
+    import { onMount } from 'svelte';
+    import { get } from 'svelte/store';
+
+    let formModal = false;
+
+    onMount(() => {
+        if (!get(isAuthenticated)){
+            formModal = true;
+        }
+    })
+
+    function handleSignIn(event: Event){
+        event.preventDefault();
+        signIn();
+        formModal = false;
+    }
 
 </script>
 
+<!-- Cards are imported from our src/lib/components
+
+
+-->
+<SignInModal bind:open={formModal} on:signin={handleSignIn} />
 <div class="flex flex-col md:flex-row items-center justify-center gap-6 w-full max-w-4xl mx-auto">
     <div class="w-full md:w-1/2 flex justify-center">
         <CampaignCard />

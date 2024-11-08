@@ -1,4 +1,4 @@
-import dbCreateUser from "$lib/logic/dbCreateUser";
+import dbCreateUser from "../../../server/utils/dbCreateUser";
 import type { RequestEvent } from '@sveltejs/kit';
 
 export async function POST(event: RequestEvent) {

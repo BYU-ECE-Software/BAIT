@@ -27,7 +27,6 @@
 - Request:
     - body:
         - name: string
-        - image: string (Optional)
         - email: string
         - password: string
 
@@ -40,7 +39,6 @@
 - Response:
     - body:
         - name: string
-        - image: string
         - email: string
         - achievements: int list
 
@@ -51,7 +49,6 @@
         - Token: string
     - body:
         - name: string
-        - image: string
         - email: string
         - password: string
 

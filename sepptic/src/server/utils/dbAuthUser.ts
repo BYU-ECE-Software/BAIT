@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { validatePassword } from '$lib/logic/crypto';
+import { validatePassword } from '../../server/utils/crypto';
 import getUserId from '$lib/logic/getUserId';
 
 // Helper function to get the user

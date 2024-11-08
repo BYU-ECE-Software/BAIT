@@ -1,4 +1,4 @@
-import dbCreateSession from '$lib/logic/dbCreateSession';
+import dbCreateSession from '../server/utils/dbCreateSession';
 
 // Test that the function dbCreateSession returns the session ID and token when given valid input.
 const userId: number = 5;

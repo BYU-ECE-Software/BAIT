@@ -1,6 +1,6 @@
-import dbCreateSession from "$lib/logic/dbCreateSession";
-import dbAuthUser from "$lib/logic/dbAuthUser";
-import dbDeleteSession from "$lib/logic/dbDeleteSession";
+import dbCreateSession from "../../../server/utils/dbCreateSession";
+import dbAuthUser from "../../../server/utils/dbAuthUser";
+import dbDeleteSession from "../../../server/utils/dbDeleteSession";
 import type { RequestEvent } from '@sveltejs/kit';
 
 export async function POST(event: RequestEvent) {

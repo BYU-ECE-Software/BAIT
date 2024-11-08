@@ -1,9 +1,9 @@
 <script lang="ts">
     import { Button, Modal, Label, Input, Checkbox } from 'flowbite-svelte';
-    export let open = false;
+    let { open = false } = $props();
 
-    let email = '';
-    let password = '';
+    let email = $state('');
+    let password = $state('');
 
     async function handleSubmit(event: SubmitEvent) {
         event.preventDefault(); // Prevent the default form submission
@@ -33,7 +33,7 @@
 </script>
 
 <Modal bind:open={open} size="xs" autoclose={false} class="w-full">
-    <form on:submit={handleSubmit} class="flex flex-col space-y-6">
+    <form onsubmit={handleSubmit} class="flex flex-col space-y-6">
         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h3>
         <Label class="space-y-2">
             <span>Email</span>

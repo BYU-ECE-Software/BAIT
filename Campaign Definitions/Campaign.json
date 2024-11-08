@@ -1,12 +1,12 @@
 {
-    "Campaign Information": {
+    "Campaign_Information": {
         "Name": "Harvesta Foods",
-        "Description": "Corporate Espionage",
+        "Description": "Harvesta Foods is a large grocery store chain. They have been teasing a large announcment on their website. Through other sources, it has been confirmed that the announcment is about a new location that Harvesta Foods will be building a grocery store in. You have been hired by a competing grocery store chain to find out what location Harvesta Foods is most likely to purchase.",
         "Image": "",
         "Website": "",
         "Briefing Video": "",
-        "Success Video": "",
-        "Failure Video": ""
+        "Success_Video": "",
+        "Failure_Video": ""
     },
     "Characters": {
         "Character01": {
@@ -14,19 +14,21 @@
             "Name": "Elara",
             "Title": "Receptionist",
             "Image": "",
+            "Susceptability": "Pretexting / gaining trust through OSINT",
+            "Prompt": "",
             "Intel": {
                 "Intel01": {
-                    "Intel ID": 1,
-                    "Intel Description": "Name of projects team lead for location acquisition project: Don Draper.",
+                    "Intel_ID": 1,
+                    "Intel_Description": "Name of projects team lead for location acquisition project: Don Draper.",
                     "Unlocks Character ID": 2
                 },
                 "Intel02": {
-                    "Intel ID": 2,
-                    "Intel Description": "Office gossip about the finance team lead blowing up at his secretary"
+                    "Intel_ID": 2,
+                    "Intel_Description": "Office gossip about the finance team lead blowing up at his secretary"
                 },
                 "Intel03": {
-                    "Intel ID": 3,
-                    "Intel Description": "Name of real estate contact to get EPA reports: Ben Dover",
+                    "Intel_ID": 3,
+                    "Intel_Description": "Name of real estate contact to get EPA reports: Ben Dover",
                     "Unlocks Charachter ID": 3
                 }
 
@@ -35,12 +37,44 @@
         "Charachter02": {
             "ID": 2,
             "Name": "Don Draper",
-            "Title": "Projects Team Lead"
+            "Title": "Projects Team Lead",
+            "Image": "",
+            "Susceptability": "Impersonation from marketing dep.",
+            "Prompt": "",
+            "Intel": {
+                "Intel04": {
+                    "Intel_ID": 4,
+                    "Intel_Description": "Information about what is happening with project. EPA result issues in real estate team. Seller holdout in finance team"
+                }
+            }
         },
         "Character03": {
             "ID": 3,
             "Name": "Ben Dover",
-            "Title": "Real Estate Intern"
+            "Title": "Real Estate Intern",
+            "Image": "",
+            "Susceptability": "Impersonation from projects / quid pro quo",
+            "Prompt": "",
+            "Intel": {
+                "Intel05": {
+                    "Intel_ID": 5,
+                    "Intel_Description": "EPA reports"
+                }
+            }
+        },
+        "Character04": {
+            "ID": 4,
+            "Name": "Finance Bro",
+            "Title": "Finance Team Lead",
+            "Image": "",
+            "Susceptability": "Impersonation from legal",
+            "Promp": "",
+            "Intel": {
+                "Intel06": {
+                    "Intel_ID": 6,
+                    "Intel_Description": "Files on seller holdout"
+                }
+            }
         }
     }
 

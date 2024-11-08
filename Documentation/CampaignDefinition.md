@@ -12,6 +12,8 @@
 - Name
 - Title
 - Image
+- Susceptability
+- Prompt
 - Intel
     - Intel ID
     - Intel Description

@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import { validatePassword } from './crypto';
-import getUserId from '../utils/getUserId';
+import { validatePassword } from '../../server/utils/crypto';
+import getUserId from './getUserId';
 
 // Helper function to get the user
 async function getUser(userId: number) {

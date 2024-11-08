@@ -21,8 +21,6 @@ services:
     container_name: phpmyadmin
     environment:
       PMA_HOST: ${PMA_HOST}
-      PMA_USER: ${MYSQL_USER}
-      PMA_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "8080:80"
     networks:

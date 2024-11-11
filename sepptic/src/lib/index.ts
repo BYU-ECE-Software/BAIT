@@ -8,3 +8,6 @@ export { default as CampaignCard } from './components/molecules/CampaignCard.sve
 export { default as LearnCard } from './components/molecules/LearnCard.svelte';
 export { default as Testimonial } from './components/molecules/Testimonial.svelte';
 export { default as SignInModal } from './components/molecules/SignInModal.svelte';
+export { default as HarvestaFoodsCard } from './components/molecules/HarvestaFoodsCard.svelte';
+export { default as WasteManagementCard } from './components/molecules/WasteManagementCard.svelte';
+export { default as ComputerChipCoCard } from './components/molecules/ComputerChipCoCard.svelte';

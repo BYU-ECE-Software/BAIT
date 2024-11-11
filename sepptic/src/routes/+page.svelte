@@ -4,8 +4,7 @@
     import { isAuthenticated, signIn } from '$lib/stores/auth';
     import { onMount } from 'svelte';
     import { get } from 'svelte/store';
-
-    let formModal = false;
+    let formModal = $state(false);
 
     onMount(() => {
         if (!get(isAuthenticated)){
@@ -25,7 +24,7 @@
 
 
 -->
-<SignInModal bind:open={formModal} on:signin={handleSignIn} />
+<SignInModal open={formModal} />
 <div class="flex flex-col md:flex-row items-center justify-center gap-6 w-full max-w-4xl mx-auto">
     <div class="w-full md:w-1/2 flex justify-center">
         <CampaignCard />

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Button, Input } from 'flowbite-svelte';
     import { SearchOutline } from 'flowbite-svelte-icons';
 </script>

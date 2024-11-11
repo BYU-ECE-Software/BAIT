@@ -4,6 +4,11 @@
 	import { applyTheme } from '$lib/themes/theme';
 	import type { CampaignName } from '$lib/themes/themeTypes';
 	import { NavBar} from "$lib";
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	let selectedTheme: CampaignName = 'default';
 
@@ -21,7 +26,7 @@
 
 <main>
 	<NavBar></NavBar>
-	<slot></slot>
+	{@render children?.()}
 </main>
 
 <style>

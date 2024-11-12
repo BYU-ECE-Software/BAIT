@@ -13,12 +13,20 @@ services:
       - mariadb_data:/var/lib/mysql
     ports:
       - "3306:3306"
+    networks:
+      - sepptic
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: phpmyadmin
     environment:
       PMA_HOST: ${PMA_HOST}
+    networks:
+      - sepptic
 
 volumes:
   mariadb_data:
+
+
+networks:
+  sepptic:

@@ -13,22 +13,12 @@ services:
       - mariadb_data:/var/lib/mysql
     ports:
       - "3306:3306"
-    networks:
-      - backend
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: phpmyadmin
     environment:
       PMA_HOST: ${PMA_HOST}
-    ports:
-      - "8080:80"
-    networks:
-      - backend
 
 volumes:
   mariadb_data:
-
-
-networks:
-  backend:

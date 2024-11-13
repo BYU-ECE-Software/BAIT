@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { CampaignCard, HarvestaFoodsCard, WasteManagementCard, ComputerChipCoCard } from '$lib';
+    import { HarvestaFoodsCard, WasteManagementCard, ComputerChipCoCard } from '$lib';
 
 </script>
 

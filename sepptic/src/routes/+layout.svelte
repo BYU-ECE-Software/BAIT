@@ -6,6 +6,7 @@
 	import { NavBar } from "$lib";
 	import { AuthModalSwitcher } from "$lib";
 	import {isAuthenticated} from "$lib/auth.svelte";
+	import { DarkMode } from 'flowbite-svelte'
 	interface Props {
 		children?: import('svelte').Snippet;
 	}
@@ -28,22 +29,13 @@
 	}
 </script>
 
-<main>
+<main class="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex flex-col">
 	<NavBar></NavBar>
+	<div style='margin-bottom: 3rem;'></div>
 	<AuthModalSwitcher open={formModal} />
 
 	{@render children?.()}
 </main>
 
 <style>
-	main {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-		background-color: #ffffff;
-		font-family: sans-serif;
-		position: relative;
-		padding: 2rem;
-		align-items: center;
-	}
 </style>

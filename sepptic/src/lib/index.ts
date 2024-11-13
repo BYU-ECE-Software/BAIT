@@ -12,3 +12,6 @@ export { default as AuthModalSwitcher } from './components/organisms/AuthModalSw
 export { default as HarvestaFoodsCard } from './components/molecules/HarvestaFoodsCard.svelte';
 export { default as WasteManagementCard } from './components/molecules/WasteManagementCard.svelte';
 export { default as ComputerChipCoCard } from './components/molecules/ComputerChipCoCard.svelte';
+export { default as ProgressBar } from './components/molecules/ProgressBar.svelte';
+export { default as Dashboard } from './components/organisms/Dashboard.svelte';
+export { default as HarvestaVideoPlayer } from './components/molecules/HarvestaVideoPlayer.svelte';

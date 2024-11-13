@@ -58,7 +58,7 @@
             "Intel": [
                 {
                     "Intel_ID": 5,
-                    "Intel_Description": "EPA reports"
+                    "Intel_Description": "Failed EPA tests."
                 }
             ]
         },
@@ -68,11 +68,11 @@
             "Title": "Finance Team Seceratary",
             "Image": "",
             "Susceptability": "Impersonation from legal",
-            "Promp": "",
+            "Prompt": "",
             "Intel": {
                 "Intel06": {
                     "Intel_ID": 6,
-                    "Intel_Description": "Files on seller holdout"
+                    "Intel_Description": "Files on seller holdout."
                 }
             }
         }

@@ -1,12 +1,12 @@
 <script lang="ts">
+    console.log("SignInModal mounted");
     import { Button, Modal, Label, Input, Checkbox } from 'flowbite-svelte';
-    let { open = false } = $props();
-
+    let { onSwitchToRegister, signFormModal = true }: {onSwitchToRegister: () => void, signFormModal: boolean } = $props();
     let email = $state('');
     let password = $state('');
 
     async function handleSubmit(event: SubmitEvent) {
-        event.preventDefault(); // Prevent the default form submission
+        event.preventDefault();
 
         const formData = { email, password };
 
@@ -21,10 +21,8 @@
 
             if (response.ok) {
                 console.log('Login successful');
-                // Handle successful login (e.g., redirect or show a success message)
             } else {
                 console.error('Login failed');
-                // Handle error (e.g., show an error message)
             }
         } catch (error) {
             console.error('Network error:', error);
@@ -32,7 +30,7 @@
     }
 </script>
 
-<Modal bind:open={open} size="xs" autoclose={false} class="w-full">
+<Modal bind:open={signFormModal} size="xs" autoclose={false} class="w-full">
     <form onsubmit={handleSubmit} class="flex flex-col space-y-6">
         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h3>
         <Label class="space-y-2">
@@ -49,7 +47,12 @@
         </div>
         <Button type="submit" class="w-full">Login to your account</Button>
         <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
-            Not registered? <a href="/" class="text-primary-700 hover:underline dark:text-primary-500">Create account</a>
+            Not registered?
+            <a href="/" onclick={(e) => { e.preventDefault(); onSwitchToRegister(); signFormModal=false; }}
+               class="text-primary-700 hover:underline dark:text-primary-500">
+                Create account
+            </a>
         </div>
     </form>
 </Modal>
+

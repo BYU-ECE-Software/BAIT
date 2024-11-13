@@ -15,3 +15,4 @@ export { default as ComputerChipCoCard } from './components/molecules/ComputerCh
 export { default as ProgressBar } from './components/molecules/ProgressBar.svelte';
 export { default as Dashboard } from './components/organisms/Dashboard.svelte';
 export { default as HarvestaVideoPlayer } from './components/molecules/HarvestaVideoPlayer.svelte';
+export { default as SideBarButton } from './components/atoms/SideBarButton.svelte';

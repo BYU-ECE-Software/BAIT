@@ -1,7 +1,7 @@
 {
     "Campaign_Information": {
         "Name": "Harvesta Foods",
-        "Description": "Harvesta Foods is a large grocery store chain. They have been teasing a large announcment on their website. Through other sources, it has been confirmed that the announcment is about a new location that Harvesta Foods will be building a grocery store in. You have been hired by a the C-Suite of Harvesta Foods to execute a penetration test on the company. Your goal is to find the location of the new grocery store Harvesta is building.",
+        "Description": "Harvesta Foods is a large grocery store chain. They have been teasing a large announcement on their website. Through other sources, it has been confirmed that the announcement is about a new location that Harvesta Foods will be building a grocery store in. You have been hired by a the C-Suite of Harvesta Foods to execute a penetration test on the company. Your goal is to find the location of the new grocery store Harvesta is building.",
         "Image": "",
         "Website": "",
         "Briefing_Video": "",
@@ -14,7 +14,7 @@
             "Name": "Elara",
             "Title": "Receptionist",
             "Image": "",
-            "Susceptability": "Pretexting / gaining trust through OSINT",
+            "Susceptibility": "Pretexting / gaining trust through OSINT",
             "Prompt": "",
             "Intel": [
                 {
@@ -39,7 +39,7 @@
             "Name": "Tony Flag",
             "Title": "Projects Team Lead",
             "Image": "",
-            "Susceptability": "Impersonation from marketing dep.",
+            "Susceptibility": "Impersonation from marketing dep.",
             "Prompt": "",
             "Intel": [
                 {
@@ -53,7 +53,7 @@
             "Name": "Tony Flag",
             "Title": "Real Estate Intern",
             "Image": "",
-            "Susceptability": "Impersonation from projects / quid pro quo",
+            "Susceptibility": "Impersonation from projects / quid pro quo",
             "Prompt": "",
             "Intel": [
                 {
@@ -65,9 +65,9 @@
         {
             "ID": 4,
             "Name": "Ann Gunn",
-            "Title": "Finance Team Seceratary",
+            "Title": "Finance Team Secretary",
             "Image": "",
-            "Susceptability": "Impersonation from legal",
+            "Susceptibility": "Impersonation from legal",
             "Prompt": "",
             "Intel": {
                 "Intel06": {

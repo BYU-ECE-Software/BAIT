@@ -24,7 +24,7 @@
                 <span class="block text-sm">Script Kiddie</span>
                 <span class="block truncate text-sm font-medium">hacker@sepptic.com</span>
             </DropdownHeader>
-            <DropdownItem>Dashboard</DropdownItem>
+            <DropdownItem href="/main/dashboard">Dashboard</DropdownItem>
             <DropdownItem>Settings</DropdownItem>
             <DropdownItem>Earnings</DropdownItem>
             <DropdownDivider />

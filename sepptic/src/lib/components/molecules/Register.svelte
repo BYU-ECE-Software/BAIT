@@ -64,7 +64,7 @@
         <Button type="submit" class="w-full bg-seppticRed-600 hover:bg-seppticRed-700">Create account</Button>
         <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
             Already have an account?
-            <a href="/" onclick={(e) => { e.preventDefault(); onSwitchToSignIn(); }} class="text-seppticOrange-600 hover:underline dark:text-seppticOrange-500">Sign in</a>
+            <a href="/main" onclick={(e) => { e.preventDefault(); onSwitchToSignIn(); }} class="text-seppticOrange-600 hover:underline dark:text-seppticOrange-500">Sign in</a>
         </div>
     </form>
 </Modal>

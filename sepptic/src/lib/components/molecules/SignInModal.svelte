@@ -51,7 +51,7 @@
         <Button type="submit" class="w-full bg-seppticRed-600 hover:bg-seppticRed-700">Login to your account</Button>
         <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
             Not registered?
-            <a href="/" onclick={(e) => { e.preventDefault(); onSwitchToRegister(); signFormModal=false; }}
+            <a href="/main" onclick={(e) => { e.preventDefault(); onSwitchToRegister(); signFormModal=false; }}
                class="text-seppticOrange-600 hover:underline dark:text-seppticOrange-500">
                 Create account
             </a>

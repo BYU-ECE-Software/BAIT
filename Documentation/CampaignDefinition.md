@@ -3,23 +3,23 @@
 - Description
 - Image
 - Website
-- Briefing Video
-- Success Video
-- Failure Video
+- Briefing_Video
+- Success_Video
+- Failure_Video
 
 # Characters
 - ID
 - Name
 - Title
 - Image
-- Susceptability
+- Susceptibility
 - Prompt
 - Intel
-    - Intel ID
-    - Intel Description
-    - Unlocks Character ID
-    - Unlocks Intel ID
-    - Achievement ID
+    - Intel_ID
+    - Intel_Description
+    - Unlocks_Character ID
+    - Unlocks_Intel_ID
+    - Achievement_ID
 
 # Achievements
 - ID

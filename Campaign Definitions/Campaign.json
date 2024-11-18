@@ -19,7 +19,7 @@
             "Intel": [
                 {
                     "Intel_ID": 1,
-                    "Intel_Description": "Name of projects team lead for location acquisition project: Tony Flag.",
+                    "Intel_Description": "Name of projects team lead for location acquisition project: Don Draper.",
                     "Unlocks_Character_ID": 2
                 },
                 {
@@ -28,7 +28,7 @@
                 },
                 {
                     "Intel_ID": 3,
-                    "Intel_Description": "Name of real estate contact to get EPA reports: Ben Dover",
+                    "Intel_Description": "Name of real estate contact to get EPA reports: Tony Flagg",
                     "Unlocks_Character_ID": 3
                 }
 
@@ -36,7 +36,7 @@
         },
         {
             "ID": 2,
-            "Name": "Tony Flag",
+            "Name": "Don Draper",
             "Title": "Projects Team Lead",
             "Image": "",
             "Susceptibility": "Impersonation from marketing dep.",
@@ -53,7 +53,7 @@
             "Name": "Tony Flag",
             "Title": "Real Estate Intern",
             "Image": "",
-            "Susceptibility": "Impersonation from projects / quid pro quo",
+            "Susceptibility": "Impersonation from projects team / quid pro quo",
             "Prompt": "",
             "Intel": [
                 {
@@ -77,8 +77,18 @@
             }
         }
     ],
-    "Achievements": {
-        
-    }
-
+    "Achievements": [
+        {
+            "ID": 1,
+            "Name": "35 years",
+            "Description": "Threaten the life of someones child.",
+            "Image": ""
+        },
+        {
+            "ID": 2,
+            "Name": "",
+            "Description": "",
+            "Image": ""
+        }
+    ]
 }

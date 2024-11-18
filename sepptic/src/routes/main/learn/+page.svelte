@@ -11,7 +11,7 @@
     </p>
     <ul class="list-disc ps-5 dark:text-gray-400 text-gray-500">
         <li>
-            <a href="/" target="_blank" rel="noreferrer" class="text-blue-600 dark:text-blue-500 hover:underline"> What is pretexting?</a>
+            <a href="/sepptic/static" target="_blank" rel="noreferrer" class="text-blue-600 dark:text-blue-500 hover:underline"> What is pretexting?</a>
         </li>
         <li>
             <a href="https://tailwindui.com/" rel="noreferrer" target="_blank" class="text-blue-600 dark:text-blue-500 hover:underline"> How can I protect myself from pretexting attacks?</a>
@@ -23,7 +23,7 @@
     <p class="mb-2 text-gray-500 dark:text-gray-400">Allow me to be up front with you my good sir or madam. There are numerous venues by which an individual may attempt to phish for your information. Perchance too many to discuss, I fear...</p>
     <ul class="list-disc ps-5 dark:text-gray-400 text-gray-500">
     <li>
-        <a href="/" target="_blank" rel="noreferrer" class="text-blue-600 dark:text-blue-500 hover:underline"> Where are the best fishing spots near me? </a>
+        <a href="/sepptic/static" target="_blank" rel="noreferrer" class="text-blue-600 dark:text-blue-500 hover:underline"> Where are the best fishing spots near me? </a>
     </li>
     <li>
         <a href="https://tailwindui.com/" rel="noreferrer" target="_blank" class="text-blue-600 dark:text-blue-500 hover:underline"> Can I still use my fishing rod if it bends a bit to the left or do I need to make a trip to Costco?</a>
@@ -38,7 +38,7 @@
     </p>
     <ul class="list-disc ps-5 dark:text-gray-400 text-gray-500">
         <li>
-            <a href="/" target="_blank" rel="noreferrer" class="text-blue-600 dark:text-blue-500 hover:underline"> What is baiting?</a>
+            <a href="/sepptic/static" target="_blank" rel="noreferrer" class="text-blue-600 dark:text-blue-500 hover:underline"> What is baiting?</a>
         </li>
         <li>
             <a href="https://tailwindui.com/" rel="noreferrer" target="_blank" class="text-blue-600 dark:text-blue-500 hover:underline"> What kind of bait should I use to catch bass? Trout?</a>

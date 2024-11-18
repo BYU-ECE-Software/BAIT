@@ -1,5 +1,4 @@
 // place files you want to import through the `$lib` alias in this folder.
-
 export { default as SignInButton} from './components/atoms/Learn.svelte';
 export { default as CampaignButton } from './components/atoms/CampaignButton.svelte';
 export { default as LearnButton } from './components/atoms/SignIn.svelte';
@@ -8,6 +7,12 @@ export { default as CampaignCard } from './components/molecules/CampaignCard.sve
 export { default as LearnCard } from './components/molecules/LearnCard.svelte';
 export { default as Testimonial } from './components/molecules/Testimonial.svelte';
 export { default as SignInModal } from './components/molecules/SignInModal.svelte';
+export { default as Register } from './components/molecules/Register.svelte';
+export { default as AuthModalSwitcher } from './components/organisms/AuthModalSwitcher.svelte'
 export { default as HarvestaFoodsCard } from './components/molecules/HarvestaFoodsCard.svelte';
 export { default as WasteManagementCard } from './components/molecules/WasteManagementCard.svelte';
 export { default as ComputerChipCoCard } from './components/molecules/ComputerChipCoCard.svelte';
+export { default as ProgressBar } from './components/molecules/ProgressBar.svelte';
+export { default as Dashboard } from './components/organisms/Dashboard.svelte';
+export { default as HarvestaVideoPlayer } from './components/molecules/HarvestaVideoPlayer.svelte';
+export { default as SideBarButton } from './components/atoms/SideBarButton.svelte';

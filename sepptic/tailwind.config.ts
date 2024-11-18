@@ -1,7 +1,10 @@
 import type { Config } from 'tailwindcss';
 import plugin = require('flowbite/plugin');
 export default {
-	content: ['./src/**/*.{html,js,svelte,ts}', './node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}'],
+	content: [
+		'./src/**/*.{html,js,svelte,ts}',
+		'./node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}'
+	],
 	plugins: [plugin],
 	darkMode: 'selector',
 	theme: {
@@ -15,6 +18,66 @@ export default {
 				// pink
 				// primary: {"50":"#fdf2f8","100":"#fce7f3","200":"#fbcfe8","300":"#f9a8d4","400":"#f472b6","500":"#ec4899","600":"#db2777","700":"#be185d","800":"#9d174d","900":"#831843"},
 				//seppticRed
+				harvestaWheat: {
+					50: '#fdf7ed',
+					100: '#f9edd6',
+					200: '#f5e2bd',
+					300: '#f1d6a3',
+					400: '#eccb8a',
+					500: '#e8c78a', // Primary shade
+					600: '#c4a16f',
+					700: '#9f7c55',
+					800: '#7b583d',
+					900: '#583624',
+				},
+				harvestaBrown: {
+					50: '#f3ebe9',
+					100: '#e4d1cd',
+					200: '#d4b7af',
+					300: '#c39c8f',
+					400: '#b28271',
+					500: '#a17258', // Primary shade
+					600: '#815a44',
+					700: '#614331',
+					800: '#422d20',
+					900: '#241810',
+				},
+				harvestaGreenLight: {
+					50: '#eef5eb',
+					100: '#d8e8cf',
+					200: '#bfd8b0',
+					300: '#a3c08d',
+					400: '#89a76d',
+					500: '#719257', // Primary shade
+					600: '#587444',
+					700: '#405731',
+					800: '#293b21',
+					900: '#12200f',
+				},
+				harvestaGreenDark: {
+					50: '#e5ede7',
+					100: '#c8d5cb',
+					200: '#a8bcad',
+					300: '#86a18e',
+					400: '#65886f',
+					500: '#4b6f57', // Primary shade
+					600: '#395646',
+					700: '#2a4034',
+					800: '#1a2a23',
+					900: '#0a1511',
+				},
+				harvestaCream: {
+					50: '#faf7f2',
+					100: '#f4ecdb',
+					200: '#ebdcc3',
+					300: '#decba6',
+					400: '#d2b78b',
+					500: '#bba375', // Primary shade
+					600: '#97845e',
+					700: '#726547',
+					800: '#4f4630',
+					900: '#2b271a',
+				},
 				seppticRed: {
 					50: '#fde8e8',
 					100: '#facbcb',
@@ -24,8 +87,8 @@ export default {
 					500: '#d33132', // Primary shade
 					600: '#b72b2b',
 					700: '#a0262b',
-					800: '#9e2a2b', // Darkest shade
-					},
+					800: '#9e2a2b' // Darkest shade
+				},
 				seppticOrange: {
 					50: '#fff5e8',
 					100: '#ffe4c2',
@@ -36,7 +99,7 @@ export default {
 					600: '#c08834',
 					700: '#9e6f29',
 					800: '#7c561e',
-					900: '#5b3e13',
+					900: '#5b3e13'
 				},
 				seppticGray: {
 					50: '#f6f9fa',
@@ -48,7 +111,7 @@ export default {
 					600: '#8ca1aa',
 					700: '#70878f',
 					800: '#566d74',
-					900: '#3b5359',
+					900: '#3b5359'
 				},
 				// fuchsia
 				// primary: {"50":"#fdf4ff","100":"#fae8ff","200":"#f5d0fe","300":"#f0abfc","400":"#e879f9","500":"#d946ef","600":"#c026d3","700":"#a21caf","800":"#86198f","900":"#701a75"}
@@ -99,7 +162,18 @@ export default {
 				// primary: {"50":"#fafaf9","100":"#f5f5f4","200":"#e7e5e4","300":"#d6d3d1","400":"#a8a29e","500":"#78716c","600":"#57534e","700":"#44403c","800":"#292524","900":"#1c1917"}
 
 				// neutral
-				primary: {"50":"#fafafa","100":"#f5f5f5","200":"#e5e5e5","300":"#d4d4d4","400":"#a3a3a3","500":"#737373","600":"#525252","700":"#404040","800":"#262626","900":"#171717"}
+				primary: {
+					50: '#fde8e8',
+					100: '#facbcb',
+					200: '#f69b9b',
+					300: '#f06b6b',
+					400: '#ea3b3b',
+					500: '#d33132', // Primary shade
+					600: '#b72b2b',
+					700: '#a0262b',
+					800: '#9e2a2b' // Darkest shade
+				}
+
 
 				// zinc
 				// primary: {"50":"#fafafa","100":"#f4f4f5","200":"#e4e4e7","300":"#d4d4d8","400":"#a1a1aa","500":"#71717a","600":"#52525b","700":"#3f3f46","800":"#27272a","900":"#18181b"}
@@ -111,5 +185,5 @@ export default {
 				// primary: {"50":"#f8fafc","100":"#f1f5f9","200":"#e2e8f0","300":"#cbd5e1","400":"#94a3b8","500":"#64748b","600":"#475569","700":"#334155","800":"#1e293b","900":"#0f172a"}
 			}
 		}
-	}
+	},
 } as Config;

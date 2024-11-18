@@ -40,7 +40,7 @@ function validateName(name: string) {
     return true;
 }
 
-async function validateUserID (User_ID: number) {
+async function validateUserID(User_ID: number) {
     const prisma = new PrismaClient();
     const user = await prisma.user.findUnique({
         where: {
@@ -53,7 +53,28 @@ async function validateUserID (User_ID: number) {
 
 // Functions to update Database
 async function putEmail(email: string, User_ID: number) {
-    
+    const prisma = new PrismaClient();
+    try {
+        await prisma.user.update({
+            where: {
+                User_ID: User_ID
+            },
+            data: {
+                Email: email
+            }
+        });
+        return {
+            "success": true,
+            "message": "Email updated successfully",
+            "status": 200
+        }
+    } catch (e) {
+        return {
+            "success": false,
+            "message": "Error updating email: " + e,
+            "status": 500
+        }
+    }
 }
 
 
@@ -113,5 +134,5 @@ export async function dbUpdateEmail(email: string, User_ID: number) {
         }
     }
 
-    return putEmail (email, User_ID)
+    return putEmail(email, User_ID)
 }

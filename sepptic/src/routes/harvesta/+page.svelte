@@ -1,5 +1,5 @@
 <script>
-    import { Tabs, TabItem } from 'flowbite-svelte';
+    import { Tabs, TabItem, Button, Card } from 'flowbite-svelte';
     import {HarvestaVideoPlayer, HarvestaFoodsCard, SideBarButton} from '$lib';
   </script>
   <SideBarButton />
@@ -18,8 +18,42 @@
     <TabItem title="Main Dashboard">
       <p class="text-sm text-gray-500 dark:text-gray-400">
         <b>Dashboard:</b>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </p>
+      <div class="container" style="margin: auto">
+      <div class="wrap" style="display: inline-block; position: relative;">
+        <img src="/HarvestaOfficeFloorplan.jpg" alt="Office Floorplan"/>
+        <div class="content" style=" position: absolute; top: 70%; left: 30%;">
+          <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Elara</h5>
+            <p class="font-normal text-gray-700 dark:text-gray-400">Receptionist</p>
+          </a>
+        </div>
+        <div class="content" style=" position: absolute; top: 35%; left: 75%;">
+          <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Ben Dover</h5>
+            <p class="font-normal text-gray-700 dark:text-gray-400">Finance Guy</p>
+          </a>
+       </div>
+       <div class="content" style=" position: absolute; top: 25%; left: 10%;">
+          <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Don Draper</h5>
+            <p class="font-normal text-gray-700 dark:text-gray-400">Projects</p>
+          </a>
+        </div>
+        <div class="content" style=" position: absolute; top: 65%; left: 5%;">
+          <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Security</h5>
+            <p class="font-normal text-gray-700 dark:text-gray-400">Don't Mess with these guys</p>
+          </a>
+        </div>
+        <div class="content" style=" position: absolute; top: 65%; left: 75%;">
+          <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Interns</h5>
+            <p class="font-normal text-gray-700 dark:text-gray-400">MVP MVP MVP MVP MVP</p>
+          </a>
+        </div>
+    </div>
+  </div>
     </TabItem>
     <TabItem title="Contact History">
       <p class="text-sm text-gray-500 dark:text-gray-400">

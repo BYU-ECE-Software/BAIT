@@ -1,4 +1,4 @@
-import jsonGetCampaigns from "../../../server/utils/jsonGetCampaigns";
+import { jsonGetCampaigns } from "../../../server/utils/jsonGetCampaigns";
 import getUserIdFromToken from "../../../server/utils/getUserIdFromToken";
 import type { RequestEvent } from '@sveltejs/kit';
 
@@ -11,6 +11,9 @@ export async function GET(event: RequestEvent) {
     if (!userIdResponse.success || !userIdResponse.userId) {
         return new Response(JSON.stringify({ message: userIdResponse.message, status: userIdResponse.status }), { status: userIdResponse.status });
     }
-    const campaigns = await jsonGetCampaigns();
-    return new Response(JSON.stringify(campaigns), { status: 200 });
+    const campaignsResponse = await jsonGetCampaigns();
+    if (campaignsResponse.status !== 200) {
+        return new Response(JSON.stringify({ message: campaignsResponse.message, status: campaignsResponse.status }), { status: campaignsResponse.status });
+    }
+    return new Response(JSON.stringify(campaignsResponse.campaigns), { status: 200 });
 }

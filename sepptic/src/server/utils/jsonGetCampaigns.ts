@@ -6,10 +6,17 @@ const campaignsDir = './src/server/campaigns';
 function getCampaignsFiles() {
     try {
         const files = fs.readdirSync(campaignsDir);
-        return files.filter(file => fs.statSync(path.join(campaignsDir, file)).isFile());
+        return {
+            files: files.filter(file => fs.statSync(path.join(campaignsDir, file)).isFile()),
+            status: 200,
+            message: 'Success'
+        }
     } catch (error) {
-        console.error('Error reading campaigns directory:', error);
-        return [];
+        return {
+            files: [],
+            status: 500,
+            message: 'Error reading campaigns directory'
+        }
     }
 };
 
@@ -25,12 +32,31 @@ function getCampaign(fileName: string) {
         }
         return campaignData;
     } catch (error) {
-        console.error('Error reading campaign file:', error);
-        return {};
+        return {
+            id: fileName.split('.')[0],
+            name: 'Error',
+            description: 'Error reading campaign file: ' + error,
+            image: ''
+        };
     }
 }
 
-export default function jsonGetCampaigns() {
-    const files = getCampaignsFiles();
-    return files.map(getCampaign);
+export function jsonGetCampaigns() {
+    const campaignFiles = getCampaignsFiles();
+    if (campaignFiles.status !== 200) {
+        return {
+            campaigns: [],
+            status: campaignFiles.status,
+            message: campaignFiles.message
+        }
+    }
+    return {
+        campaigns: campaignFiles.files.map(getCampaign),
+        status: 200,
+        message: 'Success'
+    }
+}
+
+export function jsonGetCampaign(id: string) {
+    return getCampaign(`${id}.json`);
 }

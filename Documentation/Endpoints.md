@@ -1,4 +1,4 @@
-# /auth
+# /auth - Done!
 ## POST
 - Description: Authenticate user
 - Request:
@@ -21,7 +21,7 @@
     - body:
         - message: string
 
-# /register
+# /register - Done!
 ## POST
 - Description: Register user
 - Request:
@@ -42,7 +42,7 @@
         - email: string
         - achievements: int list
 
-## PUT
+## PUT - Done!
 - Description: Update user profile
 - Request:
     - headers:
@@ -78,7 +78,7 @@
             - character: int
             - intel: int
 
-# /campaigns/[campaignId]
+# /campaigns/[campaignId] - Done!
 ## GET
 - Description: Get a campaign
 - Request:
@@ -103,7 +103,7 @@
             - failureVideo: string
             - website: string
 
-# /campaigns
+# /campaigns - Done!
 ## GET
 - Description: Get all campaigns
 - Request:

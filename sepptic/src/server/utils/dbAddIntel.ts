@@ -25,7 +25,7 @@ export default async function dbAddIntel(campaignId: number, characterId: number
                 User_ID: user.User_ID
             }
         });
-        const intelRecordId = intel.Intel_ID;
+        const intelRecordId = intel.Intel_Record_ID;
         return {
             intelId: intelRecordId,
             message: 'Intelligence recorded successfully',

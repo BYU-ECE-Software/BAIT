@@ -20,8 +20,8 @@ export async function POST(event: RequestEvent) {
     const intelId = body.intelId;
 
     const valid = await validateProgress(campaignId, characterId, intelId, userId);
-    if (!valid) {
-        return new Response(JSON.stringify({ message: 'Invalid progress', status: 400 }), { status: 400 });
+    if (valid.status !== 200) {
+        return new Response(JSON.stringify({ message: 'Invalid progress: ' + valid.message, status: valid.status }), { status: valid.status });
     }
 
     const result = await dbAddIntel(campaignId, characterId, intelId, userId);

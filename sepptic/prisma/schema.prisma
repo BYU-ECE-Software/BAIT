@@ -39,8 +39,7 @@ model Message {
 }
 
 model Session {
-  Session_ID Int      @id @default(autoincrement())
-  Token      String   @db.VarChar(255)
+  Token      String   @id @db.VarChar(255)
   Expiration DateTime @db.Date
   User_ID    Int
   User       User     @relation(fields: [User_ID], references: [User_ID], onUpdate: Restrict, map: "Session_ibfk_1")

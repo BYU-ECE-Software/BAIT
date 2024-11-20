@@ -29,11 +29,10 @@ CREATE TABLE Conversation (
 );
 
 CREATE TABLE Session (
-  Session_ID INT NOT NULL AUTO_INCREMENT,
   Token VARCHAR(255) NOT NULL,
   Expiration DATE NOT NULL,
   User_ID INT NOT NULL,
-  PRIMARY KEY (Session_ID),
+  PRIMARY KEY (Token),
   FOREIGN KEY (User_ID) REFERENCES User(User_ID)
 );
 

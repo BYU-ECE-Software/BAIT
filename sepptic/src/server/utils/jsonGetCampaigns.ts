@@ -1,8 +1,9 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
+const campaignsDir = './src/server/campaigns';
+
 function getCampaignsFiles() {
-    const campaignsDir = '../campaigns';
     try {
         const files = fs.readdirSync(campaignsDir);
         return files.filter(file => fs.statSync(path.join(campaignsDir, file)).isFile());
@@ -13,7 +14,6 @@ function getCampaignsFiles() {
 };
 
 function getCampaign(fileName: string) {
-    const campaignsDir = '../campaigns';
     const file = path.join(campaignsDir, fileName);
     try {
         const data = JSON.parse(fs.readFileSync(file).toString());

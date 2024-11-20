@@ -5,10 +5,10 @@ USE SEPTiC_Database;
 CREATE TABLE Intel (
   Intel_ID INT NOT NULL AUTO_INCREMENT,
   Character_ID INT NOT NULL,
-  Campaign_ID INT NOT NULL,
+  Campaign_ID INT NOT NULL,,
+  User_ID INT NOT NULL,
   PRIMARY KEY (Intel_ID),
-  UNIQUE (Character_ID),
-  UNIQUE (Campaign_ID)
+  FOREIGN KEY (User_ID) REFERENCES User(User_ID)
 );
 
 CREATE TABLE User (

@@ -41,6 +41,33 @@ function getCampaign(fileName: string) {
     }
 }
 
+function getFullCampaign(fileName: string) {
+    const file = path.join(campaignsDir, fileName);
+    // Make sure the file exists
+    if (!fs.existsSync(file)) {
+        return {
+            status: 404,
+            id: fileName.split('.')[0],
+            data: 'Campaign not found'
+        };
+    }
+    try {
+        const data = JSON.parse(fs.readFileSync(file).toString());
+        return {
+            status: 200,
+            id: fileName.split('.')[0],
+            data: data
+        };
+    }
+    catch (error) {
+        return {
+            status: 500,
+            id: fileName.split('.')[0],
+            data: 'Error reading campaign file: ' + error
+        };
+    }
+}
+
 export function jsonGetCampaigns() {
     const campaignFiles = getCampaignsFiles();
     if (campaignFiles.status !== 200) {
@@ -58,5 +85,5 @@ export function jsonGetCampaigns() {
 }
 
 export function jsonGetCampaign(id: string) {
-    return getCampaign(`${id}.json`);
+    return getFullCampaign(`${id}.json`);
 }

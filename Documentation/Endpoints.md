@@ -78,14 +78,12 @@
             - character: int
             - intel: int
 
-# /campaign
+# /campaigns/[campaignId]
 ## GET
 - Description: Get a campaign
 - Request:
     - headers:
         - Token: string
-    - body:
-        - campaignId: int
 - Response:
     - body:
         - campaign: json

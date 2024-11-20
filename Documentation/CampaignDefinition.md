@@ -20,6 +20,8 @@
     - Unlocks_Character ID
     - Unlocks_Intel_ID
     - Achievement_ID
+    - Quiz
+    - Answer
 
 # Achievements
 - ID

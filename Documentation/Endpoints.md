@@ -105,6 +105,19 @@
             - failureVideo: string
             - website: string
 
+# /campaigns
+## GET
+- Description: Get all campaigns
+- Request:
+    - headers:
+        - Token: string
+- Response:
+    - campaigns:
+        - id: int
+        - name: string
+        - description: string
+        - image: string
+
 # /chat
 ## GET
 - Description: Get chat messages

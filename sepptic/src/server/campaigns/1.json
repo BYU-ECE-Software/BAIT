@@ -1,11 +1,13 @@
 {
-    "Name": "Test Campaign 1",
-    "Description": "This is a test campaign",
-    "Image": "https://placehold.co/600x600",
-    "Website": "https://www.byu.edu",
-    "Briefing_Video": "https://videos.pexels.com/video-files/7295981/7295981-uhd_2732_1440_30fps.mp4",
-    "Success_Video": "https://videos.pexels.com/video-files/3755982/3755982-uhd_2732_1440_25fps.mp4",
-    "Failure_Video": "https://videos.pexels.com/video-files/5721569/5721569-uhd_2732_1440_25fps.mp4",
+    "Campaign_Information": {
+        "Name": "Test Campaign 1",
+        "Description": "This is a test campaign",
+        "Image": "https://placehold.co/600x600",
+        "Website": "https://www.byu.edu",
+        "Briefing_Video": "https://videos.pexels.com/video-files/7295981/7295981-uhd_2732_1440_30fps.mp4",
+        "Success_Video": "https://videos.pexels.com/video-files/3755982/3755982-uhd_2732_1440_25fps.mp4",
+        "Failure_Video": "https://videos.pexels.com/video-files/5721569/5721569-uhd_2732_1440_25fps.mp4"
+    },
     "Characters": [
         {
             "ID": 1,

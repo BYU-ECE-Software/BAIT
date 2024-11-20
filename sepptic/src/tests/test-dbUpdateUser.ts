@@ -4,7 +4,7 @@ import { dbUpdatePassword } from '../server/utils/dbUpdateUser';
 
 // Test that the function dbCreateUser returns the correct userId when given valid input.
 const name: string = 'James Davidson';
-const email: string = 'JD24@gmail.com';
+const email: string = 'test@example.com';
 const password: string = 'UVU2024!';
 const userId: number = 2;
 const result1 = await dbUpdateEmail(email, userId);

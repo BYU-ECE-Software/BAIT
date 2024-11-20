@@ -84,6 +84,9 @@ export function jsonGetCampaigns() {
     }
 }
 
-export function jsonGetCampaign(id: string) {
+export function jsonGetCampaign(id: number | string) {
+    if (typeof id === 'number') {
+        id = id.toString();
+    }
     return getFullCampaign(`${id}.json`);
 }

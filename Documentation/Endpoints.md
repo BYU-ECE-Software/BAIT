@@ -67,7 +67,7 @@
             - character: int
             - intel: int
 
-## POST
+## POST - Done!
 - Description: Update user progress
 - Request:
     - headers:

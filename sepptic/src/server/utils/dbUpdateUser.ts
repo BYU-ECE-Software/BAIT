@@ -77,36 +77,61 @@ async function putEmail(email: string, User_ID: number) {
     }
 }
 
+//Function to update name
+async function putName(name: string, User_ID: number) {
+    const prisma = new PrismaClient();
+    try {
+        await prisma.user.update({
+            where: {
+                User_ID: User_ID
+            },
+            data: {
+                Name: name
+            }
+        });
+        return {
+            "success": true,
+            "message": "Name updated successfully",
+            "status": 200
+        };
+    } catch (e) {
+        return {
+            "success": false,
+            "message": "Error updating name: " + e,
+            "status": 500
+        };
+    } finally {
+        await prisma.$disconnect();
+    }
+}
 
-
-
-
-// Helper function to write to the database. Returns the userId of the new user.
-// async function writeToDatabase(email: string, hash: string, name: string) {
-//     const prisma = new PrismaClient();
-//     try {
-//         const user = await prisma.user.create({
-//             data: {
-//                 Email: email,
-//                 Password: hash,
-//                 Name: name
-//             }
-//         });
-//         const userId = user.User_ID;
-//         return {
-//             userId: userId,
-//             message: 'User created successfully',
-//             status: 200
-//         }
-//     } catch (e) {
-//         return {
-//             userId: null,
-//             message: 'Error creating user: ' + e,
-//             status: 500
-//         }
-//     }
-// }
-
+// Function to update password
+async function putPassword(password: string, User_ID: number) {
+    const prisma = new PrismaClient();
+    try {
+        await prisma.user.update({
+            where: {
+                User_ID: User_ID
+            },
+            data: {
+                Password: password
+            }
+        });
+        return {
+            "success": true,
+            "message": "Password updated successfully",
+            "status": 200
+        };
+    } catch (e) {
+        return {
+            "success": false,
+            "message": "Error updating Password: " + e,
+            "status": 500
+        };
+    } finally {
+        await prisma.$disconnect();
+    }
+}
 
 // Function to update email
 export async function dbUpdateEmail(email: string, User_ID: number) {
@@ -135,4 +160,53 @@ export async function dbUpdateEmail(email: string, User_ID: number) {
     }
 
     return putEmail(email, User_ID)
+}
+
+//Function to update name
+export async function dbUpdateName(name: string, User_ID: number) {
+    if (!validateName(name)) {
+        return {
+            "success": false,
+            "message": "Invalid name: must be between 2 and 100 characters.",
+            "status": 400
+        };
+    }
+
+    const user = await validateUserID(User_ID);
+    if (!user) {
+        return {
+            "success": false,
+            "message": "User does not exist",
+            "status": 404
+        };
+    }
+
+    return putName(name, User_ID);
+}
+
+export async function dbUpdatePassword(password: string, User_ID: number) {
+    // Validate the password
+    if (!validatePassword(password)) {
+        return {
+            success: false,
+            message: "Invalid password: must be at least 8 characters, include a mix of uppercase letters, and contain at least one number.",
+            status: 400
+        };
+    }
+
+    // Validate User_ID
+    const user = await validateUserID(User_ID);
+    if (!user) {
+        return {
+            success: false,
+            message: "User does not exist",
+            status: 404
+        };
+    }
+
+    // Hash password
+    const hash = await encodePassword(password);
+
+    // Update the password in the database
+    return putPassword(hash, User_ID);
 }

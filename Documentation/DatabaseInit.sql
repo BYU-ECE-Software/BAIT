@@ -1,15 +1,6 @@
-CREATE DATABASE SEPTiC_Database;
+CREATE DATABASE IF NOT EXISTS sepptic;
 
-USE SEPTiC_Database;
-
-CREATE TABLE Intel (
-  Intel_ID INT NOT NULL AUTO_INCREMENT,
-  Character_ID INT NOT NULL,
-  Campaign_ID INT NOT NULL,,
-  User_ID INT NOT NULL,
-  PRIMARY KEY (Intel_ID),
-  FOREIGN KEY (User_ID) REFERENCES User(User_ID)
-);
+USE sepptic;
 
 CREATE TABLE User (
   User_ID INT NOT NULL AUTO_INCREMENT,
@@ -18,6 +9,16 @@ CREATE TABLE User (
   Email VARCHAR(255) NOT NULL,
   PRIMARY KEY (User_ID),
   UNIQUE (Email)
+);
+
+CREATE TABLE Intel (
+  Intel_Record_ID INT NOT NULL AUTO_INCREMENT,
+  Campaign_ID INT NOT NULL,
+  Character_ID INT NOT NULL,
+  Intel_ID INT NOT NULL,
+  User_ID INT NOT NULL,
+  PRIMARY KEY (Intel_Record_ID),
+  FOREIGN KEY (User_ID) REFERENCES User(User_ID)
 );
 
 CREATE TABLE Conversation (

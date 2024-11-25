@@ -66,6 +66,12 @@
             - campaign: int
             - character: int
             - intel: int
+        - achievements: json list
+            - id: int
+            - campaign: int
+            - name: string
+            - description: string
+            - image: string
 
 ## POST - Done!
 - Description: Update user progress

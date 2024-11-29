@@ -17,9 +17,14 @@ model Conversation {
 }
 
 model Intel {
-  Intel_ID     Int @id @default(autoincrement())
-  Character_ID Int @unique(map: "Character_ID")
-  Campaign_ID  Int @unique(map: "Campaign_ID")
+  Intel_Record_ID Int  @id @default(autoincrement())
+  Campaign_ID     Int
+  Character_ID    Int
+  Intel_ID        Int
+  User_ID         Int
+  User            User @relation(fields: [User_ID], references: [User_ID], onUpdate: Restrict, map: "Intel_ibfk_1")
+
+  @@index([User_ID], map: "User_ID")
 }
 
 model Message {
@@ -34,8 +39,7 @@ model Message {
 }
 
 model Session {
-  Session_ID Int      @id @default(autoincrement())
-  Token      String   @unique @db.VarChar(255)
+  Token      String   @id @db.VarChar(255)
   Expiration DateTime @db.Date
   User_ID    Int
   User       User     @relation(fields: [User_ID], references: [User_ID], onUpdate: Restrict, map: "Session_ibfk_1")
@@ -47,7 +51,8 @@ model User {
   User_ID      Int            @id @default(autoincrement())
   Password     String         @db.VarChar(255)
   Name         String         @db.VarChar(100)
-  Email        String         @unique @db.VarChar(255)
+  Email        String         @unique(map: "Email") @db.VarChar(255)
   Conversation Conversation[]
+  Intel        Intel[]
   Session      Session[]
 }

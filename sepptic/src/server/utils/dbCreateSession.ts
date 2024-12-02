@@ -27,11 +27,10 @@ async function writeSession(userId: number, token: string, expiration: Date) {
                 Expiration: expiration
             }
         });
-        const sessionId = session.Session_ID;
+        const sessionResult = session;
         return {
-            sessionId: sessionId,
-            token: token,
-            expiration: expiration,
+            token: sessionResult.Token,
+            expiration: sessionResult.Expiration,
             message: 'Session created successfully',
             status: 200
         }

@@ -18,7 +18,7 @@
         {
             name: "Nicholas Hague",
             role: "PoC and UI developer",
-            bio: "Primary contact and works on some web development.",
+            bio: "Primary contact for our mentors/sponsers, and works on web development.",
             linkedin: "https://www.linkedin.com/in/nicholashague8/",
             email: "nickh8@byu.edu",
         },
@@ -32,7 +32,7 @@
         {
             name: "Tyler Holland",
             role: "Team Leader",
-            bio: "Leads the team when Ethan is busy, tells jokes.",
+            bio: "He works hard as our co-team leader and builds team moral.",
             linkedin: "https://www.linkedin.com/in/tyler-holland-0a0459156/",
             email: "tyho99@byu.edu",
         },
@@ -45,8 +45,8 @@
         },
         {
             name: "Garrett White",
-            role: "Token Engineer",
-            bio: "Does frontend work that is pretty good.",
+            role: "Frontend Engineer",
+            bio: "Helps Matthew with frontend development and builds pages and internal logic.",
             linkedin: "#",
             email: "gw263@byu.edu",
         },

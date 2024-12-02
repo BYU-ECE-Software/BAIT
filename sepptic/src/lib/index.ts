@@ -17,3 +17,4 @@ export { default as Dashboard } from './components/organisms/Dashboard.svelte';
 export { default as HarvestaVideoPlayer } from './components/molecules/HarvestaVideoPlayer.svelte';
 export { default as SideBarButton } from './components/atoms/SideBarButton.svelte';
 export { default as ElaraSmallCard } from './components/molecules/ElaraSmallCard.svelte';
+export { default as MessageActivity } from './components/molecules/MessageActivity.svelte';

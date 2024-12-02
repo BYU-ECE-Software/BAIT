@@ -1,7 +1,9 @@
 <script>
     import { Tabs, TabItem, Button, Card } from 'flowbite-svelte';
     import {HarvestaVideoPlayer, HarvestaFoodsCard, SideBarButton, ElaraSmallCard} from '$lib';
-  </script>
+</script>
+<div style='margin-bottom: 3rem;'></div>
+
   <SideBarButton />
   <Tabs tabStyle="underline">
     <TabItem open title="Mission Breifing">

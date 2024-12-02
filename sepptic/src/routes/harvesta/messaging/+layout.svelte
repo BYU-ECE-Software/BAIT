@@ -7,6 +7,5 @@
 </script>
 
 <main >
-
     {@render children?.()}
 </main>

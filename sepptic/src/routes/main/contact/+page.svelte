@@ -17,7 +17,7 @@
         },
         {
             name: "Nicholas Hague",
-            role: "PoC and UI developer",
+            role: "PoC and UI Developer",
             bio: "Primary contact for our mentors/sponsers, and works on web development.",
             linkedin: "https://www.linkedin.com/in/nicholashague8/",
             email: "nickh8@byu.edu",
@@ -39,14 +39,14 @@
         {
             name: "Matthew Taylor",
             role: "Frontend Director",
-            bio: "Does most of the visual work for the application.",
+            bio: "Builds the frontend logic and connection to the database.",
             linkedin: "#",
             email: "mtaylo48@byu.edu",
         },
         {
             name: "Garrett White",
             role: "Frontend Engineer",
-            bio: "Helps Matthew with frontend development and builds pages and internal logic.",
+            bio: "Works with frontend development and builds pages and internal logic.",
             linkedin: "#",
             email: "gw263@byu.edu",
         },

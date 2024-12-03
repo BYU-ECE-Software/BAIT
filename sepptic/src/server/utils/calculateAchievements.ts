@@ -30,6 +30,7 @@ export default async function calculateAchievements(userId: number) {
     const campaignIds = getUniqueCampaignIds(userProgress);
     const achievements: {
         ID: number;
+        Campaign_ID: number;
         Name: string;
         Description: string;
         Image: string;
@@ -59,7 +60,13 @@ export default async function calculateAchievements(userId: number) {
             const requisites = achievement.Intels;
             const hasRequisites = requisites.every((r: number) => campaignProgress.some((p: any) => p.Intel_ID === r));
             if (hasRequisites) {
-                achievements.push(achievement);
+                achievements.push({
+                    ID: achievement.ID,
+                    Campaign_ID: campaignId,
+                    Name: achievement.Name,
+                    Description: achievement.Description,
+                    Image: achievement.Image
+                });
             }
         }
     }

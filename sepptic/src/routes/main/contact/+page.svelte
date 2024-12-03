@@ -1,5 +1,4 @@
 <script>
-    // Placeholder team members data
     let teamMembers = [
         {
             name: "Ethan Beere",
@@ -50,7 +49,6 @@
             linkedin: "#",
             email: "gw263@byu.edu",
         },
-        // Add more members as needed
     ];
     teamMembers = teamMembers.sort(() => Math.random() - 0.5);
 </script>

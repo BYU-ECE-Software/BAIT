@@ -30,7 +30,7 @@
         - email: string
         - password: string
 
-# /profile
+# /profile - Done!
 ## GET
 - Description: Get user profile
 - Request:
@@ -38,11 +38,12 @@
         - Token: string
 - Response:
     - body:
+        - userId: int
         - name: string
         - email: string
         - achievements: int list
 
-## PUT - Done!
+## PUT
 - Description: Update user profile
 - Request:
     - headers:

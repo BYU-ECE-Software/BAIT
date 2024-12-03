@@ -59,3 +59,23 @@ export default async function dbDeleteSession(token: string) {
     const deleteResponse = await deleteSession(token);
     return deleteResponse;
 }
+
+export async function dbDeleteUserSessions(userId: number) {
+    const prisma = new PrismaClient();
+    try {
+        await prisma.session.deleteMany({
+            where: {
+                User_ID: userId
+            }
+        });
+        return {
+            message: 'Sessions deleted. User logged out.',
+            status: 200
+        }
+    } catch (error) {
+        return {
+            message: 'Error deleting sessions: ' + error,
+            status: 500
+        }
+    }
+}

@@ -18,10 +18,7 @@
         </p>
     </TabItem>
     <TabItem title="Main Dashboard">
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        <b>Dashboard:</b>
-      </p>
-      <div class="container" style="margin: auto">
+      <div class="container" style="margin: auto; width:60vw;">
       <div class="wrap" style="display: inline-block; position: relative;">
         <img src="/HarvestaOfficeFloorplan.jpg" alt="Office Floorplan"/>
         <div class="content" style=" position: absolute; top: 70%; left: 30%;">

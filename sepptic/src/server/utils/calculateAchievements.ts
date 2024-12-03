@@ -54,7 +54,7 @@ export default async function calculateAchievements(userId: number) {
             }
         }
         const campaign = campaignResponse.data;
-        const campaignAchievements = campaign.achievements;
+        const campaignAchievements = campaign.Achievements;
         for (const achievement of campaignAchievements) {
             const requisites = achievement.Intels;
             const hasRequisites = requisites.every((r: number) => campaignProgress.some((p: any) => p.Intel_ID === r));

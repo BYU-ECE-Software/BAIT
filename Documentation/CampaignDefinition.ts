@@ -21,7 +21,7 @@ type campaign = {
             Answer: string;
         }[];
     }[];
-    achievements: {
+    Achievements: {
         ID: number;
         Name: string;
         Description: string;

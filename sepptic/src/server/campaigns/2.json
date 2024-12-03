@@ -31,7 +31,6 @@
                     "Intel_Description": "Name of real estate contact to get EPA reports: Tony Flagg",
                     "Unlocks_Character_ID": 3
                 }
-
             ]
         },
         {
@@ -80,15 +79,12 @@
     "Achievements": [
         {
             "ID": 1,
-            "Name": "35 years",
-            "Description": "Threaten the life of someones child.",
-            "Image": ""
-        },
-        {
-            "ID": 2,
-            "Name": "",
-            "Description": "",
-            "Image": ""
+            "Name": "Location of New Store",
+            "Description": "Find the location of the new Harvesta Foods store",
+            "Image": "",
+            "Intels": [
+                5
+            ]
         }
     ]
 }

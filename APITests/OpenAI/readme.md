@@ -1,14 +1,7 @@
-# OpenAI Testing/Prompt engineering
-This folder is going to store all of the prompts for the different personas. If you want to use the scripts, follow the instructions:
+There is a GUI for this already on the openai website called playground (https://platform.openai.com/playground/). Go there to do prompt engineering
 
-`pip install openai`
+For the back end, I think we will want to use the streaming API (https://platform.openai.com/docs/api-reference/chat/create#chat-create-stream_options). Which means we set the 'stream' option to true.
 
-`pip install python-dotenv`
+https://dev.to/theether0/openai-with-sveltekit-basic-integration-560c
 
-`Make a copy of the script template, put the prompt you are testing in the quotations on line 19, and the description of the persona in the comments at the top`
-
-`To use the scripts add your openai key to the .env file`
-
-## All of this is useless now. There is a GUI for this already on the openai website called playground (https://platform.openai.com/playground/). Go there to do prompt engineering
-
-If there are any atrifacts for what the general plot of the campaign will look like, put it here. Put the prompts and general ideas behind personas in Prompts.md
+https://platform.openai.com/docs/libraries#node-js-library

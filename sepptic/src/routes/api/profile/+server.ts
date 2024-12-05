@@ -4,9 +4,11 @@ import { dbDeleteUserSessions } from "../../../server/utils/dbDeleteSession";
 import dbGetUser from "../../../server/utils/dbGetUser";
 import calculateAchievements from "../../../server/utils/calculateAchievements";
 import type { RequestEvent } from '@sveltejs/kit';
+import cookie from 'cookie';
 
 export async function GET(event: RequestEvent) {
-    const token = event.request.headers.get('token');
+    const cookies = cookie.parse(event.request.headers.get('cookie') || '');
+    const token = cookies.token;
     if (!token) {
         return new Response(JSON.stringify({ message: 'No token provided', status: 400 }), { status: 400 });
     }
@@ -40,7 +42,8 @@ export async function GET(event: RequestEvent) {
 
 export async function PUT(event: RequestEvent) {
     const body = await event.request.json();
-    const token = event.request.headers.get('token');
+    const cookies = cookie.parse(event.request.headers.get('cookie') || '');
+    const token = cookies.token;
     if (!token) {
         return new Response(JSON.stringify({ message: 'No token provided', status: 400 }), { status: 400 });
     }

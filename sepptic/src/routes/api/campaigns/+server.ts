@@ -1,9 +1,11 @@
 import { jsonGetCampaigns } from "../../../server/utils/jsonGetCampaigns";
 import getUserIdFromToken from "../../../server/utils/getUserIdFromToken";
+import cookie from 'cookie';
 import type { RequestEvent } from '@sveltejs/kit';
 
 export async function GET(event: RequestEvent) {
-    const token = event.request.headers.get('token');
+    const cookies = cookie.parse(event.request.headers.get('cookie') || '');
+    const token = cookies.token;
     if (!token) {
         return new Response(JSON.stringify({ message: 'No token provided', status: 400 }), { status: 400 });
     }

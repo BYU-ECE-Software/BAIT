@@ -2,9 +2,11 @@ import validateProgress from "../../../server/utils/validateProgress";
 import dbAddIntel from "../../../server/utils/dbAddIntel";
 import getUserIdFromToken from "../../../server/utils/getUserIdFromToken";
 import type { RequestEvent } from '@sveltejs/kit';
+import cookie from 'cookie';
 
 export async function POST(event: RequestEvent) {
-    const token = event.request.headers.get('token');
+    const cookies = cookie.parse(event.request.headers.get('cookie') || '');
+    const token = cookies.token;
     if (!token) {
         return new Response(JSON.stringify({ message: 'No token provided', status: 400 }), { status: 400 });
     }

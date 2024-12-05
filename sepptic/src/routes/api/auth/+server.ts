@@ -2,6 +2,7 @@ import dbCreateSession from "../../../server/utils/dbCreateSession";
 import dbAuthUser from "../../../server/utils/dbAuthUser";
 import dbDeleteSession from "../../../server/utils/dbDeleteSession";
 import type { RequestEvent } from '@sveltejs/kit';
+import cookie from 'cookie';
 
 export async function POST(event: RequestEvent) {
     const body = await event.request.json();
@@ -45,7 +46,8 @@ export async function POST(event: RequestEvent) {
 }
 
 export async function DELETE(event: RequestEvent) {
-    const token = event.request.headers.get('token');
+    const cookies = cookie.parse(event.request.headers.get('cookie') || '');
+    const token = cookies.token;
     if (!token) {
         return new Response(JSON.stringify({ message: 'No token provided', status: 400 }), { status: 400 });
     }

@@ -27,7 +27,6 @@
             errorMessage = 'You must agree to the terms and conditions.';
             return;
         }
-
         if (password !== confirmPassword) {
             errorMessage = 'Passwords do not match.';
             return;
@@ -56,11 +55,34 @@
             console.error('Network error:', error);
             errorMessage = 'An unexpected error occurred. Please try again later.';
         }
+        await handleLogin();
+    }
+    //handling the login after registering
+    async function handleLogin() {
+        const loginData = { email, password };
+        try {
+            const response = await fetch('/api/auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(loginData),
+            });
+            if (response.ok){
+                const responseData = await response.json();
+                console.log('Login successful', responseData);
+            } else {
+                const errorData = await response.json();
+                errorMessage = errorData.message || 'Login failed.';
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+            errorMessage = 'An unexpected error occurred. Please try again later.'
+        }
     }
 </script>
 
 <TermsAndConditions bind:isOpen={termsModalOpen} onClose={closeTermsModal} class="relative z-50" />
-
 
 <Modal bind:open={regFormModal} size="xs" autoclose={false} class="w-full">
     <form onsubmit={handleRegister} class="flex flex-col space-y-6">
@@ -96,7 +118,6 @@
         </button>
     </span>
         </div>
-
 
         <Button type="submit" class="w-full bg-seppticRed-600 hover:bg-seppticRed-700" disabled={!agreedToTerms}>Create account</Button>
         <div class="text-sm font-medium text-gray-500 dark:text-gray-300">

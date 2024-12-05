@@ -1,6 +1,7 @@
 <script>
-    import { Tabs, TabItem, Button, Card } from 'flowbite-svelte';
-    import {HarvestaVideoPlayer, HarvestaFoodsCard, SideBarButton, ElaraSmallCard} from '$lib';
+    import { Avatar, Tabs, TabItem, Button, Card, Carousel, Progressbar } from 'flowbite-svelte';
+    import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, } from 'flowbite-svelte-icons';
+    import {HarvestaVideoPlayer, HarvestaFoodsCard, SideBarButton, ElaraSmallCard, AchievementCard} from '$lib';
 </script>
 <div style='margin-bottom: 3rem;'></div>
 
@@ -18,10 +19,7 @@
         </p>
     </TabItem>
     <TabItem title="Main Dashboard">
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        <b>Dashboard:</b>
-      </p>
-      <div class="container" style="margin: auto">
+      <div class="container" style="margin: auto; width:60vw;">
       <div class="wrap" style="display: inline-block; position: relative;">
         <img src="/HarvestaOfficeFloorplan.jpg" alt="Office Floorplan"/>
         <div class="content" style=" position: absolute; top: 70%; left: 30%;">
@@ -31,14 +29,14 @@
         </div>
         <div class="content" style=" position: absolute; top: 35%; left: 75%;">
           <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Carl Bing</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-400">Finance Guy</p>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Tony Flagg</h5>
+            <p class="font-normal text-gray-700 dark:text-gray-400">Real Estate Intern</p>
           </a>
        </div>
        <div class="content" style=" position: absolute; top: 25%; left: 10%;">
           <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Don Draper</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-400">Projects</p>
+            <p class="font-normal text-gray-700 dark:text-gray-400">Project Manager</p>
           </a>
         </div>
         <div class="content" style=" position: absolute; top: 65%; left: 5%;">
@@ -49,8 +47,8 @@
         </div>
         <div class="content" style=" position: absolute; top: 65%; left: 75%;">
           <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Interns</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-400">MVP MVP MVP MVP MVP</p>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Ann Gunn</h5>
+            <p class="font-normal text-gray-700 dark:text-gray-400">Finance Associate</p>
           </a>
         </div>
     </div>
@@ -62,16 +60,88 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </p>
     </TabItem>
-    <TabItem title="Profile">
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        <b>Users:</b>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
+    <TabItem title="Progress">
+      <div class="flex space-x-4">
+        <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:60vw;">
+          <Avatar>
+            <UserCircleOutline />
+          </Avatar>
+          <div class="space-y-1 font-medium dark:text-white">
+            <div>Jese Leos</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div>
+          </div>
+        </div>
+          <AchievementCard title="Achievement 1" description="Unlocked for thing 1"/>
+          <AchievementCard title="Achievement 2" description="Unlocked for thing 2"/>
+          <AchievementCard title="Achievement 3" description="Unlocked for thing 3"/>
+      </div>
+      Progress
+      <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+        <Progressbar progress="50" size="h-4" labelInside/>
+      </div>
+      <hr class="my-4">
+  <!-- First Character Begin -->
+      <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+        <Avatar>
+          <UserCircleOutline />
+        </Avatar>
+        <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
+          <div>Don Draper</div> <!-- First Character Name -->
+          <div class="text-sm text-gray-500 dark:text-gray-400">Finance Department Head</div> <!-- First Character Job Title -->
+        </div>
+        <div class="space-y-1 font-medium dark:text-white">
+          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+            <div class="flex items-center">
+              <BadgeCheckOutline/>
+              <p style="padding: 1rem; margin-left: 1rem;">Requirement 1</p>
+            </div>
+          </div>
+          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+            <div class="flex items-center">
+              <BadgeCheckOutline/>
+              <p style="padding: 1rem; margin-left: 1rem;">Requirement 2</p>
+            </div>
+          </div>
+          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+            <div class="flex items-center">
+              <BadgeCheckOutline/>
+              <p style="padding: 1rem; margin-left: 1rem;">Requirement 3</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  <!-- First Character End -->
+  <!-- Second Character Begin -->
+        <hr class="my-4">
+        <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem; ">
+          <Avatar>
+            <UserCircleOutline />
+          </Avatar>
+        <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
+          <div>Elara Arale</div> <!-- Second Character Name -->
+          <div class="text-sm text-gray-500 dark:text-gray-400">Receptionist</div> <!-- Second Character Job Title -->
+        </div>
+        <div class="space-y-1 font-medium dark:text-white">
+          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+            <div class="flex items-center">
+              <BadgeCheckOutline/>
+              <p style="padding: 1rem; margin-left: 1rem;">Requirement 1</p>
+            </div>
+          </div>
+          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+            <div class="flex items-center">
+              <BadgeCheckOutline/>
+              <p style="padding: 1rem; margin-left: 1rem;">Requirement 2</p>
+            </div>
+          </div>
+          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+            <div class="flex items-center">
+              <BadgeCheckOutline/>
+              <p style="padding: 1rem; margin-left: 1rem;">Requirement 3</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </TabItem>
-    <TabItem title="Evaluation/Progress">
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        <b>See all of your targets below. </b>
-        Completed targets will be colored, while those which have yet to be completed will be grey and include a prompt hinting at how to complete it.
-      </p>
-    </TabItem>
+
   </Tabs>

@@ -1,6 +1,38 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
+type campaign = {
+    Campaign_Information: {
+        Name: string;
+        Description: string;
+        Image: string;
+        Website: string;
+        Briefing_Video: string;
+        Failure_Video: string;
+    };
+    Characters: {
+        ID: number;
+        Name: string;
+        Title: string;
+        Image: string;
+        Prompt: string;
+        Intel: {
+            Intel_ID: number;
+            Intel_Description: string;
+            Unlocks_Character_ID?: number;
+            Quiz: string;
+            Answer: string;
+        }[];
+    }[];
+    Achievements: {
+        ID: number;
+        Name: string;
+        Description: string;
+        Image: string;
+        Intels: number[];
+    }[];
+}
+
 const campaignsDir = './src/server/campaigns';
 
 function getCampaignsFiles() {
@@ -23,7 +55,7 @@ function getCampaignsFiles() {
 function getCampaign(fileName: string) {
     const file = path.join(campaignsDir, fileName);
     try {
-        const data = JSON.parse(fs.readFileSync(file).toString());
+        const data: campaign = JSON.parse(fs.readFileSync(file).toString());
         const campaignData = {
             id: fileName.split('.')[0],
             name: data.Campaign_Information.Name,
@@ -52,7 +84,7 @@ function getFullCampaign(fileName: string) {
         };
     }
     try {
-        const data = JSON.parse(fs.readFileSync(file).toString());
+        const data: campaign = JSON.parse(fs.readFileSync(file).toString());
         return {
             status: 200,
             id: fileName.split('.')[0],

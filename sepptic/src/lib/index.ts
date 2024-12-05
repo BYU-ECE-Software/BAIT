@@ -19,3 +19,4 @@ export { default as SideBarButton } from './components/atoms/SideBarButton.svelt
 export { default as ElaraSmallCard } from './components/molecules/ElaraSmallCard.svelte';
 export { default as MessageActivity } from './components/molecules/MessageActivity.svelte';
 export { default as TermsAndConditions } from './components/molecules/TermsAndConditions.svelte';
+export { default as AchievementCard } from './components/molecules/AchievementCard.svelte';

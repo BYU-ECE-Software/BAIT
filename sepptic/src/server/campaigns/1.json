@@ -37,7 +37,6 @@
                 {
                     "Intel_ID": 2,
                     "Intel_Description": "John is the CEO of the company.",
-                    "Achievement_ID": 1,
                     "Quiz": "What is John's title?",
                     "Answer": "CEO"
                 }
@@ -49,7 +48,10 @@
             "ID": 1,
             "Name": "Flattery",
             "Description": "Flatter John",
-            "Image": "https://tlbd.org.ng/wp-content/uploads/2024/01/flatery.png"
+            "Image": "https://tlbd.org.ng/wp-content/uploads/2024/01/flatery.png",
+            "Intels": [
+                2
+            ]
         }
     ]
 }

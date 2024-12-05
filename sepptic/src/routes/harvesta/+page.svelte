@@ -27,12 +27,12 @@
             <ElaraSmallCard />
           </a>
         </div>
-        <div class="content" style=" position: absolute; top: 35%; left: 75%;">
+        <div class="content" style=" position: absolute; top: 30%; left: 65%;">
           <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <TonyFlaggSmallCard />
           </a>
        </div>
-       <div class="content" style=" position: absolute; top: 25%; left: 10%;">
+       <div class="content" style=" position: absolute; top: 15%; left: 7%;">
           <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <DonDraperSmallCard />
           </a>
@@ -43,7 +43,7 @@
             <p class="font-normal text-gray-700 dark:text-gray-400">Don't Mess with these guys</p>
           </a>
         </div>
-        <div class="content" style=" position: absolute; top: 65%; left: 75%;">
+        <div class="content" style=" position: absolute; top: 65%; left: 70%;">
           <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <AnnGunnSmallCard />
           </a>

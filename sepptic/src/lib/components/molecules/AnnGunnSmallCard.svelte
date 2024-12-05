@@ -5,13 +5,13 @@
 </script>
 
 <!--Button Card-->
-<Button on:click={() => (clickOutsideModal = true)}>
+<Button on:click={() => (clickOutsideModal = true)} style="background: white;">
   <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:auto;">
     <Avatar>
       <UserCircleOutline />
     </Avatar>
     <div class="space-y-1 font-medium dark:text-white">
-      <div>Ann Gunn</div>
+    <div class="text-black font-medium">Ann Gunn</div>
       <div class="text-sm text-gray-500 dark:text-gray-400">Finance Associate</div>
     </div>
   </div>

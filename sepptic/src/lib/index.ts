@@ -23,3 +23,4 @@ export { default as AchievementCard } from './components/molecules/AchievementCa
 export { default as AnnGunnSmallCard } from './components/molecules/AnnGunnSmallCard.svelte';
 export { default as DonDraperSmallCard } from './components/molecules/DonDraperSmallCard.svelte';
 export { default as TonyFlaggSmallCard } from './components/molecules/TonyFlaggSmallCard.svelte';
+export { default as SecurityTeamSmallCard } from './components/molecules/SecurityTeamSmallCard.svelte';

@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import validateCharacter from './validateCharacter';
 
 // Function to check if a conversation already exists for this user/character pair.
 async function checkExistingConversation(userId: number, campaignId: number, characterId: number) {
@@ -51,8 +52,18 @@ export default async function dbCreateConversation(userId: number, campaignId: n
             message: 'Conversation already exists',
             status: 200
         };
-    } else {
-        const response = await writeConversation(userId, campaignId, characterId);
+    }
+
+    const characterValidationResponse = await validateCharacter(campaignId, characterId);
+    if (characterValidationResponse.status !== 200) {
+        const response = {
+            conversationId: null,
+            message: characterValidationResponse.message,
+            status: characterValidationResponse.status
+        };
         return response;
     }
+
+    const response = await writeConversation(userId, campaignId, characterId);
+    return response;
 }

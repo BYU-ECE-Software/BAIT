@@ -24,6 +24,8 @@ CREATE TABLE Intel (
 CREATE TABLE Conversation (
   Conversation_ID INT NOT NULL AUTO_INCREMENT,
   User_ID INT NOT NULL,
+  Campaign_ID INT NOT NULL,
+  Character_ID INT NOT NULL,
   PRIMARY KEY (Conversation_ID),
   FOREIGN KEY (User_ID) REFERENCES User(User_ID)
 );

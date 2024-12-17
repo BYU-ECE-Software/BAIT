@@ -19,6 +19,6 @@ export async function POST(event: RequestEvent) {
     const campaignId = body.campaignId;
     const characterId = body.characterId;
 
-    const result = await dbCreateConversation(campaignId, characterId, userId);
+    const result = await dbCreateConversation(userId, campaignId, characterId);
     return new Response(JSON.stringify(result), { status: result.status });
 }

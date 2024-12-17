@@ -14,9 +14,6 @@
 ## DELETE
 - Description: Logout user
 - Request:
-    - headers:
-        - Token: string
-        - SessionID: int
 - Response:
     - body:
         - message: string
@@ -34,8 +31,6 @@
 ## GET
 - Description: Get user profile
 - Request:
-    - headers:
-        - Token: string
 - Response:
     - body:
         - userId: int
@@ -46,8 +41,6 @@
 ## PUT
 - Description: Update user profile
 - Request:
-    - headers:
-        - Token: string
     - body:
         - name: string
         - email: string
@@ -58,7 +51,6 @@
 - Description: Get user progress
 - Request:
     - headers:
-        - Token: string
         - CampaignID: int (Optional, required if CharacterID is provided)
         - CharacterID: int (Optional)
 - Response:
@@ -77,8 +69,6 @@
 ## POST - Done!
 - Description: Update user progress
 - Request:
-    - headers:
-        - Token: string
     - body:
         - progress: json
             - campaign: int
@@ -88,9 +78,6 @@
 # /campaigns/[campaignId] - Done!
 ## GET
 - Description: Get a campaign
-- Request:
-    - headers:
-        - Token: string
 - Response:
     - body:
         - campaign: json
@@ -114,8 +101,6 @@
 ## GET
 - Description: Get all campaigns
 - Request:
-    - headers:
-        - Token: string
 - Response:
     - campaigns:
         - id: int
@@ -123,12 +108,10 @@
         - description: string
         - image: string
 
-# /chat
+# /conversation
 ## GET
-- Description: Get chat messages
+- Description: Get a conversation
 - Request:
-    - headers:
-        - Token: string
     - body:
         - conversationId: int
 - Response:
@@ -142,8 +125,6 @@
 ## POST
 - Description: Send chat message
 - Request:
-    - headers:
-        - Token: string
     - body:
         - conversationId: int
         - content: string

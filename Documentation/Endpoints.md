@@ -123,7 +123,24 @@
             - timestamp: string
 
 ## POST
-- Description: Send chat message
+- Description: Create a conversation if it doesn't exist
+- Request:
+    - body:
+        - campaignId: int
+        - characterId: int
+- Response:
+    - body:
+        - conversationId: int
+
+## DELETE
+- Description: Delete a conversation
+- Request:
+    - body:
+        - conversationId: int
+
+# /message
+## POST
+- Description: Send a message
 - Request:
     - body:
         - conversationId: int

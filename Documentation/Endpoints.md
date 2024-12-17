@@ -122,7 +122,7 @@
             - content: string
             - timestamp: string
 
-## POST
+## POST - Done!
 - Description: Create a conversation if it doesn't exist
 - Request:
     - body:

@@ -1,3 +1,4 @@
 sepptic/.env
 node_modules
 .env
+.vscode/settings.json

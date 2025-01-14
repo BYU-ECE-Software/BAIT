@@ -10,6 +10,8 @@ datasource db {
 model Conversation {
   Conversation_ID Int       @id @default(autoincrement())
   User_ID         Int
+  Campaign_ID     Int
+  Character_ID    Int
   User            User      @relation(fields: [User_ID], references: [User_ID], onUpdate: Restrict, map: "Conversation_ibfk_1")
   Message         Message[]
 

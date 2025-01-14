@@ -5,7 +5,7 @@ const tokenValidityLength = 30; // Days
 
 // Function to generate a random base64 token with 32 characters.
 function generateToken() {
-    const token = crypto.randomBytes(32).toString('base64');
+    const token = crypto.randomBytes(32).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
     return token;
 }
 

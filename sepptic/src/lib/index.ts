@@ -18,4 +18,9 @@ export { default as HarvestaVideoPlayer } from './components/molecules/HarvestaV
 export { default as SideBarButton } from './components/atoms/SideBarButton.svelte';
 export { default as ElaraSmallCard } from './components/molecules/ElaraSmallCard.svelte';
 export { default as MessageActivity } from './components/molecules/MessageActivity.svelte';
+export { default as TermsAndConditions } from './components/molecules/TermsAndConditions.svelte';
 export { default as AchievementCard } from './components/molecules/AchievementCard.svelte';
+export { default as AnnGunnSmallCard } from './components/molecules/AnnGunnSmallCard.svelte';
+export { default as DonDraperSmallCard } from './components/molecules/DonDraperSmallCard.svelte';
+export { default as TonyFlaggSmallCard } from './components/molecules/TonyFlaggSmallCard.svelte';
+export { default as SecurityTeamSmallCard } from './components/molecules/SecurityTeamSmallCard.svelte';

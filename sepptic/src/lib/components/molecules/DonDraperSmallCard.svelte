@@ -8,11 +8,11 @@
 <Button on:click={() => (clickOutsideModal = true)} style="background: white;">
   <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:auto;">
     <Avatar>
-      <img src="/ElaraAIAvatar.jpg" alt="Receptionist headshot">
+      <UserCircleOutline />
     </Avatar>
     <div class="space-y-1 font-medium dark:text-white">
-      <div class="text-black font-medium">Elara Arale</div>
-      <div class="text-sm text-gray-500 dark:text-gray-400">Receptionist</div>
+      <div class="text-black font-medium">Don Draper</div>
+      <div class="text-sm text-gray-500 dark:text-gray-400">Project Manager</div>
     </div>
   </div>
 </Button>
@@ -22,11 +22,11 @@
   <!--Header Info Begin-->
   <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:auto;">
     <Avatar>
-      <img src="/ElaraAIAvatar.jpg" alt="Receptionist headshot">
+      <UserCircleOutline />
     </Avatar>
     <div class="space-y-1 font-medium dark:text-white">
-      <div>Elara Arale</div>
-      <div class="text-sm text-gray-500 dark:text-gray-400">Receptionist</div>
+      <div>Don Draper</div>
+      <div class="text-sm text-gray-500 dark:text-gray-400">Project Manager</div>
     </div>
   </div>
   <!--Header Info End-->

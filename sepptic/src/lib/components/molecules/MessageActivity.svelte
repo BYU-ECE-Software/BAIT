@@ -80,16 +80,17 @@
     <div class="w-1/4 bg-white border-r border-gray-200 dark:bg-gray-700 dark:border-gray-600">
         <ul>
             {#each people as person}
-                <li
-                        class="border-b border-gray-100 dark:border-gray-600 cursor-pointer"
-                        on:click={() => selectPerson(person)}
-                >
-                    <a class="flex items-center px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800">
+                <li class="border-b border-gray-100 dark:border-gray-600">
+                    <button
+                            class="w-full text-left flex items-center px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer"
+                            on:click={() => selectPerson(person)}
+                            type="button"
+                    >
                         <img class="me-3 rounded-full w-11 h-11" src={person.avatar} alt={`${person.name} Avatar`} />
                         <div>
                             <p class="text-sm font-medium text-gray-900 dark:text-white">{person.name}</p>
                         </div>
-                    </a>
+                    </button>
                 </li>
             {/each}
         </ul>

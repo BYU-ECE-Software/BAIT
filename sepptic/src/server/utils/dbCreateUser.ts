@@ -13,6 +13,7 @@ async function uniqueEmail(email: string) {
 }
 
 async function validateEmail(email: string) {
+
     const re: RegExp = /^[\w-\.+]+@([\w-]+\.)+[\w-]{2,4}$/;
     return re.test(email);
 }
@@ -31,6 +32,7 @@ function validatePassword(password: string) {
 }
 
 function validateName(name: string) {
+
     if (name.length < 2) {
         return false;
     }
@@ -43,6 +45,7 @@ function validateName(name: string) {
 
 // Helper function to write to the database. Returns the userId of the new user.
 async function writeToDatabase(email: string, hash: string, name: string) {
+
     const prisma = new PrismaClient();
     try {
         const user = await prisma.user.create({

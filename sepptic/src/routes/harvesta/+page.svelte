@@ -8,6 +8,7 @@
   <SideBarButton />
   <Tabs tabStyle="underline">
     <TabItem open title="Mission Breifing">
+      Click <a href="/harvesta/harvestasite" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.
         <HarvestaVideoPlayer />
         <p class="text-sm text-gray-500 dark:text-gray-400">
             <b>Intro Video:</b>

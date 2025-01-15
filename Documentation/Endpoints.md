@@ -46,7 +46,7 @@
         - email: string
         - password: string
 
-# /progress
+# /progress - Done!
 ## GET
 - Description: Get user progress
 - Request:
@@ -66,7 +66,7 @@
             - description: string
             - image: string
 
-## POST - Done!
+## POST
 - Description: Update user progress
 - Request:
     - body:
@@ -108,7 +108,7 @@
         - description: string
         - image: string
 
-# /conversation
+# /conversation - Done!
 ## GET
 - Description: Get a conversation
 - Request:
@@ -122,7 +122,7 @@
             - content: string
             - timestamp: string
 
-## POST - Done!
+## POST
 - Description: Create a conversation if it doesn't exist
 - Request:
     - body:

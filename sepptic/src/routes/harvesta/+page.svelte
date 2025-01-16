@@ -1,6 +1,6 @@
 <script>
     import { Avatar, Tabs, TabItem, Button, Card, Carousel, Progressbar } from 'flowbite-svelte';
-    import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, } from 'flowbite-svelte-icons';
+    import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline } from 'flowbite-svelte-icons';
     import {HarvestaVideoPlayer, HarvestaFoodsCard, SideBarButton, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
 </script>
 <div style='margin-bottom: 3rem;'></div>
@@ -8,8 +8,13 @@
   <SideBarButton />
   <Tabs tabStyle="underline">
     <TabItem open title="Mission Breifing">
-      Click <a href="/harvesta/harvestasite" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.
-        <HarvestaVideoPlayer />
+      <div style="display: flex; align-items: center;">
+        <ArrowUpRightFromSquareOutline/>
+        <span style="margin-left: 0.5rem;">Click <a href="/harvesta/harvestasite" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
+      </div>
+        <div style="width: 75vw; margin: auto;">
+          <HarvestaVideoPlayer />
+        </div>
         <p class="text-sm text-gray-500 dark:text-gray-400">
             <b>Intro Video:</b>
             Watch the video to learn more about Harvesta Foods and their expansion efforts.

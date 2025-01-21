@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
+import type { getUserIdResult } from './types/functionResults';
 
-export default async function getUserId(email: string) {
+export default async function getUserId(email: string): Promise<getUserIdResult> {
     const prisma = new PrismaClient();
     try {
         const user = await prisma.user.findFirst({

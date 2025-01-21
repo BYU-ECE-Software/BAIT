@@ -2,10 +2,19 @@ import dbCreateSession from "../../../server/utils/dbCreateSession";
 import dbAuthUser from "../../../server/utils/dbAuthUser";
 import dbDeleteSession from "../../../server/utils/dbDeleteSession";
 import type { RequestEvent } from '@sveltejs/kit';
+import type { reqAuthPostBody, reqAuthPostResponse } from "../../../server/utils/types/apiRequests";
 import cookie from 'cookie';
 
 export async function POST(event: RequestEvent) {
-    const body = await event.request.json();
+    // Get and validate request body
+    let body: reqAuthPostBody;
+    try {
+        body = await event.request.json();
+    } catch (error) {
+        return new Response(JSON.stringify({ message: 'Invalid request body: ' + error, status: 400 }), { status: 400 });
+    }
+
+    // Authenticate username and password
     const result = await dbAuthUser(body.email, body.password);
     if (!result.success || !result.userId) {
         const response = {
@@ -16,11 +25,10 @@ export async function POST(event: RequestEvent) {
         }
         return new Response(JSON.stringify(response), { status: result.status });
     }
-    const sessionResponse = await dbCreateSession(result.userId);
-    // return new Response(JSON.stringify(sessionResponse), { status: sessionResponse.status });
+    const sessionResponse: reqAuthPostResponse = await dbCreateSession(result.userId);
 
     // Check if the session was created
-    if (!sessionResponse.token) {
+    if (!sessionResponse.token || !sessionResponse.expiration) {
         const response = {
             sessionId: null,
             message: sessionResponse.message,

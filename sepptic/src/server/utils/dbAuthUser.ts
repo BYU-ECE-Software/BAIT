@@ -1,9 +1,11 @@
 import { PrismaClient } from '@prisma/client';
 import { validatePassword } from './crypto';
 import getUserId from './getUserId';
+import type { dbAuthUserResult } from './types/functionResults';
+import type { dbUser } from './types/dbResults';
 
 // Helper function to get the user
-async function getUser(userId: number) {
+async function getUser(userId: number): Promise<dbUser> {
     const prisma = new PrismaClient();
     const user = await prisma.user.findUnique({
         where: {
@@ -15,7 +17,7 @@ async function getUser(userId: number) {
 }
 
 // Main function to authenticate a user
-export default async function dbAuthUser(email: string, password: string) {
+export default async function dbAuthUser(email: string, password: string): Promise<dbAuthUserResult> {
     const response = await getUserId(email);
     if (!response.userId) {
         return {

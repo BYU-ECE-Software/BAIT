@@ -4,7 +4,6 @@
     import {HarvestaVideoPlayer, HarvestaFoodsCard, SideBarButton, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
 </script>
 <div style='margin-bottom: 3rem;'></div>
-
   <SideBarButton />
   <Tabs tabStyle="underline">
     <TabItem open title="Mission Breifing">

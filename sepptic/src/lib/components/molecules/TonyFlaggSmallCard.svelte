@@ -8,7 +8,7 @@
 <Button on:click={() => (clickOutsideModal = true)} style="background: white;">
   <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:auto;">
     <Avatar>
-      <UserCircleOutline />
+      <img src="/TonyFlaggAvatar.jpg" alt="Receptionist headshot">
     </Avatar>
     <div class="space-y-1 font-medium dark:text-white">
       <div class="text-black font-medium">Tony Flagg</div>
@@ -22,7 +22,7 @@
   <!--Header Info Begin-->
   <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:auto;">
     <Avatar>
-      <UserCircleOutline />
+      <img src="/TonyFlaggAvatar.jpg" alt="Receptionist headshot">
     </Avatar>
     <div class="space-y-1 font-medium dark:text-white">
       <div>Tony Flagg</div>

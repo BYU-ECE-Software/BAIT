@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import type { reqAuthPostResponse } from "./types/apiRequests";
 import crypto from 'crypto';
 
 const tokenValidityLength = 30; // Days
@@ -17,7 +18,7 @@ function getExpiration() {
 }
 
 // Function to write a new session to the database.
-async function writeSession(userId: number, token: string, expiration: Date) {
+async function writeSession(userId: number, token: string, expiration: Date): Promise<reqAuthPostResponse> {
     const prisma = new PrismaClient();
     try {
         const session = await prisma.session.create({
@@ -36,7 +37,6 @@ async function writeSession(userId: number, token: string, expiration: Date) {
         }
     } catch (error) {
         return {
-            sessionId: null,
             token: null,
             expiration: null,
             message: 'Error creating sessionL: ' + error,

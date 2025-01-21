@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { encodePassword } from './crypto';
+import type { dbCreateUserResult } from './types/functionResults';
 
 // Helper functions to validate email, password, and name. Returns true if input is valid, false otherwise.
 async function uniqueEmail(email: string) {
@@ -72,7 +73,7 @@ async function writeToDatabase(email: string, hash: string, name: string) {
 
 
 // Main function to create a new user in the database. Returns an object with the userId, message, and status.
-export default async function dbCreateUser(email: string, password: string, name: string) {
+export default async function dbCreateUser(email: string, password: string, name: string): Promise<dbCreateUserResult> {
     // Ensure email is unique
     if (!await uniqueEmail(email)) {
         return {

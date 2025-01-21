@@ -4,6 +4,7 @@ import dbGetMessages from '../../../server/utils/dbGetMessages';
 import aiSendMessage from '../../../server/utils/aiSendMessage';
 import { jsonGetCampaign } from '../../../server/utils/jsonGetCampaigns';
 import type { RequestEvent } from '@sveltejs/kit';
+import type { message, apiCall } from '../../../server/utils/types/aiApi';
 import cookie from 'cookie';
 
 export async function POST(event: RequestEvent) {
@@ -35,6 +36,9 @@ export async function POST(event: RequestEvent) {
         return new Response("Error getting messages: " + JSON.stringify(messagesResponse.message), { status: messagesResponse.status });
     }
     const messages = messagesResponse.messages;
+    if (!messages) {
+        return new Response("Error: messages not found", { status: 500 });
+    }
 
     // Get prompt from campaign
     const campaignResult = jsonGetCampaign(campaignId);

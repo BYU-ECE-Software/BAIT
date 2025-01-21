@@ -1,6 +1,6 @@
 export type message = {
     "role": "developer" | "user" | "assistant",
-    "message": string
+    "content": string
 }
 
 export type apiCall = {

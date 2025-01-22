@@ -42,13 +42,13 @@
     For more information, check out the helpful links below: 
     </p>
     <ul class="list-disc ps-5 dark:text-gray-400 text-gray-500">
-        <li>
-            <a href="/sepptic/static" target="_blank" rel="noreferrer" class="text-blue-600 dark:text-blue-500 hover:underline"> What is pretexting?</a>
-        </li>
-        <li>
-            <a href="https://tailwindui.com/" rel="noreferrer" target="_blank" class="text-blue-600 dark:text-blue-500 hover:underline"> How can I protect myself from pretexting attacks?</a>
-        </li>
-        </ul>
+    <li>
+        <a href="https://www.fortinet.com/resources/cyberglossary/pretexting" target="_blank" rel="noreferrer" class="text-blue-600 dark:text-blue-500 hover:underline"> What is pretexting?</a>
+    </li>
+    <li>
+        <a href="https://www.finra.org/investors/insights/pretexting" rel="noreferrer" target="_blank" class="text-blue-600 dark:text-blue-500 hover:underline"> How can I protect myself from pretexting attacks?</a>
+    </li>
+    </ul>
 </AccordionItem>
 <AccordionItem>
     <span slot="header">Phishing</span>
@@ -73,12 +73,12 @@
     For more information, check out the helpful links below: 
     </p>
     <ul class="list-disc ps-5 dark:text-gray-400 text-gray-500">
-        <li>
-            <a href="/sepptic/static" target="_blank" rel="noreferrer" class="text-blue-600 dark:text-blue-500 hover:underline"> What is baiting?</a>
-        </li>
-        <li>
-            <a href="https://tailwindui.com/" rel="noreferrer" target="_blank" class="text-blue-600 dark:text-blue-500 hover:underline"> What kind of bait should I use to catch bass? Trout?</a>
-        </li>
-        </ul>
+    <li>
+        <a href="https://www.privacysense.net/terms/baiting/" target="_blank" rel="noreferrer" class="text-blue-600 dark:text-blue-500 hover:underline"> What is baiting?</a>
+    </li>
+    <li>
+        <a href="https://fishboxapp.com/blog/what-do-bass-eat-exploring-the-best-baits-for-bass-fishing#:~:text=Best%20Baits%20for%20Specific%20Conditions%201%20Streams%20and,Bass%20baits%20in%20large%20rivers.%20...%20More%20items" rel="noreferrer" target="_blank" class="text-blue-600 dark:text-blue-500 hover:underline"> What kind of bait should I use to catch bass?</a>
+    </li>
+    </ul>
 </AccordionItem>
 </Accordion>

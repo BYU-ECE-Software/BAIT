@@ -2,9 +2,9 @@ import getUserIdFromToken from '../../../server/utils/getUserIdFromToken';
 import dbCreateConversation from '../../../server/utils/dbCreateConversation';
 import dbGetMessages from '../../../server/utils/dbGetMessages';
 import aiSendMessage from '../../../server/utils/aiSendMessage';
+import dbCreateMessages from '../../../server/utils/dbCreateMessage';
 import { jsonGetCampaign } from '../../../server/utils/jsonGetCampaigns';
 import type { RequestEvent } from '@sveltejs/kit';
-import type { message, apiCall } from '../../../server/utils/types/aiApi';
 import cookie from 'cookie';
 
 export async function POST(event: RequestEvent) {
@@ -61,6 +61,19 @@ export async function POST(event: RequestEvent) {
     }
 
     // Send messages to AI
-    const aiResponse = aiSendMessage(messages, message, prompt);
+    const aiResponse = await aiSendMessage(messages, message, prompt);
+    const aiMessage = aiResponse.choices[0].message.content;
+    if (!aiMessage) {
+        return new Response("AI Message Error: " + aiMessage, { status: 500 });
+    }
+
+    // Add AI response to conversation in DB
+    const dbMessageCreationResponse = await dbCreateMessages(conversationId, message, aiMessage);
+    if (dbMessageCreationResponse.status !== 200) {
+        return new Response("Error storing messages: " + JSON.stringify(dbMessageCreationResponse.message), { status: dbMessageCreationResponse.status });
+    }
+
+    // Return AI response
+    return new Response(aiMessage, { status: 200 });
 
 }

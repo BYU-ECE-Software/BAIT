@@ -1,11 +1,30 @@
 <script>
-    import { Avatar, Tabs, TabItem, Button, Card, Carousel, Progressbar } from 'flowbite-svelte';
-    import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline } from 'flowbite-svelte-icons';
+    import { Avatar, Tabs, TabItem, Button, Card, Carousel, Progressbar, Listgroup } from 'flowbite-svelte';
+    import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, BarsOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline } from 'flowbite-svelte-icons';
     import {HarvestaVideoPlayer, HarvestaFoodsCard, SideBarButton, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
+    import { AdjustmentsHorizontalSolid, DownloadSolid, MessagesSolid, UserCircleSolid } from 'flowbite-svelte-icons';
+        let icons = [
+          { name: 'Home', icon: HomeOutline, href:`/` },
+          { name: 'About', icon: InfoCircleOutline, href:`/main/about`},
+          { name: 'Campaigns', icon: OpenDoorOutline, href: '/main/campaigns' },
+          { name: 'Contact', icon: MailBoxOutline, href: '/main/contact' },
+          { name: 'Learn', icon: BookOpenOutline, href: '/main/learn' },
+          { name: 'Profile', icon: UserOutline, href: '/main/profile' },
+        ];
 </script>
-<div style='margin-bottom: 3rem;'></div>
-  <SideBarButton />
+
   <Tabs tabStyle="underline">
+    <TabItem title="Site Navigation">
+      <h1 style="display: flex; justify-content: center; padding-bottom: 1rem;" class="">Click the links below to navigate to other pages from the main site in a new tab. Make sure to save your progress before clicking.</h1>
+      <div style="display: flex; justify-content: center;">
+        <Listgroup active items={icons} let:item class="w-48">
+          <a href={item.href} target="_blank" rel="noopener noreferrer" class="flex items-center">
+            <svelte:component this={item.icon} class="w-4 h-4 me-2.5"/>
+            {item.name}
+          </a>
+        </Listgroup>
+      </div>
+    </TabItem>
     <TabItem open title="Mission Breifing">
       <div style="display: flex; align-items: center;">
         <ArrowUpRightFromSquareOutline/>

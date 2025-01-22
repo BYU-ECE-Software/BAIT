@@ -2,8 +2,8 @@
     import { Avatar, Tabs, TabItem, Button, Card, Carousel, Progressbar, Listgroup } from 'flowbite-svelte';
     import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, BarsOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline } from 'flowbite-svelte-icons';
     import {HarvestaVideoPlayer, HarvestaFoodsCard, SideBarButton, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
-    import { AdjustmentsHorizontalSolid, DownloadSolid, MessagesSolid, UserCircleSolid } from 'flowbite-svelte-icons';
-        let icons = [
+       
+    let icons = [
           { name: 'Home', icon: HomeOutline, href:`/` },
           { name: 'About', icon: InfoCircleOutline, href:`/main/about`},
           { name: 'Campaigns', icon: OpenDoorOutline, href: '/main/campaigns' },

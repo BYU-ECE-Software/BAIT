@@ -1,6 +1,6 @@
 <script>
-    import { Avatar, Tabs, TabItem, Button, Card, Carousel, Progressbar, Listgroup } from 'flowbite-svelte';
-    import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, BarsOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline } from 'flowbite-svelte-icons';
+    import { Avatar, Tabs, TabItem, Button, Card, Carousel, Progressbar, Listgroup, BottomNav, BottomNavItem, Skeleton, ImagePlaceholder } from 'flowbite-svelte';
+    import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, BarsOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline } from 'flowbite-svelte-icons';
     import {HarvestaVideoPlayer, HarvestaFoodsCard, SideBarButton, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
        
     let icons = [
@@ -11,20 +11,28 @@
           { name: 'Learn', icon: BookOpenOutline, href: '/main/learn' },
           { name: 'Profile', icon: UserOutline, href: '/main/profile' },
         ];
+
+    let selectedTab = 'Home';
 </script>
 
+<!-- Content to display on screens 1024px wide or larger START-->
+<div class="hidden lg:block">
+
+  <!-- "Site Navigation" Tab -->
   <Tabs tabStyle="underline">
     <TabItem title="Site Navigation">
       <h1 style="display: flex; justify-content: center; padding-bottom: 1rem;" class="">Click the links below to navigate to other pages from the main site in a new tab. Make sure to save your progress before clicking.</h1>
       <div style="display: flex; justify-content: center;">
         <Listgroup active items={icons} let:item class="w-48">
-          <a href={item.href} target="_blank" rel="noopener noreferrer" class="flex items-center">
+          <a href={item.href} target="_blank" rel="noopener noreferrer" class="flex items-center" style="font-size: medium;">
             <svelte:component this={item.icon} class="w-4 h-4 me-2.5"/>
             {item.name}
           </a>
         </Listgroup>
       </div>
     </TabItem>
+
+    <!-- "Mission Breifing" Tab -->
     <TabItem open title="Mission Breifing">
       <div style="display: flex; align-items: center;">
         <ArrowUpRightFromSquareOutline/>
@@ -39,9 +47,11 @@
         </p>
 
         <p class="text-sm text-gray-500 dark:text-gray-400">
-            Read this text to learn more about Harvesta Foods and their expansion efforts, the background of your pentesting job, rules of engagement, background information, recommendtaions on where to start, what to look for, and most importantly, which days to bring donuts into the office.
+            Read this text to learn more about Harvesta Foods and their expansion efforts, the background of your pentesting job, rules of engagement, background information, recommendations on where to start, what to look for, and most importantly, which days to bring donuts into the office.
         </p>
     </TabItem>
+
+    <!-- "Main Dashboard" Tab -->
     <TabItem title="Main Dashboard">
       <div class="container" style="margin: auto; width:60vw;">
       <div class="wrap" style="display: inline-block; position: relative;">
@@ -74,12 +84,16 @@
     </div>
   </div>
     </TabItem>
+
+    <!-- "Contact History" Tab -->
     <TabItem title="Contact History">
       <p class="text-sm text-gray-500 dark:text-gray-400">
         <b>Settings:</b>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </p>
     </TabItem>
+
+    <!-- "Progress" Tab -->
     <TabItem title="Progress">
       <div class="flex space-x-4">
         <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:60vw;">
@@ -165,3 +179,183 @@
     </TabItem>
 
   </Tabs>
+</div>
+<!-- Content to display on screens 1024px wide or larger END-->
+
+<!-- Content to display on screens 1023px wide or smaller START-->
+<div class="block lg:hidden">
+
+  <!-- "Home" or "Site Navigation" Tab Content -->
+  {#if selectedTab === 'Home'}
+    <h1 style="display: flex; justify-content: center; padding-bottom: 1rem;" class="">Click the links below to navigate to other pages from the main site in a new tab. Make sure to save your progress before clicking.</h1>
+      <div style="display: flex; justify-content: center;">
+        <Listgroup active items={icons} let:item class="w-48">
+          <a href={item.href} target="_blank" rel="noopener noreferrer" class="flex items-center" style="font-size: medium;">
+            <svelte:component this={item.icon} class="w-4 h-4 me-2.5"/>
+            {item.name}
+          </a>
+        </Listgroup>
+      </div>
+
+  <!-- "Mission" or "Breifing" Tab Content -->
+  {:else if selectedTab === 'Mission'}
+  <div style="display: flex; align-items: center;">
+    <ArrowUpRightFromSquareOutline/>
+    <span style="margin-left: 0.5rem;">Click <a href="/harvesta/harvestasite" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
+  </div>
+    <div style="width: 75vw; margin: auto;">
+      <HarvestaVideoPlayer />
+    </div>
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+        <b>Intro Video:</b>
+        Watch the video to learn more about Harvesta Foods and their expansion efforts.
+    </p>
+
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+        Read this text to learn more about Harvesta Foods and their expansion efforts, the background of your pentesting job, rules of engagement, background information, recommendations on where to start, what to look for, and most importantly, which days to bring donuts into the office.
+    </p>
+
+  <!-- "Dashboard" Tab Content -->
+  {:else if selectedTab === 'Dashboard'}
+        <div class="content">
+          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <ElaraSmallCard />
+          </a>
+        </div>
+        <div class="content">
+          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <TonyFlaggSmallCard />
+          </a>
+       </div>
+       <div class="content" >
+          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <DonDraperSmallCard />
+          </a>
+        </div>
+        <div class="content" >
+          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <SecurityTeamSmallCard />
+          </a>
+        </div>
+        <div class="content">
+          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <AnnGunnSmallCard />
+          </a>
+        </div>
+
+  <!-- "Contact" Tab Content -->
+  {:else if selectedTab === 'Contact'}
+    <p>Contact content goes here.</p>
+
+  <!-- "Progress" Tab Content -->
+  {:else if selectedTab === 'Progress'}
+   <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+        <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:60vw;">
+          <Avatar>
+            <UserCircleOutline />
+          </Avatar>
+          <div class="space-y-1 font-medium dark:text-white">
+            <div>Jese Leos</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div>
+          </div>
+        </div>
+      </div>
+    <div class="grid grid-cols-3 gap-4">
+      <Card style="width: 10vw;">
+        <div class="flex flex-col items-center">
+            <AwardOutline  class="w-8 h-8 mb-3 lg" />
+        </div>
+     </Card>
+
+      <AchievementCard title="Achievement 1" description="Unlocked for thing 1"/>
+      <AchievementCard title="Achievement 2" description="Unlocked for thing 2"/>
+      <AchievementCard title="Achievement 3" description="Unlocked for thing 3"/>
+    </div>
+      Progress
+      <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+        <Progressbar progress="50" size="h-4" labelInside/>
+      </div>
+      <hr class="my-4">
+  <!-- First Character Begin -->
+      <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+        <Avatar>
+          <UserCircleOutline />
+        </Avatar>
+        <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
+          <div>Don Draper</div> <!-- First Character Name -->
+          <div class="text-sm text-gray-500 dark:text-gray-400">Finance Department Head</div> <!-- First Character Job Title -->
+        </div>
+        <div class="space-y-1 font-medium dark:text-white">
+          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+            <div class="flex items-center">
+              <BadgeCheckOutline/>
+              <p style="padding: 1rem; margin-left: 1rem;">Requirement 1</p>
+            </div>
+          </div>
+          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+            <div class="flex items-center">
+              <BadgeCheckOutline/>
+              <p style="padding: 1rem; margin-left: 1rem;">Requirement 2</p>
+            </div>
+          </div>
+          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+            <div class="flex items-center">
+              <BadgeCheckOutline/>
+              <p style="padding: 1rem; margin-left: 1rem;">Requirement 3</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  <!-- First Character End -->
+  <!-- Second Character Begin -->
+        <hr class="my-4">
+        <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem; ">
+          <Avatar>
+            <UserCircleOutline />
+          </Avatar>
+        <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
+          <div>Elara Arale</div> <!-- Second Character Name -->
+          <div class="text-sm text-gray-500 dark:text-gray-400">Receptionist</div> <!-- Second Character Job Title -->
+        </div>
+        <div class="space-y-1 font-medium dark:text-white">
+          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+            <div class="flex items-center">
+              <BadgeCheckOutline/>
+              <p style="padding: 1rem; margin-left: 1rem;">Requirement 1</p>
+            </div>
+          </div>
+          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+            <div class="flex items-center">
+              <BadgeCheckOutline/>
+              <p style="padding: 1rem; margin-left: 1rem;">Requirement 2</p>
+            </div>
+          </div>
+          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+            <div class="flex items-center">
+              <BadgeCheckOutline/>
+              <p style="padding: 1rem; margin-left: 1rem;">Requirement 3</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  {/if}
+
+  <BottomNav position="fixed" classInner="grid-cols-5" activeUrl="/" style="bottom-0 left-0 right-0 z-10">
+    <BottomNavItem btnName="Home" on:click={() => selectedTab = 'Home'}>
+      <HomeSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+    </BottomNavItem>
+    <BottomNavItem btnName="Mission" on:click={() => selectedTab = 'Mission'}>
+      <WalletSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+    </BottomNavItem>
+    <BottomNavItem btnName="Dashboard" on:click={() => selectedTab = 'Dashboard'}>
+      <AdjustmentsVerticalOutline class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+    </BottomNavItem>
+    <BottomNavItem btnName="Contact" on:click={() => selectedTab = 'Contact'}>
+      <UserCircleSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+    </BottomNavItem>
+    <BottomNavItem btnName="Progress" on:click={() => selectedTab = 'Progress'}>
+      <UserCircleSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+    </BottomNavItem>
+  </BottomNav>
+</div>
+<!-- Content to display on screens 1023px wide or smaller END-->

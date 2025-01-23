@@ -31,7 +31,6 @@
             errorMessage = 'Passwords do not match.';
             return;
         }
-
         const formData = { name, email, password, confirmPassword };
 
         try {
@@ -47,6 +46,7 @@
                 console.log('Registration successful');
                 errorMessage = ''; // Clear error messages on success
                 // Handle successful registration (e.g., redirect to login page)
+                await handleLogin();
             } else {
                 const errorData = await response.json();
                 errorMessage = errorData.message || 'Registration failed.';
@@ -55,7 +55,6 @@
             console.error('Network error:', error);
             errorMessage = 'An unexpected error occurred. Please try again later.';
         }
-        await handleLogin();
     }
     //handling the login after registering
     async function handleLogin() {

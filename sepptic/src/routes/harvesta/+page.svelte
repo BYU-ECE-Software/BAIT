@@ -250,33 +250,47 @@
   <!-- "Progress" Tab Content -->
   {:else if selectedTab === 'Progress'}
    <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-        <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:60vw;">
-          <Avatar>
-            <UserCircleOutline />
-          </Avatar>
-          <div class="space-y-1 font-medium dark:text-white">
+      <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:60vw;">
+        <Avatar>
+          <UserCircleOutline />
+        </Avatar>
+        <div class="space-y-1 font-medium dark:text-white">
             <div>Jese Leos</div>
             <div class="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div>
-          </div>
         </div>
       </div>
-    <div class="grid grid-cols-3 gap-4">
-      <Card style="width: 10vw;">
-        <div class="flex flex-col items-center">
-            <AwardOutline  class="w-8 h-8 mb-3 lg" />
-        </div>
-     </Card>
-
-      <AchievementCard title="Achievement 1" description="Unlocked for thing 1"/>
-      <AchievementCard title="Achievement 2" description="Unlocked for thing 2"/>
-      <AchievementCard title="Achievement 3" description="Unlocked for thing 3"/>
+    </div>
+    <div class="grid gap-4 w-full" style="padding: 1rem; margin-bottom: 1rem;">
+      <div class="flex overflow-x-auto space-x-4 w-full" style="padding: 1rem; margin-bottom: 1rem;">
+        <Card style="width: 30vw;">
+          <div class="flex flex-col items-center">
+            <AwardOutline class="w-8 h-8 mb-3 lg" />
+          </div>
+        </Card>
+        <Card style="width: 30vw;">
+          <div class="flex flex-col items-center">
+            <AwardOutline class="w-8 h-8 mb-3 lg" />
+          </div>
+        </Card>
+        <Card style="width: 30vw;">
+          <div class="flex flex-col items-center">
+            <AwardOutline class="w-8 h-8 mb-3 lg" />
+          </div>
+        </Card>
+        <Card style="width: 30vw;">
+          <div class="flex flex-col items-center">
+            <AwardOutline class="w-8 h-8 mb-3 lg" />
+          </div>
+        </Card>
+        
+      </div>
     </div>
       Progress
       <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
         <Progressbar progress="50" size="h-4" labelInside/>
       </div>
+<!-- First Character Begin -->
       <hr class="my-4">
-  <!-- First Character Begin -->
       <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
         <Avatar>
           <UserCircleOutline />
@@ -285,6 +299,7 @@
           <div>Don Draper</div> <!-- First Character Name -->
           <div class="text-sm text-gray-500 dark:text-gray-400">Finance Department Head</div> <!-- First Character Job Title -->
         </div>
+      </div>
         <div class="space-y-1 font-medium dark:text-white">
           <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
             <div class="flex items-center">
@@ -305,7 +320,6 @@
             </div>
           </div>
         </div>
-      </div>
   <!-- First Character End -->
   <!-- Second Character Begin -->
         <hr class="my-4">
@@ -317,6 +331,7 @@
           <div>Elara Arale</div> <!-- Second Character Name -->
           <div class="text-sm text-gray-500 dark:text-gray-400">Receptionist</div> <!-- Second Character Job Title -->
         </div>
+      </div>
         <div class="space-y-1 font-medium dark:text-white">
           <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
             <div class="flex items-center">
@@ -337,7 +352,6 @@
             </div>
           </div>
         </div>
-      </div>
   {/if}
 
   <BottomNav position="fixed" classInner="grid-cols-5" activeUrl="/" style="bottom-0 left-0 right-0 z-10">

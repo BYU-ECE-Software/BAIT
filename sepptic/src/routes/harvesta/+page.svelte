@@ -282,6 +282,21 @@
             <AwardOutline class="w-8 h-8 mb-3 lg" />
           </div>
         </Card>
+        <Card style="width: 30vw;">
+          <div class="flex flex-col items-center">
+            <AwardOutline class="w-8 h-8 mb-3 lg" />
+          </div>
+        </Card>
+        <Card style="width: 30vw;">
+          <div class="flex flex-col items-center">
+            <AwardOutline class="w-8 h-8 mb-3 lg" />
+          </div>
+        </Card>
+        <Card style="width: 30vw;">
+          <div class="flex flex-col items-center">
+            <AwardOutline class="w-8 h-8 mb-3 lg" />
+          </div>
+        </Card>
         
       </div>
     </div>

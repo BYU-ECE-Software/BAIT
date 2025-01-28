@@ -15,10 +15,7 @@
 			{description}
 		</p>
 		<Button
-			href="/campaign"
-			on:click={() => {
-				localStorage.setItem('campaignId', campaignId);
-			}}
+			href="/main/campaigns/{campaignId}"
 			class="bg-seppticRed-600 hover:bg-seppticRed-700 focus:ring-seppticRed-400 w-full text-white focus:outline-none focus:ring-4 "
 		>
 			Play

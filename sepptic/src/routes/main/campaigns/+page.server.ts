@@ -6,6 +6,5 @@ export const load: PageServerLoad = async ({ fetch, cookies }) => {
         headers: { 'Authorization': `Bearer ${sessionToken}` }
     });
     const campaigns = await campaignsResponse.json();
-    console.log(campaigns);
     return { campaigns };
 };

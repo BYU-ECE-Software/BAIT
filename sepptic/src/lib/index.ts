@@ -25,3 +25,4 @@ export { default as DonDraperSmallCard } from './components/molecules/DonDraperS
 export { default as TonyFlaggSmallCard } from './components/molecules/TonyFlaggSmallCard.svelte';
 export { default as SecurityTeamSmallCard } from './components/molecules/SecurityTeamSmallCard.svelte';
 export { default as GenericCampaignCard } from './components/molecules/GenericCampaignCard.svelte';
+export { default as GenericVideoCard } from './components/molecules/GenericVideoCard.svelte';

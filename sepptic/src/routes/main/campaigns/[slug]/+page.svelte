@@ -1,7 +1,7 @@
 <script>
     import { Avatar, Tabs, TabItem, Button, Card, Carousel, Progressbar, Listgroup } from 'flowbite-svelte';
     import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, BarsOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline } from 'flowbite-svelte-icons';
-    import {HarvestaVideoPlayer, HarvestaFoodsCard, SideBarButton, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
+    import {GenericVideoCard, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
        
     let icons = [
           { name: 'Home', icon: HomeOutline, href:`/` },
@@ -11,6 +11,8 @@
           { name: 'Learn', icon: BookOpenOutline, href: '/main/learn' },
           { name: 'Profile', icon: UserOutline, href: '/main/profile' },
         ];
+
+    export let data;
 </script>
 
   <Tabs tabStyle="underline">
@@ -28,18 +30,18 @@
     <TabItem open title="Mission Breifing">
       <div style="display: flex; align-items: center;">
         <ArrowUpRightFromSquareOutline/>
-        <span style="margin-left: 0.5rem;">Click <a href="/harvesta/harvestasite" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
+        <span style="margin-left: 0.5rem;">Click <a href={data.Campaign_Information.Website} target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
       </div>
         <div style="width: 75vw; margin: auto;">
-          <HarvestaVideoPlayer />
+          <GenericVideoCard src={data.Campaign_Information.Briefing_Video} />
         </div>
         <p class="text-sm text-gray-500 dark:text-gray-400">
             <b>Intro Video:</b>
-            Watch the video to learn more about Harvesta Foods and their expansion efforts.
+            Watch the video to learn more about {data.Campaign_Information.Name}.
         </p>
 
         <p class="text-sm text-gray-500 dark:text-gray-400">
-            Read this text to learn more about Harvesta Foods and their expansion efforts, the background of your pentesting job, rules of engagement, background information, recommendtaions on where to start, what to look for, and most importantly, which days to bring donuts into the office.
+            {data.Campaign_Information.Description}
         </p>
     </TabItem>
     <TabItem title="Main Dashboard">

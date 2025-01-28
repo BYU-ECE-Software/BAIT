@@ -25,7 +25,7 @@
 			<GenericCampaignCard
 				name={campaign.name}
 				description={campaign.description}
-				image={campaign.photo}
+				image={campaign.image}
 				campaignId={campaign.id}
 			/>
 		</div>

@@ -1,5 +1,5 @@
 // place files you want to import through the `$lib` alias in this folder.
-export { default as SignInButton} from './components/atoms/Learn.svelte';
+export { default as SignInButton } from './components/atoms/Learn.svelte';
 export { default as CampaignButton } from './components/atoms/CampaignButton.svelte';
 export { default as LearnButton } from './components/atoms/SignIn.svelte';
 export { default as NavBar } from './components/molecules/NavBar.svelte';
@@ -24,3 +24,4 @@ export { default as AnnGunnSmallCard } from './components/molecules/AnnGunnSmall
 export { default as DonDraperSmallCard } from './components/molecules/DonDraperSmallCard.svelte';
 export { default as TonyFlaggSmallCard } from './components/molecules/TonyFlaggSmallCard.svelte';
 export { default as SecurityTeamSmallCard } from './components/molecules/SecurityTeamSmallCard.svelte';
+export { default as GenericCampaignCard } from './components/molecules/GenericCampaignCard.svelte';

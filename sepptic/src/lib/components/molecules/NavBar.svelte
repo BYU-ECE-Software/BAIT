@@ -2,6 +2,7 @@
     import { page } from '$app/stores';
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownHeader, DropdownItem, DropdownDivider, DarkMode} from 'flowbite-svelte';
     $: activeUrl = $page.url.pathname;
+    $: email = $page.data.email ?? "Unknown";
 </script>
 
     <Navbar color="dark">
@@ -22,11 +23,9 @@
         <Dropdown placement="bottom" triggeredBy="#avatar-menu">
             <DropdownHeader>
                 <span class="block text-sm">Script Kiddie</span>
-                <span class="block truncate text-sm font-medium">hacker@sepptic.com</span>
+                <span class="block truncate text-sm font-medium">{email}</span>
             </DropdownHeader>
             <DropdownItem href="/main/dashboard">Dashboard</DropdownItem>
-            <DropdownItem>Settings</DropdownItem>
-            <DropdownItem>Earnings</DropdownItem>
             <DropdownDivider />
             <DropdownItem>Sign out</DropdownItem>
         </Dropdown>

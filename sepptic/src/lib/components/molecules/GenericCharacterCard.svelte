@@ -5,7 +5,6 @@
     export let name;
     export let title;
     export let image;
-    export let characterId;
     export let intel;
 </script>
 

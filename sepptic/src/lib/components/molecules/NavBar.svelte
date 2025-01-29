@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { page } from '$app/stores';
+    import { page } from '$app/state';
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownHeader, DropdownItem, DropdownDivider, DarkMode} from 'flowbite-svelte';
-    $: activeUrl = $page.url.pathname;
-    $: email = $page.data.email ?? "Unknown";
+    $: activeUrl = page.url.pathname;
+    $: email = page.data.email ?? "Unknown";
 </script>
 
     <Navbar color="dark">

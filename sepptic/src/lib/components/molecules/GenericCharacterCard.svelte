@@ -49,7 +49,6 @@
   </div>
   <div class="space-y-1 font-medium dark:text-white">
     {#each intel as item, index}
-    {console.log(item)}
         <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
             <div class="flex items-center">
                 <BadgeCheckOutline/> 

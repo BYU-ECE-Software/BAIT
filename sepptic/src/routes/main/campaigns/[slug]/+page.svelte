@@ -1,7 +1,7 @@
 <script>
     import { Avatar, Tabs, TabItem, Button, Card, Carousel, Progressbar, Listgroup } from 'flowbite-svelte';
     import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, BarsOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline } from 'flowbite-svelte-icons';
-    import {GenericVideoCard, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
+    import {GenericVideoCard, GenericCharacterCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
        
     let icons = [
           { name: 'Home', icon: HomeOutline, href:`/` },
@@ -47,31 +47,12 @@
     <TabItem title="Main Dashboard">
       <div class="container" style="margin: auto; width:60vw;">
       <div class="wrap" style="display: inline-block; position: relative;">
-        <img src="/HarvestaOfficeFloorplan.jpg" alt="Office Floorplan"/>
-        <div class="content" style=" position: absolute; top: 70%; left: 30%;">
-          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <ElaraSmallCard />
-          </a>
-        </div>
-        <div class="content" style=" position: absolute; top: 30%; left: 65%;">
-          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <TonyFlaggSmallCard />
-          </a>
-       </div>
-       <div class="content" style=" position: absolute; top: 15%; left: 7%;">
-          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <DonDraperSmallCard />
-          </a>
-        </div>
-        <div class="content" style=" position: absolute; top: 65%; left: 5%;">
-          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <SecurityTeamSmallCard />
-          </a>
-        </div>
-        <div class="content" style=" position: absolute; top: 65%; left: 70%;">
-          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <AnnGunnSmallCard />
-          </a>
+        <div class="content">
+          {#each data.Characters as character}
+            <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+              <GenericCharacterCard name={character.Name} title={character.Title} image={character.Image} characterId={character.CharacterId} intel={character.Intel}/>
+            </a>
+          {/each}
         </div>
     </div>
   </div>

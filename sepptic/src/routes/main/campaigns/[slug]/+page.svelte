@@ -1,7 +1,7 @@
 <script>
-    import { Avatar, Tabs, TabItem, Button, Card, Carousel, Progressbar, Listgroup, BottomNav, BottomNavItem, Skeleton, ImagePlaceholder } from 'flowbite-svelte';
-    import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, BarsOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline, PhoneOutline } from 'flowbite-svelte-icons';
-    import {HarvestaVideoPlayer, HarvestaFoodsCard, SideBarButton, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
+    import { Avatar, Tabs, TabItem, Button, Card, Carousel, Progressbar, Listgroup } from 'flowbite-svelte';
+    import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, BarsOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline } from 'flowbite-svelte-icons';
+    import {GenericVideoCard, GenericCharacterCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
        
     let icons = [
           { name: 'Home', icon: HomeOutline, href:`/` },
@@ -12,7 +12,7 @@
           { name: 'Profile', icon: UserOutline, href: '/main/profile' },
         ];
 
-    let selectedTab = 'Home';
+    export let data;
 </script>
 
 <!-- Content to display on screens 1024px wide or larger START-->
@@ -36,18 +36,18 @@
     <TabItem open title="Mission Breifing">
       <div style="display: flex; align-items: center;">
         <ArrowUpRightFromSquareOutline/>
-        <span style="margin-left: 0.5rem;">Click <a href="/harvesta/harvestasite" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
+        <span style="margin-left: 0.5rem;">Click <a href={data.Campaign_Information.Website} target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
       </div>
         <div style="width: 75vw; margin: auto;">
-          <HarvestaVideoPlayer />
+          <GenericVideoCard src={data.Campaign_Information.Briefing_Video} />
         </div>
         <p class="text-sm text-gray-500 dark:text-gray-400">
             <b>Intro Video:</b>
-            Watch the video to learn more about Harvesta Foods and their expansion efforts.
+            Watch the video to learn more about {data.Campaign_Information.Name}.
         </p>
 
         <p class="text-sm text-gray-500 dark:text-gray-400">
-            Read this text to learn more about Harvesta Foods and their expansion efforts, the background of your pentesting job, rules of engagement, background information, recommendations on where to start, what to look for, and most importantly, which days to bring donuts into the office.
+            {data.Campaign_Information.Description}
         </p>
     </TabItem>
 
@@ -55,31 +55,12 @@
     <TabItem title="Main Dashboard">
       <div class="container" style="margin: auto; width:60vw;">
       <div class="wrap" style="display: inline-block; position: relative;">
-        <img src="/HarvestaOfficeFloorplan.jpg" alt="Office Floorplan"/>
-        <div class="content" style=" position: absolute; top: 70%; left: 30%;">
-          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <ElaraSmallCard />
-          </a>
-        </div>
-        <div class="content" style=" position: absolute; top: 30%; left: 65%;">
-          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <TonyFlaggSmallCard />
-          </a>
-       </div>
-       <div class="content" style=" position: absolute; top: 15%; left: 7%;">
-          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <DonDraperSmallCard />
-          </a>
-        </div>
-        <div class="content" style=" position: absolute; top: 65%; left: 5%;">
-          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <SecurityTeamSmallCard />
-          </a>
-        </div>
-        <div class="content" style=" position: absolute; top: 65%; left: 70%;">
-          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <AnnGunnSmallCard />
-          </a>
+        <div class="content">
+          {#each data.Characters as character}
+            <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+              <GenericCharacterCard name={character.Name} title={character.Title} image={character.Image} characterId={character.CharacterId} intel={character.Intel}/>
+            </a>
+          {/each}
         </div>
     </div>
   </div>

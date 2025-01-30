@@ -1,7 +1,7 @@
 <script>
-  import { Avatar, Tabs, TabItem, Button, Card, Carousel, Progressbar, Listgroup, BottomNav, BottomNavItem, Skeleton, ImagePlaceholder } from 'flowbite-svelte';
-  import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, BarsOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline, PhoneOutline } from 'flowbite-svelte-icons';
-  import {HarvestaVideoPlayer, HarvestaFoodsCard, SideBarButton, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
+  import { Avatar, Tabs, TabItem, Card, Progressbar, Listgroup, BottomNav, BottomNavItem } from 'flowbite-svelte';
+  import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline, PhoneOutline } from 'flowbite-svelte-icons';
+  import {HarvestaVideoPlayer, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
 
   let icons = [
       { name: 'Home', icon: HomeOutline, href:`/` },

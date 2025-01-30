@@ -1,6 +1,6 @@
 <script>
     import { Avatar, Tabs, TabItem, Button, Card, Carousel, Progressbar, Listgroup, BottomNav, BottomNavItem, Skeleton, ImagePlaceholder } from 'flowbite-svelte';
-    import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, BarsOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline, PhoneOutline } from 'flowbite-svelte-icons';
+    import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, BarsOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline } from 'flowbite-svelte-icons';
     import {HarvestaVideoPlayer, HarvestaFoodsCard, SideBarButton, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
        
     let icons = [
@@ -117,11 +117,11 @@
   <!-- First Character Begin -->
       <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
         <Avatar>
-          <img src="/DonDraperAvatar.jpg" alt="Project manager headshot">
+          <UserCircleOutline />
         </Avatar>
         <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
           <div>Don Draper</div> <!-- First Character Name -->
-          <div class="text-sm text-gray-500 dark:text-gray-400">Project Manager</div> <!-- First Character Job Title -->
+          <div class="text-sm text-gray-500 dark:text-gray-400">Finance Department Head</div> <!-- First Character Job Title -->
         </div>
         <div class="space-y-1 font-medium dark:text-white">
           <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
@@ -149,7 +149,7 @@
         <hr class="my-4">
         <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem; ">
           <Avatar>
-            <img src="/ElaraAIAvatar.jpg" alt="Receptionist headshot">
+            <UserCircleOutline />
           </Avatar>
         <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
           <div>Elara Arale</div> <!-- Second Character Name -->
@@ -217,7 +217,6 @@
 
   <!-- "Dashboard" Tab Content -->
   {:else if selectedTab === 'Dashboard'}
-      <div>
         <div class="content">
           <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <ElaraSmallCard />
@@ -243,7 +242,6 @@
             <AnnGunnSmallCard />
           </a>
         </div>
-      </div> 
 
   <!-- "Contact" Tab Content -->
   {:else if selectedTab === 'Contact'}
@@ -310,11 +308,11 @@
       <hr class="my-4">
       <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
         <Avatar>
-          <img src="/DonDraperAvatar.jpg" alt="Project manager headshot">
+          <UserCircleOutline />
         </Avatar>
         <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
           <div>Don Draper</div> <!-- First Character Name -->
-          <div class="text-sm text-gray-500 dark:text-gray-400">Project Manager</div> <!-- First Character Job Title -->
+          <div class="text-sm text-gray-500 dark:text-gray-400">Finance Department Head</div> <!-- First Character Job Title -->
         </div>
       </div>
         <div class="space-y-1 font-medium dark:text-white">
@@ -342,7 +340,7 @@
         <hr class="my-4">
         <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem; ">
           <Avatar>
-            <img src="/ElaraAIAvatar.jpg" alt="Receptionist headshot">
+            <UserCircleOutline />
           </Avatar>
         <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
           <div>Elara Arale</div> <!-- Second Character Name -->
@@ -382,7 +380,7 @@
       <AdjustmentsVerticalOutline class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
     </BottomNavItem>
     <BottomNavItem btnName="Contact" on:click={() => selectedTab = 'Contact'}>
-      <PhoneOutline class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+      <UserCircleSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
     </BottomNavItem>
     <BottomNavItem btnName="Progress" on:click={() => selectedTab = 'Progress'}>
       <UserCircleSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />

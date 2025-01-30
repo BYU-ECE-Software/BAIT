@@ -1,24 +1,7 @@
 <script lang="ts">
-    import { page } from '$app/state';
+    import { page } from '$app/stores';
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownHeader, DropdownItem, DropdownDivider, DarkMode} from 'flowbite-svelte';
-    $: activeUrl = page.url.pathname;
-    $: email = page.data.email ?? "Unknown";
-    import { invalidate } from '$app/navigation'; // To refresh the session
-
-    async function signOut() {
-        try {
-            const res = await fetch('/api/auth', { method: 'DELETE', credentials: 'include'});
-
-            if (res.ok) {
-                await invalidate('app:session'); // Refresh session data
-                console.log('invalidate session');
-            } else {
-                console.error("Logout failed");
-            }
-        } catch (err) {
-            console.error("Error signing out:", err);
-        }
-    }
+    $: activeUrl = $page.url.pathname;
 </script>
 
     <Navbar color="dark">
@@ -39,11 +22,13 @@
         <Dropdown placement="bottom" triggeredBy="#avatar-menu">
             <DropdownHeader>
                 <span class="block text-sm">Script Kiddie</span>
-                <span class="block truncate text-sm font-medium">{email}</span>
+                <span class="block truncate text-sm font-medium">hacker@sepptic.com</span>
             </DropdownHeader>
             <DropdownItem href="/main/dashboard">Dashboard</DropdownItem>
+            <DropdownItem>Settings</DropdownItem>
+            <DropdownItem>Earnings</DropdownItem>
             <DropdownDivider />
-            <DropdownItem on:click={signOut}>Sign out</DropdownItem>
+            <DropdownItem>Sign out</DropdownItem>
         </Dropdown>
 
         <!-- Navbar Items -->

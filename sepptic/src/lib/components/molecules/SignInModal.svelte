@@ -1,27 +1,31 @@
 <script lang="ts">
     import { Button, Modal, Label, Input, Checkbox } from 'flowbite-svelte';
+    import {signIn} from "$lib/auth.svelte";
     let { onSwitchToRegister, signFormModal = true }: {onSwitchToRegister: () => void, signFormModal: boolean } = $props();
     let email = $state('');
     let password = $state('');
+    let errorMessage = $state(''); // Reactive variable for error messages
 
-    async function handleSubmit(event: SubmitEvent) {
-        event.preventDefault();
 
-        const formData = { email, password };
 
+    async function handleLogin() {
+        const loginData = { email, password };
         try {
             const response = await fetch('/api/auth', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(loginData),
             });
-
-            if (response.ok) {
-                console.log('Login successful');
+            if (response.ok){
+                const responseData = await response.json();
+                console.log('Login successful', responseData);
+                signIn();
             } else {
-                console.error('Login failed');
+                const errorData = await response.json();
+                errorMessage = errorData.message || 'Login failed.';
+                console.error(errorMessage);
             }
         } catch (error) {
             console.error('Network error:', error);
@@ -29,8 +33,11 @@
     }
 </script>
 
-<Modal bind:open={signFormModal} size="xs" autoclose={false} class="w-full">
-    <form onsubmit={handleSubmit} class="flex flex-col space-y-6">
+<Modal bind:open={signFormModal} size="xs" autoclose={false} class="w-full" dismissable={false}>
+    <form onsubmit={handleLogin} class="flex flex-col space-y-6">
+        {#if errorMessage}
+            <div class="text-red-600 dark:text-red-400 text-sm">{errorMessage}</div>
+        {/if}
         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Sign in to SEPPTIC</h3>
         <Label class="space-y-2">
             <span>Email</span>

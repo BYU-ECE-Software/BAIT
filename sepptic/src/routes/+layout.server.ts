@@ -1,13 +1,10 @@
-import { signIn, signOut } from "$lib/auth.svelte";
 import type { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad = async ({ cookies, fetch }) => {
-    console.log(cookies.getAll()); // Logs all cookies visible to the server
+export const load: LayoutServerLoad = async ({ cookies, fetch }) => {// Logs all cookies visible to the server
     const sessionToken = cookies.get('token');
 
     if (!sessionToken) {
         console.log("Session token not found");
-        signOut();
         return { isLoggedIn: false };
     }
 
@@ -18,17 +15,14 @@ export const load: LayoutServerLoad = async ({ cookies, fetch }) => {
 
     if (!response.ok) {
         console.log("Response not okay");
-        signOut();
         return { isLoggedIn: false };
     }
 
-    console.log("This should authenticate");
+    const userData = await response.json();
+    console.log("User Data from API:", userData); // Debugging
 
-    const user = await response.json();
-    signIn();
     return {
-        isLoggedIn: true
+        isLoggedIn: true,
+        email: userData.email ?? null
     };
-
 }
-

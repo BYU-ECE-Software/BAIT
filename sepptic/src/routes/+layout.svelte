@@ -9,19 +9,17 @@
     let { data, children}: LayoutProps = $props();
     // let { isLoggedIn = false, children }: { isLoggedIn: boolean, children: () => any }: LayoutProps = $props();
 
-    let formModal = $state(false);
-
     onMount(() => {
         isAuthenticated.isAuthenticated = data.isLoggedIn ?? false;
         console.log("isLoggedIn:", data.isLoggedIn);
         //If the isLoggedIn is false then it will show the formModal.
-        formModal = !(data.isLoggedIn ?? false);
     });
+
 </script>
 
 <main class="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex flex-col">
 
-    <AuthModalSwitcher open={formModal} />
+    <AuthModalSwitcher open={!isAuthenticated.isAuthenticated} />
 
     {@render children?.()}
 </main>

@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Button, Modal, Label, Input, Checkbox } from 'flowbite-svelte';
     import { TermsAndConditions } from '$lib';
+    import {signIn} from "$lib/auth.svelte";
 
     let { onSwitchToSignIn, regFormModal = true, onOpenTerms }: { onSwitchToSignIn: () => void, regFormModal: boolean, onOpenTerms: () => void } = $props();
     let termsModalOpen = $state(false);
@@ -70,6 +71,7 @@
             if (response.ok){
                 const responseData = await response.json();
                 console.log('Login successful', responseData);
+                signIn();
             } else {
                 const errorData = await response.json();
                 errorMessage = errorData.message || 'Login failed.';
@@ -83,7 +85,7 @@
 
 <TermsAndConditions bind:isOpen={termsModalOpen} onClose={closeTermsModal} class="relative z-50" />
 
-<Modal bind:open={regFormModal} size="xs" autoclose={false} class="w-full">
+<Modal bind:open={regFormModal} size="xs" autoclose={false} class="w-full" dismissable={false}>
     <form onsubmit={handleRegister} class="flex flex-col space-y-6">
         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create an account</h3>
         {#if errorMessage}

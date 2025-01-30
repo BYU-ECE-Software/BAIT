@@ -5,12 +5,12 @@ export const isAuthenticated = $state({
 })
 
 export function signOut(): void {
-    console.log("Signing out. . .")
+    console.log("Signing out. . .");
     isAuthenticated.isAuthenticated = false;
 }
 
 export function signIn(): void{
-    console.log("Signing in. . .")
+    console.log("Signing in. . .");
     isAuthenticated.isAuthenticated = true;
 }
 

@@ -3,6 +3,22 @@
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownHeader, DropdownItem, DropdownDivider, DarkMode} from 'flowbite-svelte';
     $: activeUrl = page.url.pathname;
     $: email = page.data.email ?? "Unknown";
+    import { invalidate } from '$app/navigation'; // To refresh the session
+
+    async function signOut() {
+        try {
+            const res = await fetch('/api/auth', { method: 'DELETE', credentials: 'include'});
+
+            if (res.ok) {
+                await invalidate('app:session'); // Refresh session data
+                console.log('invalidate session');
+            } else {
+                console.error("Logout failed");
+            }
+        } catch (err) {
+            console.error("Error signing out:", err);
+        }
+    }
 </script>
 
     <Navbar color="dark">
@@ -27,7 +43,7 @@
             </DropdownHeader>
             <DropdownItem href="/main/dashboard">Dashboard</DropdownItem>
             <DropdownDivider />
-            <DropdownItem>Sign out</DropdownItem>
+            <DropdownItem on:click={signOut}>Sign out</DropdownItem>
         </Dropdown>
 
         <!-- Navbar Items -->

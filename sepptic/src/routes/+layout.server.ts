@@ -19,7 +19,6 @@ export const load: LayoutServerLoad = async ({ cookies, fetch }) => {// Logs all
     }
 
     const userData = await response.json();
-    console.log("User Data from API:", userData); // Debugging
 
     return {
         isLoggedIn: true,

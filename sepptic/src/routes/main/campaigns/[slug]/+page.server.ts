@@ -6,6 +6,12 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const campaignsResponse = await fetch(`/api/campaigns/${slug}`, {
         headers: { 'Authorization': `Bearer ${sessionToken}` }
     });
-    const campaign = await campaignsResponse.json();
-    return campaign.data;
+    const userResponse = await fetch('/api/profile', {
+        headers: { 'Authorization': `Bearer ${sessionToken}` }
+    });
+    const campaignJson = await campaignsResponse.json();
+    const userJson = await userResponse.json();
+    const campaign = campaignJson.data;
+    const user = userJson;
+    return { campaign, user };
 };

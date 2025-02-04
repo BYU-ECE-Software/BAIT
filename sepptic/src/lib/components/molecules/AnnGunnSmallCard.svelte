@@ -4,14 +4,27 @@
     let clickOutsideModal = false;
 </script>
 
-<!--Button Card-->
-<Button on:click={() => (clickOutsideModal = true)} style="background: white;">
+<!--Desktop Button Card-->
+<Button on:click={() => (clickOutsideModal = true)} class="hidden lg:flex" style="background: white;">
   <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:auto;">
     <Avatar>
       <img src="/AnnGunnAvatar.jpg" alt="Receptionist headshot">
     </Avatar>
     <div class="space-y-1 font-medium dark:text-white">
     <div class="text-black font-medium">Ann Gunn</div>
+      <div class="text-sm text-gray-500 dark:text-gray-400">Finance Associate</div>
+    </div>
+  </div>
+</Button>
+
+<!-- Mobile Button Card -->
+<Button on:click={() => (clickOutsideModal = true)} class="flex lg:hidden h-full" style="background: white; width: 70vw">
+  <div class="flex items-center space-x-4 rtl:space-x-reverse w-full h-full">
+    <Avatar rounded size="lg">
+      <img src="/AnnGunnAvatar.jpg" alt="Finance associate headshot">
+    </Avatar>
+    <div class="space-y-1 font-medium dark:text-white">
+      <div class="text-black font-medium">Ann Gunn</div>
       <div class="text-sm text-gray-500 dark:text-gray-400">Finance Associate</div>
     </div>
   </div>

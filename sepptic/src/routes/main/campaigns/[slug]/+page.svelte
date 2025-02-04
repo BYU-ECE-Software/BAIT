@@ -78,9 +78,11 @@
                       <div>{data.user.name}</div>
                   </div>
               </div>
-              <AchievementCard title="Achievement 1" description="Unlocked for thing 1"/>
-              <AchievementCard title="Achievement 2" description="Unlocked for thing 2"/>
-              <AchievementCard title="Achievement 3" description="Unlocked for thing 3"/>
+              {#each data.user.achievements as achievement, index}
+                {#if achievement.Campaign_ID === data.slug}
+                  <AchievementCard title={achievement.Name} description={achievement.Description}/>
+                {/if}
+              {/each}
           </div>
           Progress
           <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">

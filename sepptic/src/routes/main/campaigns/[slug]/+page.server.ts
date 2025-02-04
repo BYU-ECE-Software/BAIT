@@ -13,5 +13,7 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const userJson = await userResponse.json();
     const campaign = campaignJson.data;
     const user = userJson;
-    return { campaign, user };
+    console.log(campaign)
+    console.log(user)
+    return { campaign, user, slug };
 };

@@ -39,6 +39,7 @@
         <ArrowUpRightFromSquareOutline class="w-5 h-5 me-2"/>Company Website
       </Button>
     </div>
+    <hr class="my-4">
         <div style="width: 75vw; margin: auto;">
           <HarvestaVideoPlayer />
         </div>
@@ -228,7 +229,7 @@
     <hr class="my-4">
       <div class="column" style="display: flex; flex-direction: column; align-items: center;">
         <div class="content">
-          <a href="#" class="block max-w-sm h-full bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <ElaraSmallCard />
           </a>
         </div>

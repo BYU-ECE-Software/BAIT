@@ -56,9 +56,9 @@
 <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {#each teamMembers as member}
         <div class="w-full max-w-md mx-auto p-4 border border-seppticGray-300 dark:border-seppticGray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center shadow-md">
-            <h2 class="mb-2 text-2xl font-bold tracking-tight text-seppticRed-500 dark:text-seppticRed-300">{member.name}</h2>
-            <p class="mb-3 font-normal text-gray-800 dark:text-gray-300 leading-tight">{member.role}</p>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 leading-tight">{member.bio}</p>
+            <h2 class="mb-2 text-2xl font-bold tracking-tight text-black dark:text-white">{member.name}</h2>
+            <p class="mb-3 font-normal text-gray-500 dark:text-gray-400 leading-tight">{member.role}</p>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-300 leading-tight">{member.bio}</p>
             <div class="flex justify-center gap-4 mt-4">
                 {#if member.linkedin}
                     <a href={member.linkedin} target="_blank" class="text-seppticOrange-500 dark:text-seppticOrange-300 hover:underline">
@@ -66,7 +66,7 @@
                     </a>
                 {/if}
                 {#if member.email}
-                    <a href={`mailto:${member.email}`} class="text-seppticGray-800 dark:text-seppticGray-50 hover:underline">
+                    <a href={`mailto:${member.email}`} class="text-seppticRed-500 dark:text-seppticRed-300 hover:underline">
                         Email
                     </a>
                 {/if}

@@ -46,7 +46,7 @@
             name: "Garrett White",
             role: "Frontend Engineer",
             bio: "Works with frontend development and builds pages and internal logic.",
-            linkedin: "#",
+            linkedin: "https://www.linkedin.com/in/gmwhite/",
             email: "gw263@byu.edu",
         },
     ];

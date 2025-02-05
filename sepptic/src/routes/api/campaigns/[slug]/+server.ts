@@ -3,6 +3,29 @@ import getUserIdFromToken from "../../../../server/utils/getUserIdFromToken";
 import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
 
+function appendCharacterTotals(campaign: any) {
+    for (const character of campaign.data.Characters) {
+        character.Total_Intel = character.Intel.length;
+    }
+    return campaign;
+}
+
+function appendCampaignTotal(campaign: any) {
+    let total: number = 0;
+    for (const character of campaign.data.Characters) {
+        total += character.Intel.length;
+    }
+    campaign.data.Campaign_Information.Total_Intel = total;
+    return campaign;
+}
+
+function appendTotals(campaign: any){
+    let newCampaign = campaign;
+    newCampaign = appendCharacterTotals(newCampaign);
+    newCampaign = appendCampaignTotal(newCampaign);
+    return newCampaign;
+}
+
 export async function GET(event: RequestEvent) {
     const cookies = cookie.parse(event.request.headers.get('cookie') || '');
     const token = cookies.token;
@@ -14,6 +37,7 @@ export async function GET(event: RequestEvent) {
         return new Response(JSON.stringify({ message: userIdResponse.message, status: userIdResponse.status }), { status: userIdResponse.status });
     }
     const campaignId = event.params.slug;
-    const campaign = jsonGetCampaign(campaignId as string);
+    let campaign = await jsonGetCampaign(campaignId as string);
+    campaign = appendTotals(campaign);
     return new Response(JSON.stringify(campaign), { status: campaign.status });
 }

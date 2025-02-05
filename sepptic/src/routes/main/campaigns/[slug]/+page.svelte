@@ -79,7 +79,7 @@
                   </div>
               </div>
               {#each data.user.achievements as achievement, index}
-                {#if achievement.Campaign_ID === data.slug}
+                {#if achievement.Campaign_ID == data.slug}
                   <AchievementCard title={achievement.Name} description={achievement.Description}/>
                 {/if}
               {/each}

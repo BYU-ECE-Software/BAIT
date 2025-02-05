@@ -6,6 +6,21 @@ import dbGetIntel from "../../../server/utils/dbGetIntel";
 import calculateAchievements from "../../../server/utils/calculateAchievements";
 import cookie from 'cookie';
 
+function sortIntel(intelResponse: any) {
+    const intel = intelResponse.intel;
+    const sortedIntel: { [key: string]: any[] } = {};
+
+    intel.forEach((intelItem: any) => {
+        const campaignId = intelItem.Campaign_ID;
+        if (!sortedIntel[campaignId]) {
+            sortedIntel[campaignId] = [];
+        }
+        sortedIntel[campaignId].push(intelItem);
+    });
+
+    return { intel: sortedIntel };
+}
+
 export async function POST(event: RequestEvent) {
     const cookies = cookie.parse(event.request.headers.get('cookie') || '');
     const token = cookies.token;
@@ -49,6 +64,8 @@ export async function GET(event: RequestEvent) {
         return new Response(JSON.stringify({ message: intelResponse.message, status: intelResponse.status }), { status: intelResponse.status });
     }
 
+    const intelByCampaignResponse = sortIntel(intelResponse);
+
     const achievementsResponse = await calculateAchievements(userId);
     if (achievementsResponse.status !== 200) {
         return new Response(JSON.stringify({ message: achievementsResponse.message, status: achievementsResponse.status }), { status: achievementsResponse.status });
@@ -57,6 +74,7 @@ export async function GET(event: RequestEvent) {
     if ('intel' in intelResponse) {
         return new Response(JSON.stringify({
             intel: intelResponse.intel,
+            intelByCampaign: intelByCampaignResponse.intel,
             achievements: achievementsResponse.achievements
         }), { status: 200 });
     } else {

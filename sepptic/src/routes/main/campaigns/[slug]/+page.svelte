@@ -86,71 +86,31 @@
           </div>
           Progress
           <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-              <Progressbar progress="50" size="h-4" labelInside/>
+              <Progressbar progress={data.progresses.campaign} size="h-4" labelInside/>
           </div>
           <hr class="my-4">
-          <!-- First Character Begin -->
-          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-              <Avatar>
-                  <img src="/DonDraperAvatar.jpg" alt="Project manager headshot">
-              </Avatar>
-              <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
-                  <div>Don Draper</div> <!-- First Character Name -->
-                  <div class="text-sm text-gray-500 dark:text-gray-400">Project Manager</div> <!-- First Character Job Title -->
-              </div>
-              <div class="space-y-1 font-medium dark:text-white">
-                  <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                      <div class="flex items-center">
-                          <BadgeCheckOutline/>
-                          <p style="padding: 1rem; margin-left: 1rem;">Requirement 1</p>
-                      </div>
-                  </div>
-                  <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                      <div class="flex items-center">
-                          <BadgeCheckOutline/>
-                          <p style="padding: 1rem; margin-left: 1rem;">Requirement 2</p>
-                      </div>
-                  </div>
-                  <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                      <div class="flex items-center">
-                          <BadgeCheckOutline/>
-                          <p style="padding: 1rem; margin-left: 1rem;">Requirement 3</p>
-                      </div>
-                  </div>
-              </div>
-          </div>
+          {#each data.campaign.Characters as character, index}
+            <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+                <Avatar>
+                    <img src={character.Image} alt={character.Name} />
+                </Avatar>
+                <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
+                    <div>{character.Name}</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">{character.Title}</div>
+                </div>
+                <div class="space-y-1 font-medium dark:text-white">
+                    {#each character.Intel as intel, index}
+                        <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+                            <div class="flex items-center">
+                                <BadgeCheckOutline/>
+                                <p style="padding: 1rem; margin-left: 1rem;">{intel.Intel_Description}</p>
+                            </div>
+                        </div>
+                    {/each}
+                </div>
+            </div>
+          {/each}
           <!-- First Character End -->
-          <!-- Second Character Begin -->
-          <hr class="my-4">
-          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem; ">
-              <Avatar>
-                  <img src="/ElaraAIAvatar.jpg" alt="Receptionist headshot">
-              </Avatar>
-              <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
-                  <div>Elara Arale</div> <!-- Second Character Name -->
-                  <div class="text-sm text-gray-500 dark:text-gray-400">Receptionist</div> <!-- Second Character Job Title -->
-              </div>
-              <div class="space-y-1 font-medium dark:text-white">
-                  <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                      <div class="flex items-center">
-                          <BadgeCheckOutline/>
-                          <p style="padding: 1rem; margin-left: 1rem;">Requirement 1</p>
-                      </div>
-                  </div>
-                  <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                      <div class="flex items-center">
-                          <BadgeCheckOutline/>
-                          <p style="padding: 1rem; margin-left: 1rem;">Requirement 2</p>
-                      </div>
-                  </div>
-                  <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                      <div class="flex items-center">
-                          <BadgeCheckOutline/>
-                          <p style="padding: 1rem; margin-left: 1rem;">Requirement 3</p>
-                      </div>
-                  </div>
-              </div>
-          </div>
       </TabItem>
 
   </Tabs>

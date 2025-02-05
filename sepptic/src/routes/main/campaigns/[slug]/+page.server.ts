@@ -42,5 +42,6 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const campaign = campaignJson.data;
     const user = userJson;
     const progresses = calculateProgresses(userProgress, campaign, slug);
-    return { campaign, user, slug, progresses };
+    console.log(userProgress.intelByCampaign[slug]);
+    return { campaign, user, slug, progresses, userProgress };
 };

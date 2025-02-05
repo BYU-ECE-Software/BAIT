@@ -32,19 +32,21 @@
             </div>
         </TabItem>
 
-        <!-- "Mission Breifing" Tab -->
-        <TabItem open title="Mission Breifing">
-            <div style="display: flex; align-items: center;">
-                <ArrowUpRightFromSquareOutline/>
-                <span style="margin-left: 0.5rem;">Click <a href="/harvesta/harvestasite" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
-            </div>
-            <div style="width: 75vw; margin: auto;">
-                <HarvestaVideoPlayer />
-            </div>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
-                <b>Intro Video:</b>
-                Watch the video to learn more about Harvesta Foods and their expansion efforts.
-            </p>
+    <!-- "Mission Breifing" Tab -->
+    <TabItem open title="Mission Breifing">
+      <div style="display: flex; justify-content: center; width: 100%;">
+      <Button size="md" on:click={() => window.open('/harvesta/harvestasite', '_blank', 'noopener,noreferrer')}>
+        <ArrowUpRightFromSquareOutline class="w-5 h-5 me-2"/>Company Website
+      </Button>
+    </div>
+    <hr class="my-4">
+        <div style="width: 75vw; margin: auto;">
+          <HarvestaVideoPlayer />
+        </div>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+            <b>Intro Video:</b>
+            Watch the video to learn more about Harvesta Foods and their expansion efforts.
+        </p>
 
             <p class="text-sm text-gray-500 dark:text-gray-400">
                 Read this text to learn more about Harvesta Foods and their expansion efforts, the background of your pentesting job, rules of engagement, background information, recommendations on where to start, what to look for, and most importantly, which days to bring donuts into the office.
@@ -185,138 +187,146 @@
 <!-- Content to display on screens 1023px wide or smaller START-->
 <div class="block lg:hidden">
 
-    <!-- "Home" or "Site Navigation" Tab Content -->
-    {#if selectedTab === 'Home'}
-        <h1 style="display: flex; justify-content: center; padding-bottom: 1rem;" class="">Click the links below to navigate to other pages from the main site in a new tab. Make sure to save your progress before clicking.</h1>
-        <div style="display: flex; justify-content: center;">
-            <Listgroup active items={icons} let:item class="w-48">
-                <a href={item.href} target="_blank" rel="noopener noreferrer" class="flex items-center" style="font-size: medium;">
-                    <svelte:component this={item.icon} class="w-4 h-4 me-2.5"/>
-                    {item.name}
-                </a>
-            </Listgroup>
-        </div>
+  <!-- "Home" or "Site Navigation" Tab Content -->
+  {#if selectedTab === 'Home'}
+    <h1 style="display: flex; justify-content: center; padding-bottom: 1rem;" class="p-4">Click the links below to navigate to other pages from the main site in a new tab. Make sure to save your progress before clicking.</h1>
+      <div style="display: flex; justify-content: center;">
+        <Listgroup active items={icons} let:item class="w-48">
+          <a href={item.href} target="_blank" rel="noopener noreferrer" class="flex items-center" style="font-size: medium;">
+            <svelte:component this={item.icon} class="w-4 h-4 me-2.5"/>
+            {item.name}
+          </a>
+        </Listgroup>
+      </div>
 
-        <!-- "Mission" or "Breifing" Tab Content -->
-    {:else if selectedTab === 'Mission'}
-        <div style="display: flex; align-items: center;">
-            <ArrowUpRightFromSquareOutline/>
-            <span style="margin-left: 0.5rem;">Click <a href="/harvesta/harvestasite" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
-        </div>
-        <div style="width: 75vw; margin: auto;">
-            <HarvestaVideoPlayer />
-        </div>
-        <p class="text-sm text-gray-500 dark:text-gray-400">
-            <b>Intro Video:</b>
-            Watch the video to learn more about Harvesta Foods and their expansion efforts.
-        </p>
+  <!-- "Mission" or "Breifing" Tab Content -->
+  {:else if selectedTab === 'Mission'}
+    <div style="width: 75vw; margin: auto;" class='pt-6'>
+      <HarvestaVideoPlayer />
+    </div>
+    <p class="text-sm text-gray-500 dark:text-gray-400 p-4">
+      <b>Intro Video:</b>
+      Watch the video to learn more about Harvesta Foods and their expansion efforts.
+    </p>
+    <hr class="my-4">
+    <div style="display: flex; justify-content: center; width: 100%;">
+      <Button size="md" on:click={() => window.open('/harvesta/harvestasite', '_blank', 'noopener,noreferrer')}>
+        <ArrowUpRightFromSquareOutline class="w-5 h-5 me-2"/>Company Website
+      </Button>
+    </div>
+    <hr class="my-4">
+    <p class="text-sm text-gray-500 dark:text-gray-400 p-4">
+        Read this text to learn more about Harvesta Foods and their expansion efforts, the background of your pentesting job, rules of engagement, background information, recommendations on where to start, what to look for, and most importantly, which days to bring donuts into the office.
+    </p>
 
-        <p class="text-sm text-gray-500 dark:text-gray-400">
-            Read this text to learn more about Harvesta Foods and their expansion efforts, the background of your pentesting job, rules of engagement, background information, recommendations on where to start, what to look for, and most importantly, which days to bring donuts into the office.
-        </p>
-
-        <!-- "Dashboard" Tab Content -->
-    {:else if selectedTab === 'Dashboard'}
-        <div>
-            <div class="content">
-                <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <ElaraSmallCard />
-                </a>
-            </div>
-            <div class="content">
-                <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <TonyFlaggSmallCard />
-                </a>
-            </div>
-            <div class="content" >
-                <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <DonDraperSmallCard />
-                </a>
-            </div>
-            <div class="content" >
-                <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <SecurityTeamSmallCard />
-                </a>
-            </div>
-            <div class="content">
-                <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <AnnGunnSmallCard />
-                </a>
-            </div>
+  <!-- "Dashboard" Tab Content -->
+  {:else if selectedTab === 'Dashboard'}
+    <div class="pt-4 pr-4 pl-4 text-center">
+      <p>
+        Click on a character card below for hints on who to talk to or what topics to find information about.
+      </p>
+    </div>
+    <hr class="my-4">
+      <div class="column" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="content">
+          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <ElaraSmallCard />
+          </a>
         </div>
+        <div class="content">
+          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <TonyFlaggSmallCard />
+          </a>
+       </div>
+       <div class="content">
+          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <AnnGunnSmallCard />
+          </a>
+        </div>
+       <div class="content" >
+          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <DonDraperSmallCard />
+          </a>
+        </div>
+        <div class="content" >
+          <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <SecurityTeamSmallCard />
+          </a>
+        </div>
+      </div> 
 
         <!-- "Contact" Tab Content -->
     {:else if selectedTab === 'Contact'}
         <p>Contact content goes here.</p>
 
-        <!-- "Progress" Tab Content -->
-    {:else if selectedTab === 'Progress'}
-        <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-            <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:60vw;">
-                <Avatar>
-                    <UserCircleOutline />
-                </Avatar>
-                <div class="space-y-1 font-medium dark:text-white">
-                    <div>Jese Leos</div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div>
-                </div>
-            </div>
+  <!-- "Progress" Tab Content -->
+  {:else if selectedTab === 'Progress'}
+   <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+      <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:60vw;">
+        <Avatar>
+          <UserCircleOutline />
+        </Avatar>
+        <div class="space-y-1 font-medium dark:text-white">
+            <div>Jese Leos</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div>
         </div>
-        <div class="grid gap-4 w-full" style="padding: 1rem; margin-bottom: 1rem;">
-            <div class="flex overflow-x-auto space-x-4 w-full" style="padding: 1rem; margin-bottom: 1rem;">
-                <Card style="width: 30vw;">
-                    <div class="flex flex-col items-center">
-                        <AwardOutline class="w-8 h-8 mb-3 lg" />
-                    </div>
-                </Card>
-                <Card style="width: 30vw;">
-                    <div class="flex flex-col items-center">
-                        <AwardOutline class="w-8 h-8 mb-3 lg" />
-                    </div>
-                </Card>
-                <Card style="width: 30vw;">
-                    <div class="flex flex-col items-center">
-                        <AwardOutline class="w-8 h-8 mb-3 lg" />
-                    </div>
-                </Card>
-                <Card style="width: 30vw;">
-                    <div class="flex flex-col items-center">
-                        <AwardOutline class="w-8 h-8 mb-3 lg" />
-                    </div>
-                </Card>
-                <Card style="width: 30vw;">
-                    <div class="flex flex-col items-center">
-                        <AwardOutline class="w-8 h-8 mb-3 lg" />
-                    </div>
-                </Card>
-                <Card style="width: 30vw;">
-                    <div class="flex flex-col items-center">
-                        <AwardOutline class="w-8 h-8 mb-3 lg" />
-                    </div>
-                </Card>
-                <Card style="width: 30vw;">
-                    <div class="flex flex-col items-center">
-                        <AwardOutline class="w-8 h-8 mb-3 lg" />
-                    </div>
-                </Card>
-
-            </div>
+      </div>
+    </div>
+    <div class="grid gap-4 w-full" style="padding: 1rem; margin-bottom: 1rem;">
+      <div class="flex overflow-x-auto space-x-4 w-full" style="padding: 1rem; margin-bottom: 1rem;">
+        <Card style="width: 30vw;">
+          <div class="flex flex-col items-center">
+            <AwardOutline class="w-8 h-8 mb-3 lg" />
+          </div>
+        </Card>
+        <Card style="width: 30vw;">
+          <div class="flex flex-col items-center">
+            <AwardOutline class="w-8 h-8 mb-3 lg" />
+          </div>
+        </Card>
+        <Card style="width: 30vw;">
+          <div class="flex flex-col items-center">
+            <AwardOutline class="w-8 h-8 mb-3 lg" />
+          </div>
+        </Card>
+        <Card style="width: 30vw;">
+          <div class="flex flex-col items-center">
+            <AwardOutline class="w-8 h-8 mb-3 lg" />
+          </div>
+        </Card>
+        <Card style="width: 30vw;">
+          <div class="flex flex-col items-center">
+            <AwardOutline class="w-8 h-8 mb-3 lg" />
+          </div>
+        </Card>
+        <Card style="width: 30vw;">
+          <div class="flex flex-col items-center">
+            <AwardOutline class="w-8 h-8 mb-3 lg" />
+          </div>
+        </Card>
+        <Card style="width: 30vw;">
+          <div class="flex flex-col items-center">
+            <AwardOutline class="w-8 h-8 mb-3 lg" />
+          </div>
+        </Card>
+        
+      </div>
+    </div>
+      <p class="pt-4 pr-4 pl-4">Progress</p>
+      <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+        <Progressbar progress="50" size="h-4" labelInside/>
+      </div>
+<!-- First Character Begin -->
+      <hr class="my-4">
+      <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+        <Avatar>
+          <img src="/DonDraperAvatar.jpg" alt="Project manager headshot">
+        </Avatar>
+        <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
+          <div>Don Draper</div> <!-- First Character Name -->
+          <div class="text-sm text-gray-500 dark:text-gray-400">Project Manager</div> <!-- First Character Job Title -->
         </div>
-        Progress
-        <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-            <Progressbar progress="50" size="h-4" labelInside/>
-        </div>
-        <!-- First Character Begin -->
-        <hr class="my-4">
-        <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-            <Avatar>
-                <img src="/DonDraperAvatar.jpg" alt="Project manager headshot">
-            </Avatar>
-            <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
-                <div>Don Draper</div> <!-- First Character Name -->
-                <div class="text-sm text-gray-500 dark:text-gray-400">Project Manager</div> <!-- First Character Job Title -->
-            </div>
-        </div>
+      </div>
         <div class="space-y-1 font-medium dark:text-white">
             <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
                 <div class="flex items-center">
@@ -369,7 +379,14 @@
                 </div>
             </div>
         </div>
-    {/if}
+
+    <!--Space Filler so footer doesn't cover character intel. Keep this at the bottom.-->
+        <div class="flex space-x-4" style="padding: 1rem;">
+          <div class="flex items-center">
+            <p style="padding: 1rem; margin-left: 1rem;"></p>
+          </div>
+        </div>
+  {/if}
 
     <BottomNav position="fixed" classInner="grid-cols-5" activeUrl="/" style="bottom-0: left-0 right-0 z-10">
         <BottomNavItem btnName="Home" on:click={() => selectedTab = 'Home'}>

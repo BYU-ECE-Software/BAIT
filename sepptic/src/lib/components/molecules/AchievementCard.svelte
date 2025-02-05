@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
     import { Card } from 'flowbite-svelte';
     import { AwardOutline, ArrowUpRightFromSquareOutline } from 'flowbite-svelte-icons';
-    export let title = "Title";
-    export let description = "Description";
+    let { title = "title", description = "Description"}: {title: string, description: string} = $props();
+
+
 </script>
 
 <Card style="width: 10vw;">

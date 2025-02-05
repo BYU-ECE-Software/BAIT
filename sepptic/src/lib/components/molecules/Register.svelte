@@ -5,7 +5,6 @@
 
     let { onSwitchToSignIn, regFormModal = true, onOpenTerms }: { onSwitchToSignIn: () => void, regFormModal: boolean, onOpenTerms: () => void } = $props();
     let termsModalOpen = $state(false);
-
     let name = $state('');
     let email = $state('');
     let password = $state('');

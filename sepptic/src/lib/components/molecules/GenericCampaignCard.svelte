@@ -1,9 +1,6 @@
-<script>
+<script lang="ts">
 	import { Card, Button } from 'flowbite-svelte';
-	export let name;
-	export let image;
-	export let description;
-	export let campaignId;
+	let { name, image, description, campaignId }: {name: string, image: string, description: string, campaignId: number} =$props();
 </script>
 
 <div class="mx-auto w-full max-w-3xl">

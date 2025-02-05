@@ -14,7 +14,6 @@ export const load: LayoutServerLoad = async ({ cookies, fetch }) => {// Logs all
     });
 
     if (!response.ok) {
-        console.log("Response not okay");
         return { isLoggedIn: false };
     }
 

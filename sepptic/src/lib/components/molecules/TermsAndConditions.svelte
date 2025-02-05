@@ -11,7 +11,7 @@
     }
 </script>
 
-<Modal bind:open={isOpen} size="lg" autoclose={false} {...$$restProps}>
+<Modal bind:open={isOpen} size="lg" autoclose={false} {...$$restProps} dismissable={false}>
     <div class="space-y-4">
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
             Terms and Conditions

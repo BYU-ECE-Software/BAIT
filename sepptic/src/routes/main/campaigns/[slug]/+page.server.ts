@@ -24,6 +24,17 @@ function calculateProgresses(userProgress: any, campaign: any, slug: string) {
     return progresses;
 }
 
+function checkIntel(userProgress: any, campaignId: string, characterId: number, intelId: number) {
+    if (!userProgress.intelByCampaign[campaignId]){
+        return false;
+    }
+    console.log(userProgress)
+    console.log("Character ID:")
+    console.log(characterId)
+    const intel = userProgress.intelByCampaign[campaignId].filter((intel: any) => intel.Character_ID === characterId && intel.Intel_ID === intelId);
+    return intel.length > 0;
+}
+
 export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const sessionToken = cookies.get('token');
     const slug = params.slug;
@@ -42,6 +53,5 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const campaign = campaignJson.data;
     const user = userJson;
     const progresses = calculateProgresses(userProgress, campaign, slug);
-    console.log(userProgress.intelByCampaign[slug]);
     return { campaign, user, slug, progresses, userProgress };
 };

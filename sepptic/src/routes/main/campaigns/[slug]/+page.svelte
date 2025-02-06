@@ -100,12 +100,16 @@
                 </div>
                 <div class="space-y-1 font-medium dark:text-white">
                     {#each character.Intel as intel, index}
+                    {#if intel.userIntels[character.ID][intel.IntelID]}
                         <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
                             <div class="flex items-center">
                                 <BadgeCheckOutline/>
                                 <p style="padding: 1rem; margin-left: 1rem;">{intel.Intel_Description}</p>
                             </div>
                         </div>
+                    {:else}
+                        You don't have this intel
+                    {/if}
                     {/each}
                 </div>
             </div>

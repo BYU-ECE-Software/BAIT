@@ -28,11 +28,21 @@ function checkIntel(userProgress: any, campaignId: string, characterId: number, 
     if (!userProgress.intelByCampaign[campaignId]){
         return false;
     }
-    console.log(userProgress)
-    console.log("Character ID:")
-    console.log(characterId)
     const intel = userProgress.intelByCampaign[campaignId].filter((intel: any) => intel.Character_ID === characterId && intel.Intel_ID === intelId);
     return intel.length > 0;
+}
+
+function parseUserIntels(userProgress: any, campaignId: string, campaign: any) {
+    let userIntels: { [characterId: number]: { [intelId: number]: boolean } } = {};
+    campaign.Characters.forEach((character: any) => {
+        character.Intel.forEach((intel: any) => {
+            if (!userIntels[character.ID]){
+                userIntels[character.ID] = {};
+            }
+            userIntels[character.ID][intel.Intel_ID] = checkIntel(userProgress, campaignId, character.ID, intel.Intel_ID);
+        });
+    });
+    return userIntels;
 }
 
 export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
@@ -53,5 +63,7 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const campaign = campaignJson.data;
     const user = userJson;
     const progresses = calculateProgresses(userProgress, campaign, slug);
-    return { campaign, user, slug, progresses, userProgress };
+    const userIntels = parseUserIntels(userProgress, slug, campaign);
+    console.log(userIntels)
+    return { campaign, user, slug, progresses, userProgress, userIntels };
 };

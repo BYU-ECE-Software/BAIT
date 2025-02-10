@@ -64,6 +64,5 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const user = userJson;
     const progresses = calculateProgresses(userProgress, campaign, slug);
     const userIntels = parseUserIntels(userProgress, slug, campaign);
-    console.log(campaign.Characters[0].Intel)
     return { campaign, user, slug, progresses, userProgress, userIntels };
 };

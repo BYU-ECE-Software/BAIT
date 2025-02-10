@@ -59,7 +59,7 @@
                 {#each data.campaign.Characters as character, index}
                   <div class="content">
                       <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                          <GenericCharacterCard name={character.Name} title={character.Title} image={character.Image} intel={character.Intel} />
+                          <GenericCharacterCard name={character.Name} title={character.Title} image={character.Image} intel={character.Intel} characterProgress={data.progresses.characters[character.ID]} />
                       </div>
                   </div>
                 {/each}
@@ -100,7 +100,7 @@
                 </div>
                 <div class="space-y-1 font-medium dark:text-white">
                     {#each character.Intel as intel, index}
-                    {#if intel.userIntels[character.ID][intel.IntelID]}
+                    {#if data.userIntels[character.ID][intel.Intel_ID]}
                         <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
                             <div class="flex items-center">
                                 <BadgeCheckOutline/>
@@ -108,7 +108,11 @@
                             </div>
                         </div>
                     {:else}
-                        You don't have this intel
+                        <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+                            <div class="flex items-center">
+                                <p style="padding: 1rem; margin-left: 1rem;">{intel.Quiz}</p>
+                            </div>
+                        </div>
                     {/if}
                     {/each}
                 </div>

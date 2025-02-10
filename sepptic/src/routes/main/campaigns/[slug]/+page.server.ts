@@ -1,7 +1,7 @@
 import type { PageServerLoad } from "./$types";
 
 function calculateProgresses(userProgress: any, campaign: any, slug: string) {
-    let progresses = {
+    let progresses: { campaign: number, characters: { [key: string]: number } } = {
         'campaign': 0,
         'characters': {}
     };
@@ -64,6 +64,6 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const user = userJson;
     const progresses = calculateProgresses(userProgress, campaign, slug);
     const userIntels = parseUserIntels(userProgress, slug, campaign);
-    console.log(userIntels)
+    console.log(campaign.Characters[0].Intel)
     return { campaign, user, slug, progresses, userProgress, userIntels };
 };

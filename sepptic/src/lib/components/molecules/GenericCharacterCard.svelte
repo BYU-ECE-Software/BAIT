@@ -6,6 +6,7 @@
     export let title;
     export let image;
     export let intel;
+    export let characterProgress;
 </script>
 
 <!--Button Card-->
@@ -44,7 +45,7 @@
 
   <!--Target Goals Begin-->  
   <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-    <Progressbar progress="50" size="h-4" labelInside/>
+    <Progressbar progress="{characterProgress}" size="h-4" labelInside/>
   </div>
   <div class="space-y-1 font-medium dark:text-white">
     {#each intel as item, index}

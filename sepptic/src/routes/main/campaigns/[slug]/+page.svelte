@@ -1,7 +1,7 @@
 <script>
-  import { Avatar, Tabs, TabItem, Button, Card, Carousel, Progressbar, Listgroup, BottomNav, BottomNavItem, Skeleton, ImagePlaceholder } from 'flowbite-svelte';
-  import { UserCircleOutline, QuestionCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, BarsOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline, PhoneOutline } from 'flowbite-svelte-icons';
-  import {HarvestaVideoPlayer, HarvestaFoodsCard, SideBarButton, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard} from '$lib';
+  import { Avatar, Tabs, TabItem, Card, Progressbar, Listgroup, BottomNav, BottomNavItem } from 'flowbite-svelte';
+  import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline, PhoneOutline } from 'flowbite-svelte-icons';
+  import {GenericVideoCard, GenericCharacterCard, HarvestaVideoPlayer, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard, CampaignButton} from '$lib';
 
   let icons = [
       { name: 'Home', icon: HomeOutline, href:`/` },
@@ -12,6 +12,7 @@
       { name: 'Profile', icon: UserOutline, href: '/main/profile' },
   ];
 
+  export let data;
   let selectedTab = 'Home';
 </script>
 
@@ -32,22 +33,22 @@
           </div>
       </TabItem>
 
-      <!-- "Mission Breifing" Tab -->
-      <TabItem open title="Mission Breifing">
+      <!-- "Mission Briefing" Tab -->
+      <TabItem open title="Mission Briefing">
           <div style="display: flex; align-items: center;">
               <ArrowUpRightFromSquareOutline/>
-              <span style="margin-left: 0.5rem;">Click <a href="/harvesta/harvestasite" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
+              <span style="margin-left: 0.5rem;">Click <a href="{data.campaign.Campaign_Information.Website}" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
           </div>
           <div style="width: 75vw; margin: auto;">
-              <HarvestaVideoPlayer />
+              <GenericVideoCard src="{data.campaign.Campaign_Information.Briefing_Video}" />
           </div>
           <p class="text-sm text-gray-500 dark:text-gray-400">
               <b>Intro Video:</b>
-              Watch the video to learn more about Harvesta Foods and their expansion efforts.
+              Watch the video to learn more about {data.campaign.Campaign_Information.Name}.
           </p>
 
           <p class="text-sm text-gray-500 dark:text-gray-400">
-              Read this text to learn more about Harvesta Foods and their expansion efforts, the background of your pentesting job, rules of engagement, background information, recommendations on where to start, what to look for, and most importantly, which days to bring donuts into the office.
+              {data.campaign.Campaign_Information.Description}
           </p>
       </TabItem>
 
@@ -55,42 +56,15 @@
       <TabItem title="Main Dashboard">
           <div class="container" style="margin: auto; width:60vw;">
               <div class="wrap" style="display: inline-block; position: relative;">
-                  <img src="/HarvestaOfficeFloorplan.jpg" alt="Office Floorplan"/>
-                  <div class="content" style=" position: absolute; top: 70%; left: 30%;">
-                      <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                          <ElaraSmallCard />
-                      </a>
+                {#each data.campaign.Characters as character, index}
+                  <div class="content">
+                      <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                          <GenericCharacterCard name={character.Name} title={character.Title} image={character.Image} intel={character.Intel} characterProgress={data.progresses.characters[character.ID]} />
+                      </div>
                   </div>
-                  <div class="content" style=" position: absolute; top: 30%; left: 65%;">
-                      <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                          <TonyFlaggSmallCard />
-                      </a>
-                  </div>
-                  <div class="content" style=" position: absolute; top: 15%; left: 7%;">
-                      <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                          <DonDraperSmallCard />
-                      </a>
-                  </div>
-                  <div class="content" style=" position: absolute; top: 65%; left: 5%;">
-                      <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                          <SecurityTeamSmallCard />
-                      </a>
-                  </div>
-                  <div class="content" style=" position: absolute; top: 65%; left: 70%;">
-                      <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                          <AnnGunnSmallCard />
-                      </a>
-                  </div>
+                {/each}
               </div>
           </div>
-      </TabItem>
-
-      <!-- "Contact History" Tab -->
-      <TabItem title="Contact History">
-          <p class="text-sm text-gray-500 dark:text-gray-400">
-              <b>Settings:</b>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
       </TabItem>
 
       <!-- "Progress" Tab -->
@@ -101,81 +75,50 @@
                       <UserCircleOutline />
                   </Avatar>
                   <div class="space-y-1 font-medium dark:text-white">
-                      <div>Jese Leos</div>
-                      <div class="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div>
+                      <div>{data.user.name}</div>
                   </div>
               </div>
-              <AchievementCard title="Achievement 1" description="Unlocked for thing 1"/>
-              <AchievementCard title="Achievement 2" description="Unlocked for thing 2"/>
-              <AchievementCard title="Achievement 3" description="Unlocked for thing 3"/>
+              {#each data.user.achievements as achievement, index}
+                {#if achievement.Campaign_ID == data.slug}
+                  <AchievementCard title={achievement.Name} description={achievement.Description}/>
+                {/if}
+              {/each}
           </div>
           Progress
           <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-              <Progressbar progress="50" size="h-4" labelInside/>
+              <Progressbar progress={data.progresses.campaign} size="h-4" labelInside/>
           </div>
           <hr class="my-4">
-          <!-- First Character Begin -->
-          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-              <Avatar>
-                  <img src="/DonDraperAvatar.jpg" alt="Project manager headshot">
-              </Avatar>
-              <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
-                  <div>Don Draper</div> <!-- First Character Name -->
-                  <div class="text-sm text-gray-500 dark:text-gray-400">Project Manager</div> <!-- First Character Job Title -->
-              </div>
-              <div class="space-y-1 font-medium dark:text-white">
-                  <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                      <div class="flex items-center">
-                          <BadgeCheckOutline/>
-                          <p style="padding: 1rem; margin-left: 1rem;">Requirement 1</p>
-                      </div>
-                  </div>
-                  <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                      <div class="flex items-center">
-                          <BadgeCheckOutline/>
-                          <p style="padding: 1rem; margin-left: 1rem;">Requirement 2</p>
-                      </div>
-                  </div>
-                  <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                      <div class="flex items-center">
-                          <BadgeCheckOutline/>
-                          <p style="padding: 1rem; margin-left: 1rem;">Requirement 3</p>
-                      </div>
-                  </div>
-              </div>
-          </div>
+          {#each data.campaign.Characters as character, index}
+            <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+                <Avatar>
+                    <img src={character.Image} alt={character.Name} />
+                </Avatar>
+                <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
+                    <div>{character.Name}</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">{character.Title}</div>
+                </div>
+                <div class="space-y-1 font-medium dark:text-white">
+                    {#each character.Intel as intel, index}
+                    {#if data.userIntels[character.ID][intel.Intel_ID]}
+                        <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+                            <div class="flex items-center">
+                                <BadgeCheckOutline/>
+                                <p style="padding: 1rem; margin-left: 1rem;">{intel.Intel_Description}</p>
+                            </div>
+                        </div>
+                    {:else}
+                        <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+                            <div class="flex items-center">
+                                <p style="padding: 1rem; margin-left: 1rem;">{intel.Quiz}</p>
+                            </div>
+                        </div>
+                    {/if}
+                    {/each}
+                </div>
+            </div>
+          {/each}
           <!-- First Character End -->
-          <!-- Second Character Begin -->
-          <hr class="my-4">
-          <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem; ">
-              <Avatar>
-                  <img src="/ElaraAIAvatar.jpg" alt="Receptionist headshot">
-              </Avatar>
-              <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
-                  <div>Elara Arale</div> <!-- Second Character Name -->
-                  <div class="text-sm text-gray-500 dark:text-gray-400">Receptionist</div> <!-- Second Character Job Title -->
-              </div>
-              <div class="space-y-1 font-medium dark:text-white">
-                  <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                      <div class="flex items-center">
-                          <BadgeCheckOutline/>
-                          <p style="padding: 1rem; margin-left: 1rem;">Requirement 1</p>
-                      </div>
-                  </div>
-                  <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                      <div class="flex items-center">
-                          <BadgeCheckOutline/>
-                          <p style="padding: 1rem; margin-left: 1rem;">Requirement 2</p>
-                      </div>
-                  </div>
-                  <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                      <div class="flex items-center">
-                          <BadgeCheckOutline/>
-                          <p style="padding: 1rem; margin-left: 1rem;">Requirement 3</p>
-                      </div>
-                  </div>
-              </div>
-          </div>
       </TabItem>
 
   </Tabs>
@@ -197,7 +140,7 @@
           </Listgroup>
       </div>
 
-      <!-- "Mission" or "Breifing" Tab Content -->
+      <!-- "Mission" or "Briefing" Tab Content -->
   {:else if selectedTab === 'Mission'}
       <div style="display: flex; align-items: center;">
           <ArrowUpRightFromSquareOutline/>
@@ -212,36 +155,36 @@
       </p>
 
       <p class="text-sm text-gray-500 dark:text-gray-400">
-          Read this text to learn more about Harvesta Foods and their expansion efforts, the background of your pentesting job, rules of engagement, background information, recommendations on where to start, what to look for, and most importantly, which days to bring donuts into the office.
+          Read this text to learn more about Harvesta Foods and their expansion efforts, the background of your pen testing job, rules of engagement, background information, recommendations on where to start, what to look for, and most importantly, which days to bring donuts into the office.
       </p>
 
       <!-- "Dashboard" Tab Content -->
   {:else if selectedTab === 'Dashboard'}
       <div>
           <div class="content">
-              <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+              <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                   <ElaraSmallCard />
-              </a>
+              </div>
           </div>
           <div class="content">
-              <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+              <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                   <TonyFlaggSmallCard />
-              </a>
+              </div>
           </div>
           <div class="content" >
-              <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+              <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                   <DonDraperSmallCard />
-              </a>
+              </div>
           </div>
           <div class="content" >
-              <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+              <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                   <SecurityTeamSmallCard />
-              </a>
+              </div>
           </div>
           <div class="content">
-              <a href="#" class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+              <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                   <AnnGunnSmallCard />
-              </a>
+              </div>
           </div>
       </div>
 

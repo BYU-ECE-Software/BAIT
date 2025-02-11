@@ -48,6 +48,7 @@ jobs:
       - name: Start Docker container
         run: |
           docker run -d --name sepptic \
+            --network sepptic \
             -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
             -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
             ghcr.io/rootbeerefloat/sepptic:latest

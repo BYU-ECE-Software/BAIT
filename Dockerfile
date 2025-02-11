@@ -1,5 +1,6 @@
 # Use a Node.js base image
 FROM node:18-alpine 
+LABEL org.opencontainers.image.source https://github.com/rootbeerefloat/SEPPTIC
 
 # Set the working directory inside the container
 WORKDIR /app

@@ -25,8 +25,8 @@ RUN npx prisma generate
 # Use secrets without exposing them
 RUN --mount=type=secret,id=openai_key \
     --mount=type=secret,id=database_url \
-    export OPENAI_API_KEY=$(cat /run/secrets/openai_key) && \
-    export DATABASE_URL=$(cat /run/secrets/database_url) && \
+    export OPENAI_API_KEY=$OPENAI_API_KEY && \
+    export DATABASE_URL=$DATABASE_URL && \
     npm run build
 
 # Expose the port your app runs on

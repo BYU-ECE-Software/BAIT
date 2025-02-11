@@ -1,5 +1,12 @@
 # Use a Node.js base image
 FROM node:18-alpine 
+
+ARG DATABASE_URL
+ARG OPENAI_API_KEY
+
+ENV DATABASE_URL=$DATABASE_URL
+ENV OPENAI_API_KEY=$OPENAI_API_KEY
+
 LABEL org.opencontainers.image.source https://github.com/rootbeerefloat/SEPPTIC
 
 # Set the working directory inside the container

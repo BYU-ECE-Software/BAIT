@@ -1,5 +1,6 @@
 import { jsonGetCampaign } from "../../../../server/utils/jsonGetCampaigns";
 import getUserIdFromToken from "../../../../server/utils/getUserIdFromToken";
+import filterCharacters from "../../../../server/utils/filterCharacters";
 import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
 
@@ -36,8 +37,10 @@ export async function GET(event: RequestEvent) {
     if (!userIdResponse.success || !userIdResponse.userId) {
         return new Response(JSON.stringify({ message: userIdResponse.message, status: userIdResponse.status }), { status: userIdResponse.status });
     }
+    const userId = userIdResponse.userId;
     const campaignId = event.params.slug;
     let campaign = await jsonGetCampaign(campaignId as string);
+    campaign = await filterCharacters(campaign, userId);
     campaign = appendTotals(campaign);
     return new Response(JSON.stringify(campaign), { status: campaign.status });
 }

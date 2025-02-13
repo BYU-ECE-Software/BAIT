@@ -19,6 +19,7 @@
 <div class="hidden lg:block">
 
     <!-- "Site Navigation" Tab -->
+     
     <Tabs tabStyle="underline">
         <TabItem title="Site Navigation">
             <h1 style="display: flex; justify-content: center; padding-bottom: 1rem;" class="">Click the links below to navigate to other pages from the main site in a new tab. Make sure to save your progress before clicking.</h1>
@@ -183,7 +184,7 @@
     </Tabs>
 </div>
 <!-- Content to display on screens 1024px wide or larger END-->
-
+<!-- ------------------------------------------------------------------------------------------------------------------- -->
 <!-- Content to display on screens 1023px wide or smaller START-->
 <div class="block lg:hidden">
 

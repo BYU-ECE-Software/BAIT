@@ -142,51 +142,34 @@
 
       <!-- "Mission" or "Briefing" Tab Content -->
   {:else if selectedTab === 'Mission'}
-      <div style="display: flex; align-items: center;">
-          <ArrowUpRightFromSquareOutline/>
-          <span style="margin-left: 0.5rem;">Click <a href="/harvesta/harvestasite" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
-      </div>
-      <div style="width: 75vw; margin: auto;">
-          <HarvestaVideoPlayer />
-      </div>
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-          <b>Intro Video:</b>
-          Watch the video to learn more about Harvesta Foods and their expansion efforts.
-      </p>
+    <div style="display: flex; align-items: center;">
+        <ArrowUpRightFromSquareOutline/>
+        <span style="margin-left: 0.5rem;">Click <a href="{data.campaign.Campaign_Information.Website}" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
+    </div>
+    <div style="width: 75vw; margin: auto;">
+        <GenericVideoCard src="{data.campaign.Campaign_Information.Briefing_Video}" />
+    </div>
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+        <b>Intro Video:</b>
+        Watch the video to learn more about {data.campaign.Campaign_Information.Name}.
+    </p>
 
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-          Read this text to learn more about Harvesta Foods and their expansion efforts, the background of your pen testing job, rules of engagement, background information, recommendations on where to start, what to look for, and most importantly, which days to bring donuts into the office.
-      </p>
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+        {data.campaign.Campaign_Information.Description}
+    </p>
 
       <!-- "Dashboard" Tab Content -->
   {:else if selectedTab === 'Dashboard'}
-      <div>
-          <div class="content">
-              <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                  <ElaraSmallCard />
-              </div>
-          </div>
-          <div class="content">
-              <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                  <TonyFlaggSmallCard />
-              </div>
-          </div>
-          <div class="content" >
-              <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                  <DonDraperSmallCard />
-              </div>
-          </div>
-          <div class="content" >
-              <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                  <SecurityTeamSmallCard />
-              </div>
-          </div>
-          <div class="content">
-              <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                  <AnnGunnSmallCard />
-              </div>
-          </div>
-      </div>
+
+<div>
+    {#each data.campaign.Characters as character, index}
+        <div class="content">
+            <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <GenericCharacterCard name={character.Name} title={character.Title} image={character.Image} intel={character.Intel} characterProgress={data.progresses.characters[character.ID]} />
+            </div>
+        </div>
+    {/each}
+</div>
 
       <!-- "Contact" Tab Content -->
   {:else if selectedTab === 'Contact'}
@@ -314,22 +297,25 @@
       </div>
   {/if}
 
-  <BottomNav position="fixed" classInner="grid-cols-5" activeUrl="/" style="bottom-0: left-0 right-0 z-10">
-      <BottomNavItem btnName="Home" on:click={() => selectedTab = 'Home'}>
-          <HomeSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
-      </BottomNavItem>
-      <BottomNavItem btnName="Mission" on:click={() => selectedTab = 'Mission'}>
-          <WalletSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
-      </BottomNavItem>
-      <BottomNavItem btnName="Dashboard" on:click={() => selectedTab = 'Dashboard'}>
-          <AdjustmentsVerticalOutline class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
-      </BottomNavItem>
-      <BottomNavItem btnName="Contact" on:click={() => selectedTab = 'Contact'}>
-          <PhoneOutline class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
-      </BottomNavItem>
-      <BottomNavItem btnName="Progress" on:click={() => selectedTab = 'Progress'}>
-          <UserCircleSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
-      </BottomNavItem>
-  </BottomNav>
+
+  <div style="bottom: 0; left: 0; right: 0; z-10; background-color: white; height: 1rem;"></div>
+
+<BottomNav position="fixed" classInner="grid-cols-5" activeUrl="/" style="bottom: 1rem; left: 0; right: 0; z-10; background-color: white;">
+    <BottomNavItem btnName="Home" on:click={() => selectedTab = 'Home'}>
+        <HomeSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+    </BottomNavItem>
+    <BottomNavItem btnName="Mission" on:click={() => selectedTab = 'Mission'}>
+        <WalletSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+    </BottomNavItem>
+    <BottomNavItem btnName="Dashboard" on:click={() => selectedTab = 'Dashboard'}>
+        <AdjustmentsVerticalOutline class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+    </BottomNavItem>
+    <BottomNavItem btnName="Contact" on:click={() => selectedTab = 'Contact'}>
+        <PhoneOutline class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+    </BottomNavItem>
+    <BottomNavItem btnName="Progress" on:click={() => selectedTab = 'Progress'}>
+        <UserCircleSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+    </BottomNavItem>
+</BottomNav>
 </div>
 <!-- Content to display on screens 1023px wide or smaller END-->

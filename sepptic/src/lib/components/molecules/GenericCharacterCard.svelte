@@ -7,6 +7,9 @@
     export let image;
     export let intel;
     export let characterProgress;
+    if (characterProgress === undefined) {
+        characterProgress = 0;
+    }
 </script>
 
 <!--Button Card-->

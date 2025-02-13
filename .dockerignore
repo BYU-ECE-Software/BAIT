@@ -1,0 +1,6 @@
+sepptic/node_modules
+sepptic/dist
+sepptic/.env
+.git
+Dockerfile
+.dockerignore

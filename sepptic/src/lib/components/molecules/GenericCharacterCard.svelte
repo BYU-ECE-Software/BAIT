@@ -1,5 +1,5 @@
 <script>
-    import { Card, Avatar, Dropdown, DropdownHeader, DropdownItem, DropdownDivider, Tooltip,  Button, Modal, Progressbar } from 'flowbite-svelte';
+    import { Card, Avatar, Dropdown, DropdownHeader, DropdownItem, DropdownDivider, Tooltip,  Button, Modal, Progressbar, Label, Input } from 'flowbite-svelte';
     import { ExclamationCircleOutline, UserCircleOutline, BadgeCheckOutline, MessageDotsOutline } from 'flowbite-svelte-icons';
     let clickOutsideModal = false;
     export let name;
@@ -54,10 +54,12 @@
     {#each intel as item, index}
         <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
             <div class="flex items-center">
-                <BadgeCheckOutline/> 
-                <p style="padding: 1rem; margin-left: 1rem;">Intel {index + 1}</p>
-                <p style="padding: 1rem; margin-left: 1rem;">{item.Quiz}</p>
+                <p style="padding: 1rem;">{item.Quiz}</p>
             </div>
+        </div>
+        <div class="flex space-x-4" style="padding: 1rem;">
+          <Input class="focus:border-seppticOrange-600 focus:ring focus:ring-seppticOrange-300" style="padding: 1rem;" placeholder="answer" />
+          <Button>Submit</Button>
         </div>
     {/each}
   </div>

@@ -40,11 +40,14 @@ async function checkQuiz(campaignId: number, characterId: number, intelId: numbe
     if (!character) {
         return false;
     }
-    const intel = character.Intel.find((intel: any) => intel.ID === intelId);
+    const intel = character.Intel.find((intel: any) => intel.Intel_ID === intelId);
     if (!intel) {
         return false;
     }
-    console.log(intel)
+    const correctAnswer = intel.Answer.toLowerCase();
+    if (userAnswer.toLowerCase().includes(correctAnswer)) {
+        return true;
+    }
     return false;
 }
 

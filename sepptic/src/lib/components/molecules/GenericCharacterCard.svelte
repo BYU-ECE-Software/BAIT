@@ -1,6 +1,7 @@
 <script>
     import { Card, Avatar, Dropdown, DropdownHeader, DropdownItem, DropdownDivider, Tooltip,  Button, Modal, Progressbar, Label, Input } from 'flowbite-svelte';
     import { ExclamationCircleOutline, UserCircleOutline, BadgeCheckOutline, MessageDotsOutline } from 'flowbite-svelte-icons';
+    import { QuizSubmission } from '$lib';
     let clickOutsideModal = false;
     export let name;
     export let title;
@@ -67,10 +68,7 @@
                 <p style="padding: 1rem;">{item.Quiz}</p>
             </div>
         </div>
-        <div class="flex space-x-4" style="padding: 1rem;">
-            <Input bind:value={inputValue} class="focus:border-seppticOrange-600 focus:ring focus:ring-seppticOrange-300" style="padding: 1rem;" placeholder="answer" />
-            <Button>Submit</Button>
-        </div>
+        <QuizSubmission />
       {/if}
     {/each}
   </div>

@@ -134,7 +134,7 @@
                                     </div>
                                     <p class="text-sm font-normal text-gray-900 dark:text-white">{message.content}</p>
                                     {#if message.image}
-                                        <img src={message.image} class="rounded-lg mt-2" />
+                                        <img src={message.image} class="rounded-lg mt-2" alt="rounded message" />
                                     {/if}
                                 </div>
                             </div>

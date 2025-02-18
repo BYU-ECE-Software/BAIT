@@ -27,3 +27,4 @@ export { default as SecurityTeamSmallCard } from './components/molecules/Securit
 export { default as GenericCampaignCard } from './components/molecules/GenericCampaignCard.svelte';
 export { default as GenericVideoCard } from './components/molecules/GenericVideoCard.svelte';
 export { default as GenericCharacterCard } from './components/molecules/GenericCharacterCard.svelte';
+export { default as QuizSubmission } from './components/atoms/QuizSubmission.svelte';

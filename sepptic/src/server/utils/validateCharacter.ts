@@ -3,8 +3,9 @@ import { PrismaClient } from "@prisma/client";
 
 export default async function validateCharacter(campaignId: number, characterId: number) {
     // Ensure campaign exists
-    const campaign = await jsonGetCampaign(campaignId);
-    if (campaign.status !== 200) {
+    const campaignResponse = await jsonGetCampaign(campaignId);
+    const campaign = campaignResponse.data;
+    if (campaignResponse.status !== 200 || !campaign || typeof campaign === 'string') {
         return {
             status: 404,
             message: 'Campaign not found'
@@ -12,7 +13,7 @@ export default async function validateCharacter(campaignId: number, characterId:
     }
 
     // Ensure character exists
-    const character = campaign.data.Characters.find((c: any) => c.ID === characterId);
+    const character = campaign.Characters.find((c: any) => c.ID === characterId);
     if (!character) {
         return {
             status: 404,
@@ -22,6 +23,7 @@ export default async function validateCharacter(campaignId: number, characterId:
 
     return {
         status: 200,
-        message: 'Character valid'
+        message: 'Character valid',
+        character: character
     }
 }

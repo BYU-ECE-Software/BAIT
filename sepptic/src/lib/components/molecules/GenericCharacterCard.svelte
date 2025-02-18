@@ -3,12 +3,15 @@
     import { ExclamationCircleOutline, UserCircleOutline, BadgeCheckOutline, MessageDotsOutline } from 'flowbite-svelte-icons';
     import { QuizSubmission } from '$lib';
     let clickOutsideModal = false;
-    export let name;
-    export let title;
-    export let image;
-    export let intel;
+    export let character;
+    const name = character.Name;
+    const title = character.Title;
+    const image = character.Image;
+    const intel = character.Intel;
+    const characterId = character.ID;
     export let characterProgress;
     export let userIntels;
+    export let campaignId;
     if (characterProgress === undefined) {
         characterProgress = 0;
     }
@@ -68,7 +71,7 @@
                 <p style="padding: 1rem;">{item.Quiz}</p>
             </div>
         </div>
-        <QuizSubmission />
+        <QuizSubmission campaignId={campaignId} characterId={characterId} intelId={item.Intel_ID} />
       {/if}
     {/each}
   </div>

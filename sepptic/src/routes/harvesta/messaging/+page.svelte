@@ -1,5 +1,5 @@
 <script>
-    import {MessageActivity} from  '$lib';
+    import {Email} from  '$lib';
 </script>
 
-<MessageActivity />
+<Email />

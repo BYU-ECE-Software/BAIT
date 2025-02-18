@@ -1,8 +1,8 @@
 <script lang="ts">
     import { Modal } from 'flowbite-svelte';
 
-    export let isOpen: boolean = false;
-    export let onClose: () => void = () => {};
+    let{isOpen = false, onClose, ...restProps}: {isOpen: boolean, onClose: () => void} = $props();
+
 
     // Close the modal
     function closeModal() {
@@ -11,7 +11,7 @@
     }
 </script>
 
-<Modal bind:open={isOpen} size="lg" autoclose={false} {...$$restProps} dismissable={false}>
+<Modal bind:open={isOpen} size="lg" autoclose={false} {...restProps} dismissable={false}>
     <div class="space-y-4">
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
             Terms and Conditions
@@ -27,7 +27,7 @@
             <button
                     type="button"
                     class="text-primary-600 hover:underline"
-                    on:click={closeModal}>
+                    onclick={closeModal}>
                 Close
             </button>
         </div>

@@ -1,7 +1,7 @@
 <script>
   import { Avatar, Tabs, TabItem, Card, Progressbar, Listgroup, BottomNav, BottomNavItem } from 'flowbite-svelte';
   import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline, PhoneOutline } from 'flowbite-svelte-icons';
-  import {GenericVideoCard, GenericCharacterCard, HarvestaVideoPlayer, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard, CampaignButton} from '$lib';
+  import {GenericVideoCard, GenericCharacterCard, HarvestaVideoPlayer, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard, Email} from '$lib';
 
   let icons = [
       { name: 'Home', icon: HomeOutline, href:`/` },
@@ -66,6 +66,18 @@
               </div>
           </div>
       </TabItem>
+
+      <!-- Email Tab -->
+      <TabItem title="Email">
+          <div style="display: flex; justify-content: center; padding-bottom: 1rem;">
+              <h1>Your Emails</h1>
+          </div>
+          <div style="width: 75vw; margin: auto;">
+              <!-- Replace with your email page component -->
+              <Email />
+          </div>
+      </TabItem>
+
 
       <!-- "Progress" Tab -->
       <TabItem title="Progress">

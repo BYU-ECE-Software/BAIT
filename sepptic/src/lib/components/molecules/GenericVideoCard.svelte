@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
     import { Video } from 'flowbite-svelte';
-    export let src;
+    let {src = "Not Initialized Yet"}: {src: string} = $props();
+
 </script>
 
-<Video src="{src}" controls class="w-full max-w-full h-auto" />
+<Video src={src} controls class="w-full max-w-full h-auto" />

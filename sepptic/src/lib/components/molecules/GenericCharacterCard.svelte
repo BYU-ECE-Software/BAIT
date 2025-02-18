@@ -10,6 +10,7 @@
     if (characterProgress === undefined) {
         characterProgress = 0;
     }
+    let inputValue = '';
 </script>
 
 <!--Button Card-->
@@ -58,8 +59,8 @@
             </div>
         </div>
         <div class="flex space-x-4" style="padding: 1rem;">
-          <Input class="focus:border-seppticOrange-600 focus:ring focus:ring-seppticOrange-300" style="padding: 1rem;" placeholder="answer" />
-          <Button>Submit</Button>
+            <Input bind:value={inputValue} class="focus:border-seppticOrange-600 focus:ring focus:ring-seppticOrange-300" style="padding: 1rem;" placeholder="answer" />
+            <Button on:click={() => checkAnswer(inputValue)}>Submit</Button>
         </div>
     {/each}
   </div>

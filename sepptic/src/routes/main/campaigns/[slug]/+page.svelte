@@ -59,7 +59,7 @@
                 {#each data.campaign.Characters as character, index}
                   <div class="content">
                       <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                          <GenericCharacterCard name={character.Name} title={character.Title} image={character.Image} intel={character.Intel} characterProgress={data.progresses.characters[character.ID]} />
+                          <GenericCharacterCard name={character.Name} title={character.Title} image={character.Image} intel={character.Intel} characterProgress={data.progresses.characters[character.ID]} userIntels = {data.userIntels[character.ID]} />
                       </div>
                   </div>
                 {/each}

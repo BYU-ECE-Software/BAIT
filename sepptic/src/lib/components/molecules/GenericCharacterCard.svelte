@@ -7,6 +7,7 @@
     export let image;
     export let intel;
     export let characterProgress;
+    export let userIntels;
     if (characterProgress === undefined) {
         characterProgress = 0;
     }
@@ -53,6 +54,14 @@
   </div>
   <div class="space-y-1 font-medium dark:text-white">
     {#each intel as item, index}
+      {#if userIntels[item.Intel_ID]}
+      <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+          <div class="flex items-center">
+              <p style="padding: 1rem;">{item.Intel_Description}</p>
+          </div>
+      </div>
+
+      {:else}
         <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
             <div class="flex items-center">
                 <p style="padding: 1rem;">{item.Quiz}</p>
@@ -60,8 +69,9 @@
         </div>
         <div class="flex space-x-4" style="padding: 1rem;">
             <Input bind:value={inputValue} class="focus:border-seppticOrange-600 focus:ring focus:ring-seppticOrange-300" style="padding: 1rem;" placeholder="answer" />
-            <Button on:click={() => checkAnswer(inputValue)}>Submit</Button>
+            <Button>Submit</Button>
         </div>
+      {/if}
     {/each}
   </div>
   <!--Target Goals End-->  

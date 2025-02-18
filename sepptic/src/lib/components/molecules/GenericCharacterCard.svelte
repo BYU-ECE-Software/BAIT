@@ -1,8 +1,12 @@
-<script lang="ts">
+<script>
     import { Card, Avatar, Dropdown, DropdownHeader, DropdownItem, DropdownDivider, Tooltip,  Button, Modal, Progressbar } from 'flowbite-svelte';
     import { ExclamationCircleOutline, UserCircleOutline, BadgeCheckOutline, MessageDotsOutline } from 'flowbite-svelte-icons';
-    // Intel is right now defined as any but we need to change it later possibly to reflect the actual object type.
-    let { name = "Not Initialized", image = "Not Initialized", title = "Not Initialized", clickOutsideModal, characterProgress = 0}: {name: string, title: string, image: string, description: string, campaignId: number, clickOutsideModal: boolean, intel:any, characterProgress: number} =$props();
+    let clickOutsideModal = false;
+    export let name;
+    export let title;
+    export let image;
+    export let intel;
+    export let characterProgress;
 </script>
 
 <!--Desktop Button Card-->

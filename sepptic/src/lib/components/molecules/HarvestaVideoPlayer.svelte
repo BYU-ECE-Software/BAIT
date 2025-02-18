@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
     import { Video } from 'flowbite-svelte';
 </script>
 

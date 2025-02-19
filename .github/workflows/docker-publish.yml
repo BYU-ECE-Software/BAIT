@@ -28,12 +28,19 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
 
+      # Step 4: Create secret files for environment variables
+      - name: Create Secret Files
+        run: |
+          echo -n "${{ secrets.OPENAI_API_KEY }}" > openai_key.txt
+          echo -n "${{ secrets.DATABASE_URL }}" > database_url.txt
+
       # Step 5: Build Docker image with environment variables
       - name: Build Docker image
         run: |
-          docker build --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} \
-                       --build-arg OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
-                       -t ghcr.io/rootbeerefloat/sepptic:latest .
+          DOCKER_BUILDKIT=1 docker build \
+            --secret id=openai_key,src=openai_key.txt \
+            --secret id=database_url,src=database_url.txt \
+            -t ghcr.io/rootbeerefloat/sepptic:latest .
 
       # Step 6: Push the Docker image to GHCR
       - name: Push Docker image to GHCR

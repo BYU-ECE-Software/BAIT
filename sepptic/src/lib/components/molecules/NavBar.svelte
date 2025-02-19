@@ -45,8 +45,6 @@
             <!-- <span class="block text-sm">Script Kiddie</span> -->
             <span class="block truncate text-sm font-medium">{email}</span>
         </DropdownHeader>
-        <DropdownItem href="/main/dashboard">Dashboard</DropdownItem>
-        <DropdownDivider />
         <DropdownItem on:click={logOut}>Sign out</DropdownItem>
     </Dropdown>
 

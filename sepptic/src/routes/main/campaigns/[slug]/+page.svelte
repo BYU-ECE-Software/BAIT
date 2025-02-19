@@ -19,19 +19,7 @@
 <!-- Content to display on screens 1024px wide or larger START-->
 <div class="hidden lg:block">
 
-  <!-- "Site Navigation" Tab -->
   <Tabs tabStyle="underline">
-      <TabItem title="Site Navigation">
-          <h1 style="display: flex; justify-content: center; padding-bottom: 1rem;" class="">Click the links below to navigate to other pages from the main site in a new tab. Make sure to save your progress before clicking.</h1>
-          <div style="display: flex; justify-content: center;">
-              <Listgroup active items={icons} let:item class="w-48">
-                  <a href={item.href} target="_blank" rel="noopener noreferrer" class="flex items-center" style="font-size: medium;">
-                      <svelte:component this={item.icon} class="w-4 h-4 me-2.5"/>
-                      {item.name}
-                  </a>
-              </Listgroup>
-          </div>
-      </TabItem>
 
       <!-- "Mission Briefing" Tab -->
       <TabItem open title="Mission Briefing">

@@ -119,7 +119,7 @@
   {#if selectedTab === 'Mission'}
       <div style="display: flex; align-items: center;">
           <ArrowUpRightFromSquareOutline/>
-          <span style="margin-left: 0.5rem;">Click <a href="/harvesta/harvestasite" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
+          <span style="margin-left: 0.5rem;">Click <a href="{data.campaign.Campaign_Information.Website}" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
       </div>
       <div style="width: 75vw; margin: auto;">
         <GenericVideoCard src="{data.campaign.Campaign_Information.Briefing_Video}" />

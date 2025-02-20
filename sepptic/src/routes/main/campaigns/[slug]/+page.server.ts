@@ -56,7 +56,8 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     });
     const userProgressResponse = await fetch('/api/progress', {
         headers: { 'Authorization': `Bearer ${sessionToken}` }
-    })
+    });
+
     const userProgress = await userProgressResponse.json();
     const campaignJson = await campaignsResponse.json();
     const userJson = await userResponse.json();
@@ -64,5 +65,16 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const user = userJson;
     const progresses = calculateProgresses(userProgress, campaign, slug);
     const userIntels = parseUserIntels(userProgress, slug, campaign);
-    return { campaign, user, slug, progresses, userProgress, userIntels };
+    let messagesByCharacter: { [key: number]: any[] } = {};
+
+    for (const character of campaign.Characters) {
+        const messagesResponse = await fetch(`/api/conversation?campaignId=${slug}&characterId=${character.ID}`, {
+            headers: { 'Authorization': `Bearer ${sessionToken}` }
+        });
+        const messagesJson = await messagesResponse.json();
+
+        // Store messages under character ID
+        messagesByCharacter[character.ID] = messagesJson.data || []; // Default to empty array if no messages
+    }
+    return { campaign, user, slug, progresses, userProgress, userIntels, messagesByCharacter};
 };

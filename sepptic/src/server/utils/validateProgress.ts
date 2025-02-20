@@ -5,9 +5,10 @@ import validateCharacter from './validateCharacter';
 export default async function validateProgress(campaignId: number, characterId: number, intelId: number, userId: number) {
     // Ensure campaign and character exist
     const characterValidationResponse = await validateCharacter(campaignId, characterId);
-    if (characterValidationResponse.status !== 200) {
+    if (characterValidationResponse.status !== 200 || !characterValidationResponse.character) {
         return characterValidationResponse;
     }
+    const character = characterValidationResponse.character;
 
     // Ensure intel exists
     const intel = character.Intel.find((i: any) => i.Intel_ID === intelId);

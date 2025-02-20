@@ -1,12 +1,21 @@
 <script>
-    import { Card, Avatar, Dropdown, DropdownHeader, DropdownItem, DropdownDivider, Tooltip,  Button, Modal, Progressbar } from 'flowbite-svelte';
+    import { Card, Avatar, Dropdown, DropdownHeader, DropdownItem, DropdownDivider, Tooltip,  Button, Modal, Progressbar, Label, Input } from 'flowbite-svelte';
     import { ExclamationCircleOutline, UserCircleOutline, BadgeCheckOutline, MessageDotsOutline } from 'flowbite-svelte-icons';
+    import { QuizSubmission } from '$lib';
     let clickOutsideModal = false;
-    export let name;
-    export let title;
-    export let image;
-    export let intel;
+    export let character;
+    const name = character.Name;
+    const title = character.Title;
+    const image = character.Image;
+    const intel = character.Intel;
+    const characterId = character.ID;
     export let characterProgress;
+    export let userIntels;
+    export let campaignId;
+    if (characterProgress === undefined) {
+        characterProgress = 0;
+    }
+    let inputValue = '';
 </script>
 
 <!--Desktop Button Card-->
@@ -64,13 +73,21 @@
   </div>
   <div class="space-y-1 font-medium dark:text-white">
     {#each intel as item, index}
+      {#if userIntels[item.Intel_ID]}
+      <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+          <div class="flex items-center">
+              <p style="padding: 1rem;">{item.Intel_Description}</p>
+          </div>
+      </div>
+
+      {:else}
         <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
             <div class="flex items-center">
-                <BadgeCheckOutline/> 
-                <p style="padding: 1rem; margin-left: 1rem;">Intel {index + 1}</p>
-                <p style="padding: 1rem; margin-left: 1rem;">{item.Quiz}</p>
+                <p style="padding: 1rem;">{item.Quiz}</p>
             </div>
         </div>
+        <QuizSubmission campaignId={campaignId} characterId={characterId} intelId={item.Intel_ID} />
+      {/if}
     {/each}
   </div>
   <!--Target Goals End-->  

@@ -19,6 +19,9 @@ async function getUserCampaignIntel(userId: number, campaignId: string) {
     const intelResponse = await dbGetIntel(userId);
     const intelByCampaignResponse = sortIntel(intelResponse);
     const userCampaignIntel = intelByCampaignResponse.intel[campaignId];
+    if (!userCampaignIntel) {
+        return [];
+    }
     let userIntelIDs = [];
     for(const intel of userCampaignIntel) {
         userIntelIDs.push(intel.Intel_ID);

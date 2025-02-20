@@ -35,3 +35,5 @@ export { default as EmailView } from './components/molecules/EmailView.svelte';
 export { default as Email } from './components/organisms/Email.svelte';
 
 
+
+export { default as QuizSubmission } from './components/atoms/QuizSubmission.svelte';

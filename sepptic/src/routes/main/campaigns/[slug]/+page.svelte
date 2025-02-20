@@ -1,7 +1,7 @@
 <script>
   import { Avatar, Tabs, TabItem, Card, Progressbar, Listgroup, BottomNav, BottomNavItem } from 'flowbite-svelte';
   import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline, PhoneOutline } from 'flowbite-svelte-icons';
-  import {GenericVideoCard, GenericCharacterCard, HarvestaVideoPlayer, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard, CampaignButton} from '$lib';
+  import {GenericVideoCard, GenericCharacterCard, HarvestaVideoPlayer, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard, CampaignButton, Email} from '$lib';
 
   let icons = [
       { name: 'Home', icon: HomeOutline, href:`/` },
@@ -38,6 +38,9 @@
           <p class="text-sm text-gray-500 dark:text-gray-400">
               {data.campaign.Campaign_Information.Description}
           </p>
+      </TabItem>
+      <TabItem title="Email">
+          <Email messageData ={data.messagesByCharacter}></Email>
       </TabItem>
 
       <!-- "Main Dashboard" Tab -->
@@ -116,6 +119,7 @@
 <!-- Content to display on screens 1023px wide or smaller START-->
 <div class="block lg:hidden">
       <!-- "Mission" or "Briefing" Tab Content -->
+
   {#if selectedTab === 'Mission'}
       <div style="display: flex; align-items: center;">
           <ArrowUpRightFromSquareOutline/>
@@ -148,6 +152,7 @@
             </div>
         {/each}
       </div>
+
 
       <!-- "Progress" Tab Content -->
   {:else if selectedTab === 'Progress'}
@@ -212,6 +217,7 @@
       <!-- First Character End -->
   {/if}
 
+
   <BottomNav position="fixed" classInner="grid-cols-5" activeUrl="/" style="bottom-0: left-0 right-0 z-10">
       <BottomNavItem btnName="Mission" on:click={() => selectedTab = 'Mission'}>
           <WalletSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
@@ -226,5 +232,6 @@
           <UserCircleSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
       </BottomNavItem>
   </BottomNav>
+
 </div>
 <!-- Content to display on screens 1023px wide or smaller END-->

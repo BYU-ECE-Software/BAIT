@@ -27,4 +27,13 @@ export { default as SecurityTeamSmallCard } from './components/molecules/Securit
 export { default as GenericCampaignCard } from './components/molecules/GenericCampaignCard.svelte';
 export { default as GenericVideoCard } from './components/molecules/GenericVideoCard.svelte';
 export { default as GenericCharacterCard } from './components/molecules/GenericCharacterCard.svelte';
+export { default as EmailCompose } from './components/molecules/EmailCompose.svelte';
+export { default as EmailHeader } from './components/molecules/EmailHeader.svelte';
+export { default as EmailList } from './components/molecules/EmailList.svelte';
+export { default as EmailSidebar } from './components/molecules/EmailSidebar.svelte';
+export { default as EmailView } from './components/molecules/EmailView.svelte';
+export { default as Email } from './components/organisms/Email.svelte';
+
+
+
 export { default as QuizSubmission } from './components/atoms/QuizSubmission.svelte';

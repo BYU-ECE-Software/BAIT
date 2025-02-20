@@ -40,7 +40,7 @@
           </p>
       </TabItem>
       <TabItem title="Email">
-          <Email messageData ={data.messagesByCharacter}></Email>
+          <Email messageData={data.messagesByCharacter} campaignId = {data.slug}></Email>
       </TabItem>
 
       <!-- "Main Dashboard" Tab -->

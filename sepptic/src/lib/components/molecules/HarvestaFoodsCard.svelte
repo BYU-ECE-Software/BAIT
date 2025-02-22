@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { Card, Button } from 'flowbite-svelte';
 </script>
 
@@ -10,5 +10,4 @@
             Harvest Info
         </Button>
     </Card>
-
 </div>

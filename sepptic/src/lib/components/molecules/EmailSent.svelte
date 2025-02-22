@@ -14,6 +14,8 @@
         timestamp: string;
     };
 
+
+
     let sentMessages: SentMessage[] = [];
     let isLoading = $state(true);
     let errorMessage = $state("");
@@ -66,7 +68,7 @@
         <p class="text-gray-500">No sent messages found.</p>
     {:else}
         {#each sentMessages as message}
-            <div class="p-3 border-b cursor-pointer hover:bg-gray-100" on:click={() => selectMessage(message)}>
+            <div class="p-3 border-b cursor-pointer hover:bg-gray-100" onclick={() => selectMessage(message)}>
                 <strong>To: {message.recipient}</strong> <br />
                 <span class="text-gray-600 text-sm">{message.content.slice(0, 50)}...</span>
                 <div class="text-xs text-gray-400">{new Date(message.timestamp).toLocaleString()}</div>
@@ -84,7 +86,7 @@
             <div class="text-xs text-gray-500 mt-4">
                 Sent: {new Date(selectedMessage.timestamp).toLocaleString()}
             </div>
-            <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded" on:click={closeMessageView}>
+            <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded" onclick={closeMessageView}>
                 Close
             </button>
         </div>

@@ -11,7 +11,6 @@
 
     onMount(() => {
         isAuthenticated.isAuthenticated = data.isLoggedIn ?? false;
-        console.log("isLoggedIn:", data.isLoggedIn);
         //If the isLoggedIn is false then it will show the formModal.
     });
 

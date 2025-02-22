@@ -1,6 +1,6 @@
 <script lang="ts">
     import { page } from '$app/state';
-    import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownHeader, DropdownItem, DropdownDivider, DarkMode} from 'flowbite-svelte';
+    import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownHeader, DropdownItem,  DarkMode} from 'flowbite-svelte';
     $: activeUrl = page.url.pathname;
     $: email = page.data.email ?? "Unknown";
     import { invalidateAll } from '$app/navigation'; // To refresh the session

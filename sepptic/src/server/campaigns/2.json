@@ -21,20 +21,20 @@
                     "Intel_Description": "Name of projects team lead for location acquisition project: Don Draper.",
                     "Unlocks_Character_ID": 2,
                     "Quiz": "Who will be able to give more information on the project?",
-                    "Answer":"Don Draper"
+                    "Answer":"Don"
                 },
                 {
                     "Intel_ID": 2,
                     "Intel_Description": "Office gossip about the finance team lead blowing up at his secretary",
                     "Quiz": "Which department lead is not happy with their progress?",
-                    "Answer":"Finance lead"
+                    "Answer":"Finance"
                 },
                 {
                     "Intel_ID": 3,
                     "Intel_Description": "Name of real estate contact to get EPA reports: Tony Flagg",
                     "Unlocks_Character_ID": 3,
                     "Quiz":"Who in the real estate department does Elara know?",
-                    "Answer":"Tony Flagg"
+                    "Answer":"Tony"
                 }
 
             ]
@@ -50,13 +50,13 @@
                     "Intel_ID": 4,
                     "Intel_Description": "EPA result issues in real estate team.",
                     "Quiz":"What is the issue with one of the sites?",
-                    "Answer":"Failed EPA test."
+                    "Answer":"EPA"
                 },
                 {
                     "Intel_ID": 5,
                     "Intel_Description": "Seller holdout in finance team.",
                     "Quiz":"What is the issue with the other site?",
-                    "Answer":"Seller holdout"
+                    "Answer":"Seller"
                 }
             ]
         },
@@ -86,7 +86,22 @@
                     "Intel_ID": 7,
                     "Intel_Description": "Files on seller holdout.",
                     "Quiz":"What did you get from Ann?",
-                    "Answer":"The seller holdout files."
+                    "Answer":"files"
+                }
+            ]
+        },
+        {
+            "ID": 5,
+            "Name": "Endgame",
+            "Title": "The Last Dance",
+            "Image": "",
+            "Prompt": "N/A",
+            "Intel": [
+                {
+                    "Intel_ID": 8,
+                    "Intel_Description": "The location of the new Harvesta Foods store.",
+                    "Quiz":"What is the location the new Harvesta Foods store will be built on?",
+                    "Answer": "Provo"
                 }
             ]
         }

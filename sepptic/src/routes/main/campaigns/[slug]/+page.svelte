@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { Avatar, Tabs, TabItem, Card, Progressbar, Listgroup, BottomNav, BottomNavItem } from 'flowbite-svelte';
   import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline, PhoneOutline } from 'flowbite-svelte-icons';
   import {GenericVideoCard, GenericCharacterCard, HarvestaVideoPlayer, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard, CampaignButton, Email} from '$lib';
@@ -12,8 +12,16 @@
       { name: 'Profile', icon: UserOutline, href: '/main/profile' },
   ];
 
-  export let data;
-  let selectedTab = 'Mission';
+  let { data } = $props();
+  
+  let selectedTab = $state('Mission');
+  let userIntels = $state(data.userIntels);
+
+  function handleUpdateQuiz(event: Event, characterId: number, intelId: number) {
+      let updatedUserIntels = {...userIntels};
+      updatedUserIntels[characterId][intelId] = true;
+      userIntels = updatedUserIntels;
+  }
 </script>
 
 <!-- Content to display on screens 1024px wide or larger START-->
@@ -28,7 +36,7 @@
               <span style="margin-left: 0.5rem;">Click <a href="{data.campaign.Campaign_Information.Website}" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
           </div>
           <div style="width: 75vw; margin: auto;">
-              <GenericVideoCard src="{data.campaign.Campaign_Information.Briefing_Video}" />
+              <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
           </div>
           <p class="text-sm text-gray-500 dark:text-gray-400">
               <b>Intro Video:</b>
@@ -50,7 +58,7 @@
                 {#each data.campaign.Characters as character, index}
                   <div class="content">
                       <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                          <GenericCharacterCard character={character} campaignId={data.slug} characterProgress={data.progresses.characters[character.ID]} userIntels = {data.userIntels[character.ID]} />
+                          <GenericCharacterCard character={character} campaignId={data.slug} characterProgress={data.progresses.characters[character.ID]} userIntels = {userIntels[character.ID]} />
                       </div>
                   </div>
                 {/each}
@@ -91,7 +99,7 @@
                 </div>
                 <div class="space-y-1 font-medium dark:text-white">
                     {#each character.Intel as intel, index}
-                    {#if data.userIntels[character.ID][intel.Intel_ID]}
+                    {#if userIntels[character.ID][intel.Intel_ID]}
                         <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
                             <div class="flex items-center">
                                 <BadgeCheckOutline/>
@@ -126,7 +134,7 @@
           <span style="margin-left: 0.5rem;">Click <a href="{data.campaign.Campaign_Information.Website}" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
       </div>
       <div style="width: 75vw; margin: auto;">
-        <GenericVideoCard src="{data.campaign.Campaign_Information.Briefing_Video}" />
+        <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
       </div>
       <p class="text-sm text-gray-500 dark:text-gray-400">
           <b>Intro Video:</b>
@@ -147,7 +155,7 @@
         {#each data.campaign.Characters as character, index}
             <div class="content">
                 <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <GenericCharacterCard character={character} campaignId={data.slug} characterProgress={data.progresses.characters[character.ID]} userIntels = {data.userIntels[character.ID]} />
+                    <GenericCharacterCard character={character} campaignId={data.slug} characterProgress={data.progresses.characters[character.ID]} userIntels = {userIntels[character.ID]} />
                 </div>
             </div>
         {/each}
@@ -197,7 +205,7 @@
         </div>
         <div class="space-y-1 font-medium dark:text-white">
             {#each character.Intel as intel, index}
-            {#if data.userIntels[character.ID][intel.Intel_ID]}
+            {#if userIntels[character.ID][intel.Intel_ID]}
                 <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
                     <div class="flex items-center">
                         <BadgeCheckOutline/>

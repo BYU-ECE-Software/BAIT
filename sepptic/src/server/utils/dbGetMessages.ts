@@ -18,7 +18,8 @@ export default async function dbGetMessages(conversationId: number) {
         for (const dbMessage of dbMessages) {
             messages.push({
                 role: (dbMessage.User_Sent) ? 'user' : 'assistant',
-                content: dbMessage.Message
+                content: dbMessage.Message,
+                timestamp: dbMessage.Timestamp
             });
         }
 

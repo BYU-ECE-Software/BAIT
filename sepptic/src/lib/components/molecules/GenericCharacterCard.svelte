@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
     import { Card, Avatar, Dropdown, DropdownHeader, DropdownItem, DropdownDivider, Tooltip,  Button, Modal, Progressbar, Label, Input } from 'flowbite-svelte';
     import { ExclamationCircleOutline, UserCircleOutline, BadgeCheckOutline, MessageDotsOutline } from 'flowbite-svelte-icons';
     import { QuizSubmission } from '$lib';
     let clickOutsideModal = $state(false);
-    let { character, characterProgress, userIntels, campaignId } = $props();
+    let { character, characterProgress, userIntels, campaignId, updateIntel } = $props();
     const name = character.Name;
     const title = character.Title;
     const image = character.Image;
@@ -13,6 +13,11 @@
         characterProgress = 0;
     }
     let statefulUserIntels = $state(userIntels);
+    function passUpdate(characterId: number, intelId: number) {
+        statefulUserIntels[intelId] = true;
+        statefulUserIntels = { ...statefulUserIntels };
+        updateIntel(characterId, intelId);
+    }
 </script>
 
 <!--Desktop Button Card-->
@@ -83,7 +88,7 @@
                 <p style="padding: 1rem;">{item.Quiz}</p>
             </div>
         </div>
-        <QuizSubmission campaignId={campaignId} characterId={characterId} intelId={item.Intel_ID} />
+        <QuizSubmission correctAnswer={() => {passUpdate(characterId, item.Intel_ID)}} campaignId={campaignId} characterId={characterId} intelId={item.Intel_ID} />
       {/if}
     {/each}
   </div>

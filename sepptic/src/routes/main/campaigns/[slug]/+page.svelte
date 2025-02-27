@@ -17,11 +17,11 @@
   let selectedTab = $state('Mission');
   let userIntels = $state(data.userIntels);
 
-  function handleUpdateQuiz(event: Event, characterId: number, intelId: number) {
-      let updatedUserIntels = {...userIntels};
-      updatedUserIntels[characterId][intelId] = true;
-      userIntels = updatedUserIntels;
+  function updateIntel(characterId: number, intelId: number) {
+    userIntels[characterId][intelId] = true;
+    userIntels = { ...userIntels };
   }
+
 </script>
 
 <!-- Content to display on screens 1024px wide or larger START-->
@@ -58,7 +58,7 @@
                 {#each data.campaign.Characters as character, index}
                   <div class="content">
                       <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                          <GenericCharacterCard character={character} campaignId={data.slug} characterProgress={data.progresses.characters[character.ID]} userIntels = {userIntels[character.ID]} />
+                          <GenericCharacterCard updateIntel={(updatedCharacterId: number, updatedIntelId: number) => {updateIntel(updatedCharacterId, updatedIntelId)}} character={character} campaignId={data.slug} characterProgress={data.progresses.characters[character.ID]} userIntels = {userIntels[character.ID]} />
                       </div>
                   </div>
                 {/each}
@@ -155,7 +155,7 @@
         {#each data.campaign.Characters as character, index}
             <div class="content">
                 <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <GenericCharacterCard character={character} campaignId={data.slug} characterProgress={data.progresses.characters[character.ID]} userIntels = {userIntels[character.ID]} />
+                    <GenericCharacterCard updateIntel={(updatedCharacterId: number, updatedIntelId: number) => {updateIntel(updatedCharacterId, updatedIntelId)}} character={character} campaignId={data.slug} characterProgress={data.progresses.characters[character.ID]} userIntels = {userIntels[character.ID]} />
                 </div>
             </div>
         {/each}
@@ -205,20 +205,20 @@
         </div>
         <div class="space-y-1 font-medium dark:text-white">
             {#each character.Intel as intel, index}
-            {#if userIntels[character.ID][intel.Intel_ID]}
-                <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                    <div class="flex items-center">
-                        <BadgeCheckOutline/>
-                        <p style="padding: 1rem; margin-left: 1rem;">{intel.Intel_Description}</p>
+                {#if userIntels[character.ID][intel.Intel_ID]}
+                    <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+                        <div class="flex items-center">
+                            <BadgeCheckOutline/>
+                            <p style="padding: 1rem; margin-left: 1rem;">{intel.Intel_Description}</p>
+                        </div>
                     </div>
-                </div>
-            {:else}
-                <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                    <div class="flex items-center">
-                        <p style="padding: 1rem; margin-left: 1rem;">{intel.Quiz}</p>
+                {:else}
+                    <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
+                        <div class="flex items-center">
+                            <p style="padding: 1rem; margin-left: 1rem;">{intel.Quiz}</p>
+                        </div>
                     </div>
-                </div>
-            {/if}
+                {/if}
             {/each}
         </div>
       {/each}

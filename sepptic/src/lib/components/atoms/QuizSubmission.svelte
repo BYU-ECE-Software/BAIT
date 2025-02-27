@@ -23,8 +23,11 @@
         console.log(data);
         if (data.correct) {
             correctAnswer();
+            console.log('Correct!');
         }
-        alert(data.message);
+        else {
+            console.log('Not quite, keep trying!');
+        }
     }
 </script>
 

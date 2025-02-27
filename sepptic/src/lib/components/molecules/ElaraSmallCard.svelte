@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { Card, Avatar, Dropdown, DropdownHeader, DropdownItem, DropdownDivider, Tooltip,  Button, Modal, Progressbar } from 'flowbite-svelte';
-    import { ExclamationCircleOutline, UserCircleOutline, BadgeCheckOutline, MessageDotsOutline } from 'flowbite-svelte-icons';
+    import { Avatar, Button, Modal, Progressbar } from 'flowbite-svelte';
+    import { BadgeCheckOutline, MessageDotsOutline } from 'flowbite-svelte-icons';
     let { clickOutsideModal = false}: {clickOutsideModal: boolean} = $props();
 
 </script>

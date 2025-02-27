@@ -48,12 +48,15 @@ function parseUserIntels(userProgress: any, campaignId: string, campaign: any) {
 export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const sessionToken = cookies.get('token');
     const slug = params.slug;
+
     const campaignsResponse = await fetch(`/api/campaigns/${slug}`, {
         headers: { 'Authorization': `Bearer ${sessionToken}` }
     });
+
     const userResponse = await fetch('/api/profile', {
         headers: { 'Authorization': `Bearer ${sessionToken}` }
     });
+
     const userProgressResponse = await fetch('/api/progress', {
         headers: { 'Authorization': `Bearer ${sessionToken}` }
     });
@@ -65,16 +68,29 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const user = userJson;
     const progresses = calculateProgresses(userProgress, campaign, slug);
     const userIntels = parseUserIntels(userProgress, slug, campaign);
-    let messagesByCharacter: { [key: number]: any[] } = {};
+
+    let messagesByCharacter: { [characterName: string]: { id: number, inbox: any[], sent: any[] } } = {};
 
     for (const character of campaign.Characters) {
         const messagesResponse = await fetch(`/api/conversation?campaignId=${slug}&characterId=${character.ID}`, {
             headers: { 'Authorization': `Bearer ${sessionToken}` }
         });
-        const messagesJson = await messagesResponse.json();
 
-        // Store messages under character ID
-        messagesByCharacter[character.ID] = messagesJson.data || []; // Default to empty array if no messages
+        const messagesJson = await messagesResponse.json();
+        console.log(`Fetched messages for ${character.Name}:`, messagesJson);
+
+        // Separate messages based on role
+        const inboxMessages = messagesJson.messages?.filter(msg => msg.role === "assistant") || [];
+        const sentMessages = messagesJson.messages?.filter(msg => msg.role === "user") || [];
+
+        console.log(inboxMessages);
+
+        messagesByCharacter[character.Name] = {
+            id: character.ID,
+            inbox: inboxMessages,  // ✅ Messages from assistant
+            sent: sentMessages     // ✅ Messages from user
+        };
     }
-    return { campaign, user, slug, progresses, userProgress, userIntels, messagesByCharacter};
+
+    return { campaign, user, slug, progresses, userProgress, userIntels, messagesByCharacter };
 };

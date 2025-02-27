@@ -1,7 +1,5 @@
 // place files you want to import through the `$lib` alias in this folder.
-export { default as SignInButton } from './components/atoms/Learn.svelte';
 export { default as CampaignButton } from './components/atoms/CampaignButton.svelte';
-export { default as LearnButton } from './components/atoms/SignIn.svelte';
 export { default as NavBar } from './components/molecules/NavBar.svelte';
 export { default as CampaignCard } from './components/molecules/CampaignCard.svelte';
 export { default as LearnCard } from './components/molecules/LearnCard.svelte';
@@ -17,7 +15,6 @@ export { default as Dashboard } from './components/organisms/Dashboard.svelte';
 export { default as HarvestaVideoPlayer } from './components/molecules/HarvestaVideoPlayer.svelte';
 export { default as SideBarButton } from './components/atoms/SideBarButton.svelte';
 export { default as ElaraSmallCard } from './components/molecules/ElaraSmallCard.svelte';
-export { default as MessageActivity } from './components/molecules/MessageActivity.svelte';
 export { default as TermsAndConditions } from './components/molecules/TermsAndConditions.svelte';
 export { default as AchievementCard } from './components/molecules/AchievementCard.svelte';
 export { default as AnnGunnSmallCard } from './components/molecules/AnnGunnSmallCard.svelte';
@@ -33,7 +30,5 @@ export { default as EmailList } from './components/molecules/EmailList.svelte';
 export { default as EmailSidebar } from './components/molecules/EmailSidebar.svelte';
 export { default as EmailView } from './components/molecules/EmailView.svelte';
 export { default as Email } from './components/organisms/Email.svelte';
-
-
-
 export { default as QuizSubmission } from './components/atoms/QuizSubmission.svelte';
+export { default as EmailSent } from './components/molecules/EmailSent.svelte';

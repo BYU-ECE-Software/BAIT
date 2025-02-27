@@ -1,6 +1,7 @@
 export type message = {
     "role": "developer" | "user" | "assistant",
-    "content": string
+    "content": string,
+    "timestamp"?: Date
 }
 
 export type apiCall = {

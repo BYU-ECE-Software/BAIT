@@ -33,7 +33,7 @@ model Message {
   Message_ID      Int          @id @default(autoincrement())
   User_Sent       Boolean?     @default(false)
   Message         String       @db.Text
-  Timestamp       DateTime     @db.Date
+  Timestamp       DateTime
   Conversation_ID Int
   Conversation    Conversation @relation(fields: [Conversation_ID], references: [Conversation_ID], onUpdate: Restrict, map: "Message_ibfk_1")
 

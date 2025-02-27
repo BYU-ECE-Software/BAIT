@@ -1,21 +1,23 @@
-<script>
+<script lang="ts">
     import { Card, Avatar, Dropdown, DropdownHeader, DropdownItem, DropdownDivider, Tooltip,  Button, Modal, Progressbar, Label, Input } from 'flowbite-svelte';
     import { ExclamationCircleOutline, UserCircleOutline, BadgeCheckOutline, MessageDotsOutline } from 'flowbite-svelte-icons';
     import { QuizSubmission } from '$lib';
-    let clickOutsideModal = false;
-    export let character;
+    let clickOutsideModal = $state(false);
+    let { character, characterProgress, userIntels, campaignId, updateIntel } = $props();
     const name = character.Name;
     const title = character.Title;
     const image = character.Image;
     const intel = character.Intel;
     const characterId = character.ID;
-    export let characterProgress;
-    export let userIntels;
-    export let campaignId;
     if (characterProgress === undefined) {
         characterProgress = 0;
     }
-    let inputValue = '';
+    let statefulUserIntels = $state(userIntels);
+    function passUpdate(characterId: number, intelId: number) {
+        statefulUserIntels[intelId] = true;
+        statefulUserIntels = { ...statefulUserIntels };
+        updateIntel(characterId, intelId);
+    }
 </script>
 
 <!--Desktop Button Card-->
@@ -69,24 +71,25 @@
 
   <!--Target Goals Begin-->  
   <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-    <Progressbar progress="{characterProgress}" size="h-4" labelInside/>
+    <Progressbar progress={characterProgress} size="h-4" labelInside/>
   </div>
   <div class="space-y-1 font-medium dark:text-white">
     {#each intel as item, index}
-      {#if userIntels[item.Intel_ID]}
+      {#if statefulUserIntels[item.Intel_ID]}
       <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
           <div class="flex items-center">
+              <BadgeCheckOutline/>
               <p style="padding: 1rem;">{item.Intel_Description}</p>
           </div>
       </div>
 
       {:else}
         <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-            <div class="flex items-center">
+        <div class="flex items-center">
                 <p style="padding: 1rem;">{item.Quiz}</p>
             </div>
         </div>
-        <QuizSubmission campaignId={campaignId} characterId={characterId} intelId={item.Intel_ID} />
+        <QuizSubmission correctAnswer={() => {passUpdate(characterId, item.Intel_ID)}} campaignId={campaignId} characterId={characterId} intelId={item.Intel_ID} />
       {/if}
     {/each}
   </div>

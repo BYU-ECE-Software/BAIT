@@ -78,6 +78,7 @@
       {#if statefulUserIntels[item.Intel_ID]}
       <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
           <div class="flex items-center">
+              <BadgeCheckOutline/>
               <p style="padding: 1rem;">{item.Intel_Description}</p>
           </div>
       </div>

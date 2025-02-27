@@ -4,7 +4,8 @@ import OpenAI from 'openai';
 
 
 export default async function aiSendMessage(messages: message[], message: string, prompt: string) {
-    let apiMessages: message[] = [{ role: 'developer', content: prompt }, { role: 'user', content: message }, ...messages];
+    let apiMessages: message[] = [{ role: 'developer', content: prompt }, ...messages, { role: 'user', content: message }];
+    console.log(apiMessages); 
 
     const apiCall: apiCall = {
         model: 'gpt-4o',

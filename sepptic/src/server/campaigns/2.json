@@ -115,6 +115,15 @@
             "Intels": [
                 6
             ]
+        },
+        {
+            "ID": 2,
+            "Name": "Final Question",
+            "Description": "Find out the location of the new Harvesta Foods store.",
+            "Image": "",
+            "Intels": [
+                8
+            ]
         }
     ]
 }

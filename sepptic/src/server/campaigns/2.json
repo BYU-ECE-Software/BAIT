@@ -85,8 +85,8 @@
                 {
                     "Intel_ID": 7,
                     "Intel_Description": "Files on seller holdout.",
-                    "Quiz":"What did you get from Ann?",
-                    "Answer":"files"
+                    "Quiz":"What location is held up by the seller?",
+                    "Answer":"Weippe"
                 }
             ]
         },
@@ -100,8 +100,8 @@
                 {
                     "Intel_ID": 8,
                     "Intel_Description": "The location of the new Harvesta Foods store.",
-                    "Quiz":"What is the location the new Harvesta Foods store will be built on?",
-                    "Answer": "Provo"
+                    "Quiz":"What is the location the new Harvesta Foods store will be built on? Riggins, Weippe, or Grangeville?",
+                    "Answer": "Grangeville"
                 }
             ]
         }

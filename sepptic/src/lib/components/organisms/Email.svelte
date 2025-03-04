@@ -25,15 +25,16 @@
         console.log("Selected thread (snapshot):", $state.snapshot(thread)); // ✅ Logs actual state
 
         if (thread && thread.contact && thread.messages) {
-            selectedThread = null;  // Force reactivity
+            selectedThread = null;  // ✅ Force reactivity by resetting
             setTimeout(() => {
-                selectedThread = { ...thread };
-                console.log("Updated selectedThread:", $state.snapshot(selectedThread)); // ✅ Check if updated
+                selectedThread = JSON.parse(JSON.stringify(thread)); // ✅ Ensure deep reactivity update
+                console.log("Updated selectedThread:", $state.snapshot(selectedThread));
             }, 0);
         } else {
             console.error("Invalid thread selected:", thread);
         }
     }
+
 
 
     function handleCompose() {
@@ -47,10 +48,24 @@
     function handleMessageSent(contact: string, newMessage: any) {
         console.log("New message received:", newMessage);
 
-        if (messageData[contact]) {
-            messageData[contact].messages.push(newMessage);
+        // ✅ Ensure messageData exists for the contact
+        if (!messageData[contact]) {
+            messageData[contact] = { id: newMessage.characterId, messages: [] };
+        }
+
+        // ✅ Update the messages array
+        messageData[contact].messages = [...messageData[contact].messages, newMessage];
+
+        // ✅ Update the UI preview in EmailList
+        messageData = { ...messageData };  // 🔄 Forces reactivity
+
+        // ✅ If the selected thread is open, update it instantly
+        if (selectedThread && selectedThread.contact === contact) {
+            selectedThread.messages = [...selectedThread.messages, newMessage];
         }
     }
+
+
 </script>
 
 <div class="flex h-screen">
@@ -64,20 +79,34 @@
         {/if}
 
         {#if selectedThread}
-            {#if selectedThread.contact}
-                <p>Selected Thread: {selectedThread.contact}</p>
-            {/if}
-            <EmailView
-                    thread={selectedThread}
-                    campaignId={campaignId}
-                    onClose={() => selectedThread = null}
-                    onMessageSent={handleMessageSent}
-            />
+            <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                <div class="bg-white w-[600px] max-h-[80vh] overflow-auto shadow-lg rounded-lg relative">
+                    <!-- Close Button -->
+                    <button class="absolute top-2 right-2 text-gray-600 hover:text-gray-900" onclick={() => selectedThread = null}>
+                        <span class="material-icons text-lg">close</span>
+                    </button>
+
+                    <!-- EmailView Component -->
+                    <EmailView
+                            thread={selectedThread}
+                            campaignId={campaignId}
+                            onClose={() => selectedThread = null}
+                            onMessageSent={handleMessageSent}
+                    />
+                </div>
+            </div>
         {/if}
+
 
     </div>
 </div>
 
 {#if isComposing}
-    <EmailCompose campaignId={campaignId} messageData={messageData} onClose={() => isComposing = false} />
+    <EmailCompose
+            campaignId={campaignId}
+            messageData={messageData}
+            onClose={() => isComposing = false}
+            onMessageSent={handleMessageSent}
+    />
 {/if}
+

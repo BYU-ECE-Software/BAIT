@@ -8,15 +8,15 @@ export default async function dbCreateMessages(conversationId: number, userMessa
                 Conversation_ID: conversationId,
                 Message: userMessage,
                 User_Sent: true,
-                Timestamp: new Date()
+                Timestamp: new Date().toISOString()
             }
         });
         const aiMessageStatus = await prisma.message.create({
             data: {
-                Conversation_ID: conversationId,
-                Message: aiMessage,
-                User_Sent: false,
-                Timestamp: new Date()
+            Conversation_ID: conversationId,
+            Message: aiMessage,
+            User_Sent: false,
+            Timestamp: new Date().toISOString()
             }
         });
         return {

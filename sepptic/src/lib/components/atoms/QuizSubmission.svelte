@@ -1,10 +1,8 @@
 <script lang="ts">
     import { Button, Input } from 'flowbite-svelte';
-    let inputValue = '';
-    export let campaignId: any;
+    let inputValue = $state('');
+    let { correctAnswer, campaignId, characterId, intelId } = $props();
     campaignId = Number(campaignId);
-    export let characterId: number;
-    export let intelId: number;
 
     async function checkAnswer(userAnswer: string) {
         console.log(campaignId, characterId, intelId, userAnswer);
@@ -23,7 +21,13 @@
 
         const data = await response.json();
         console.log(data);
-        alert(data.message);
+        if (data.correct) {
+            correctAnswer();
+            console.log('Correct!');
+        }
+        else {
+            console.log('Not quite, keep trying!');
+        }
     }
 </script>
 

@@ -32,3 +32,4 @@ export { default as EmailView } from './components/molecules/EmailView.svelte';
 export { default as Email } from './components/organisms/Email.svelte';
 export { default as QuizSubmission } from './components/atoms/QuizSubmission.svelte';
 export { default as EmailSent } from './components/molecules/EmailSent.svelte';
+export { default as YoutubeVideoCard } from './components/molecules/YoutubeVideoCard.svelte';

@@ -85,6 +85,7 @@
                 {
                     "Intel_ID": 7,
                     "Intel_Description": "Location experiencing seller holdout: Weippe.",
+                    "Unlocks_Character_ID": 5,
                     "Quiz":"What location is held up by the seller?",
                     "Answer":"Weippe"
                 }

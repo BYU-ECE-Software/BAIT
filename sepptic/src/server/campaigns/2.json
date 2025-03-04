@@ -69,7 +69,7 @@
             "Intel": [
                 {
                     "Intel_ID": 6,
-                    "Intel_Description": "Location of failed EPA test.",
+                    "Intel_Description": "Location of failed EPA test: Riggins",
                     "Quiz":"What is the name of the location that failed the EPA test.",
                     "Answer":"riggins"
                 }
@@ -84,7 +84,7 @@
             "Intel": [
                 {
                     "Intel_ID": 7,
-                    "Intel_Description": "Files on seller holdout.",
+                    "Intel_Description": "Location experiencing seller holdout: Weippe.",
                     "Quiz":"What location is held up by the seller?",
                     "Answer":"Weippe"
                 }

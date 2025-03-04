@@ -4,14 +4,11 @@
         onSelectTab: (tab: string) => void // ✅ Pass selected tab
     }>();
 
-    let menuItems = ["Inbox", "Sent"];
+    let menuItems = ["Inbox"]; // ✅ No "Sent", since all messages are now threads
 </script>
 
 <div class="w-64 bg-gray-100 p-4">
-    <button
-            class="w-full bg-blue-500 text-white p-2 rounded"
-            onclick={onCompose}
-    >
+    <button class="w-full bg-blue-500 text-white p-2 rounded" onclick={onCompose}>
         Compose
     </button>
 
@@ -24,4 +21,3 @@
         {/each}
     </ul>
 </div>
-

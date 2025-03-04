@@ -69,7 +69,7 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const progresses = calculateProgresses(userProgress, campaign, slug);
     const userIntels = parseUserIntels(userProgress, slug, campaign);
 
-    let messagesByCharacter: { [characterName: string]: { id: number, inbox: any[], sent: any[] } } = {};
+    let messagesByCharacter: { [characterName: string]: { id: number, messages: any[] } } = {};
 
     for (const character of campaign.Characters) {
         const messagesResponse = await fetch(`/api/conversation?campaignId=${slug}&characterId=${character.ID}`, {
@@ -79,18 +79,12 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
         const messagesJson = await messagesResponse.json();
         console.log(`Fetched messages for ${character.Name}:`, messagesJson);
 
-        // Separate messages based on role
-        const inboxMessages = messagesJson.messages?.filter(msg => msg.role === "assistant") || [];
-        const sentMessages = messagesJson.messages?.filter(msg => msg.role === "user") || [];
-
-        console.log(inboxMessages);
-
         messagesByCharacter[character.Name] = {
             id: character.ID,
-            inbox: inboxMessages,  // ✅ Messages from assistant
-            sent: sentMessages     // ✅ Messages from user
+            messages: messagesJson.messages || [] // ✅ Send all messages without filtering
         };
     }
 
     return { campaign, user, slug, progresses, userProgress, userIntels, messagesByCharacter };
 };
+

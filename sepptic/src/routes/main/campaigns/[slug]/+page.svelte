@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Avatar, Tabs, TabItem, Card, Progressbar, Listgroup, BottomNav, BottomNavItem } from 'flowbite-svelte';
   import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline, PhoneOutline } from 'flowbite-svelte-icons';
-  import {GenericVideoCard, GenericCharacterCard, HarvestaVideoPlayer, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard, CampaignButton, Email} from '$lib';
+  import {GenericVideoCard, YoutubeVideoCard, GenericCharacterCard, HarvestaVideoPlayer, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard, CampaignButton, Email} from '$lib';
 
   let icons = [
       { name: 'Home', icon: HomeOutline, href:`/` },
@@ -36,7 +36,8 @@
               <span style="margin-left: 0.5rem;">Click <a href="{data.campaign.Campaign_Information.Website}" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
           </div>
           <div style="width: 75vw; margin: auto;">
-              <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
+              <!-- <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} /> -->
+               <YoutubeVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
           </div>
           <p class="text-sm text-gray-500 dark:text-gray-400">
               <b>Intro Video:</b>

@@ -42,7 +42,8 @@
             body: JSON.stringify({
                 campaignId: campaignIdNum,
                 characterId: thread.characterId,
-                message: replyContent.trim()
+                message: replyContent.trim(),
+                role: "user"
             })
         });
 

@@ -26,13 +26,16 @@
 
     // Format the message data into threads
     let threads = Object.entries(messageData).map(([contact, data]) => ({
-        contact,
-        characterId: data.id,
-        messages: data.messages ? data.messages.map(m => ({
-            ...m,
-            sender: m.role === "user" ? "You" : contact
-        })) : []
-    }));
+    contact,
+    characterId: data.id,
+    messages: data.messages.map(m => ({
+        id: m.id,
+        sender: m.role === "user" ? "You" : contact,  // ✅ Ensures correct sender
+        content: m.content,
+        timestamp: m.timestamp
+    }))
+}));
+
 
 </script>
 

@@ -1,9 +1,11 @@
 <script lang="ts">
-    let { messageData = {}, campaignId, onClose } = $props<{
+    let { messageData = {}, campaignId, onClose, onMessageSent } = $props<{
         messageData: { [key: string]: { id: number, inbox: any[], messages: any[] } };
-        campaignId: string | number; // ✅ Accept string or number
+        campaignId: string | number;
         onClose: () => void;
+        onMessageSent: (contact: string, newMessage: any) => void;  // ✅ Add this prop
     }>();
+
 
     let messageText = $state("");
     let filteredRecipients: string[] = $state([]);
@@ -50,28 +52,77 @@
         if (!recipient || !messageText.trim() || !recipientId) return;
 
         try {
-            let messageResponse = await fetch("/api/message", {
+            let response = await fetch("/api/message", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
                 body: JSON.stringify({
-                    campaignId: campaignIdNum, // ✅ Now uses the dynamic campaignIdNum
+                    campaignId: campaignIdNum,
                     characterId: recipientId,
                     message: messageText.trim()
                 })
             });
 
-            console.log(`Send Message Status: ${messageResponse.status}`);
+            let responseText = await response.text();
+            console.log("Raw response:", responseText);
 
-            if (!messageResponse.ok) throw new Error("Failed to send message");
+            let responseData;
+            try {
+                responseData = JSON.parse(responseText);
+            } catch (error) {
+                console.warn("Response is not JSON, assuming it's a bot reply:", responseText);
+                responseData = { content: responseText }; // Handle plain text bot replies
+            }
 
-            console.log("Message sent successfully!");
+            if (!response.ok) {
+                console.error("API Error:", responseData);
+                throw new Error(`Failed to send message: ${responseData.message || responseText}`);
+            }
 
-            messageText = ""; // Clear input
+            console.log("Message sent successfully!", responseData);
+
+            // ✅ Create new message object
+            const newMessage = {
+                id: Date.now(),
+                sender: "You",
+                content: messageText.trim(),
+                timestamp: new Date().toISOString(),
+            };
+
+            // ✅ Update messageData immediately
+            if (!messageData[recipient]) {
+                messageData[recipient] = { id: recipientId, messages: [] };
+            }
+            messageData[recipient].messages.push(newMessage);
+
+            // ✅ Notify parent component (Email.svelte) to update UI
+            onMessageSent(recipient, newMessage);
+
+            // ✅ Clear input field and close modal
+            messageText = "";
+            onClose();
+
+            // ✅ Handle AI reply (if applicable)
+            if (responseData.content) {
+                const aiMessage = {
+                    id: Date.now() + 1,
+                    sender: recipient,
+                    content: responseData.content,
+                    timestamp: new Date().toISOString(),
+                };
+
+                setTimeout(() => {
+                    messageData[recipient].messages.push(aiMessage);
+                    onMessageSent(recipient, aiMessage);
+                }, 1000); // Simulate AI response delay
+            }
+
         } catch (error) {
-            console.error("Error:", error);
+            console.error("Error sending message:", error);
         }
     }
+
+
 
 </script>
 

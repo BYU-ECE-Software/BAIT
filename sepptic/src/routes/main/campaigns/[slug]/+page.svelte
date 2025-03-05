@@ -13,7 +13,7 @@
   ];
 
   let { data } = $props();
-  
+
   let selectedTab = $state('Mission');
   let userIntels = $state(data.userIntels);
 
@@ -135,8 +135,9 @@
           <span style="margin-left: 0.5rem;">Click <a href="{data.campaign.Campaign_Information.Website}" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
       </div>
       <div style="width: 75vw; margin: auto;">
-        <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
-      </div>
+        <!-- <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} /> -->
+         <YoutubeVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
+    </div>
       <p class="text-sm text-gray-500 dark:text-gray-400">
           <b>Intro Video:</b>
           Watch the video to learn more about Harvesta Foods and their expansion efforts.
@@ -162,6 +163,8 @@
         {/each}
       </div>
 
+  {:else if selectedTab === 'Contact'}
+    <Email messageData={data.messagesByCharacter} campaignId = {data.slug}></Email>
 
       <!-- "Progress" Tab Content -->
   {:else if selectedTab === 'Progress'}

@@ -131,7 +131,9 @@
 
 <!-- Main Compose Window -->
 <div class="fixed bottom-2 right-4 w-[480px] bg-white shadow-lg rounded-lg flex flex-col transition-all duration-300 ease-in-out z-50
-    {isFullscreen ? 'w-[90vw] h-[90vh] bottom-[5%] right-[5%] flex flex-col' : ''}">
+    sm:inset-0 sm:w-full sm:h-full sm:rounded-none sm:bottom-0 sm:right-0
+    {isFullscreen ? 'w-[90vw] h-[80vh] bottom-[5%] right-[5%] flex flex-col' : ''}">
+
 
     <!-- Header -->
     <div class="bg-gray-100 px-4 py-2 flex justify-between items-center">

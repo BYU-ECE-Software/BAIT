@@ -14,7 +14,7 @@
                 class="dark:hover:bg-seppticOrange-700 bg-seppticOrange-600 dark:bg-seppticOrange-600 hover:bg-seppticOrange-700 text-white focus:outline-none w-full"
                 href="/main/learn"
         >
-            Learn Here
+            Learn Here  
         </Button>
     </Card>
 </div>

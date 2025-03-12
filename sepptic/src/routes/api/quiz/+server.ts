@@ -6,6 +6,7 @@ import getUserIdFromToken from "../../../server/utils/getUserIdFromToken";
 import { jsonGetCampaign } from "../../../server/utils/jsonGetCampaigns";
 import filterCharacters from "../../../server/utils/filterCharacters";
 
+// Takes in a campaign and appends the total number of intel for each character
 function campaignAppendCharacterTotals(campaign: any) {
     for (const character of campaign.data.Characters) {
         character.Total_Intel = character.Intel.length;
@@ -13,6 +14,7 @@ function campaignAppendCharacterTotals(campaign: any) {
     return campaign;
 }
 
+// Takes in a campaign and appends the total number of intel for the campaign
 function campaignAppendCampaignTotal(campaign: any) {
     let total: number = 0;
     for (const character of campaign.data.Characters) {
@@ -22,6 +24,7 @@ function campaignAppendCampaignTotal(campaign: any) {
     return campaign;
 }
 
+// Takes in a campaign and appends the total number of intel for each character and the campaign
 function campaignAppendTotals(campaign: any){
     let newCampaign = campaign;
     newCampaign = campaignAppendCharacterTotals(newCampaign);
@@ -29,6 +32,7 @@ function campaignAppendTotals(campaign: any){
     return newCampaign;
 }
 
+// Takes in the campaign ID, character ID, intel ID, user ID, and user answer and checks if the answer is correct
 async function checkQuiz(campaignId: number, characterId: number, intelId: number, userId: number, userAnswer: string) {
     let campaign = await jsonGetCampaign(campaignId);
     campaign = await filterCharacters(campaign, userId);
@@ -52,6 +56,7 @@ async function checkQuiz(campaignId: number, characterId: number, intelId: numbe
 }
 
 export async function POST(event: RequestEvent){
+    // Authenticate and Get UserID
     const cookies = cookie.parse(event.request.headers.get('cookie') || '');
     const token = cookies.token;
     if (!token) {
@@ -63,19 +68,23 @@ export async function POST(event: RequestEvent){
     }
     const userId = userIdResponse.userId;
 
+    // Parse
     const body = await event.request.json();
     const campaignId = body.campaignId;
     const characterId = body.characterId;
     const intelId = body.intelId;
     const userAnswer = body.userAnswer;
 
+    // Validate progress
     const valid = await validateProgress(campaignId, characterId, intelId, userId);
     if (valid.status !== 200) {
         return new Response(JSON.stringify({ message: 'Invalid progress: ' + valid.message, status: valid.status }), { status: valid.status });
     }
 
+    // Check quiz
     const correct = await checkQuiz(campaignId, characterId, intelId, userId, userAnswer);
 
+    // If correct, add intel to DB
     if (correct) {
         const result = await dbAddIntel(campaignId, characterId, intelId, userId);
         if (result.status !== 200) {
@@ -83,9 +92,9 @@ export async function POST(event: RequestEvent){
         }
     }
 
+    // Return result
     if (!correct) {
         return new Response(JSON.stringify({ message: 'Incorrect quiz answer', correct: false}), { status: 200 });
     }
-
     return new Response(JSON.stringify({ message: 'Correct quiz answer', correct: true }), { status: 200 });
 }

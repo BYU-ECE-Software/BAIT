@@ -8,6 +8,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
 
 export async function POST(event: RequestEvent) {
+    // Authenticate and get user ID
     const body = await event.request.json();
     const cookies = cookie.parse(event.request.headers.get('cookie') || '');
     const token = cookies.token;
@@ -18,6 +19,8 @@ export async function POST(event: RequestEvent) {
     if (!userIdResponse.success || !userIdResponse.userId) {
         return new Response(JSON.stringify({ message: userIdResponse.message, status: userIdResponse.status }), { status: userIdResponse.status });
     }
+
+    // Get request data
     const userId = userIdResponse.userId;
     const campaignId = body.campaignId;
     const characterId = body.characterId;

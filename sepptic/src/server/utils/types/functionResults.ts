@@ -1,3 +1,5 @@
+// Type definitions for the results of various functions
+
 export type dbAuthUserResult = {
     success: boolean;
     userId: number | null;

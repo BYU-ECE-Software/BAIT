@@ -1,3 +1,5 @@
+// Type definitions for requests to our API
+
 export type reqAuthPostBody = {
     email: string;
     password: string;

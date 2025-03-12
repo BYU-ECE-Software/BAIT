@@ -1,0 +1,16 @@
+- better intel confimation (AI functions)
+- voice interactions
+- security character/potential to be caught
+- more intuitive UI
+- survey that is local to the website, not external
+- more in depth learn page
+- tune current prompts
+- add loading icon to messaging between request and response
+- more achievements
+- better state
+- explain the project better in about
+- better name (good luck)
+- cleaner breifing page
+- add file so when a persona gives files user has to look through them
+- more social engineering techniques
+- 

@@ -77,7 +77,6 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
         });
 
         const messagesJson = await messagesResponse.json();
-        console.log(`Fetched messages for ${character.Name}:`, messagesJson);
 
         messagesByCharacter[character.Name] = {
             id: character.ID,

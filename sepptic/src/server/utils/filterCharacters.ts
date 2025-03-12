@@ -1,5 +1,6 @@
 import dbGetIntel from "./dbGetIntel";
 
+// Function to sort intel by campaign ID
 function sortIntel(intelResponse: any) {
     const intel = intelResponse.intel;
     const sortedIntel: { [key: string]: any[] } = {};
@@ -15,6 +16,7 @@ function sortIntel(intelResponse: any) {
     return { intel: sortedIntel };
 }
 
+// Function to get all intel for a user from the database.
 async function getUserCampaignIntel(userId: number, campaignId: string) {
     const intelResponse = await dbGetIntel(userId);
     const intelByCampaignResponse = sortIntel(intelResponse);
@@ -29,6 +31,7 @@ async function getUserCampaignIntel(userId: number, campaignId: string) {
     return userIntelIDs;
 }
 
+// Function to get required intel for a character
 function getRequiredIntel(character: any, campaign: any) {
     let requiredIntel = [];
     for(const campaign_character of campaign.data.Characters) {
@@ -41,6 +44,7 @@ function getRequiredIntel(character: any, campaign: any) {
     return requiredIntel;
 }
 
+// Function to filter characters based on user intel
 export default async function filterCharacters(unfilteredCampaign: any, userId: number) {
     let campaign = unfilteredCampaign;
     const userIntelIDs = await getUserCampaignIntel(userId, campaign.id);

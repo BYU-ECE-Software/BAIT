@@ -1,5 +1,4 @@
 import { jsonGetCampaign } from './jsonGetCampaigns';
-import { PrismaClient } from "@prisma/client";
 
 export default async function validateCharacter(campaignId: number, characterId: number) {
     // Ensure campaign exists

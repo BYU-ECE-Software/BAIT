@@ -1,7 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
 // Get a user from the database.
-
 export default async function dbGetUser(userId: number) {
     const prisma = new PrismaClient();
 

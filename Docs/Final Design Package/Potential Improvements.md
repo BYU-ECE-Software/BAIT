@@ -13,4 +13,5 @@
 - cleaner breifing page
 - add file so when a persona gives files user has to look through them
 - more social engineering techniques
-- 
+- chat reset
+- more OSINT

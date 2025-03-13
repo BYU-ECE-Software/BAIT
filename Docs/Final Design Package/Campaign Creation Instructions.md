@@ -73,7 +73,7 @@ The `Intel` sub-object is where the intel the persona has, as well as the quiz t
 
 `Answer` is the answer that is needed to complete the quiz. Currently, if the answer the user gives contains the text in `Answer` anywhere it will be accepted, but this can be changed to be more strict. 
 
-#### Images
+### Images
 All images that are referenced in this file can be stored in `/SEPPTIC/sepptic/static`. They can be stored in other places, you will just have to add the correct path.
 
 ## Filtering

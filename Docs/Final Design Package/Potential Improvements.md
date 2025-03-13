@@ -19,3 +19,4 @@ This file is a list of any improvements that we think would be beneficial to the
 - Chat reset: Add a chat reset button, when clicked it will delete all previous prompt to the AI, and cause the AI to forgot all previous conversations. This could help with some of the more stubborn personas that sometimes lock themselves down if one wrong thing is said.
 - More OSINT: Harvesta Foods doesn't have much of an OSINT component, it would be cool to add more of it.
 - Message button on main dashboard: There is a message button when you click on a persona on the main dashboard page that doesn't work. Would be cool if it either redirected directly to that persona messaging page, or open a popup messenger.
+- VR: Make a VR game so you can do physical attacks like tailgaiting (Good luck again).

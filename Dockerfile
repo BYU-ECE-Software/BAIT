@@ -27,5 +27,9 @@ RUN --mount=type=secret,id=openai_key \
 # Expose the port your app runs on
 EXPOSE 3000
 
+# Add a health check
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD wget --quiet --spider http://localhost:3000 || exit 1
+
 # Start the application (secrets should be passed at runtime)
 CMD ["npm", "run", "start"]

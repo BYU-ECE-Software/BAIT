@@ -32,85 +32,68 @@
     let replyContent = $state("");
 
     async function sendReply() {
-        if (!replyContent.trim() || !thread.characterId) return;
+    if (!replyContent.trim() || !thread.characterId) return;
 
-        try {
-            console.log("Sending reply:", {
+    try {
+        let response = await fetch("/api/message", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({
                 campaignId: campaignIdNum,
                 characterId: thread.characterId,
                 message: replyContent.trim(),
-            });
+                role: "user"
+            })
+        });
 
-            let response = await fetch("/api/message", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-                body: JSON.stringify({
-                    campaignId: campaignIdNum,
-                    characterId: thread.characterId,
-                    message: replyContent.trim()
-                })
-            });
+        let responseText = await response.text();
+        let responseData;
 
-            // ✅ Check if the response is JSON
-            let responseText = await response.text();
-            console.log("Raw response:", responseText);
+        try {
+            responseData = JSON.parse(responseText);
+        } catch (error) {
+            console.warn("Response is not JSON, assuming it's a bot reply:", responseText);
+            responseData = { content: responseText };
+        }
 
-            let responseData;
-            try {
-                responseData = JSON.parse(responseText);
-            } catch (error) {
-                console.warn("Response is not JSON, assuming it's a bot reply:", responseText);
-                responseData = { content: responseText }; // Fallback for plain text responses
-            }
+        if (!response.ok) {
+            console.error("API Error:", responseData);
+            throw new Error(`Failed to send message: ${responseData.message || responseText}`);
+        }
 
-            if (!response.ok) {
-                console.error("API Error:", responseData);
-                throw new Error(`Failed to send message: ${responseData.message || responseText}`);
-            }
+        const newMessage = {
+            id: Date.now(),
+            sender: "You",
+            content: replyContent.trim(),
+            timestamp: new Date().toISOString(),
+        };
 
-            console.log("Message sent successfully!", responseData);
+        // ✅ Call onMessageSent instead of directly modifying thread.messages
+        onMessageSent(thread.contact, newMessage);
 
-            // ✅ Add new message immediately to the UI
-            const newMessage = {
-                id: Date.now(),
-                recipient: thread.contact,
-                characterId: thread.characterId,
-                content: replyContent.trim(),
+        // ✅ Clear input field
+        replyContent = "";
+
+        // ✅ Handle AI reply (if applicable)
+        if (responseData.content) {
+            const aiMessage = {
+                id: Date.now() + 1,
+                sender: thread.contact,
+                content: responseData.content,
                 timestamp: new Date().toISOString(),
-                sender: "You"
             };
 
-            // ✅ Append new message instantly
-            thread.messages = [...thread.messages, newMessage];
-
-            // ✅ Clear input field
-            replyContent = "";
-
-            // ✅ Notify parent component so it updates the global state
-            onMessageSent(thread.contact, newMessage);
-
-            // ✅ Handle AI reply (if applicable)
-            if (responseData.content) {
-                const aiMessage = {
-                    id: Date.now() + 1, // Unique ID
-                    recipient: thread.contact,
-                    characterId: thread.characterId,
-                    content: responseData.content, // AI-generated response
-                    timestamp: new Date().toISOString(),
-                    sender: thread.contact
-                };
-
-                setTimeout(() => {
-                    thread.messages = [...thread.messages, aiMessage];
-                    onMessageSent(thread.contact, aiMessage);
-                }, 1000); // Simulate AI response delay
-            }
-
-        } catch (error) {
-            console.error("Error sending reply:", error);
+            setTimeout(() => {
+                onMessageSent(thread.contact, aiMessage);
+            }, 1000);
         }
+
+    } catch (error) {
+        console.error("Error sending reply:", error);
     }
+}
+
 
 
 </script>

@@ -17,10 +17,16 @@
   let selectedTab = $state('Mission');
   let userIntels = $state(data.userIntels);
 
+  let newUserIntels = $derived(
+      userIntels
+  )
+
   function updateIntel(characterId: number, intelId: number) {
     userIntels[characterId][intelId] = true;
     userIntels = { ...userIntels };
   }
+
+
 
 </script>
 

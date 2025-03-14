@@ -1,5 +1,5 @@
 # Potential Improvements
-This file is a list of any improvements that we think would be beneficial to the project. 
+This file is a list of any improvements that we think would be beneficial to the project. They are in no particular order, and are some things we noticed or wanted to do.
 
 - Better intel confirmation: Instead of having a quiz for each intel, have a more streamlined way to mark intel as found by user. For example, there should be a way to use ChatGPT functions that allow the AI to call a function that marks the intel automatically.
 - Voice interactions: Add a way to have a 'phone call' with the AI. There are some text to speech and voice enabled models in OpenAI. Or, maybe run the users speech through speech to text, then give it to the AI, then convert it using a text to speech, and feed it back to the user.

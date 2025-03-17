@@ -26,16 +26,16 @@
                 },
                 {
                     "Intel_ID": 2,
-                    "Intel_Description": "Office gossip about Tony Flagg wanting to go to the projects team.",
-                    "Quiz": "Who wants to move to the projects team?",
-                    "Answer":"Tony"
-                },
-                {
-                    "Intel_ID": 3,
                     "Intel_Description": "Name of real estate contact to get EPA reports: Tony Flagg",
                     "Unlocks_Character_ID": 3,
                     "Quiz":"Who in the real estate department does Elara know?",
                     "Answer":"Tony"
+                },
+                {
+                    "Intel_ID": 3,
+                    "Intel_Description": "Office gossip about Tony Flagg wanting to go to the projects team.",
+                    "Quiz": "What department does Tony Flagg want to move to?",
+                    "Answer":"Projects"
                 }
 
             ]

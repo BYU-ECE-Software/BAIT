@@ -21,6 +21,7 @@
     function closeTerms() {
         showTerms = false;
     }
+
 </script>
 
 {#if open}

@@ -28,15 +28,15 @@ The most important file for creating a new campaign is the campaign JSON file. T
             Unlocks_Character_ID?: number;
             Quiz: string;
             Answer: string;
-        }[];
-    }[];
+        };
+    };
     Achievements: {
         ID: number;
         Name: string;
         Description: string;
         Image: string;
-        Intels: number[];
-    }[];
+        Intels: number;
+    };
 }
 ```
 ### Campaign Information

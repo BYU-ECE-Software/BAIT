@@ -1,6 +1,9 @@
 # Deployment Instructions
 To deploy the SEPPTIC application, you must have access to the GitHub repository. At the time of writing, this was `github.com/rootbeerefloat/SEPPTIC`. Before you can clone the repository or pull the container, you must have the necessary permissions to access the repository, and be authenticated from the CLI with git and docker.
 
+## Setting up a database
+The SEPPTIC application requires a mysql database to store user data. The database must be accessible from the application and have the necessary tables created. The database can be initialized with the [Database Initialization Script](../Development%20Resources/DatabaseInit.sql). The database URL must be provided to the application as an environment variable. The database URL should be in the format `mysql://username:password@host:port/sepptic`.
+
 ## Building the Container
 The following describes how to build the docker container. An existing docker image is available from GHCR and is associated with the GitHub repository.
 
@@ -86,8 +89,20 @@ Before the GitHub action can be used, a few steps must be taken to set up the re
 3. Click on `Secrets and variables` in the left sidebar
 4. Click on `Actions`
 5. Set the following secrets:
+
 Name|Description
 ---|---
-DATABASE_URL|The URL to the database 
-GHCR_TOKEN|
-OPENAI_API_KEY|
+DATABASE_URL|The database URL
+GHCR_TOKEN|A GitHub access token that has access to push and pull from GHCR
+OPENAI_API_KEY|An OpenAI API key
+
+#### Setup Actions Runner
+The GitHub action is designed for the actions runner to be the server on which to deploy the application. The following steps must be taken to set up the actions runner:
+
+*Note to future BYU development teams: Dr. Hansen has a VM in YCloud that has historically been used for this purpose. Contact him for access to the VM.* 
+
+1. [Install Docker](https://docs.docker.com/engine/install/) on the server
+2. Create a user with a home folder for the actions runner. Add this user to the `docker` group
+3. In the GitHub repository, navigate to `Settings > Actions > Runners` and click on `New self-hosted runner`
+4. Follow the instructions to download and configure the runner
+5. Install the runner as a service on the server using the created user by following [these instructions](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service)

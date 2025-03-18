@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: [self-hosted, capstone]  # This specifies to use the self-hosted runner
+    runs-on: [self-hosted]  # This specifies to use the self-hosted runner
 
     steps:
       # Step 1: Checkout the code

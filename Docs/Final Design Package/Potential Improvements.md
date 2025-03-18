@@ -20,3 +20,5 @@ This file is a list of any improvements that we think would be beneficial to the
 - More OSINT: Harvesta Foods doesn't have much of an OSINT component, it would be cool to add more of it.
 - Message button on main dashboard: There is a message button when you click on a persona on the main dashboard page that doesn't work. Would be cool if it either redirected directly to that persona messaging page, or open a popup messenger.
 - VR: Make a VR game so you can do physical attacks like tailgaiting (Good luck again).
+- Clean up messaging page so it's more straight forward. 
+- Add a tutorial video or page that explains what to do after watching the intro video i.e. where to message, what you need to find etc.

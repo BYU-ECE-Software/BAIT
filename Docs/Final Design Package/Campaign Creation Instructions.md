@@ -39,6 +39,7 @@ The most important file for creating a new campaign is the campaign JSON file. T
     };
 }
 ```
+There is a copy of this file in /SEPPTIC/Docs/Technical Documentation/CampaignDefinition.ts, you can copy use that file as a template.
 ## Campaign Information
 `Campaign_Information` holds general information about the campaign. Most of it is self-explanatory.
 
@@ -88,6 +89,3 @@ Is the answer that is needed to complete the quiz. Currently, if the answer the 
 
 #### Images
 All images that are referenced in this file can be stored in `/SEPPTIC/sepptic/static`. They can be stored in other places, you will just have to add the correct path.
-
-## Filtering
-Filtering is used to hide locked characters so that users can't see them until they have answered any pertinent intel quizzes.

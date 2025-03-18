@@ -21,6 +21,7 @@ SEPPTIC
 │   │   ├── Overview.md
 │   │   ├── Potential Improvements.md
 │   │   └── User Feedback.md
+│   ├── Media
 │   └── Technical Documentation
 │       ├── API Functions.md
 │       ├── CampaignDefinition.ts
@@ -220,6 +221,7 @@ SEPPTIC
         - **Overview.md** - An overview of the project
         - **Potential Improvements.md** - A list of potential improvements to the project
         - **User Feedback.md** - A summary of user feedback
+    - **Media** - Media files used in the documentation
     - **Technical Documentation** - More detailed technical documentation
         - **API Functions.md** - Documentation of the inner workings of teh API
         - **CampaignDefinition.ts** - A TypeScript file that defines the structure of a campaign

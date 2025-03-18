@@ -64,4 +64,30 @@ npm run build
 npm run start
 ```
 
-## CI/CD Pipeline
+## GitAub Actions
+A GitHub action has been setup to automatically build, publish, and deploy a new container each time a push is made to the main branch. The action is defined in `.github/workflows/docker-publish.yml`. The action does the following:
+
+1. Checks out the repository
+2. Sets up Docker Buildx allowing for multi-platform builds
+3. Logs into the GitHub Container Registry (GHCR) using the token stored as `GHCR_TOKEN` in repository secrets
+4. Temporarily saves environment variables from the repository secrets `OPENAI_API_KEY` and `DATABASE_URL` to files for later use
+5. Builds the docker image with the environment variables
+6. Deletes the temporary environment variable files
+7. Pushes the docker image to GHCR
+8. Stops and removes the running container on the runner
+9. Starts the new container using the new image
+
+### Setting up GitHub Actions
+Before the GitHub action can be used, a few steps must be taken to set up the repository and actions runner.
+
+#### Setup Repository Secrets
+1. Navigate to the repository on GitHub
+2. Click on `Settings` in the top right
+3. Click on `Secrets and variables` in the left sidebar
+4. Click on `Actions`
+5. Set the following secrets:
+Name|Description
+---|---
+DATABASE_URL|The URL to the database 
+GHCR_TOKEN|
+OPENAI_API_KEY|

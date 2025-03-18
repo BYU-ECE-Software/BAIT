@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: [self-hosted, capstone]  # This specifies to use the self-hosted runner
+    runs-on: [self-hosted]  # This specifies to use the self-hosted runner
 
     steps:
       # Step 1: Checkout the code
@@ -42,22 +42,28 @@ jobs:
             --secret id=database_url,src=database_url.txt \
             -t ghcr.io/rootbeerefloat/sepptic:latest .
 
-      # Step 6: Push the Docker image to GHCR
+      # Step 6: Delete secret files
+      - name: Delete Secret Files
+        run: |
+          rm openai_key.txt
+          rm database_url.txt
+
+      # Step 7: Push the Docker image to GHCR
       - name: Push Docker image to GHCR
         run: |
           docker push ghcr.io/rootbeerefloat/sepptic:latest
 
-      # Step 7: Stop any previously running container (optional)
+      # Step 8: Stop any previously running container (optional)
       - name: Stop and remove previous container (if any)
         run: |
           docker stop sepptic || true
           docker rm sepptic || true
 
-      # Step 8: Start the Docker container on the self-hosted runner
+      # Step 9: Start the Docker container on the self-hosted runner
       - name: Start Docker container
         run: |
           docker run -d --name sepptic \
             --network sepptic_sepptic \
-            -e DATABASE_URL=${{ secrets.CONTAINER_DATABASE_URL }} \
+            -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
             -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
             ghcr.io/rootbeerefloat/sepptic:latest

@@ -73,7 +73,7 @@ Is the most important, that is the initial instruction that will be sent to the 
 The `Intel` sub-object is where the intel the persona has, as well as the quiz to prove the user got said intel, are defined (This was our solution, there might be a more elegant way to confirm intel using OpenAI functions, but this is quick and easy). 
 
 ### `Intel_ID`
-Iike character `ID`, is unique. It is required to have several objects within the `Intel` object, so it doesn't serve any direct purpose besides differentiation. 
+Like character `ID`, is unique. It is required to have several objects within the `Intel` object, so it doesn't serve any direct purpose besides differentiation. 
 
 ### `Intel_Description` 
 Is what will show under a persona in the 'Progress' tab. This should be a recap of the intel, as well as the answer, as it only shows up after the user has taken the quiz for the intel and can be referenced during future interactions. 
@@ -89,3 +89,6 @@ Is the answer that is needed to complete the quiz. Currently, if the answer the 
 
 #### Images
 All images that are referenced in this file can be stored in `/SEPPTIC/sepptic/static`. They can be stored in other places, you will just have to add the correct path.
+
+## Creation
+To create a campaign, all you need to do is make a copy of the CampaignDefinitions.ts file as a .json file. Fill it out with all the data you need for your campaign. Move it into the sepptic/src/server/campaigns folder, and that's it. The website will dynamically generate all the needed elements to fit the campaign.

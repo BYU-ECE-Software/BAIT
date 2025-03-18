@@ -11,6 +11,11 @@ SEPPTIC
 │   └── Story.drawio
 ├── Dockerfile
 ├── Docs
+│   ├── Development Resources
+│   │   ├── API Functions.md
+│   │   ├── CampaignDefinition.ts
+│   │   ├── DatabaseInit.sql
+│   │   └── SEPPTIC.postman_collection.json
 │   ├── Final Design Package
 │   │   ├── API Endpoints.md
 │   │   ├── Architecture.md
@@ -21,12 +26,7 @@ SEPPTIC
 │   │   ├── Overview.md
 │   │   ├── Potential Improvements.md
 │   │   └── User Feedback.md
-│   ├── Media
-│   └── Technical Documentation
-│       ├── API Functions.md
-│       ├── CampaignDefinition.ts
-│       ├── DatabaseInit.sql
-│       └── SEPPTIC.postman_collection.json
+│   └── Media
 ├── Tests
 │   ├── LoadTest.py
 │   └── requirements.txt
@@ -211,6 +211,11 @@ SEPPTIC
     - **testing.json** - Test campaign with dummy data
 - **Dockerfile** - Defines how to build the docker container
 - **Docs** - Documentation
+    - **Development Resources** - More detailed technical documentation
+        - **API Functions.md** - Documentation of the inner workings of teh API
+        - **CampaignDefinition.ts** - A TypeScript file that defines the structure of a campaign
+        - **DatabaseInit.sql** - A SQL file that initializes the database
+        - **SEPPTIC.postman_collection.json** - A Postman definition of the API endpoints
     - **Final Design Package** - MD files to be included in the final design package
         - **API Endpoints.md** - Documentation of the API endpoints
         - **Architecture.md** - Documentation of the system architecture and technologies we are using
@@ -222,11 +227,6 @@ SEPPTIC
         - **Potential Improvements.md** - A list of potential improvements to the project
         - **User Feedback.md** - A summary of user feedback
     - **Media** - Media files used in the documentation
-    - **Technical Documentation** - More detailed technical documentation
-        - **API Functions.md** - Documentation of the inner workings of teh API
-        - **CampaignDefinition.ts** - A TypeScript file that defines the structure of a campaign
-        - **DatabaseInit.sql** - A SQL file that initializes the database
-        - **SEPPTIC.postman_collection.json** - A Postman definition of the API endpoints
 - **Tests** - Various files used for testing the application
     - **LoadTest.py** - Python script for load testing the application
     - **requirements.txt** - Python requirements for the load test script

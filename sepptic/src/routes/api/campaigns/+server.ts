@@ -4,6 +4,7 @@ import cookie from 'cookie';
 import type { RequestEvent } from '@sveltejs/kit';
 
 export async function GET(event: RequestEvent) {
+    // Authenticate user and get User ID
     const cookies = cookie.parse(event.request.headers.get('cookie') || '');
     const token = cookies.token;
     if (!token) {
@@ -13,6 +14,8 @@ export async function GET(event: RequestEvent) {
     if (!userIdResponse.success || !userIdResponse.userId) {
         return new Response(JSON.stringify({ message: userIdResponse.message, status: userIdResponse.status }), { status: userIdResponse.status });
     }
+
+    // Get campaigns
     const campaignsResponse = await jsonGetCampaigns();
     if (campaignsResponse.status !== 200) {
         return new Response(JSON.stringify({ message: campaignsResponse.message, status: campaignsResponse.status }), { status: campaignsResponse.status });

@@ -1,3 +1,4 @@
+// Campaign type definition
 export type campaign = {
     Campaign_Information: {
         Name: string;

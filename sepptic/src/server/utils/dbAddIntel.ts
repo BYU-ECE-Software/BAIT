@@ -4,6 +4,7 @@ import { PrismaClient } from "@prisma/client";
 export default async function dbAddIntel(campaignId: number, characterId: number, inputIntelId: number, userId: number) {
     const prisma = new PrismaClient();
 
+    // Ensure that the user exists
     try {
         const user = await prisma.user.findUnique({
             where: {
@@ -17,6 +18,8 @@ export default async function dbAddIntel(campaignId: number, characterId: number
                 status: 404
             }
         }
+
+        // Ensure that the campaign exists
         const intel = await prisma.intel.create({
             data: {
                 Campaign_ID: campaignId,
@@ -25,6 +28,8 @@ export default async function dbAddIntel(campaignId: number, characterId: number
                 User_ID: user.User_ID
             }
         });
+
+        // Return the intelligence ID
         const intelRecordId = intel.Intel_Record_ID;
         return {
             intelId: intelRecordId,

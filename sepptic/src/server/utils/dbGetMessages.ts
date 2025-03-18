@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import type { message } from "./types/aiApi";
 
+// Function to get messages from the database.
 export default async function dbGetMessages(conversationId: number) {
     const prisma = new PrismaClient();
 

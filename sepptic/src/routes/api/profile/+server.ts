@@ -7,6 +7,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
 
 export async function GET(event: RequestEvent) {
+    // Authenticate and get user
     const cookies = cookie.parse(event.request.headers.get('cookie') || '');
     const token = cookies.token;
     if (!token) {
@@ -17,21 +18,20 @@ export async function GET(event: RequestEvent) {
         return new Response(JSON.stringify({ message: userIdResponse.message, status: userIdResponse.status }), { status: userIdResponse.status });
     }
     const User_ID = userIdResponse.userId;
-
     const userResponse = await dbGetUser(User_ID);
     if (userResponse.status !== 200 || !userResponse.user) {
         return new Response(JSON.stringify({ message: userResponse.message, status: userResponse.status }), { status: userResponse.status });
     }
     const user = userResponse.user;
 
+    // Get achievements
     const achievementsResponse = await calculateAchievements(User_ID);
     if (achievementsResponse.status !== 200) {
         return new Response(JSON.stringify({ message: achievementsResponse.message, status: achievementsResponse.status }), { status: achievementsResponse.status });
     }
     const achievements = achievementsResponse.achievements;
 
-
-
+    // Send profile with achievements
     return new Response(JSON.stringify({
         userId: user.User_ID,
         email: user.Email,
@@ -41,6 +41,7 @@ export async function GET(event: RequestEvent) {
 }
 
 export async function PUT(event: RequestEvent) {
+    // Authenticate and get user ID
     const body = await event.request.json();
     const cookies = cookie.parse(event.request.headers.get('cookie') || '');
     const token = cookies.token;
@@ -53,6 +54,7 @@ export async function PUT(event: RequestEvent) {
     }
     const User_ID = userIdResponse.userId;
 
+    // Update user email if in body
     if (body.email) {
         const emailResponse = await dbUpdateEmail(body.email, User_ID);
         if (!emailResponse.success) {
@@ -60,6 +62,7 @@ export async function PUT(event: RequestEvent) {
         }
     }
 
+    // Update user name if in body
     if (body.name) {
         const nameResponse = await dbUpdateName(body.name, User_ID);
         if (!nameResponse.success) {
@@ -67,6 +70,7 @@ export async function PUT(event: RequestEvent) {
         }
     }
 
+    // Update user password if in body
     if (body.password) {
         const passwordResponse = await dbUpdatePassword(body.password, User_ID);
         if (passwordResponse.success) {
@@ -81,5 +85,6 @@ export async function PUT(event: RequestEvent) {
         }
     }
 
+    // Send success message
     return new Response(JSON.stringify({ message: 'Profile updated successfully', status: 200 }), { status: 200 });
 }

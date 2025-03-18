@@ -13,12 +13,13 @@ async function uniqueEmail(email: string) {
     return user === null;
 }
 
+// Function to validate an email address using a regular expression.
 async function validateEmail(email: string) {
-
     const re: RegExp = /^[\w-\.+]+@([\w-]+\.)+[\w-]{2,4}$/;
     return re.test(email);
 }
 
+// Function to enforce password complexity rules.
 function validatePassword(password: string) {
     if (password.length < 8) {
         return false;
@@ -32,6 +33,7 @@ function validatePassword(password: string) {
     return true;
 }
 
+// Function to enforce name complexity rules.
 function validateName(name: string) {
 
     if (name.length < 2) {
@@ -92,6 +94,7 @@ export default async function dbCreateUser(email: string, password: string, name
         }
     }
 
+    // Ensure password meets requirements
     if (!validatePassword(password)) {
         return {
             userId: null,
@@ -100,6 +103,7 @@ export default async function dbCreateUser(email: string, password: string, name
         }
     }
 
+    // Ensure name meets requirements
     if (!validateName(name)) {
         return {
             userId: null,

@@ -1,3 +1,11 @@
-#TODO - Write Readme
+# SEPPTIC
 
-This readme should contain a brief description of our project and links to the remainder of our documentation.
+The Social Engineering Practice Platform for Teaching Information Compromise
+
+![SEPPTIC Homepage](Docs/Media/homepage.png)
+
+## What is SEPPTIC?
+
+## Documentation
+
+## Installation

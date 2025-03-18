@@ -1,36 +1,35 @@
 ```mermaid
 erDiagram
     User {
-        userId int PK
-        email string
-        password string
-        name string
+        User_ID int PK
+        Email varchar
+        Password varchar
+        Name varchar
     }
     Session {
-        sessionId int PK
-        token string
-        expiration datetime
-        userId int FK
+        Token varchar PK
+        Expiration date
+        User_ID int FK
     }
     Intel {
-        intelId int PK
-        campaignId int
-        characterId int
-        intelId int
-        userId int FK
+        Intel_Record_ID int PK
+        Intel_ID int
+        Campaign_ID int
+        Character_ID int
+        User_ID int FK
     }
     Conversation {
-        conversationId int PK
-        userId int FK
-        campaignId int
-        characterId int
+        Conversation_ID int PK
+        User_ID int FK
+        Campaign_ID int
+        Character_ID int
     }
     Message {
-        messageId int PK
-        conversationId int FK
-        userSent bool
-        message string
-        timestamp datetime
+        Message_ID int PK
+        Conversation_ID int FK
+        User_Sent tinyint
+        Message text
+        Timestamp datetime
     }
 
     User ||--o{ Session : "has"

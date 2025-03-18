@@ -7,10 +7,7 @@ SEPPTIC
 ├── .gitignore
 ├── Campaign Definitions
 │   ├── 1.json
-│   ├── CampaignBrief.md
 │   ├── Harvesta.json
-│   ├── Harvesta.old.json
-│   ├── Prompts.md
 │   └── Story.drawio
 ├── Dockerfile
 ├── Docs
@@ -30,12 +27,8 @@ SEPPTIC
 │       ├── DatabaseInit.sql
 │       └── SEPPTIC.postman_collection.json
 ├── Tests
-│   ├── +server.ts
 │   ├── LoadTest.py
-│   ├── Script Template.py
-│   ├── User Testing Survey.md
-│   ├── readme.md
-│   ├── requirements.txt
+│   └── requirements.txt
 ├── docker-compose.yml
 ├── readme.md
 └── sepptic
@@ -144,44 +137,37 @@ SEPPTIC
     │   │       │   └── +page.svelte
     │   │       └── learn
     │   │           └── +page.svelte
-    │   ├── server
-    │   │   ├── campaigns
-    │   │   │   └── 2.json
-    │   │   └── utils
-    │   │       ├── aiSendMessage.ts
-    │   │       ├── calculateAchievements.ts
-    │   │       ├── crypto.ts
-    │   │       ├── dbAddIntel.ts
-    │   │       ├── dbAuthUser.ts
-    │   │       ├── dbCreateConversation.ts
-    │   │       ├── dbCreateMessage.ts
-    │   │       ├── dbCreateSession.ts
-    │   │       ├── dbCreateUser.ts
-    │   │       ├── dbDeleteSession.ts
-    │   │       ├── dbGetConversation.ts
-    │   │       ├── dbGetIntel.ts
-    │   │       ├── dbGetMessages.ts
-    │   │       ├── dbGetUser.ts
-    │   │       ├── dbUpdateUser.ts
-    │   │       ├── filterCharacters.ts
-    │   │       ├── getUserId.ts
-    │   │       ├── getUserIdFromToken.ts
-    │   │       ├── jsonGetCampaigns.ts
-    │   │       ├── types
-    │   │       │   ├── aiApi.ts
-    │   │       │   ├── apiRequests.ts
-    │   │       │   ├── campaign.ts
-    │   │       │   ├── dbResults.ts
-    │   │       │   └── functionResults.ts
-    │   │       ├── validateCharacter.ts
-    │   │       └── validateProgress.ts
-    │   └── tests
-    │       ├── test-dbAddIntel.ts
-    │       ├── test-dbAuthUser.ts
-    │       ├── test-dbCreateSession.ts
-    │       ├── test-dbCreateUser.ts
-    │       ├── test-dbUpdateUser.ts
-    │       └── test-getUserIdFromToken.ts
+    │   └── server
+    │       ├── campaigns
+    │       │   └── 2.json
+    │       └── utils
+    │           ├── aiSendMessage.ts
+    │           ├── calculateAchievements.ts
+    │           ├── crypto.ts
+    │           ├── dbAddIntel.ts
+    │           ├── dbAuthUser.ts
+    │           ├── dbCreateConversation.ts
+    │           ├── dbCreateMessage.ts
+    │           ├── dbCreateSession.ts
+    │           ├── dbCreateUser.ts
+    │           ├── dbDeleteSession.ts
+    │           ├── dbGetConversation.ts
+    │           ├── dbGetIntel.ts
+    │           ├── dbGetMessages.ts
+    │           ├── dbGetUser.ts
+    │           ├── dbUpdateUser.ts
+    │           ├── filterCharacters.ts
+    │           ├── getUserId.ts
+    │           ├── getUserIdFromToken.ts
+    │           ├── jsonGetCampaigns.ts
+    │           ├── types
+    │           │   ├── aiApi.ts
+    │           │   ├── apiRequests.ts
+    │           │   ├── campaign.ts
+    │           │   ├── dbResults.ts
+    │           │   └── functionResults.ts
+    │           ├── validateCharacter.ts
+    │           └── validateProgress.ts
     ├── static
     │   ├── AlbertTay.jpg
     │   ├── AnnGunnAvatar.jpg
@@ -207,8 +193,6 @@ SEPPTIC
     │   └── favicon.png
     ├── svelte.config.js
     ├── tailwind.config.ts
-    ├── tests
-    │   └── test.ts
     ├── tsconfig.json
     └── vite.config.ts
  ```

@@ -90,68 +90,161 @@ Request Body:
     "password": "string"
 }
 ```
+Response Body:
+```json
+{
+    "message": "string",
+    "status": 200
+}
+```
 
 ## /progress
 ### GET
-- Description: Get user progress
-- Request:
-    - headers:
-        - CampaignID: int (Optional, required if CharacterID is provided)
-        - CharacterID: int (Optional)
-- Response:
-    - body:
-        - progress: json list
-            - campaign: int
-            - character: int
-            - intel: int
-        - achievements: json list
-            - id: int
-            - campaign: int
-            - name: string
-            - description: string
-            - image: string
+**Description**: Get user progress
+
+Response Body:
+```json
+{
+    "intel": [
+        {
+            "Intel_Record_ID": 1,
+            "Campaign_ID": 1,
+            "Character_ID": 1,
+            "Intel_ID": 1,
+            "User_ID": 1,
+        }
+    ],
+    "intelByCampaign": {
+        "1": [
+            {
+                "Intel_Record_ID": 1,
+                "Campaign_ID": 1,
+                "Character_ID": 1,
+                "Intel_ID": 1,
+                "User_ID": 1,
+            }
+        ]
+    },
+    "achievements": [
+        {
+            "ID": 1,
+            "Campaign_ID": 1,
+            "Name": "string",
+            "Description": "string",
+            "Image": "string"
+        }
+    ]
+}
+```
 
 ### POST
-- Description: Update user progress
-- Request:
-    - body:
-        - progress: json
-            - campaign: int
-            - character: int
-            - intel: int
+**Description**: Update user progress
+
+Request Body:
+```json
+{
+    "campaignId": 1,
+    "characterId": 1,
+    "intelId": 1
+}
+```
+
+Response Body:
+```json
+{
+    "message": "string",
+    "status": 200
+}
+```
+
+## /quiz
+### POST
+**Description**: Submit a quiz answer. Updates user progress if correct.
+
+Request Body:
+```json
+{
+    "campaignId": 1,
+    "characterId": 1,
+    "intelId": 1,
+    "userAnswer": "string"
+}
+```
+Response Body:
+```json
+{
+    "message": "string",
+    "status": 200
+}
+```
 
 ## /campaigns/[campaignId]
 ### GET
-- Description: Get a campaign
-- Response:
-    - body:
-        - campaign: json
-            - id: int
-            - name: string
-            - description: string
-            - image: string
-            - characters: json list
-                - id: int
-                - name: string
-                - image: string
-                - description: string
-                - progress: int
-                - intel: int list
-            - briefingVideo: string
-            - successVideo: string
-            - failureVideo: string
-            - website: string
+**Description**: Get a full campaign
+```json
+{
+    "status": 200,
+    "id": 1,
+    "data": {
+        "Campaign_Information": {
+            "Name": "string",
+            "Description": "string",
+            "Image": "string",
+            "Website": "string",
+            "Briefing_Video": "string",
+            "Success_Video": "string",
+            "Failure_Video": "string",
+            "Total_Intel": 1
+        },
+        "Characters": [
+            {
+                "ID": 1,
+                "Name": "string",
+                "Title": "string",
+                "Image": "string",
+                "Prompt": "string",
+                "Intel": [
+                    {
+                        "Intel_ID": 1,
+                        "Intel_Description": "string",
+                        "Unlocks_Character_ID": 1,
+                        "Quiz": "string",
+                        "Answer": "string"
+                    }
+                ],
+                "Total_Intel": 1
+            }
+        ],
+        "Achievements": [
+            {
+                "ID": 1,
+                "Name": "string",
+                "Description": "string",
+                "Image": "string",
+                "Intels": [
+                    1
+                ]
+            }
+        ]
+    }
+}
+```
 
 ## /campaigns
 ### GET
-- Description: Get all campaigns
-- Request:
-- Response:
-    - campaigns:
-        - id: int
-        - name: string
-        - description: string
-        - image: string
+**Description**: Get a brief of all campaigns
+
+Response Body:
+```json
+[
+    {
+        "id": 1,
+        "name": "string",
+        "description": "string",
+        "image": "string"
+    }
+]
+```
 
 ## /conversation
 ### GET

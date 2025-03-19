@@ -1,53 +1,98 @@
-# /auth - Done!
-## POST
-- Description: Authenticate user
-- Request:
-    - body:
-        - email: string
-        - password: string
-- Response:
-    - body:
-        - token: string
-        - sessionId: int
-        - message: string
+# API Endpoints
 
-## DELETE
-- Description: Logout user
-- Request:
-- Response:
-    - body:
-        - message: string
+The following is a list of API endpionts, their methods, what they take as input, and what they return. All endpoints are after /api/. A [Postman definition](../Development%20Resources/SEPPTIC.postman_collection.json) of these endpoints is also available.
 
-# /register - Done!
-## POST
-- Description: Register user
-- Request:
-    - body:
-        - name: string
-        - email: string
-        - password: string
+Authentication is done using tokens stored in the cookies. The token is set when the user logs in, is unset when the user logs out, and is automatically sent with any requests to the API.
 
-# /profile - Done!
-## GET
-- Description: Get user profile
-- Request:
-- Response:
-    - body:
-        - userId: int
-        - name: string
-        - email: string
-        - achievements: int list
+## /auth
+### POST
+**Description**: Log in user. Response on successful login saves a token in the cookies.
 
-## PUT
-- Description: Update user profile
-- Request:
-    - body:
-        - name: string
-        - email: string
-        - password: string
+Request Body:
+```json
+{
+    "email": "string",
+    "password": "string"
+}
+```
+Response Body:
+```json
+{
+    "message": "string",
+    "status": 200
+}
+```
 
-# /progress - Done!
-## GET
+### DELETE
+**Description**: Logout user
+
+Response Body:
+```json
+{
+    "message": "string",
+    "status": 200
+}
+```
+
+## /register
+### POST
+**Description**: Register a new user user
+
+Request Body:
+```json
+{
+    "name": "string",
+    "email": "string",
+    "password": "string"
+}
+```
+Response Body:
+```json
+{
+    "userId": 1,
+    "message": "string",
+    "status": 200
+}
+```
+
+## /profile
+### GET
+**Description**: Get user profile
+
+Response Body:
+```json
+{
+    "userId": 1,
+    "email": "string",
+    "name": "string",
+    "achievements": [
+        {
+            "ID": 1,
+            "Campaign_ID": 1,
+            "Name": "string",
+            "Description": "string",
+            "Image": "string"
+        }
+    ]
+}
+```
+
+### PUT
+**Description**: Update user profile
+
+Note: Each parameter is optional, but at least one must be provided.
+
+Request Body:
+```json
+{
+    "name": "string",
+    "email": "string",
+    "password": "string"
+}
+```
+
+## /progress
+### GET
 - Description: Get user progress
 - Request:
     - headers:
@@ -66,7 +111,7 @@
             - description: string
             - image: string
 
-## POST
+### POST
 - Description: Update user progress
 - Request:
     - body:
@@ -75,8 +120,8 @@
             - character: int
             - intel: int
 
-# /campaigns/[campaignId] - Done!
-## GET
+## /campaigns/[campaignId]
+### GET
 - Description: Get a campaign
 - Response:
     - body:
@@ -97,8 +142,8 @@
             - failureVideo: string
             - website: string
 
-# /campaigns - Done!
-## GET
+## /campaigns
+### GET
 - Description: Get all campaigns
 - Request:
 - Response:
@@ -108,8 +153,8 @@
         - description: string
         - image: string
 
-# /conversation - Done!
-## GET
+## /conversation
+### GET
 - Description: Get a conversation
 - Request:
     - body:
@@ -122,7 +167,7 @@
             - content: string
             - timestamp: string
 
-## POST
+### POST
 - Description: Create a conversation if it doesn't exist
 - Request:
     - body:
@@ -132,14 +177,14 @@
     - body:
         - conversationId: int
 
-## DELETE
+### DELETE
 - Description: Delete a conversation
 - Request:
     - body:
         - conversationId: int
 
-# /message
-## POST
+## /message
+### POST
 - Description: Send a message
 - Request:
     - body:

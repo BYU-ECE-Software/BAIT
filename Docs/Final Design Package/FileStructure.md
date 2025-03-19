@@ -1,3 +1,4 @@
+# File Structure
 ```
 SEPPTIC
 ├── .dockerignore

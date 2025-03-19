@@ -248,38 +248,63 @@ Response Body:
 
 ## /conversation
 ### GET
-- Description: Get a conversation
-- Request:
-    - body:
-        - conversationId: int
-- Response:
-    - body:
-        - messages: json list
-            - id: int
-            - sender: string
-            - content: string
-            - timestamp: string
+**Description**: Get a conversation
+
+Request Parameters:
+- characterId: int
+- campaignId: int
+
+Request Example:
+`/api/conversation?characterId=1&campaignId=1`
+
+Response Body:
+```json
+{
+    "status": 200,
+    "message": "string",
+    "messsages": [
+        {
+            "role": "user OR assistant",
+            "content": "string",
+            "timestamp": "2025-01-01T00:00:00.000Z"
+        }
+    ]
+}
+```
 
 ### POST
-- Description: Create a conversation if it doesn't exist
-- Request:
-    - body:
-        - campaignId: int
-        - characterId: int
-- Response:
-    - body:
-        - conversationId: int
+**Description**: Create a conversation if it doesn't exist
 
-### DELETE
-- Description: Delete a conversation
-- Request:
-    - body:
-        - conversationId: int
+Request Body:
+```json
+{
+    "characterId": 1,
+    "campaignId": 1
+}
+```
+
+Response Body:
+```json
+{
+    "conversationId": 1,
+    "message": "string",
+    "status": 200
+}
+```
 
 ## /message
 ### POST
-- Description: Send a message
-- Request:
-    - body:
-        - conversationId: int
-        - content: string
+**Description**: Send a message
+
+Request Body:
+```json
+{
+    "campaignId": 1,
+    "characterId": 1,
+    "message": "string"
+}
+```
+Response Body:
+```
+AI Response
+```

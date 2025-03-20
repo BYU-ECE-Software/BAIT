@@ -1,6 +1,5 @@
 <script lang="ts">
 	import {
-		HarvestaFoodsCard,
 		WasteManagementCard,
 		ComputerChipCoCard,
 		GenericCampaignCard

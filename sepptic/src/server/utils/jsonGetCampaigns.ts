@@ -31,6 +31,7 @@ function getCampaign(fileName: string) {
             id: fileName.split('.')[0],
             name: data.Campaign_Information.Name,
             description: data.Campaign_Information.Description,
+            brief: data.Campaign_Information.Brief,
             image: data.Campaign_Information.Image
         }
         return campaignData;

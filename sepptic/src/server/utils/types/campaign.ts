@@ -3,6 +3,7 @@ export type campaign = {
     Campaign_Information: {
         Name: string;
         Description: string;
+        Brief: string;
         Image: string;
         Website: string;
         Briefing_Video: string;

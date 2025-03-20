@@ -2,6 +2,7 @@
     "Campaign_Information": {
         "Name": "Test Campaign 1",
         "Description": "This is a test campaign",
+        "Brief": "",
         "Image": "https://placehold.co/600x600",
         "Website": "https://www.byu.edu",
         "Briefing_Video": "https://videos.pexels.com/video-files/7295981/7295981-uhd_2732_1440_30fps.mp4",

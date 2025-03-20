@@ -1,3 +1,4 @@
+# Database Entity Relationship Diagram
 ```mermaid
 erDiagram
     User {

@@ -27,4 +27,4 @@ SEPPTIC is an AI-powered platform for teaching social engineering in a safe and 
 
 ![Capstone Team](Docs/Media/team.jpg)
 
-SEPPTIC was created as a Capstone project for Brigham Young University's Cybersecurity program. Team members (from left to right): Ethan Beere, Garrett White, Elliot Delay, Matthew Taylor, Tyler Holland, Zac Hansen, Nicholas Hague, and Dr. Ben Schooley.
+SEPPTIC was created as a Capstone project for Brigham Young University's Cybersecurity program. Team members (from left to right): Ethan Beere, Garrett White, Elliot Delay, Matthew Taylor, Tyler Holland, Zac Hansen, and Nicholas Hague. Coached by Dr. Ben Schooley.

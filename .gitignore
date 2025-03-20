@@ -4,3 +4,5 @@ node_modules
 .vscode/settings.json
 .vscode/settings.json
 Tests/venv/
+.DS_Store
+sepptic/node_modules

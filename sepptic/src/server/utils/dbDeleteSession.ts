@@ -49,7 +49,6 @@ async function deleteSession(token: string) {
     }
 }
 
-
 // Function to delete a session from the database.
 export default async function dbDeleteSession(token: string) {
     const checkResponse = await checkSession(token);
@@ -60,6 +59,7 @@ export default async function dbDeleteSession(token: string) {
     return deleteResponse;
 }
 
+// Function to delete all sessions for a user from the database.
 export async function dbDeleteUserSessions(userId: number) {
     const prisma = new PrismaClient();
     try {

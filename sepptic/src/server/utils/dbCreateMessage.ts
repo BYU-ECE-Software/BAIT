@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 export default async function dbCreateMessages(conversationId: number, userMessage: string, aiMessage: string) {
     const prisma = new PrismaClient();
     try {
+        // Create the user message
         const userMessageStatus = await prisma.message.create({
             data: {
                 Conversation_ID: conversationId,
@@ -11,6 +12,8 @@ export default async function dbCreateMessages(conversationId: number, userMessa
                 Timestamp: new Date().toISOString()
             }
         });
+
+        // Create the AI message
         const aiMessageStatus = await prisma.message.create({
             data: {
             Conversation_ID: conversationId,

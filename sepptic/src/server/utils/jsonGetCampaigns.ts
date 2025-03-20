@@ -2,8 +2,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 import type { campaign } from './types/campaign';
 
-const campaignsDir = './src/server/campaigns';
+const campaignsDir = './src/server/campaigns'; // Directory containing campaign definition files
 
+// Get a list of campaign definition files
 function getCampaignsFiles() {
     try {
         const files = fs.readdirSync(campaignsDir);
@@ -21,6 +22,7 @@ function getCampaignsFiles() {
     }
 };
 
+// Get the basic information for a campaign from its definition file
 function getCampaign(fileName: string) {
     const file = path.join(campaignsDir, fileName);
     try {
@@ -42,6 +44,7 @@ function getCampaign(fileName: string) {
     }
 }
 
+// Get the full campaign data from its definition file
 function getFullCampaign(fileName: string) {
     const file = path.join(campaignsDir, fileName);
     // Make sure the file exists
@@ -69,6 +72,7 @@ function getFullCampaign(fileName: string) {
     }
 }
 
+// Get the list of campaigns
 export function jsonGetCampaigns() {
     const campaignFiles = getCampaignsFiles();
     if (campaignFiles.status !== 200) {
@@ -85,6 +89,7 @@ export function jsonGetCampaigns() {
     }
 }
 
+// Get a full campaign by id
 export function jsonGetCampaign(id: number | string) {
     if (typeof id === 'number') {
         id = id.toString();

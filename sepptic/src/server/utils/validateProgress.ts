@@ -1,4 +1,3 @@
-import { jsonGetCampaign } from './jsonGetCampaigns';
 import { PrismaClient } from "@prisma/client";
 import validateCharacter from './validateCharacter';
 

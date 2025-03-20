@@ -4,7 +4,7 @@ import getUserId from './getUserId';
 import type { dbAuthUserResult } from './types/functionResults';
 import type { dbUser } from './types/dbResults';
 
-// Helper function to get the user
+// Get the user from the database
 async function getUser(userId: number): Promise<dbUser> {
     const prisma = new PrismaClient();
     const user = await prisma.user.findUnique({
@@ -16,9 +16,12 @@ async function getUser(userId: number): Promise<dbUser> {
     return user;
 }
 
-// Main function to authenticate a user
+// Takes in an email and password and returns a result object with the success status, message, status code, and user ID
 export default async function dbAuthUser(email: string, password: string): Promise<dbAuthUserResult> {
+    // Get user id from the email
     const response = await getUserId(email);
+
+    // Ensure that the user exists
     if (!response.userId) {
         return {
             success: false,
@@ -27,7 +30,6 @@ export default async function dbAuthUser(email: string, password: string): Promi
             userId: null
         }
     }
-
     const user = await getUser(response.userId)
     if (!user) {
         return {
@@ -38,6 +40,7 @@ export default async function dbAuthUser(email: string, password: string): Promi
         }
     }
 
+    // Validate the password
     if (!await validatePassword(password, user.Password)) {
         return {
             success: false,
@@ -47,6 +50,7 @@ export default async function dbAuthUser(email: string, password: string): Promi
         }
     }
 
+    // Return true
     return {
         success: true,
         message: 'User authenticated successfully',

@@ -1,7 +1,7 @@
 {
     "Campaign_Information": {
         "Name": "Harvesta Foods",
-        "Description": "Harvesta Foods is a large grocery store chain. They have been teasing a large announcement on their website. Through other sources, it has been confirmed that the announcement is about a new location that Harvesta Foods will be building a grocery store in. You have been hired by a the C-Suite of Harvesta Foods to execute a penetration test on the company. Your goal is to find the location of the new grocery store Harvesta is building.",
+        "Description": "Harvesta Foods has hired you to execute a social engineering penetration test on their corporate headquarters.",
         "Image": "/HarvestaLogo.png",
         "Website": "/harvesta/harvestasite",
         "Briefing_Video": "https://www.youtube.com/embed/f3XOr6FKbzE",

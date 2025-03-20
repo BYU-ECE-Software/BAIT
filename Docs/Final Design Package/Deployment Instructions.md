@@ -92,7 +92,8 @@ Before the GitHub action can be used, a few steps must be taken to set up the re
 
 Name|Description
 ---|---
-DATABASE_URL|The database URL
+DATABASE_URL|The externally accessible database URL
+CONTAINER_DATABASE_URL|The database URL to be used in the container. This may use the DB container name as the hostname.
 GHCR_TOKEN|A GitHub access token that has access to push and pull from GHCR
 OPENAI_API_KEY|An OpenAI API key
 

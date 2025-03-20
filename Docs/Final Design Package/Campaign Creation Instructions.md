@@ -11,6 +11,7 @@ The most important file for creating a new campaign is the campaign JSON file. T
     Campaign_Information: {
         Name: string;
         Description: string;
+        Brief: string;
         Image: string;
         Website: string;
         Briefing_Video: string;
@@ -44,7 +45,10 @@ There is a copy of this file in [`Docs/Development Resources/CampaignDefinition.
 `Campaign_Information` holds general information about the campaign. Most of it is self-explanatory.
 
 ### `Description` 
-Will show in the 'Campaigns' page, as well as under the briefing video on the 'Mission Briefing' page. 
+Will show in the 'Campaigns' page.
+
+### `Brief`
+Will show under the briefing video on the 'Mission Briefing' page. 
 
 ### `Website` 
 Is meant for a fake website made for the company/organization that the user is social engineering, and is meant for general OSINT on said company. It can be left blank if it doesn't fit in the context of the campaign. 

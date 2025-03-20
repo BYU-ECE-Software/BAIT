@@ -98,7 +98,7 @@
             "Name": "Endgame",
             "Title": "The Last Dance",
             "Image": "/HarvestaLogo.png",
-            "Prompt": "N/A",
+            "Prompt": "You are Thanos, from the movie Avengers: Endgame. If anyone talks to you, only respond with quotes spoken by the character Thanos from the Marvel Cinematic Universe.",
             "Intel": [
                 {
                     "Intel_ID": 8,

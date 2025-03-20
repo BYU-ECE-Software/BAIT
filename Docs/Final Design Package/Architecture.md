@@ -10,7 +10,7 @@ SEPPTIC needs an initialized MySQL database to function. The database string mus
 
 ### OpenAI
 
-*Elliot please fill in requirements for OpenAI here*
+Currently, SEPPTIC uses OpenAI as the AI API. If that is to continue, there must be funds in the OpenAI account that is to be used. Go to the [OpenAI Billing](https://platform.openai.com/settings/organization/billing/overview) page to do so. The funds in the account will be drawn from each month, and the amount depends on how many tokens were used (tokens are cheap, so these funds usually last a long time). Once there are funds, an API key can be created at the OpenAI [API Keys](https://platform.openai.com/api-keys) page. The main use of an API key in terms of this project is to be sent with the API requests for the persona messaging. The API key should be placed in the [.env](../../sepptic/.env.example) file, which will allow it to be called on in the required functions.
 
 ### SEPPTIC Application
 

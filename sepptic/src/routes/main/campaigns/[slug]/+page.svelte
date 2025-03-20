@@ -45,7 +45,7 @@
           </p>
 
           <p class="text-sm text-gray-500 dark:text-gray-400">
-              {data.campaign.Campaign_Information.Description}
+              {data.campaign.Campaign_Information.Brief}
           </p>
       </TabItem>
       <TabItem title="Email">
@@ -148,7 +148,7 @@
       </p>
 
       <p class="text-sm text-gray-500 dark:text-gray-400">
-        {data.campaign.Campaign_Information.Description}
+        {data.campaign.Campaign_Information.Brief}
       </p>
 
       <!-- "Dashboard" Tab Content -->

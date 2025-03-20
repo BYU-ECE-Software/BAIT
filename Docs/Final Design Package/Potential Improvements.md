@@ -23,3 +23,4 @@ This file is a list of any improvements that we think would be beneficial to the
 - Clean up messaging page so it's more straight forward. 
 - Tutorial: Add a tutorial video or page that explains what to do after watching the intro video i.e. where to message, what you need to find etc.
 - Timestamps: Add timestamps for all events. Primarily quizzes so there can be data on how long each person takes.
+- Celebration: Add confetti or something when the user finishes the campaign.

@@ -21,4 +21,6 @@ This file is a list of any improvements that we think would be beneficial to the
 - Message button on main dashboard: There is a message button when you click on a persona on the main dashboard page that doesn't work. Would be cool if it either redirected directly to that persona messaging page, or open a popup messenger.
 - VR: Make a VR game so you can do physical attacks like tailgating (Good luck again).
 - Clean up messaging page so it's more straight forward. 
-- Add a tutorial video or page that explains what to do after watching the intro video i.e. where to message, what you need to find etc.
+- Tutorial: Add a tutorial video or page that explains what to do after watching the intro video i.e. where to message, what you need to find etc.
+- Timestamps: Add timestamps for all events. Primarily quizzes so there can be data on how long each person takes.
+- Celebration: Add confetti or something when the user finishes the campaign.

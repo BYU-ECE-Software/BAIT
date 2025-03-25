@@ -90,12 +90,12 @@ Before the GitHub action can be used, a few steps must be taken to set up the re
 4. Click on `Actions`
 5. Set the following secrets:
 
-Name|Description
----|---
-DATABASE_URL|The externally accessible database URL
-CONTAINER_DATABASE_URL|The database URL to be used in the container. This may use the DB container name as the hostname.
-GHCR_TOKEN|A GitHub access token that has access to push and pull from GHCR
-OPENAI_API_KEY|An OpenAI API key
+| Name                   | Description                                                                                       |
+|------------------------|---------------------------------------------------------------------------------------------------|
+| DATABASE_URL           | The externally accessible database URL                                                            |
+| CONTAINER_DATABASE_URL | The database URL to be used in the container. This may use the DB container name as the hostname. |
+| GHCR_TOKEN             | A GitHub access token that has access to push and pull from GHCR                                  |
+| OPENAI_API_KEY         | An OpenAI API key                                                                                 |
 
 #### Setup Actions Runner
 The GitHub action is designed for the actions runner to be the server on which to deploy the application. The following steps must be taken to set up the actions runner:

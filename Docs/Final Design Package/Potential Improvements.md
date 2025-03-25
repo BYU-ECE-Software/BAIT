@@ -5,7 +5,7 @@ This file is a list of any improvements that we think would be beneficial to the
 - Voice interactions: Add a way to have a 'phone call' with the AI. There are some text to speech and voice enabled models in OpenAI. Or, maybe run the users speech through speech to text, then give it to the AI, then convert it using a text to speech, and feed it back to the user.
 - Security character/potential to be caught: Add a persona that is suspicious of social engineering, if you fail to get information right away they kick you out. Or, make every persona like this. Or, an idea that we tried was make a security character, personas can report you to security if they feel you are being suspicious, then you have to social engineer the security persona to let you out.
 - More intuitive UI: An ongoing improvement, but make the AI easier to navigate and find what you are looking for without any other prior knowledge.
-- Survey that is local to the website: Instead of having a Qualtics survey, create a dedicated page on the site that is the survey, responses can be saved in the DB.
+- Survey that is local to the website: Instead of having a Qualtrics survey, create a dedicated page on the site that is the survey, responses can be saved in the DB.
 - More in depth learn page: Explains itself, more explanation into the techniques.
 - Tune current prompts: Make better prompts, more natural, less specific, etc.
 - Add loading icon to messaging between request and response: Add a spinny wheel or something that shows when the site is waiting for a response from the AI. Currently, nothing happens when you click send, and many users will spam the send button, sending multiple empty prompts to the AI. With the loading icon, hopefully users will realize that they don't need to click send again.
@@ -19,7 +19,7 @@ This file is a list of any improvements that we think would be beneficial to the
 - Chat reset: Add a chat reset button, when clicked it will delete all previous prompt to the AI, and cause the AI to forgot all previous conversations. This could help with some of the more stubborn personas that sometimes lock themselves down if one wrong thing is said.
 - More OSINT: Harvesta Foods doesn't have much of an OSINT component, it would be cool to add more of it.
 - Message button on main dashboard: There is a message button when you click on a persona on the main dashboard page that doesn't work. Would be cool if it either redirected directly to that persona messaging page, or open a popup messenger.
-- VR: Make a VR game so you can do physical attacks like tailgaiting (Good luck again).
+- VR: Make a VR game so you can do physical attacks like tailgating (Good luck again).
 - Clean up messaging page so it's more straight forward. 
 - Tutorial: Add a tutorial video or page that explains what to do after watching the intro video i.e. where to message, what you need to find etc.
 - Timestamps: Add timestamps for all events. Primarily quizzes so there can be data on how long each person takes.

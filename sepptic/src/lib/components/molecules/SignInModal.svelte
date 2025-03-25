@@ -33,7 +33,7 @@
     }
 </script>
 
-<Modal bind:open={signFormModal} size="xs" autoclose={false} class="w-full" dismissable={true}>
+<Modal bind:open={signFormModal} size="xs" autoclose={false} class="w-full" dismissable={false}>
     <form onsubmit={handleLogin} class="flex flex-col space-y-6">
         {#if errorMessage}
             <div class="text-red-600 dark:text-red-400 text-sm">{errorMessage}</div>

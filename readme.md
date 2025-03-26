@@ -17,7 +17,8 @@ The Social Engineering Practice Platform for Teaching Information Compromise
 - [API Endpoints](Docs/Final%20Design%20Package/API%20Endpoints.md)
 - [Database Schema](Docs/Final%20Design%20Package/ERD.md)
 
-### Feedback
+### Design and Feedback
+- [Design Requirements](Docs/Final%20Design%20Package/Design%20Requirements.md)
 - [User Feedback](Docs/Final%20Design%20Package/User%20Feedback.md)
 - [Potential Improvements](Docs/Final%20Design%20Package/Potential%20Improvements.md)
 

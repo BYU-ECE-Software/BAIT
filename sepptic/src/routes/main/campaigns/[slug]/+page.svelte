@@ -240,9 +240,6 @@
       <BottomNavItem btnName="Dashboard" on:click={() => selectedTab = 'Dashboard'}>
           <AdjustmentsVerticalOutline class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
       </BottomNavItem>
-      <BottomNavItem btnName="Message" on:click={() => selectedTab = 'Contact'}>
-          <PhoneOutline class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
-      </BottomNavItem>
       <BottomNavItem btnName="Progress" on:click={() => selectedTab = 'Progress'}>
           <UserCircleSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
       </BottomNavItem>

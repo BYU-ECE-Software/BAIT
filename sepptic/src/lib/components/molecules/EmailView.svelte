@@ -91,12 +91,11 @@
 
     function updateMessages() {
         if (thread && thread.messages) {
-            thread.messages = thread.messages.map((message) => {
-                if (message.sender === "You") {
-                    return { ...message, sender: "You" };
-                } else {
-                    return { ...message, sender: thread.contact };
-                }
+            thread.messages = thread.messages.map((message, index) => {
+                return {
+                    ...message,
+                    sender: index % 2 === 0 ? "You" : thread.contact
+                };
             });
         }
     }
@@ -107,9 +106,9 @@
         <h2 class="text-lg font-semibold mb-2">{thread.contact}</h2>
         <div class="overflow-y-auto max-h-[400px] border rounded p-2 bg-gray-50">
             {#if thread.messages && thread.messages.length > 0}
-                {#each thread.messages as message}
-                    <div class="mb-2 p-2 {message.sender === 'You' ? 'text-right bg-blue-100' : 'bg-gray-200'} rounded">
-                        <p class="text-sm"><strong>{message.sender}:</strong> {message.content}</p>
+                {#each thread.messages as message, index}
+                    <div class="mb-2 p-2 {index % 2 === 0 ? 'text-right bg-blue-100' : 'bg-gray-200'} rounded">
+                        <p class="text-sm"><strong>{index % 2 === 0 ? 'You' : thread.contact}:</strong> {message.content}</p>
                         <p class="text-xs text-gray-500">{message.timestamp}</p>
                     </div>
                 {/each}

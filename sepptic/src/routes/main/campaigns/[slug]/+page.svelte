@@ -54,9 +54,6 @@
               {data.campaign.Campaign_Information.Brief}
           </p>
       </TabItem>
-      <TabItem title="Email">
-          <Email messageData={data.messagesByCharacter} campaignId = {data.slug}></Email>
-      </TabItem>
 
       <!-- "Main Dashboard" Tab -->
       <TabItem title="Main Dashboard">
@@ -65,7 +62,7 @@
                 {#each data.campaign.Characters as character, index}
                   <div class="content">
                       <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                          <GenericCharacterCard updateIntel={(updatedCharacterId: number, updatedIntelId: number) => {updateIntel(updatedCharacterId, updatedIntelId)}} character={character} campaignId={data.slug} characterProgress={data.progresses.characters[character.ID]} userIntels = {userIntels[character.ID]} />
+                          <GenericCharacterCard messageData={data.messagesByCharacter} updateIntel={(updatedCharacterId: number, updatedIntelId: number) => {updateIntel(updatedCharacterId, updatedIntelId)}} character={character} campaignId={data.slug} characterProgress={data.progresses.characters[character.ID]} userIntels = {userIntels[character.ID]} />
                       </div>
                   </div>
                 {/each}
@@ -163,7 +160,7 @@
         {#each data.campaign.Characters as character, index}
             <div class="content">
                 <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <GenericCharacterCard updateIntel={(updatedCharacterId: number, updatedIntelId: number) => {updateIntel(updatedCharacterId, updatedIntelId)}} character={character} campaignId={data.slug} characterProgress={data.progresses.characters[character.ID]} userIntels = {userIntels[character.ID]} />
+                    <GenericCharacterCard messageData={data.messagesByCharacter} updateIntel={(updatedCharacterId: number, updatedIntelId: number) => {updateIntel(updatedCharacterId, updatedIntelId)}} character={character} campaignId={data.slug} characterProgress={data.progresses.characters[character.ID]} userIntels = {userIntels[character.ID]} />
                 </div>
             </div>
         {/each}

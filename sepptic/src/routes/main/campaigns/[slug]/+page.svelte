@@ -233,7 +233,7 @@
   {/if}
 
 
-  <BottomNav position="fixed" classInner="grid-cols-4" activeUrl="/" style="bottom-0: left-0 right-0 z-10">
+  <BottomNav position="fixed" classInner="grid-cols-3" activeUrl="/" style="bottom-0: left-0 right-0 z-10">
       <BottomNavItem btnName="Mission" on:click={() => selectedTab = 'Mission'}>
           <WalletSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
       </BottomNavItem>

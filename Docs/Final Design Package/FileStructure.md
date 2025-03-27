@@ -246,20 +246,20 @@ SEPPTIC
     - **prisma** - Contains the Prisma ORM schema.
         - **schema.prisma** - Prisma schema for the database
     - **src** - 
-        - **app.css** - 
-        - **app.d.ts** - 
-        - **app.html** - 
-        - **index.test.ts** - 
-        - **lib** - 
-            - **auth.svelte.ts** - 
-            - **components** - 
-                - **atoms** - 
+        - **app.css** - This file handles CSS package imports for the project
+        - **app.d.ts** - Sveltekit boilerplate
+        - **app.html** - Sveltekit boilerplate for initializing the application
+        - **index.test.ts** - This holds the index for tests for the frontend
+        - **lib** - This file holds the components and style themes for the project
+            - **auth.svelte.ts** - This file stores frontend data for being logged in
+            - **components** - These are all of our ccomponents for the application that are then imported to the +page.svelte files
+                - **atoms** - Granular level components
                     - **CampaignButton.svelte** - 
                     - **Learn.svelte** - 
                     - **QuizSubmission.svelte** - 
                     - **SideBarButton.svelte** - 
                     - **SignIn.svelte** - 
-                - **molecules** - 
+                - **molecules** - Larger components that can be modals or encompass multiple functionalities
                     - **AchievementCard.svelte** - 
                     - **AnnGunnSmallCard.svelte** - 
                     - **CampaignCard.svelte** - 
@@ -288,18 +288,18 @@ SEPPTIC
                     - **TonyFlaggSmallCard.svelte** - 
                     - **WasteManagementCard.svelte** - 
                     - **YoutubeVideoCard.svelte** - 
-                - **organisms** - 
+                - **organisms** - The largest components that combine together multiple components together
                     - **AuthModalSwitcher.svelte** - 
                     - **Dashboard.svelte** - 
                     - **Email.svelte** - 
-            - **index.ts** - 
-            - **themes** - 
+            - **index.ts** - This file handles imports for any files in the lib folder to make it easier to access them in the main project
+            - **themes** - Themes for the project defined for CSS styling
                 - **theme.ts** - 
                 - **themeTypes.ts** - 
-        - **routes** - 
-            - **+layout.server.ts** - 
-            - **+layout.svelte** - 
-            - **+page.svelte** - 
+        - **routes** - The main layout for the project, every +page.svelte file is a route that you can visit in the browser
+            - **+layout.server.ts** - Handles logic for making sure you are authenticated, and keeping data stored in a place so you can access easily across every route (These are in sub-routes as well)
+            - **+layout.svelte** - Handles top level design logic and styling for the entire project (These are in sub-routes as well)
+            - **+page.svelte** - The main page for the route and also the main page that you look at when visiting our site (These are in sub-routes as well)
             - **api** - API routes
                 - **auth** - /api/auth
                     - **+server.ts** - Auth endpoint definitions
@@ -319,10 +319,10 @@ SEPPTIC
                     - **+server.ts** - Quiz endpoint definitions
                 - **register** - /api/register
                     - **+server.ts** - Register endpoint definitions
-            - **harvesta** - 
+            - **harvesta** - Harvesta site that you can visit that represents the company website
                 - **harvestasite** - 
-                    - **+page.svelte** - 
-            - **main** - 
+                    - **+page.svelte** - page for company site
+            - **main** - The main route for campaign info and including sub-routes for about, campaigns, contact, learn
                 - **+layout.svelte** - 
                 - **+page.svelte** - 
                 - **about** - 
@@ -330,13 +330,13 @@ SEPPTIC
                 - **campaigns** - 
                     - **+page.server.ts** - 
                     - **+page.svelte** - 
-                    - **[slug]** - 
-                        - **+layout.svelte** - 
-                        - **+page.server.ts** - 
-                        - **+page.svelte** - 
-                - **contact** - 
+                    - **[slug]** - This is the route that is automatically generate for each campaign that we make based on ID
+                        - **+layout.svelte** - Top level styling/logic
+                        - **+page.server.ts** - Server logic
+                        - **+page.svelte** - Page for the main route for each campaign ID
+                - **contact** - Contact page
                     - **+page.svelte** - 
-                - **learn** - 
+                - **learn** - Learn page
                     - **+page.svelte** - 
         - **server** - Server-side code
             - **campaigns** - Folder to contain serialized campaign definitions
@@ -392,7 +392,7 @@ SEPPTIC
         - **TonyFlaggAvatar.jpg**
         - **WasteManagementLogo.png**
         - **favicon.png**
-    - **svelte.config.js** - 
-    - **tailwind.config.ts** - 
-    - **tsconfig.json** - 
-    - **vite.config.ts** - 
+    - **svelte.config.js** - Boiler plate for running the svelte project
+    - **tailwind.config.ts** - Tailwind config where you can define colors and stylings
+    - **tsconfig.json** - Typescript config file
+    - **vite.config.ts** - Vite config which a dependency for sveltekit

@@ -22,6 +22,7 @@ SEPPTIC
 │   │   ├── Architecture.md
 │   │   ├── Campaign Creation Instructions.md
 │   │   ├── Deployment Instructions.md
+│   │   ├── Design Requirements.md
 │   │   ├── ERD.md
 │   │   ├── File Structure.md
 │   │   ├── Overview.md
@@ -222,6 +223,7 @@ SEPPTIC
         - **Architecture.md** - Documentation of the system architecture and technologies we are using
         - **Campaign Creation Instructions.md** - Instructions for creating additional campaigns
         - **Deployment Instructions.md** - Instructions to build and deploy the application on Docker. Also contains information on GitHub Actions.
+        - **Design Requirements.md** - A list of design requirements for the project
         - **ERD.md** - ERD diagram for database
         - **File Structure.md** - This file
         - **Overview.md** - An overview of the project

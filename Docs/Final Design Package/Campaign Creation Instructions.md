@@ -45,10 +45,10 @@ There is a copy of this file in [`Docs/Development Resources/CampaignDefinition.
 `Campaign_Information` holds general information about the campaign. Most of it is self-explanatory.
 
 ### `Description` 
-Will show in the 'Campaigns' page.
+Will show in the 'Campaigns' page on the title card for the campaign.
 
 ### `Brief`
-Will show under the briefing video on the 'Mission Briefing' page. 
+This will show under the briefing video and should be an explanation of the context of the campaign, like a transcript of the video. 
 
 ### `Website` 
 Is meant for a fake website made for the company/organization that the user is social engineering, and is meant for general OSINT on said company. It can be left blank if it doesn't fit in the context of the campaign. 

@@ -92,6 +92,24 @@ Is the quiz question that the user will be given to prove that they completed so
 ### `Answer` 
 Is the answer that is needed to complete the quiz. Currently, if the answer the user gives contains the text in `Answer` anywhere it will be accepted, but this can be changed to be more strict. 
 
+## Achievements
+The `Achievements` property is where the badges that show in the progress tab are defined. For Harvesta, we only made 2, but future teams can make as many as they please. 
+
+### `ID`
+Is the unique identifier for the achievement.
+
+### `Name`
+Is what will show as the name on the badge.
+
+### `Description`
+Is the description of the achievement, i.e. what the user did to gain it.
+
+### `Image`
+If there is an image that should be displayed as the achievement instead of the basic badge icon, place the path here.
+
+### `Intels`
+This is how the achievement is unlocked currently. An achievement is connected to an `Intel`, and when the quiz for said `Intel` is passed, the achievement is awarded.
+
 #### Images
 All images that are referenced in this file can be stored in [`sepptic/static`](../../sepptic/static/). Images can be stored anywhere, as long as the correct path is used.
 

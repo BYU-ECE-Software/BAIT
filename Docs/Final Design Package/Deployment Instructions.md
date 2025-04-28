@@ -4,6 +4,9 @@ To deploy the SEPPTIC application, you must have access to the GitHub repository
 ## Setting up a database
 The SEPPTIC application requires a mysql database to store user data. The database must be accessible from the application and have the necessary tables created. The database can be initialized with the [Database Initialization Script](../Development%20Resources/DatabaseInit.sql). The database URL must be provided to the application as an environment variable. The database URL should be in the format `mysql://username:password@host:port/sepptic`.
 
+## Setting up OpenAI API Key
+In order for the application to access the OpenAI API, an API key must be provided as an environment variable. The API key can be obtained from the [OpenAI website](https://platform.openai.com/signup). The API key should be provided to the application as an environment variable. The environment variable should be named `OPENAI_API_KEY`.
+
 ## Building the Container
 The following describes how to build the docker container. An existing docker image is available from GHCR and is associated with the GitHub repository.
 

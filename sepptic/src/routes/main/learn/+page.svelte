@@ -1,6 +1,13 @@
 <script>
     import { AccordionItem, Accordion } from 'flowbite-svelte';
   </script>
+
+<h2 class="text-3xl font-bold text-center mb-6 text-gray-800 dark:text-white">
+  Social Engineering Tactics 💻🎭
+</h2>
+<p class="text-center text-gray-500 dark:text-gray-400 mb-8">
+  Click on a tactic to learn how attackers manipulate their way into systems. Starred items might be important for campaigns.
+</p>
   
 <Accordion class="justify-center w-full max-w-4xl mx-auto" activeClass="bg-seppticOrange-600 hover:bg-seppticOrange-700 text-white focus:ring-4 focus:ring-seppticOrange-400 focus:outline-none w-full" inactiveClass="text-gray-500 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800">
 <AccordionItem>

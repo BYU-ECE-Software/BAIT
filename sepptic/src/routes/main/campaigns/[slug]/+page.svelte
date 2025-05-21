@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { AccordionItem, Accordion } from 'flowbite-svelte';
   import { Avatar, Tabs, TabItem, Card, Progressbar, Listgroup, BottomNav, BottomNavItem } from 'flowbite-svelte';
   import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline, PhoneOutline } from 'flowbite-svelte-icons';
   import {GenericVideoCard, YoutubeVideoCard, GenericCharacterCard, HarvestaVideoPlayer, AnnGunnSmallCard, DonDraperSmallCard, ElaraSmallCard, TonyFlaggSmallCard,  AchievementCard, SecurityTeamSmallCard, CampaignButton, Email} from '$lib';
@@ -36,23 +37,36 @@
   <Tabs tabStyle="underline">
 
       <!-- "Mission Briefing" Tab -->
-      <TabItem open title="Mission Briefing">
-          <div style="display: flex; align-items: center;">
-              <ArrowUpRightFromSquareOutline/>
-              <span style="margin-left: 0.5rem;">Click <a href="{data.campaign.Campaign_Information.Website}" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
-          </div>
-          <div style="width: 75vw; margin: auto;">
-              <!-- <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} /> -->
-               <YoutubeVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
-          </div>
-          <p class="text-sm text-gray-500 dark:text-gray-400">
-              <b>Intro Video:</b>
-              Watch the video to learn more about {data.campaign.Campaign_Information.Name}.
-          </p>
+      <TabItem open title="Mission Documents">
+        <div class="w-full max-w-4xl mx-auto">
+            <h4 class="text-black-500 mb-2">Mission Documents</h4>
+            <Accordion class="justify-center" 
+                        activeClass="bg-seppticOrange-600 hover:bg-seppticOrange-700 text-white focus:ring-4 focus:ring-seppticOrange-400 focus:outline-none w-full" 
+                        inactiveClass="text-black-500 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800">
+                    <AccordionItem>
+                        <span slot="header">Pen test onboarding</span>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                            <b>Intro Video:</b>
+                                Watch the video to learn more about not hard coded i like to pee my pants {data.campaign.Campaign_Information.Name}.
+                            </p>
 
-          <p class="text-sm text-gray-500 dark:text-gray-400">
-              {data.campaign.Campaign_Information.Brief}
-          </p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                {data.campaign.Campaign_Information.Brief}
+                            </p>
+                            <div style="width: 75vw; margin: auto;">
+                                <!-- <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} /> -->
+                                <YoutubeVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
+                            </div>
+                    </AccordionItem>
+                    <AccordionItem>
+                        <span slot="header">Harvesta Website</span>
+                        <div style="display: flex; align-items: center;">
+                            <ArrowUpRightFromSquareOutline/>
+                            <span style="margin-left: 0.5rem;">Click <a href="{data.campaign.Campaign_Information.Website}" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
+                        </div>
+                    </AccordionItem>
+                </Accordion>
+            </div>
       </TabItem>
 
       <!-- "Main Dashboard" Tab -->

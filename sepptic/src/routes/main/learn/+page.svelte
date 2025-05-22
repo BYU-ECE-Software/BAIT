@@ -1,6 +1,6 @@
 <script>
     import { AccordionItem, Accordion } from 'flowbite-svelte';
-  </script>
+</script>
 
 <h2 class="text-3xl font-bold text-center mb-6 text-gray-800 dark:text-white">
   Social Engineering Tactics 💻🎭

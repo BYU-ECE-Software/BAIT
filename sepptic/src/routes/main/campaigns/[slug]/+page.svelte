@@ -34,15 +34,15 @@
 <!-- Content to display on screens 1024px wide or larger START-->
 <div class="hidden lg:block">
 
-  <Tabs tabStyle="underline">
+  <Tabs tabStyle="underline" class="bottom-nav-container tabs-container" style="flex-direction: column; display: flex;">
 
       <!-- "Mission Briefing" Tab -->
       <TabItem open title="Mission Documents">
         <div class="w-full max-w-4xl mx-auto">
             <h4 class="text-black-500 mb-2">Mission Documents</h4>
-            <Accordion class="justify-center" 
-                        activeClass="bg-seppticOrange-600 hover:bg-seppticOrange-700 text-white focus:ring-4 focus:ring-seppticOrange-400 focus:outline-none w-full" 
-                        inactiveClass="text-black-500 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800">
+                <Accordion class="justify-center"
+                activeClass="bg-gray-200 hover:bg-gray-300 text-black focus:ring-4 focus:ring-gray-400 focus:outline-none w-full"
+                inactiveClass="text-black-500 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800">
                     <AccordionItem>
                         <span slot="header">Pen test onboarding</span>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -53,8 +53,7 @@
                             <p class="text-sm text-gray-500 dark:text-gray-400">
                                 {data.campaign.Campaign_Information.Brief}
                             </p>
-                            <div style="width: 75vw; margin: auto;">
-                                <!-- <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} /> -->
+                            <div class="w-full max-w-3xl mx-auto">
                                 <YoutubeVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
                             </div>
                     </AccordionItem>
@@ -261,3 +260,16 @@
 
 </div>
 <!-- Content to display on screens 1023px wide or smaller END-->
+
+<style>
+        /* For larger screens, keep the tabs horizontal */
+    @media (min-width: 1024px) {
+    .bottom-nav-container {
+        display: none; /* Hide the vertical tab bar on large screens */
+    }
+    .tabs-container {
+        display: flex;
+        flex-direction: column; /* Tabs should be horizontal on larger screens */
+    }
+    }
+</style>

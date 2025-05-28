@@ -1,8 +1,7 @@
 <script lang="ts">
   import { AccordionItem, Accordion } from 'flowbite-svelte';
-  import { Avatar, Tabs, TabItem, Card, Progressbar, Listgroup, BottomNav, BottomNavItem } from 'flowbite-svelte';
-  import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline, PhoneOutline } from 'flowbite-svelte-icons';
-  import {GenericVideoCard, YoutubeVideoCard, GenericCharacterCard, AchievementCard, SecurityTeamSmallCard, CampaignButton, Email} from '$lib';
+  import { ArrowUpRightFromSquareOutline } from 'flowbite-svelte-icons';
+  import {YoutubeVideoCard} from '$lib';
 
   let activeTab = 'tab1';
   let { data } = $props();

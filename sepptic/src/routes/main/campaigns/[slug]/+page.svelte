@@ -258,9 +258,6 @@
         {/each}
       </div>
 
-  {:else if selectedTab === 'Contact'}
-    <Email messageData={data.messagesByCharacter} campaignId = {data.slug}></Email>
-
       <!-- "Progress" Tab Content -->
   {:else if selectedTab === 'Progress'}
       <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">

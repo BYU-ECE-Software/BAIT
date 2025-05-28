@@ -2,8 +2,9 @@
   import { AccordionItem, Accordion } from 'flowbite-svelte';
   import { writable } from 'svelte/store';
   import { Avatar, Tabs, TabItem, Card, Progressbar, Listgroup, BottomNav, BottomNavItem } from 'flowbite-svelte';
-  import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, HomeOutline, InfoCircleOutline, OpenDoorOutline, MailBoxOutline, BookOpenOutline, UserOutline, HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, AwardOutline, PhoneOutline } from 'flowbite-svelte-icons';
-  import { GenericVideoCard, YoutubeVideoCard, GenericCharacterCard, AchievementCard, SecurityTeamSmallCard, CampaignButton, Email } from '$lib';
+  import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid } from 'flowbite-svelte-icons';
+  import { YoutubeVideoCard, GenericCharacterCard, AchievementCard, Email } from '$lib';
+  import EmailView from '../../../../lib/components/molecules/EmailView.svelte'; // Import EmailView
 
   const activeTab = writable('tab1');
 
@@ -24,7 +25,15 @@
     }
     userIntels[characterId][intelId] = true;
     userIntels = { ...userIntels }; // trigger reactivity
-  }
+    }
+
+    const selectedCharacter = writable(data.campaign.Characters[0]);
+
+    function selectCharacter(character) {
+        console.log("Selected character:", character);
+        selectedCharacter.set({ ...character });
+    }
+
 </script>
 
 <!-- Content to display on screens 1024px wide or larger START-->
@@ -112,23 +121,48 @@
                 </div>
         {/if}
         {#if $activeTab === 'tab2'}
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
-            {#each data.campaign.Characters as character, index}
-                <div class="w-full">
-                <div class="h-[15rem] bg-white border border-gray-300 rounded-xl shadow-md p-4 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700">
+            <div class="flex h-[85vh] border rounded-lg overflow-hidden">
+                
+                <!-- Left: Character List -->
+                <div class="w-1/4 bg-white dark:bg-gray-900 border-r border-gray-300 overflow-y-auto">
+                {#each data.campaign.Characters as character}
+                    <div
+                    on:click={() => selectCharacter(character)}
+                    class="flex items-center px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                    class:selected-character={$selectedCharacter?.ID === character.ID}
+                    >
+                    <img src={character.Image ?? '/placeholder.png'} alt={character.Name} class="w-10 h-10 rounded-full mr-3" />
+                    <span class="text-gray-800 dark:text-gray-200">{character.Name}</span>
+                    </div>
+                {/each}
+                </div>
+
+                <!-- RIGHT: Chat Panel -->
+                <div class="w-3/4 bg-gray-50 dark:bg-gray-800 p-6 overflow-y-auto">
+                    <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">
+                    {$selectedCharacter?.Name}'s Chat
+                    </h2>
+
+                    {#key $selectedCharacter?.ID}
                     <GenericCharacterCard
-                    messageData={data.messagesByCharacter}
-                    updateIntel={(updatedCharacterId: number, updatedIntelId: number) => updateIntel(updatedCharacterId, updatedIntelId)}
-                    character={character}
-                    campaignId={data.slug}
-                    characterProgress={data.progresses.characters[character.ID]}
-                    userIntels={userIntels[character.ID]}
+                        messageData={data.messagesByCharacter}
+                        updateIntel={(updatedCharacterId, updatedIntelId) =>
+                        updateIntel(updatedCharacterId, updatedIntelId)
+                        }
+                        character={$selectedCharacter}
+                        campaignId={data.slug}
+                        characterProgress={data.progresses.characters[$selectedCharacter.ID]}
+                        userIntels={userIntels[$selectedCharacter.ID]}
                     />
+                    {/key}
                 </div>
-                </div>
-            {/each}
             </div>
 
+            <style>
+                .selected-character {
+                background-color: #e5e7eb;
+                }
+            </style>
         {/if}
         {#if $activeTab === 'tab3'}
         <div class="flex space-x-4">

@@ -6,12 +6,10 @@ export { default as Testimonial } from './components/molecules/Testimonial.svelt
 export { default as SignInModal } from './components/molecules/SignInModal.svelte';
 export { default as Register } from './components/molecules/Register.svelte';
 export { default as AuthModalSwitcher } from './components/organisms/AuthModalSwitcher.svelte'
-export { default as HarvestaFoodsCard } from './components/molecules/HarvestaFoodsCard.svelte';
 export { default as WasteManagementCard } from './components/molecules/WasteManagementCard.svelte';
 export { default as ComputerChipCoCard } from './components/molecules/ComputerChipCoCard.svelte';
 export { default as ProgressBar } from './components/molecules/ProgressBar.svelte';
 export { default as Dashboard } from './components/organisms/Dashboard.svelte';
-export { default as HarvestaVideoPlayer } from './components/molecules/HarvestaVideoPlayer.svelte';
 export { default as TermsAndConditions } from './components/molecules/TermsAndConditions.svelte';
 export { default as AchievementCard } from './components/molecules/AchievementCard.svelte';
 export { default as GenericCampaignCard } from './components/molecules/GenericCampaignCard.svelte';

@@ -77,6 +77,76 @@ export async function POST(event: RequestEvent) {
     }
 
     // Return AI response
-    return new Response(aiMessage, { status: 200 });
+    return new Response(
+    JSON.stringify({ content: aiMessage }),
+    {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+    }
+    );
 
+}
+
+export async function GET(event: RequestEvent) {
+  try {
+    // — authenticate —
+    const cookies = cookie.parse(event.request.headers.get('cookie') || '');
+    if (!cookies.token) {
+      return new Response(
+        JSON.stringify({ message: 'Not authenticated' }),
+        { status: 401, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+    const userResp = await getUserIdFromToken(cookies.token);
+    if (!userResp.success || !userResp.userId) {
+      return new Response(
+        JSON.stringify({ message: userResp.message }),
+        { status: userResp.status, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+    const userId = userResp.userId;
+
+    // — parse params —
+    const url         = new URL(event.request.url);
+    const campaignId  = Number(url.searchParams.get('campaignId'));
+    const characterId = Number(url.searchParams.get('characterId'));
+
+    if (isNaN(campaignId) || isNaN(characterId)) {
+      return new Response(
+        JSON.stringify({ message: 'Missing or invalid campaignId/characterId' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // — ensure conversation exists —
+    const convoRes = await dbCreateConversation(userId, campaignId, characterId);
+    if (convoRes.status !== 200 || !convoRes.conversationId) {
+      return new Response(
+        JSON.stringify({ message: 'No conversation found', detail: convoRes }),
+        { status: convoRes.status, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // — fetch messages —
+    const msgsRes = await dbGetMessages(convoRes.conversationId);
+    if (msgsRes.status !== 200 || !msgsRes.messages) {
+      return new Response(
+        JSON.stringify({ message: 'Error fetching messages', detail: msgsRes.message }),
+        { status: msgsRes.status, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // — success →
+    return new Response(
+      JSON.stringify({ messages: msgsRes.messages }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
+
+  } catch (err) {
+    console.error('💥 GET /api/message error', err);
+    return new Response(
+      JSON.stringify({ message: 'Internal server error', error: String(err) }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
 }

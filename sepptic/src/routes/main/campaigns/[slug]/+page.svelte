@@ -1,12 +1,12 @@
 <script lang="ts">
   import { AccordionItem, Accordion } from 'flowbite-svelte';
   import { writable } from 'svelte/store';
-  import { Avatar, Tabs, TabItem, Card, Progressbar, Listgroup, BottomNav, BottomNavItem } from 'flowbite-svelte';
+  import { Avatar, Card, Progressbar, BottomNav, BottomNavItem } from 'flowbite-svelte';
   import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid } from 'flowbite-svelte-icons';
   import { YoutubeVideoCard, GenericCharacterCard, AchievementCard, Email } from '$lib';
-  import EmailView from '../../../../lib/components/molecules/EmailView.svelte'; // Import EmailView
+  import Chat from '../../../../lib/components/molecules/ChatCard.svelte'; // Import EmailView
 
-  const activeTab = writable('tab1');
+    const activeTab = writable('tab1');
 
   function switchTab(tab: string) {
     console.log(`Switching to ${tab}`);
@@ -33,6 +33,32 @@
         console.log("Selected character:", character);
         selectedCharacter.set({ ...character });
     }
+// TEXTING FUNCTIONS
+  function handleMessageSent(contact, newMessage) {
+    // Update message data with the new message
+    if (!messageData[contact]) {
+      messageData[contact] = { id: newMessage.characterId, messages: [] };
+    }
+    messageData[contact].messages.push(newMessage);
+
+    // Update EmailView if it's open
+    if (selectedThread && selectedThread.contact === contact) {
+      selectedThread.messages = [...selectedThread.messages, newMessage];
+    }
+  }
+
+    const initialMessages = data.messagesByCharacter[$selectedCharacter.Name]?.messages.map(m => ({
+        sender: m.role === 'user' ? 'You' : $selectedCharacter.Name,
+        content: m.content,
+        timestamp: m.timestamp
+    })) ?? [];
+
+    let userContacts = [
+    { id: 1, name: 'You' },
+    { id: 2, name: 'Admin' },
+    // …etc
+    ];
+    let fromContactId = userContacts[0].id;
 
 </script>
 
@@ -94,20 +120,23 @@
                     activeClass="bg-gray-200 hover:bg-gray-300 text-black focus:ring-4 focus:ring-gray-400 focus:outline-none w-full"
                     inactiveClass="text-black-500 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800">
                         <AccordionItem>
-                        <span slot="header">Pen test onboarding</span>
+                            <span slot="header">Pen test onboarding</span>
 
-                        <p class="text-sm text-gray-500 dark:text-gray-400">
-                            {data.campaign.Campaign_Information.Brief}
-                        </p>
-                        
-                        <p class="text-sm text-gray-500 dark:text-gray-400">
-                            <b>Intro Video:</b> Watch the video to learn more about {data.campaign.Campaign_Information.Name}.
-                        </p>
-                        <div class="overflow-hidden w-full">
-                            <div class="w-full max-w-full px-2">
-                            <YoutubeVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
+                            <div class="space-y-4">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                {data.campaign.Campaign_Information.Brief}
+                                </p>
+
+                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                <b>Intro Video:</b> Watch the video to learn more about {data.campaign.Campaign_Information.Name}.
+                                </p>
+
+                                <div class="overflow-hidden w-full">
+                                <div class="w-full max-w-full px-2">
+                                    <YoutubeVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
+                                </div>
+                                </div>
                             </div>
-                        </div>
                         </AccordionItem>
 
                         <AccordionItem>
@@ -124,7 +153,7 @@
             <div class="flex h-[85vh] border rounded-lg overflow-hidden">
                 
                 <!-- Left: Character List -->
-                <div class="w-1/4 bg-white dark:bg-gray-900 border-r border-gray-300 overflow-y-auto">
+                <div class="w-1/4 flex-shrink-0 bg-white dark:bg-gray-900 border-r border-gray-300 overflow-y-auto">
                 {#each data.campaign.Characters as character}
                     <div
                     on:click={() => selectCharacter(character)}
@@ -138,25 +167,58 @@
                 </div>
 
                 <!-- RIGHT: Chat Panel -->
-                <div class="w-3/4 bg-gray-50 dark:bg-gray-800 p-6 overflow-y-auto">
-                    <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">
-                    {$selectedCharacter?.Name}'s Chat
-                    </h2>
+                <div class="flex flex-col flex-1 h-full bg-gray-50 dark:bg-gray-800 p-6">
+                    <!-- Header + selectors go here… -->
+                    <div class="flex items-center justify-between mb-4">
+                        <!-- “To:” with avatar and name -->
+                        <div class="flex items-center space-x-3">
+                        <img
+                            src="{$selectedCharacter.Image}"
+                            alt="{$selectedCharacter.Name}"
+                            class="w-10 h-10 rounded-full"
+                        />
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">To:</p>
+                            <p class="text-lg font-semibold text-gray-800 dark:text-white">
+                            {$selectedCharacter?.Name}
+                            </p>
+                        </div>
+                        </div>
 
-                    {#key $selectedCharacter?.ID}
-                    <GenericCharacterCard
-                        messageData={data.messagesByCharacter}
-                        updateIntel={(updatedCharacterId, updatedIntelId) =>
-                        updateIntel(updatedCharacterId, updatedIntelId)
-                        }
-                        character={$selectedCharacter}
-                        campaignId={data.slug}
-                        characterProgress={data.progresses.characters[$selectedCharacter.ID]}
-                        userIntels={userIntels[$selectedCharacter.ID]}
-                    />
-                    {/key}
+                        <!-- “From:” dropdown -->
+                        <div class="flex flex-col">
+                        <label for="from-select" class="text-sm text-gray-500 dark:text-gray-400">
+                            From:
+                        </label>
+                        <select
+                            id="from-select"
+                            bind:value={fromContactId}
+                            class="mt-1 p-1 bg-white dark:bg-gray-700 border border-gray-300 rounded"
+                        >
+                            {#each userContacts as c}
+                            <option value={c.id}>{c.name}</option>
+                            {/each}
+                        </select>
+                        </div>
+                    </div>
+
+                    <!-- Chat area fills all remaining space -->
+                    <div class="flex-grow overflow-y-auto">
+                        {#key $selectedCharacter?.ID}
+                        <Chat
+                            class="h-full"
+                            characterId={$selectedCharacter.ID}
+                            contactName={$selectedCharacter.Name}
+                            campaignId={data.slug}
+                            on:messageSent={e => {
+                            console.log('new message for', e.detail.characterId, e.detail.message);
+                            }}
+                        />
+                        {/key}
+                    </div>
                 </div>
-            </div>
+                </div> 
+
 
             <style>
                 .selected-character {

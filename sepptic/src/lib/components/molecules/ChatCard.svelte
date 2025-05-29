@@ -6,7 +6,7 @@
   export let contactName: string;          // human-readable display name
   export let campaignId: number | string;  // campaign identifier
 
-   let messagesContainer: HTMLDivElement | null = null;
+  let messagesContainer: HTMLDivElement | null = null;
 
   // Whenever Svelte re-renders (e.g. a new message), scroll to bottom
   afterUpdate(() => {
@@ -16,7 +16,7 @@
   });
 
   // — component state —
-  let messages: { sender: string; content: string; timestamp: string }[] = [];
+  let messages: { sender: string; content: string; timestamp: string; isTyping?: boolean }[] = [];
   let replyContent = '';
 
   const dispatch = createEventDispatcher();
@@ -27,12 +27,11 @@
     try {
       const res = await fetch(
         `/api/message?campaignId=${campaignId}&characterId=${characterId}`,
-            { credentials: 'include' }
-        );
-      console.log('GET /api/message status', res.status);  
+        { credentials: 'include' }
+      );
+      console.log('GET /api/message status', res.status);
       if (res.ok) {
         const payload = await res.json();
-        console.log('GET payload', payload);
         const incoming = payload.messages;
         messages = incoming.map(m => ({
           sender: m.role === 'user' ? 'You' : contactName,
@@ -40,7 +39,6 @@
           timestamp: m.timestamp
         }));
       } else if (res.status === 404) {
-        // no history yet → leave messages empty
         console.log('No history found (404)');
       } else {
         console.error('Fetch error:', res.statusText);
@@ -50,7 +48,7 @@
     }
   });
 
-  // — your sendReply function, with the correct names —
+  // — your sendReply function, now with typing indicator —
   async function sendReply() {
     const text = replyContent.trim();
     if (!text) return;
@@ -73,7 +71,7 @@
         credentials: 'include',
         body: JSON.stringify({
           campaignId: Number(campaignId),
-          characterId,      // <-- use the prop, not a stray contactId
+          characterId,
           message: text,
           role: 'user'
         })
@@ -82,12 +80,29 @@
       const payload = await res.json();
       if (res.ok && payload.content) {
         const aiMessage = {
-          sender: contactName,    // <-- use contactName, not contact
+          sender: contactName,
           content: payload.content,
           timestamp: new Date().toISOString()
         };
-        messages = [...messages, aiMessage];
-        dispatch('messageSent', { characterId, message: aiMessage });
+
+        // show typing indicator
+        const typingBubble = {
+          sender: contactName,
+          content: '...',
+          timestamp: new Date().toISOString(),
+          isTyping: true
+        };
+        messages = [...messages, typingBubble];
+
+        // random delay under 4 seconds
+        const delay = Math.random() * 4000;
+        setTimeout(() => {
+          // remove typing bubble
+          messages = messages.filter(msg => msg !== typingBubble);
+          // add actual AI message
+          messages = [...messages, aiMessage];
+          dispatch('messageSent', { characterId, message: aiMessage });
+        }, delay);
       } else {
         console.error('API error:', payload);
       }
@@ -105,6 +120,8 @@
   }
   .messages {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
     overflow-y: auto;
     padding: 1rem;
     border: 1px solid #ccc;
@@ -115,15 +132,22 @@
     margin-bottom: 0.75rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
+    max-width: 70%;
   }
   .message.user {
     align-self: flex-end;
     background: #d0f0fd;
     text-align: right;
+    margin-left: auto;
   }
   .message.ai {
     align-self: flex-start;
     background: #eee;
+    margin-right: auto;
+  }
+  .message.typing {
+    font-style: italic;
+    color: #888;
   }
   .input-area {
     display: flex;
@@ -148,13 +172,16 @@
 </style>
 
 <div class="chat-container">
-  <!-- bind this div to our ref -->
   <div class="messages" bind:this={messagesContainer}>
     {#if messages.length}
       {#each messages as msg}
-        <div class="message {msg.sender === 'You' ? 'user' : 'ai'}">
+        <div class="message {msg.sender === 'You' ? 'user' : 'ai'} {msg.isTyping ? 'typing' : ''}">
           <strong>{msg.sender}:</strong> {msg.content}
-          <div class="text-xs text-gray-500">{new Date(msg.timestamp).toLocaleString()}</div>
+          {#if !msg.isTyping}
+            <div class="text-xs text-gray-500">
+              {new Date(msg.timestamp).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}
+            </div>
+          {/if}
         </div>
       {/each}
     {:else}
@@ -162,7 +189,17 @@
     {/if}
   </div>
   <div class="input-area">
-    <textarea bind:value={replyContent} rows="2" placeholder="Type a message..."></textarea>
+      <textarea
+        bind:value={replyContent}
+        rows="2"
+        placeholder="Type a message..."
+        on:keydown={(e) => {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendReply();
+          }
+      }}
+      ></textarea>
     <button on:click={sendReply}>Send</button>
   </div>
 </div>

@@ -12,7 +12,7 @@
 
 <main >
     <NavBar></NavBar>
-    <div style='margin-bottom: 3rem;'></div>
+    <div style='margin-bottom: 1rem;'></div>
 
     {@render children?.()}
 </main>

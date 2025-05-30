@@ -53,10 +53,19 @@
         timestamp: m.timestamp
     })) ?? [];
 
-    let userContacts = [
-    { id: 1, name: 'You' },
-    { id: 2, name: 'Admin' },
-    // …etc
+    interface Contact {
+        id: number;
+        name: string;
+    }
+
+    // Build once at component initialization
+    const userContacts: Contact[] = [
+        { id: 1, name: 'You' },
+        // then map your Characters into contacts
+        ...data.campaign.Characters.map((c, i) => ({
+        id: i + 2,      // +2 because “You” is id=1
+        name: c.Name
+        }))
     ];
     let fromContactId = userContacts[0].id;
 

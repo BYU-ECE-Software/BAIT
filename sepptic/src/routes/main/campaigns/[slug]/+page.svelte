@@ -219,6 +219,7 @@
                             characterId={$selectedCharacter.ID}
                             contactName={$selectedCharacter.Name}
                             campaignId={data.slug}
+                            sentfrom={c.name}
                             on:messageSent={e => {
                             console.log('new message for', e.detail.characterId, e.detail.message);
                             }}

@@ -1,5 +1,5 @@
 import getUserIdFromToken from '../../../server/utils/getUserIdFromToken';
-import dbCreateConversation from '../../../server/utils/dbCreateConversation';
+import dbCreateConversation from '../../../server/utils/dbCreateConversationtest';
 import dbGetMessages from '../../../server/utils/dbGetMessages';
 import aiSendMessage from '../../../server/utils/aiSendMessage';
 import dbCreateMessages from '../../../server/utils/dbCreateMessage';
@@ -25,9 +25,10 @@ export async function POST(event: RequestEvent) {
     const campaignId = body.campaignId;
     const characterId = body.characterId;
     const message = body.message;
+    const sentfrom = body.sentfrom;
 
     // Create conversation if not exists. Get conversation ID either way.
-    const conversationResult = await dbCreateConversation(userId, campaignId, characterId);
+    const conversationResult = await dbCreateConversation(userId, campaignId, characterId, sentfrom);
     if (conversationResult.status !== 200 || !conversationResult.conversationId) {
         return new Response("Error getting conversation: " + JSON.stringify(conversationResult), { status: conversationResult.status });
     }
@@ -62,6 +63,9 @@ export async function POST(event: RequestEvent) {
             break;
         }
     }
+    prompt += '\n\nYou are being contacted by ';
+    prompt += sentfrom;
+    prompt += ' pretend you are talking to them.';
 
     // Send messages to AI
     const aiResponse = await aiSendMessage(messages, message, prompt);
@@ -110,6 +114,7 @@ export async function GET(event: RequestEvent) {
     const url         = new URL(event.request.url);
     const campaignId  = Number(url.searchParams.get('campaignId'));
     const characterId = Number(url.searchParams.get('characterId'));
+    const sentfrom = String(url.searchParams.get('sentfrom'));
 
     if (isNaN(campaignId) || isNaN(characterId)) {
       return new Response(
@@ -119,7 +124,7 @@ export async function GET(event: RequestEvent) {
     }
 
     // — ensure conversation exists —
-    const convoRes = await dbCreateConversation(userId, campaignId, characterId);
+    const convoRes = await dbCreateConversation(userId, campaignId, characterId, sentfrom);
     if (convoRes.status !== 200 || !convoRes.conversationId) {
       return new Response(
         JSON.stringify({ message: 'No conversation found', detail: convoRes }),

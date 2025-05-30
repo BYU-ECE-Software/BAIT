@@ -14,6 +14,7 @@ model Conversation {
   Character_ID    Int
   User            User      @relation(fields: [User_ID], references: [User_ID], onUpdate: Restrict, map: "Conversation_ibfk_1")
   Message         Message[]
+  sentfrom        String
 
   @@index([User_ID], map: "User_ID")
 }

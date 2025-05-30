@@ -61,7 +61,7 @@
       timestamp: new Date().toISOString()
     };
     messages = [...messages, userMessage];
-    dispatch('messageSent', { characterId, message: userMessage });
+    dispatch('messageSent', { characterId, message: userMessage, sentfrom });
     replyContent = '';
 
     // 2) post to your backend
@@ -95,8 +95,8 @@
         };
         messages = [...messages, typingBubble];
 
-        // random delay under 4 seconds
-        const delay = Math.random() * 4000;
+        // random delay under 3 seconds
+        const delay = Math.random() * 3000;
         setTimeout(() => {
           // remove typing bubble
           messages = messages.filter(msg => msg !== typingBubble);

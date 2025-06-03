@@ -110,9 +110,36 @@
       console.error('Network error sending reply:', err);
     }
   }
+
+  async function startCall() {
+    // Placeholder for call functionality
+    console.log('Starting call...');
+    // Start a new API session
+    try {
+      const response = await fetch('/api/realtime', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // Maybe?
+      }); // Potential architectures here;
+      // I could have this be a POST request including the characterId and campaignId, which then returns a session ID or similar
+      // Or I could have this be a GET request that returns the ephemeral KEY to be used then do another function to start call
+
+      // const data = await response.json();
+      // console.log(data)
+
+      } catch (err) {
+      console.error('Error starting call:', err);
+    }
+  }
 </script>
 
 <style>
+  .call {
+    background: green;
+    color: white;
+  }
   .chat-container {
     display: flex;
     flex-direction: column;
@@ -201,5 +228,6 @@
       }}
       ></textarea>
     <button on:click={sendReply}>Send</button>
+    <button class="call" on:click={startCall}>Call</button>
   </div>
 </div>

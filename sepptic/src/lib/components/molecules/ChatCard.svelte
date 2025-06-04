@@ -121,18 +121,68 @@
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include', // Maybe?
+        body: JSON.stringify({
+          characterId: characterId,
+          campaignId: campaignId,
+          // **Pass prompt info here**
+        })
+        // credentials: 'include', // Maybe?
       }); // Potential architectures here;
       // I could have this be a POST request including the characterId and campaignId, which then returns a session ID or similar
       // Or I could have this be a GET request that returns the ephemeral KEY to be used then do another function to start call
+      const session = await response.json();
+      console.log('Session data:', session);
 
-      // const data = await response.json();
-      // console.log(data)
+      // Handling session data
+      const EPHEMERAL_KEY = session.client_secret.value;
+      
+      // WebRTC peer connection
+      const pc = new RTCPeerConnection();
+      
+      // Set up to play remote audio from the model
+      const audioEl = document.createElement("audio");
+      audioEl.autoplay = true;
+      pc.ontrack = e => audioEl.srcObject = e.streams[0];// Assuming the response contains an ephemeral key
+
+      // Add local audio track for mic input from user
+      const ms = await navigator.mediaDevices.getUserMedia({ audio: true });
+      pc.addTrack(ms.getTracks()[0]);
+
+      // Set data channel for sending and receiving events
+      const dc = pc.createDataChannel("realtime-chat");
+      dc.addEventListener("message", (e) => {
+        // Realtime server appear here!
+        console.log(e);
+      });
+
+      // Start the session using the Session Description Protocol (SDP)
+      const offer = await pc.createOffer();
+      await pc.setLocalDescription(offer);
+
+      const baseUrl = "https://api.openai.com/v1/realtime";
+      const model = "gpt-40-realtime-preview-2025-06-03";
+      const sdpResponse = await fetch(`${baseUrl}?model=${model}`, {
+        method: "POST",
+        body: offer.sdp,
+        headers: {
+          Authorization: `Bearer ${EPHEMERAL_KEY}`,
+          "Content-Type": "application/sdp",
+        }
+      });
+
+      const answer = {
+        type: "answer",
+        sdp: await sdpResponse.text(),
+      };
+      await pc.setRemoteDescription(answer);
+      console.log('Call started successfully');
+
 
       } catch (err) {
       console.error('Error starting call:', err);
     }
   }
+  
 </script>
 
 <style>

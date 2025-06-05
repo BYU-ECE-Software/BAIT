@@ -29,7 +29,7 @@
     <NavBrand href="/">
         <img src="/SEPPTIC.png" class="me-3 h-6 sm:h-9" alt="SEPPTIC logo" />
         <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-seppticRed-600 text-seppticRed-600">
-            SEPPTIC
+            SOCIAL ENGINEERING BYU
         </span>
     </NavBrand>
 

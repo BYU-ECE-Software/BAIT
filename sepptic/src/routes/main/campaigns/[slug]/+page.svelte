@@ -3,7 +3,7 @@
   import { writable } from 'svelte/store';
   import { Avatar, Card, Progressbar, BottomNav, BottomNavItem } from 'flowbite-svelte';
   import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid } from 'flowbite-svelte-icons';
-  import { YoutubeVideoCard, GenericCharacterCard, AchievementCard, Email } from '$lib';
+  import { GenericVideoCard, GenericCharacterCard, AchievementCard } from '$lib';
   import Chat from '../../../../lib/components/molecules/ChatCard.svelte'; // Import EmailView
 
     const activeTab = writable('tab1');
@@ -142,7 +142,7 @@
 
                                 <div class="overflow-hidden w-full">
                                 <div class="w-full max-w-full px-2">
-                                    <YoutubeVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
+                                    <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
                                 </div>
                                 </div>
                             </div>
@@ -328,7 +328,7 @@
       </div>
       <div style="width: 75vw; margin: auto;">
         <!-- <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} /> -->
-         <YoutubeVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
+         <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
     </div>
       <p class="text-sm text-gray-500 dark:text-gray-400">
           <b>Intro Video:</b>

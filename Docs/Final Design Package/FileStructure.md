@@ -67,7 +67,6 @@ SEPPTIC
     │   │   │   │   ├── CampaignCard.svelte
     │   │   │   │   ├── ComputerChipCoCard.svelte
     │   │   │   │   ├── DonDraperSmallCard.svelte
-    │   │   │   │   ├── ElaraSmallCard.svelte
     │   │   │   │   ├── EmailCompose.svelte
     │   │   │   │   ├── EmailHeader.svelte
     │   │   │   │   ├── EmailList.svelte
@@ -89,7 +88,6 @@ SEPPTIC
     │   │   │   │   ├── Testimonial.svelte
     │   │   │   │   ├── TonyFlaggSmallCard.svelte
     │   │   │   │   ├── WasteManagementCard.svelte
-    │   │   │   │   └── YoutubeVideoCard.svelte
     │   │   │   └── organisms
     │   │   │       ├── AuthModalSwitcher.svelte
     │   │   │       ├── Dashboard.svelte

@@ -179,7 +179,7 @@
                         </AccordionItem>
 
                         <AccordionItem>
-                            <span slot="header">Harvesta Website</span>
+                            <span slot="header">Other</span>
                         </AccordionItem>
                     </Accordion>
                 </div>

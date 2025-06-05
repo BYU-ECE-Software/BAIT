@@ -14,7 +14,7 @@ export { default as TermsAndConditions } from './components/molecules/TermsAndCo
 export { default as AchievementCard } from './components/molecules/AchievementCard.svelte';
 export { default as GenericCampaignCard } from './components/molecules/GenericCampaignCard.svelte';
 export { default as GenericVideoCard } from './components/molecules/GenericVideoCard.svelte';
-export { default as GenericCharacterCard } from './components/molecules/GenericCharacterCard.svelte';
+export { default as GenericCharacterCard } from './components/molecules/GenericCharacterCardtest.svelte';
 export { default as EmailView } from './components/molecules/EmailView.svelte';
 export { default as QuizSubmission } from './components/atoms/QuizSubmission.svelte';
 export { default as YoutubeVideoCard } from './components/molecules/YoutubeVideoCard.svelte';

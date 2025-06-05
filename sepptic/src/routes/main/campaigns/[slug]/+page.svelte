@@ -155,6 +155,32 @@
                                 <span style="margin-left: 0.5rem;">Click <a href="{data.campaign.Campaign_Information.Website}" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
                             </div>
                         </AccordionItem>
+
+
+                        <AccordionItem>
+                            <span slot="header">Gathered Intel on Employees</span>
+                            <div class="space-y-4">
+                                <p class="text-sm text-gray-800 dark:text-gray-400">
+                                This is the information that we have been able to gather on the Employees of [Insert Company Name]. Use this info to decide things like who to contact or learn more about the companies hierarchy. We weren't able to find out everything about everyone, so you may need ask around. 
+                                </p>
+                                      <div class="grid grid-cols-3 gap-4 p-4">
+                                        {#each data.campaign.Characters as character, index}
+                                            <div class="content">
+                                                <div class="block bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                                                    <GenericCharacterCard 
+                                                    character={character} 
+                                                    campaignId={data.slug} 
+                                                    />
+                                                </div>
+                                            </div>
+                                        {/each}
+                                    </div>
+                            </div>
+                        </AccordionItem>
+
+                        <AccordionItem>
+                            <span slot="header">Harvesta Website</span>
+                        </AccordionItem>
                     </Accordion>
                 </div>
         {/if}

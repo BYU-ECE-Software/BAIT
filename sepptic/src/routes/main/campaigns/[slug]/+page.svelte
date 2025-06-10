@@ -5,6 +5,7 @@
   import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid } from 'flowbite-svelte-icons';
   import { GenericVideoCard, GenericCharacterCard, AchievementCard } from '$lib';
   import Chat from '../../../../lib/components/molecules/ChatCard.svelte'; // Import EmailView
+  import CTFInputBox from '../../../../lib/components/molecules/CTFInputBox.svelte';
 
     const activeTab = writable('tab1');
 
@@ -68,7 +69,11 @@
         }))
     ];
     let fromContactId = userContacts[0].id;
-
+let userFlag = '';
+function handleFlagSubmit(flagValue) {
+    console.log('Flag entered also its passing:', flagValue);
+    // …do whatever verification or API call you need…
+  }
 </script>
 
 <!-- Content to display on screens 1024px wide or larger START-->
@@ -114,7 +119,7 @@
             <div class="absolute top-0 left-0 w-full h-1 bg-gray-400 rounded-t-md bg-gray-100"></div>
         {/if}
         <div class="flex flex-col">
-            <span class="font-semibold text-md">Progress</span>
+            <span class="font-semibold text-md">Progress dashboard</span>
             <p class="text-xs text-gray-500">Progress Bar and Hints</p>
         </div>
         </button>
@@ -262,55 +267,30 @@
             </style>
         {/if}
         {#if $activeTab === 'tab3'}
-        <div class="flex space-x-4">
-                <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:60vw;">
-                    <Avatar>
-                        <UserCircleOutline />
-                    </Avatar>
-                    <div class="space-y-1 font-medium dark:text-white">
-                        <div>{data.user.name}</div>
-                    </div>
-                </div>
-                {#each data.user.achievements as achievement, index}
-                    {#if achievement.Campaign_ID == data.slug}
-                    <AchievementCard title={achievement.Name} description={achievement.Description}/>
-                    {/if}
-                {/each}
+            <div class="w-full max-w-4xl mx-auto font-semibold space-y-5">
+                <h4 class="text-black-500 mb-2">Progress Dashboard</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                 {data.campaign.Campaign_Information.Brief}
+                </p>
+                
+                <CTFInputBox
+                    bind:flag={userFlag}
+                    placeholder="Write answer here"
+                    question={data.campaign.Campaign_Information.Final_Question}
+                    onSubmit={handleFlagSubmit}
+                />
+
+                <Chat
+                    class="h-full"
+                    characterId=99
+                    contactName="Randy"
+                    campaignId={data.slug}
+                    on:messageSent={e => {
+                    console.log('new message for', e.detail.characterId, e.detail.message);
+                    }}
+                />
+
             </div>
-            Progress
-            <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                <Progressbar progress={data.progresses.campaign} size="h-4" labelInside/>
-            </div>
-            <hr class="my-4">
-            {#each data.campaign.Characters as character, index}
-                <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                    <Avatar>
-                        <img src={character.Image} alt={character.Name} />
-                    </Avatar>
-                    <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
-                        <div>{character.Name}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">{character.Title}</div>
-                    </div>
-                    <div class="space-y-1 font-medium dark:text-white">
-                        {#each character.Intel as intel, index}
-                        {#if userIntels[character.ID][intel.Intel_ID]}
-                            <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                                <div class="flex items-center">
-                                    <BadgeCheckOutline/>
-                                    <p style="padding: 1rem; margin-left: 1rem;">{intel.Intel_Description}</p>
-                                </div>
-                            </div>
-                        {:else}
-                            <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                                <div class="flex items-center">
-                                    <p style="padding: 1rem; margin-left: 1rem;">{intel.Quiz}</p>
-                                </div>
-                            </div>
-                        {/if}
-                        {/each}
-                    </div>
-                </div>
-            {/each}
         {/if}
     </div>
     </div>

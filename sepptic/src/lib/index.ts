@@ -17,4 +17,3 @@ export { default as GenericVideoCard } from './components/molecules/GenericVideo
 export { default as GenericCharacterCard } from './components/molecules/GenericCharacterCard.svelte';
 export { default as EmailView } from './components/molecules/EmailView.svelte';
 export { default as QuizSubmission } from './components/atoms/QuizSubmission.svelte';
-export { default as YoutubeVideoCard } from './components/molecules/YoutubeVideoCard.svelte';

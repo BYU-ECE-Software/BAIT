@@ -1,7 +1,7 @@
 <script lang="ts">
   import { AccordionItem, Accordion } from 'flowbite-svelte';
   import { ArrowUpRightFromSquareOutline } from 'flowbite-svelte-icons';
-  import {YoutubeVideoCard} from '$lib';
+  import {GenericVideoCard} from '$lib';
 
   let activeTab = 'tab1';
   let { data } = $props();
@@ -51,7 +51,7 @@
                                 {data.campaign.Campaign_Information.Brief}
                             </p>
                             <div class="w-full max-w-3xl mx-auto">
-                                <YoutubeVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
+                                <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
                             </div>
                     </AccordionItem>
                     <AccordionItem>

@@ -3,8 +3,9 @@
   import { writable } from 'svelte/store';
   import { Avatar, Card, Progressbar, BottomNav, BottomNavItem } from 'flowbite-svelte';
   import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid } from 'flowbite-svelte-icons';
-  import { YoutubeVideoCard, GenericCharacterCard, AchievementCard, Email } from '$lib';
+  import { GenericVideoCard, GenericCharacterCard, AchievementCard } from '$lib';
   import Chat from '../../../../lib/components/molecules/ChatCard.svelte'; // Import EmailView
+  import CTFInputBox from '../../../../lib/components/molecules/CTFInputBox.svelte';
 
     const activeTab = writable('tab1');
 
@@ -68,7 +69,11 @@
         }))
     ];
     let fromContactId = userContacts[0].id;
-
+let userFlag = '';
+function handleFlagSubmit(flagValue) {
+    console.log('Flag entered also its passing:', flagValue);
+    // …do whatever verification or API call you need…
+  }
 </script>
 
 <!-- Content to display on screens 1024px wide or larger START-->
@@ -114,7 +119,7 @@
             <div class="absolute top-0 left-0 w-full h-1 bg-gray-400 rounded-t-md bg-gray-100"></div>
         {/if}
         <div class="flex flex-col">
-            <span class="font-semibold text-md">Progress</span>
+            <span class="font-semibold text-md">Progress dashboard</span>
             <p class="text-xs text-gray-500">Progress Bar and Hints</p>
         </div>
         </button>
@@ -142,7 +147,7 @@
 
                                 <div class="overflow-hidden w-full">
                                 <div class="w-full max-w-full px-2">
-                                    <YoutubeVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
+                                    <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
                                 </div>
                                 </div>
                             </div>
@@ -155,6 +160,34 @@
                                 <span style="margin-left: 0.5rem;">Click <a href="{data.campaign.Campaign_Information.Website}" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
                             </div>
                         </AccordionItem>
+
+
+                        <AccordionItem>
+                            <span slot="header">Gathered Intel on Employees</span>
+                            <div class="space-y-4">
+                                <p class="text-sm text-gray-800 dark:text-gray-400">
+                                This is the information that we have been able to gather on the Employees of [Insert Company Name]. Use this info to decide things like who to contact or learn more about the companies hierarchy. We weren't able to find out everything about everyone, so you may need ask around. 
+                                </p>
+                                      <div class="grid grid-cols-3 gap-4 p-4">
+                                        {#each data.campaign.Characters as character, index}
+                                        {#if character.ID !== 99}
+                                            <div class="content">
+                                            <div class="block bg-white border border-gray-200 rounded-lg shadow 
+                                                        hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                                                <GenericCharacterCard 
+                                                {character}
+                                                campaignId={data.slug} />
+                                            </div>
+                                            </div>
+                                        {/if}
+                                        {/each}
+                                    </div>
+                            </div>
+                        </AccordionItem>
+
+                        <AccordionItem>
+                            <span slot="header">Other</span>
+                        </AccordionItem>
                     </Accordion>
                 </div>
         {/if}
@@ -164,6 +197,7 @@
                 <!-- Left: Character List -->
                 <div class="w-1/4 flex-shrink-0 bg-white dark:bg-gray-900 border-r border-gray-300 overflow-y-auto">
                 {#each data.campaign.Characters as character}
+                {#if character.ID !== 99}
                     <div
                     on:click={() => selectCharacter(character)}
                     class="flex items-center px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition"
@@ -172,6 +206,7 @@
                     <img src={character.Image ?? '/placeholder.png'} alt={character.Name} class="w-10 h-10 rounded-full mr-3" />
                     <span class="text-gray-800 dark:text-gray-200">{character.Name}</span>
                     </div>
+                {/if}
                 {/each}
                 </div>
 
@@ -236,55 +271,53 @@
             </style>
         {/if}
         {#if $activeTab === 'tab3'}
-        <div class="flex space-x-4">
-                <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:60vw;">
-                    <Avatar>
-                        <UserCircleOutline />
-                    </Avatar>
-                    <div class="space-y-1 font-medium dark:text-white">
-                        <div>{data.user.name}</div>
+            <div class="w-full max-w-4xl mx-auto font-semibold space-y-5">
+                <h4 class="text-black-500 mb-2">Progress Dashboard</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                 {data.campaign.Campaign_Information.Brief}
+                </p>
+                
+                <CTFInputBox
+                    bind:flag={userFlag}
+                    placeholder="Write answer here"
+                    question={data.campaign.Campaign_Information.Final_Question}
+                    onSubmit={handleFlagSubmit}
+                />
+
+                <div class="flex flex-col flex-1 h-full bg-gray-50 dark:bg-gray-800 p-6">
+                    <!-- Header + selectors go here… -->
+                    <div class="flex items-center justify-between mb-4">
+                        <!-- “To:” with avatar and name -->
+                        <div class="flex items-center space-x-3">
+                        <img
+                            src="/Randy.png"
+                            alt="Randy"
+                            class="w-10 h-10 rounded-full"
+                        />
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">To:</p>
+                            <p class="text-lg font-semibold text-gray-800 dark:text-white">
+                            Randy
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat area fills all remaining space -->
+                    <div class="flex-grow overflow-y-auto">
+                        <Chat
+                            class="h-full"
+                            characterId={$selectedCharacter.ID}
+                            contactName={$selectedCharacter.Name}
+                            campaignId={data.slug}
+                            on:messageSent={e => {
+                            console.log('new message for', e.detail.characterId, e.detail.message);
+                            }}
+                        />
                     </div>
                 </div>
-                {#each data.user.achievements as achievement, index}
-                    {#if achievement.Campaign_ID == data.slug}
-                    <AchievementCard title={achievement.Name} description={achievement.Description}/>
-                    {/if}
-                {/each}
+
             </div>
-            Progress
-            <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                <Progressbar progress={data.progresses.campaign} size="h-4" labelInside/>
-            </div>
-            <hr class="my-4">
-            {#each data.campaign.Characters as character, index}
-                <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                    <Avatar>
-                        <img src={character.Image} alt={character.Name} />
-                    </Avatar>
-                    <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
-                        <div>{character.Name}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">{character.Title}</div>
-                    </div>
-                    <div class="space-y-1 font-medium dark:text-white">
-                        {#each character.Intel as intel, index}
-                        {#if userIntels[character.ID][intel.Intel_ID]}
-                            <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                                <div class="flex items-center">
-                                    <BadgeCheckOutline/>
-                                    <p style="padding: 1rem; margin-left: 1rem;">{intel.Intel_Description}</p>
-                                </div>
-                            </div>
-                        {:else}
-                            <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                                <div class="flex items-center">
-                                    <p style="padding: 1rem; margin-left: 1rem;">{intel.Quiz}</p>
-                                </div>
-                            </div>
-                        {/if}
-                        {/each}
-                    </div>
-                </div>
-            {/each}
         {/if}
     </div>
     </div>
@@ -302,7 +335,7 @@
       </div>
       <div style="width: 75vw; margin: auto;">
         <!-- <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} /> -->
-         <YoutubeVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
+         <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
     </div>
       <p class="text-sm text-gray-500 dark:text-gray-400">
           <b>Intro Video:</b>

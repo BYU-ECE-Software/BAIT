@@ -170,14 +170,16 @@ function handleFlagSubmit(flagValue) {
                                 </p>
                                       <div class="grid grid-cols-3 gap-4 p-4">
                                         {#each data.campaign.Characters as character, index}
+                                        {#if character.ID !== 99}
                                             <div class="content">
-                                                <div class="block bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                                                    <GenericCharacterCard 
-                                                    character={character} 
-                                                    campaignId={data.slug} 
-                                                    />
-                                                </div>
+                                            <div class="block bg-white border border-gray-200 rounded-lg shadow 
+                                                        hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                                                <GenericCharacterCard 
+                                                {character}
+                                                campaignId={data.slug} />
                                             </div>
+                                            </div>
+                                        {/if}
                                         {/each}
                                     </div>
                             </div>
@@ -195,6 +197,7 @@ function handleFlagSubmit(flagValue) {
                 <!-- Left: Character List -->
                 <div class="w-1/4 flex-shrink-0 bg-white dark:bg-gray-900 border-r border-gray-300 overflow-y-auto">
                 {#each data.campaign.Characters as character}
+                {#if character.ID !== 99}
                     <div
                     on:click={() => selectCharacter(character)}
                     class="flex items-center px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition"
@@ -203,6 +206,7 @@ function handleFlagSubmit(flagValue) {
                     <img src={character.Image ?? '/placeholder.png'} alt={character.Name} class="w-10 h-10 rounded-full mr-3" />
                     <span class="text-gray-800 dark:text-gray-200">{character.Name}</span>
                     </div>
+                {/if}
                 {/each}
                 </div>
 
@@ -280,15 +284,38 @@ function handleFlagSubmit(flagValue) {
                     onSubmit={handleFlagSubmit}
                 />
 
-                <Chat
-                    class="h-full"
-                    characterId=99
-                    contactName="Randy"
-                    campaignId={data.slug}
-                    on:messageSent={e => {
-                    console.log('new message for', e.detail.characterId, e.detail.message);
-                    }}
-                />
+                <div class="flex flex-col flex-1 h-full bg-gray-50 dark:bg-gray-800 p-6">
+                    <!-- Header + selectors go here… -->
+                    <div class="flex items-center justify-between mb-4">
+                        <!-- “To:” with avatar and name -->
+                        <div class="flex items-center space-x-3">
+                        <img
+                            src="/Randy.png"
+                            alt="Randy"
+                            class="w-10 h-10 rounded-full"
+                        />
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">To:</p>
+                            <p class="text-lg font-semibold text-gray-800 dark:text-white">
+                            Randy
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat area fills all remaining space -->
+                    <div class="flex-grow overflow-y-auto">
+                        <Chat
+                            class="h-full"
+                            characterId={$selectedCharacter.ID}
+                            contactName={$selectedCharacter.Name}
+                            campaignId={data.slug}
+                            on:messageSent={e => {
+                            console.log('new message for', e.detail.characterId, e.detail.message);
+                            }}
+                        />
+                    </div>
+                </div>
 
             </div>
         {/if}

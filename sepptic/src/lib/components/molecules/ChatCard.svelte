@@ -171,7 +171,7 @@
   }
 </style>
 
-<div class="chat-container">
+<div class="chat-container max-h-[300px]">
   <div class="messages" bind:this={messagesContainer}>
     {#if messages.length}
       {#each messages as msg}

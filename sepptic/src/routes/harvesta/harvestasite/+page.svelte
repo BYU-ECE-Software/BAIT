@@ -102,7 +102,7 @@
   }
 
   /* RESPONSIVE BREAKPOINTS */
-  @media (max-width: 1024px) {
+  @media (max-width: 500px) {
     .two-col > div {
       flex: 1 1 100%;
       margin: .5rem 0;

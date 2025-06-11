@@ -307,8 +307,8 @@ function handleFlagSubmit(flagValue) {
                     <div class="flex-grow overflow-y-auto">
                         <Chat
                             class="h-full"
-                            characterId={$selectedCharacter.ID}
-                            contactName={$selectedCharacter.Name}
+                            characterId={99}
+                            contactName={"Randy"}
                             campaignId={data.slug}
                             on:messageSent={e => {
                             console.log('new message for', e.detail.characterId, e.detail.message);

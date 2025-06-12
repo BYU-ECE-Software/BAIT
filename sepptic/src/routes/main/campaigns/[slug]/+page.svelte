@@ -281,8 +281,14 @@
                         </div>
                     {:else if chatOrCall == "call"}
                     <div>
-                        <Call>
-                        </Call>
+                        <Call
+                            class="h-full"
+                            characterId={$selectedCharacter.ID}
+                            contactName={$selectedCharacter.Name}
+                            campaignId={data.slug}
+                            prompt={$selectedCharacter.Prompt}
+                            voice={$selectedCharacter.Voice}
+                        />
                     </div>
                     {/if}   
                 </div>

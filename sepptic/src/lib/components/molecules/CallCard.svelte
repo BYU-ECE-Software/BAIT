@@ -1,116 +1,19 @@
 <script lang="ts">
-  import { createEventDispatcher, onMount, afterUpdate } from 'svelte';
+  import { createEventDispatcher, afterUpdate } from 'svelte';
 	import postcssConfig from '../../../../postcss.config';
 
   // — the only props you need —
   export let characterId: number;          // numeric ID for your API
   export let contactName: string;          // human-readable display name
   export let campaignId: number | string;  // campaign identifier
-
-  let messagesContainer: HTMLDivElement | null = null;
-
-  // Whenever Svelte re-renders (e.g. a new message), scroll to bottom
-  afterUpdate(() => {
-    if (messagesContainer) {
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-  });
+  export let prompt: string; // prompt for the AI model
+  export let voice: string; // Base voice model for the AI
 
   // — component state —
   let messages: { sender: string; content: string; timestamp: string; isTyping?: boolean }[] = [];
   let replyContent = '';
 
   const dispatch = createEventDispatcher();
-
-  // — onMount lives inside the <script>, right after your state & props —
-  onMount(async () => {
-    console.log('🔍 fetching history for', { campaignId, characterId });
-    try {
-      const res = await fetch(
-        `/api/message?campaignId=${campaignId}&characterId=${characterId}`,
-        { credentials: 'include' }
-      );
-      console.log('GET /api/message status', res.status);
-      if (res.ok) {
-        const payload = await res.json();
-        const incoming = payload.messages;
-        messages = incoming.map(m => ({
-          sender: m.role === 'user' ? 'You' : contactName,
-          content: m.content,
-          timestamp: m.timestamp
-        }));
-      } else if (res.status === 404) {
-        console.log('No history found (404)');
-      } else {
-        console.error('Fetch error:', res.statusText);
-      }
-    } catch (err) {
-      console.error('Network error:', err);
-    }
-  });
-
-  // — your sendReply function, now with typing indicator —
-  async function sendReply() {
-    const text = replyContent.trim();
-    if (!text) return;
-
-    // 1) add your own message locally
-    const userMessage = {
-      sender: 'You',
-      content: text,
-      timestamp: new Date().toISOString()
-    };
-    messages = [...messages, userMessage];
-    dispatch('messageSent', { characterId, message: userMessage });
-    replyContent = '';
-
-    // 2) post to your backend
-    try {
-      const res = await fetch('/api/message', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({
-          campaignId: Number(campaignId),
-          characterId,
-          message: text,
-          role: 'user'
-        })
-      });
-
-      const payload = await res.json();
-      if (res.ok && payload.content) {
-        const aiMessage = {
-          sender: contactName,
-          content: payload.content,
-          timestamp: new Date().toISOString()
-        };
-
-        // show typing indicator
-        const typingBubble = {
-          sender: contactName,
-          content: '...',
-          timestamp: new Date().toISOString(),
-          isTyping: true
-        };
-        messages = [...messages, typingBubble];
-
-        // random delay under 4 seconds
-        const delay = Math.random() * 4000;
-        setTimeout(() => {
-          // remove typing bubble
-          messages = messages.filter(msg => msg !== typingBubble);
-          // add actual AI message
-          messages = [...messages, aiMessage];
-          dispatch('messageSent', { characterId, message: aiMessage });
-        }, delay);
-      } else {
-        console.error('API error:', payload);
-      }
-    } catch (err) {
-      console.error('Network error sending reply:', err);
-    }
-  }
 
   // — call management functions —
   let currentCall = 0; // 0 = no call, 1 = call in progress
@@ -133,12 +36,16 @@
         body: JSON.stringify({
           characterId: characterId,
           campaignId: campaignId,
-          // **Pass prompt info here**
+          prompt: prompt,
+          voice: voice
         })
-        // credentials: 'include', // Maybe?
-      }); // Potential architectures here;
-      // I could have this be a POST request including the characterId and campaignId, which then returns a session ID or similar
-      // Or I could have this be a GET request that returns the ephemeral KEY to be used then do another function to start call
+      });
+
+      // Check if the response is ok
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
       const session = await response.json();
       console.log('Session data:', session);
 
@@ -159,9 +66,9 @@
 
       // Set data channel for sending and receiving events
       const dc = pc.createDataChannel("realtime-chat");
-      dc.addEventListener("message", (e) => {
+      dc.addEventListener("message", (event) => {
         // Realtime server appear here!
-        console.log(e);
+        console.log(event);
       });
 
       // Start the session using the Session Description Protocol (SDP)
@@ -186,6 +93,10 @@
       await pc.setRemoteDescription(answer);
       console.log('Call started successfully');
 
+      // Set up transcription connection to Google Cloud Speech-to-Text
+      // const speechToTextAPI = new GoogleCloudSpeechToTextAPI({
+      //   apiKey: process.env.GOOGLE_CLOUD_API_KEY
+      // });
 
       } catch (err) {
       console.error('Error starting call:', err);
@@ -217,18 +128,21 @@
 </script>
 
 <div class="chat-container max-h-[300px]">
-  <div class="input-area">
+  <div class="transcript">
+    <p>The transcript will be recorded here.</p>
+  </div>
+  <div>
     {#if currentCall}
       <div class="flex flex-col gap-2 w-full">
+        <button class="end-call py-2 px-4 rounded" on:click={endCall}>End Phone Call</button>
         <div>
           <p class="text-gray-500">Call in progress...</p>
         </div>
-        <button class="end-call py-2 px-4 rounded" on:click={endCall}>End Phone Call</button>
       </div>
     {:else}
+    <button class="call py-2 px-4 rounded" on:click={startCall}>Start Phone Call</button>
     <div class="flex flex-col gap-2 w-full">
       <p class="text-gray-500">No active call...</p>
-      <button class="call py-2 px-4 rounded" on:click={startCall}>Start Phone Call</button>
     </div>
     {/if}
   </div>
@@ -249,7 +163,8 @@
     flex-direction: column;
     height: 100%;
   }
-  .messages {
+
+  .transcript {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -258,46 +173,5 @@
     border: 1px solid #ccc;
     border-radius: 0.5rem;
     background: #f9f9f9;
-  }
-  .message {
-    margin-bottom: 0.75rem;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    max-width: 70%;
-  }
-  .message.user {
-    align-self: flex-end;
-    background: #d0f0fd;
-    text-align: right;
-    margin-left: auto;
-  }
-  .message.ai {
-    align-self: flex-start;
-    background: #eee;
-    margin-right: auto;
-  }
-  .message.typing {
-    font-style: italic;
-    color: #888;
-  }
-  .input-area {
-    display: flex;
-    padding: 0.5rem 0;
-  }
-  .input-area textarea {
-    flex-grow: 1;
-    resize: none;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 0.25rem;
-  }
-  .input-area button {
-    margin-left: 0.5rem;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.25rem;
-    background: #007acc;
-    color: white;
-    cursor: pointer;
   }
 </style>

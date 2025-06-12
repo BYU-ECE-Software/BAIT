@@ -182,7 +182,7 @@
       console.error('Error starting call:', err);
     }
   }
-
+  
 </script>
 
 <style>
@@ -249,7 +249,7 @@
 </style>
 
 <div class="chat-container max-h-[300px]">
-  <div class="messages" bind:this={messagesContainer}>
+  <!-- <div class="messages" bind:this={messagesContainer}>
     {#if messages.length}
       {#each messages as msg}
         <div class="message {msg.sender === 'You' ? 'user' : 'ai'} {msg.isTyping ? 'typing' : ''}">
@@ -263,20 +263,11 @@
       {/each}
     {:else}
       <p class="text-gray-500">No messages yet.</p>
-    {/if}
+    {/if} -->
+  <div class="transcript">
+    <p class="text-gray-500">Call has not started...</p>
   </div>
-  <div class="input-area">
-      <textarea
-        bind:value={replyContent}
-        rows="2"
-        placeholder="Type a message..."
-        on:keydown={(e) => {
-          if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            sendReply();
-          }
-      }}
-      ></textarea>
-    <button on:click={sendReply}>Send</button>
+  <div>
+    <button on:click={startCall}>Start Phone Call</button>
   </div>
 </div>

@@ -5,9 +5,10 @@
   import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid } from 'flowbite-svelte-icons';
   import { GenericVideoCard, GenericCharacterCard, AchievementCard } from '$lib';
   import Chat from '../../../../lib/components/molecules/ChatCard.svelte'; // Import EmailView
+  import Call from '../../../../lib/components/molecules/CallCard.svelte'; // Import Realtime Call Card
   import CTFInputBox from '../../../../lib/components/molecules/CTFInputBox.svelte';
 
-    const activeTab = writable('tab1');
+  const activeTab = writable('tab1');
 
   function switchTab(tab: string) {
     console.log(`Switching to ${tab}`);
@@ -203,8 +204,13 @@ function handleFlagSubmit(flagValue) {
                     class="flex items-center px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                     class:selected-character={$selectedCharacter?.ID === character.ID}
                     >
+
                     <img src={character.Image ?? '/placeholder.png'} alt={character.Name} class="w-10 h-10 rounded-full mr-3" />
                     <span class="text-gray-800 dark:text-gray-200">{character.Name}</span>
+                    <!--Insert the call and messsage buttons here and add onclicks that adjust a global value that an if/else stmt can use-->
+                    <img src="/message_selected.png"/>
+                    <img src="/call_selected.png"/>
+                    <!-- on:click={functionForConditional} -->
                     </div>
                 {/if}
                 {/each}
@@ -249,6 +255,7 @@ function handleFlagSubmit(flagValue) {
                     <!-- Chat area fills all remaining space -->
                     <div class="flex-grow overflow-y-auto">
                         {#key $selectedCharacter?.ID}
+                    <!-- NOT IMPLEMENTED YET: if the text button is clicked, enter the <Chat card> else if the call button is clicked unter <call></call> -->
                         <Chat
                             class="h-full"
                             characterId={$selectedCharacter.ID}
@@ -259,6 +266,10 @@ function handleFlagSubmit(flagValue) {
                             }}
                         />
                         {/key}
+                    </div>
+                    <div>
+                        <Call>
+                        </Call>
                     </div>
                 </div>
                 </div> 

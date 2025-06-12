@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, onMount, afterUpdate } from 'svelte';
+	import postcssConfig from '../../../../postcss.config';
 
   // — the only props you need —
   export let characterId: number;          // numeric ID for your API
@@ -111,9 +112,17 @@
     }
   }
 
+  // — call management functions —
+  let currentCall = 0; // 0 = no call, 1 = call in progress
+
+  // Declare pc at the component scope so both functions can access it
+  let pc: RTCPeerConnection | null = null;
+  let ms: MediaStream | null = null; // MediaStream for microphone input
+
   async function startCall() {
     // Placeholder for call functionality
     console.log('Starting call...');
+    currentCall = 1; // Set current call state to indicate a call is in progress
     // Start a new API session
     try {
       const response = await fetch('/api/realtime', {
@@ -137,7 +146,7 @@
       const EPHEMERAL_KEY = session.client_secret.value;
       
       // WebRTC peer connection
-      const pc = new RTCPeerConnection();
+      pc = new RTCPeerConnection();
       
       // Set up to play remote audio from the model
       const audioEl = document.createElement("audio");
@@ -145,7 +154,7 @@
       pc.ontrack = e => audioEl.srcObject = e.streams[0];// Assuming the response contains an ephemeral key
 
       // Add local audio track for mic input from user
-      const ms = await navigator.mediaDevices.getUserMedia({ audio: true });
+      ms = await navigator.mediaDevices.getUserMedia({ audio: true });
       pc.addTrack(ms.getTracks()[0]);
 
       // Set data channel for sending and receiving events
@@ -182,10 +191,55 @@
       console.error('Error starting call:', err);
     }
   }
-  
+
+  async function endCall() {
+    // Placeholder for ending call functionality
+    console.log('Ending call...');
+    // Implement logic to end the call session
+    currentCall = 0;
+
+    if (pc) {
+      // Close the peer connection and clean up
+      try {
+        console.log('Closing peer connection...');
+        pc.close(); // Clear the peer connection to OpenAI
+        pc = null; // Clear the peer connection variable
+        console.log('Peer connection closed');
+        await ms?.removeTrack(ms.getTracks()[0]); // Remove the microphone track if it exists
+        ms = null; // Clear the MediaStream
+        console.log('Call ended successfully');
+      } catch (err) {
+        console.error('Error ending call:', err);
+      }
+    }
+  }
+
 </script>
 
+<div class="chat-container max-h-[300px]">
+  <div class="input-area">
+    {#if currentCall}
+      <div class="flex flex-col gap-2 w-full">
+        <div>
+          <p class="text-gray-500">Call in progress...</p>
+        </div>
+        <button class="end-call py-2 px-4 rounded" on:click={endCall}>End Phone Call</button>
+      </div>
+    {:else}
+    <div class="flex flex-col gap-2 w-full">
+      <p class="text-gray-500">No active call...</p>
+      <button class="call py-2 px-4 rounded" on:click={startCall}>Start Phone Call</button>
+    </div>
+    {/if}
+  </div>
+</div>
+
+
 <style>
+  .end-call {
+    background: red;
+    color: white;
+  }
   .call {
     background: green;
     color: white;
@@ -247,27 +301,3 @@
     cursor: pointer;
   }
 </style>
-
-<div class="chat-container max-h-[300px]">
-  <!-- <div class="messages" bind:this={messagesContainer}>
-    {#if messages.length}
-      {#each messages as msg}
-        <div class="message {msg.sender === 'You' ? 'user' : 'ai'} {msg.isTyping ? 'typing' : ''}">
-          <strong>{msg.sender}:</strong> {msg.content}
-          {#if !msg.isTyping}
-            <div class="text-xs text-gray-500">
-              {new Date(msg.timestamp).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}
-            </div>
-          {/if}
-        </div>
-      {/each}
-    {:else}
-      <p class="text-gray-500">No messages yet.</p>
-    {/if} -->
-  <div class="transcript">
-    <p class="text-gray-500">Call has not started...</p>
-  </div>
-  <div>
-    <button on:click={startCall}>Start Phone Call</button>
-  </div>
-</div>

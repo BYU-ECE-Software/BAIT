@@ -70,11 +70,25 @@
         }))
     ];
     let fromContactId = userContacts[0].id;
-let userFlag = '';
-function handleFlagSubmit(flagValue) {
+    let userFlag = '';
+    function handleFlagSubmit(flagValue) {
     console.log('Flag entered also its passing:', flagValue);
     // …do whatever verification or API call you need…
   }
+
+  let chatOrCall = $state("chat"); // Default to chat
+
+  function setCall() {
+    chatOrCall = "call";
+    console.log("Opening call window");
+    console.log(chatOrCall);
+  }
+    function setChat() {
+    chatOrCall = "chat";
+    console.log("Opening chat window");
+    console.log(chatOrCall);
+  }
+  
 </script>
 
 <!-- Content to display on screens 1024px wide or larger START-->
@@ -200,23 +214,20 @@ function handleFlagSubmit(flagValue) {
                 {#each data.campaign.Characters as character}
                 {#if character.ID !== 99}
                     <div
-                    on:click={() => selectCharacter(character)}
-                    class="flex items-center px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                    class="flex items-center px-4 py-3 transition hover:bg-gray-100 dark:hover:bg-gray-700"
                     class:selected-character={$selectedCharacter?.ID === character.ID}
                     >
-
                     <img src={character.Image ?? '/placeholder.png'} alt={character.Name} class="w-10 h-10 rounded-full mr-3" />
                     <span class="text-gray-800 dark:text-gray-200">{character.Name}</span>
                     <!--Insert the call and messsage buttons here and add onclicks that adjust a global value that an if/else stmt can use-->
-                    <img src="/message_selected.png"/>
-                    <img src="/call_selected.png"/>
-                    <!-- on:click={functionForConditional} -->
+                    <img class="cursor-pointer" on:click={() => { setChat(); selectCharacter(character); }} src="/message_selected.png"/>
+                    <img class="cursor-pointer" on:click={() => { setCall(); selectCharacter(character); }} src="/call_selected.png"/>
                     </div>
                 {/if}
                 {/each}
                 </div>
 
-                <!-- RIGHT: Chat Panel -->
+                <!-- RIGHT: Chat Panel --> 
                 <div class="flex flex-col flex-1 h-full bg-gray-50 dark:bg-gray-800 p-6">
                     <!-- Header + selectors go here… -->
                     <div class="flex items-center justify-between mb-4">
@@ -253,26 +264,29 @@ function handleFlagSubmit(flagValue) {
                     </div>
 
                     <!-- Chat area fills all remaining space -->
-                    <div class="flex-grow overflow-y-auto">
-                        {#key $selectedCharacter?.ID}
-                    <!-- NOT IMPLEMENTED YET: if the text button is clicked, enter the <Chat card> else if the call button is clicked unter <call></call> -->
-                        <Chat
-                            class="h-full"
-                            characterId={$selectedCharacter.ID}
-                            contactName={$selectedCharacter.Name}
-                            campaignId={data.slug}
-                            on:messageSent={e => {
-                            console.log('new message for', e.detail.characterId, e.detail.message);
-                            }}
-                        />
-                        {/key}
-                    </div>
+                    <!--Depending on which button is selected chat or call will fill space-->
+                    {#if chatOrCall == "chat"}
+                        <div class="flex-grow overflow-y-auto">
+                            {#key $selectedCharacter?.ID}
+                            <Chat
+                                class="h-full"
+                                characterId={$selectedCharacter.ID}
+                                contactName={$selectedCharacter.Name}
+                                campaignId={data.slug}
+                                on:messageSent={e => {
+                                console.log('new message for', e.detail.characterId, e.detail.message);
+                                }}
+                            />
+                            {/key}
+                        </div>
+                    {:else if chatOrCall == "call"}
                     <div>
                         <Call>
                         </Call>
                     </div>
+                    {/if}   
                 </div>
-                </div> 
+            </div>
 
 
             <style>

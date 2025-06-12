@@ -11,7 +11,7 @@ export async function POST() {
     },
     body: JSON.stringify({
       model: "gpt-4o-realtime-preview-2025-06-03",
-      voice: "verse",
+      voice: "ash",
       instructions: "This is a placeholder prompt, please act like a goofy clown ChatGPT"
     }),
   });

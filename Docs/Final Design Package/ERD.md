@@ -32,9 +32,16 @@ erDiagram
         Message text
         Timestamp datetime
     }
+    Transcription {
+        ID int PK
+        Transcript text
+        Timestamp datetime
+        Conversation_ID FK
+    }
 
     User ||--o{ Session : "has"
     User }o--o{ Intel : "knows"
     User ||--o{ Conversation : "participates"
     Conversation ||--o{ Message : "contains"
+    Conversation ||--o{ Transcription : "contains"
 ```

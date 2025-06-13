@@ -36,7 +36,7 @@ erDiagram
         ID int PK
         Transcript text
         Timestamp datetime
-        Conversation_ID FK
+        Conversation_ID int FK
     }
 
     User ||--o{ Session : "has"

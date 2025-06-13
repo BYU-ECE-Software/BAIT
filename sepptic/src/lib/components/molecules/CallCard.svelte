@@ -22,6 +22,8 @@
   let pc: RTCPeerConnection | null = null;
   let ms: MediaStream | null = null; // MediaStream for microphone input
 
+  let transcript: string[] = [];
+
   async function startCall() {
     // Placeholder for call functionality
     console.log('Starting call...');
@@ -67,8 +69,16 @@
       // Set data channel for sending and receiving events
       const dc = pc.createDataChannel("realtime-chat");
       dc.addEventListener("message", (event) => {
-        // Realtime server appear here!
+        // Realtime server calls and responses logged in console here
         console.log(event);
+        // Records AI output to transcript array to be use on DOM and stored when conversation ends
+        const data = JSON.parse(event.data);
+        if (data.type === "response.audio_transcript.done"){
+          console.log("Identified response end");
+          let output = data.transcript;
+          transcript = [...transcript, output];
+          console.log("Current transcript array", transcript)
+        }
       });
 
       // Start the session using the Session Description Protocol (SDP)
@@ -93,11 +103,6 @@
       await pc.setRemoteDescription(answer);
       console.log('Call started successfully');
 
-      // Set up transcription connection to Google Cloud Speech-to-Text
-      // const speechToTextAPI = new GoogleCloudSpeechToTextAPI({
-      //   apiKey: process.env.GOOGLE_CLOUD_API_KEY
-      // });
-
       } catch (err) {
       console.error('Error starting call:', err);
     }
@@ -108,6 +113,12 @@
     console.log('Ending call...');
     // Implement logic to end the call session
     currentCall = 0;
+
+    try {
+      // Filler for code that will store transcript array in database
+    } catch (err) {
+      console.error("Error storing transcript in database:", err);
+    }
 
     if (pc) {
       // Close the peer connection and clean up
@@ -128,8 +139,11 @@
 </script>
 
 <div class="chat-container max-h-[300px]">
-  <div class="transcript">
-    <p>The transcript will be recorded here.</p>
+  <div class="transcript m-5">
+    {#each transcript as response}
+    <p class="messageai">{response}</p>
+    <br>
+    {/each}
   </div>
   <div>
     {#if currentCall}
@@ -140,10 +154,12 @@
         </div>
       </div>
     {:else}
-    <button class="call py-2 px-4 rounded" on:click={startCall}>Start Phone Call</button>
-    <div class="flex flex-col gap-2 w-full">
-      <p class="text-gray-500">No active call...</p>
-    </div>
+      <div class="flex flex-col gap-2 w-full">
+        <button class="start-call py-2 px-4 rounded" on:click={startCall}>Start Phone Call</button>
+        <div>
+          <p class="text-gray-500">No active call...</p>
+        </div>
+      </div>
     {/if}
   </div>
 </div>
@@ -154,7 +170,7 @@
     background: red;
     color: white;
   }
-  .call {
+  .start-call {
     background: green;
     color: white;
   }
@@ -173,5 +189,10 @@
     border: 1px solid #ccc;
     border-radius: 0.5rem;
     background: #f9f9f9;
+  }
+  .messageai {
+    align-self: flex-start;
+    background: #eee;
+    margin-right: auto;
   }
 </style>

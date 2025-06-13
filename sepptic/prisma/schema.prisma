@@ -12,6 +12,7 @@ model Conversation {
   User_ID         Int
   Campaign_ID     Int
   Character_ID    Int
+  Realtime        Boolean // Used to distinguish calls from texts
   User            User      @relation(fields: [User_ID], references: [User_ID], onUpdate: Restrict, map: "Conversation_ibfk_1")
   Message         Message[]
 
@@ -36,6 +37,16 @@ model Message {
   Timestamp       DateTime
   Conversation_ID Int
   Conversation    Conversation @relation(fields: [Conversation_ID], references: [Conversation_ID], onUpdate: Restrict, map: "Message_ibfk_1")
+
+  @@index([Conversation_ID], map: "Conversation_ID")
+}
+
+model Transcript {
+  Conversation_ID INT
+  Transcript String
+  Timestamp Datetime
+
+  Conversation Conversation @relation(fields: [Conversation_ID], references: [Conversation_ID], onUpdate: Restrict)
 
   @@index([Conversation_ID], map: "Conversation_ID")
 }

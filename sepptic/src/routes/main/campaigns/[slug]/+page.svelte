@@ -281,6 +281,7 @@
                         </div>
                     {:else if chatOrCall == "call"}
                     <div>
+                        {#key $selectedCharacter?.ID}
                         <Call
                             class="h-full"
                             characterId={$selectedCharacter.ID}
@@ -289,6 +290,7 @@
                             prompt={$selectedCharacter.Prompt}
                             voice={$selectedCharacter.Voice}
                         />
+                        {/key}
                     </div>
                     {/if}   
                 </div>

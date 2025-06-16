@@ -182,7 +182,7 @@
       console.error('Error starting call:', err);
     }
   }
-  
+
 </script>
 
 <style>
@@ -278,6 +278,5 @@
       }}
       ></textarea>
     <button on:click={sendReply}>Send</button>
-    <button class="call" on:click={startCall}>Call</button>
   </div>
 </div>

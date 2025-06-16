@@ -8,12 +8,14 @@ datasource db {
 }
 
 model Conversation {
-  Conversation_ID Int       @id @default(autoincrement())
+  Conversation_ID Int          @id @default(autoincrement())
   User_ID         Int
   Campaign_ID     Int
   Character_ID    Int
-  User            User      @relation(fields: [User_ID], references: [User_ID], onUpdate: Restrict, map: "Conversation_ibfk_1")
+  Realtime        Boolean // Used to distinguish calls from texts
+  User            User         @relation(fields: [User_ID], references: [User_ID], onUpdate: Restrict, map: "Conversation_ibfk_1")
   Message         Message[]
+  Transcript      Transcript[]
 
   @@index([User_ID], map: "User_ID")
 }
@@ -36,6 +38,16 @@ model Message {
   Timestamp       DateTime
   Conversation_ID Int
   Conversation    Conversation @relation(fields: [Conversation_ID], references: [Conversation_ID], onUpdate: Restrict, map: "Message_ibfk_1")
+
+  @@index([Conversation_ID], map: "Conversation_ID")
+}
+
+model Transcript {
+  ID              Int      @id @default(autoincrement())
+  Transcript      String   @db.Text
+  Timestamp       DateTime
+  Conversation_ID Int
+  Conversation Conversation @relation(fields: [Conversation_ID], references: [Conversation_ID], onUpdate: Restrict, map: "Transcript_ibfk_1") // IDK what map is for i just added it becasue all the others have it...
 
   @@index([Conversation_ID], map: "Conversation_ID")
 }

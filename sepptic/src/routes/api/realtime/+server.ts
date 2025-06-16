@@ -1,8 +1,14 @@
-import { json } from "@sveltejs/kit";
+import { json, RequestEvent } from "@sveltejs/kit";
 
 // An endpoint which would work with the client code above - it returns
 // the contents of a REST API request to this protected endpoint
-export async function POST() {
+export async function POST(event: RequestEvent) {
+
+  const body = await event.request.json();
+
+  let voiceType = body.voice; // The voice type to use for the AI response; comes from the CallCard request
+  let prompt = body.prompt; // The prompt to send to the AI
+
   const response = await fetch("https://api.openai.com/v1/realtime/sessions", {
     method: "POST",
     headers: {
@@ -11,8 +17,8 @@ export async function POST() {
     },
     body: JSON.stringify({
       model: "gpt-4o-realtime-preview-2025-06-03",
-      voice: "verse",
-      instructions: "This is a placeholder prompt, please act like a goofy clown ChatGPT"
+      voice: voiceType,
+      instructions: prompt
     }),
   });
 

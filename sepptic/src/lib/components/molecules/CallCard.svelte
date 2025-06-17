@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, afterUpdate } from 'svelte';
+  import { createEventDispatcher, onMount, onDestroy } from 'svelte';
 	import postcssConfig from '../../../../postcss.config';
 
   // — the only props you need —
@@ -9,11 +9,28 @@
   export let prompt: string; // prompt for the AI model
   export let voice: string; // Base voice model for the AI
 
-  // — component state —
-  let messages: { sender: string; content: string; timestamp: string; isTyping?: boolean }[] = [];
-  let replyContent = '';
+  // -- Will be used to handle pulling in fresh transcript from database if present --
+  onMount(() => {
+    console.log("Call component is being built")
+  })
 
-  const dispatch = createEventDispatcher();
+  // — onDestroy called to wipe call session before user can move to another card, prevents multiple RTC sessions at once 
+  onDestroy(() => {
+    console.log("Call component is being destroyed")
+    try {
+      pc?.close(); // Clear the peer connection to OpenAI
+      pc = null; // Clear the peer connection variable
+      console.log('Peer connection closed');
+      ms?.getTracks().forEach((track) => track.stop()); // Iterate through and remove microphone tracks if they exists
+      ms = null; // Clear the MediaStream
+      console.log('Call ended successfully');
+      console.log()
+    }
+    catch(err) {
+      console.error("onDeestroy failed to end call:", err)
+    }
+  })
+
 
   // — call management functions —
   let currentCall = 0; // 0 = no call, 1 = call in progress
@@ -25,7 +42,6 @@
   let transcript: string[] = [];
 
   async function startCall() {
-    // Placeholder for call functionality
     console.log('Starting call...');
     currentCall = 1; // Set current call state to indicate a call is in progress
     // Start a new API session
@@ -127,7 +143,7 @@
         pc.close(); // Clear the peer connection to OpenAI
         pc = null; // Clear the peer connection variable
         console.log('Peer connection closed');
-        await ms?.removeTrack(ms.getTracks()[0]); // Remove the microphone track if it exists
+        ms?.getTracks().forEach((track) => track.stop()); // Iterate through and remove microphone individual tracks to free microphone
         ms = null; // Clear the MediaStream
         console.log('Call ended successfully');
       } catch (err) {
@@ -140,10 +156,13 @@
 
 <div class="chat-container max-h-[300px]">
   <div class="transcript m-5">
-    {#each transcript as response}
+    <!--This is the reactive version of the code-->
+    <!-- {#each transcript as response}
     <p class="messageai">{response}</p>
     <br>
-    {/each}
+    {/each} -->
+
+    <!--This is the version that prints the full transcript post conversation-->
   </div>
   <div>
     {#if currentCall}

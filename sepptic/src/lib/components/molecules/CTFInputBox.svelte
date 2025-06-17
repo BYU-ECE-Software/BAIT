@@ -1,19 +1,43 @@
 <script lang="ts">
+  import Congratulations from './CongratulationsModal.svelte';
+  import Failure from './FailureModal.svelte';
   // Question or prompt to display above the input
   export let question: string = 'Enter the flag:';
+
+  // The correct answer to check against
+  export let answer: string = 'correct-flag';
+
   // Value entered by the user
-  export let flag: string = '';
+  let flag: string = '';
+
   // Placeholder text for the input
   export let placeholder: string = 'e.g. 1234567';
+
   // Callback when the user submits the flag
   export let onSubmit: (value: string) => void = (value) => {
     console.log('Submitted flag:', value);
   };
+  
+  // Just log if the value includes the answer
+  function checkFlag(value: string): void {
+    const result = value.includes(answer);
+    console.log(`Checking flag: "${value}" contains "${answer}"? →`, result);
+    if (result) {
+    showModal = true;
+  }
+  if (!result) {
+    failshowModal = true;
+  }
+  }
 
   function handleSubmit(e: Event) {
     e.preventDefault();
+    checkFlag(flag);
     onSubmit(flag);
   }
+
+let showModal = false;
+let failshowModal = false;
 </script>
 
 <!-- Container: blue box with padding and rounded corners -->
@@ -39,4 +63,10 @@
       Submit
     </button>
   </form>
+  {#if showModal}
+  <Congratulations onClose={() => (showModal = false)} show={true} />
+  {/if}
+  {#if failshowModal}
+  <Failure onClose={() => (failshowModal = false)} show={true} />
+  {/if}
 </div>

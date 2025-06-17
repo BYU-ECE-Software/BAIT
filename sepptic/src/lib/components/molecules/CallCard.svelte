@@ -11,8 +11,14 @@
 
   // -- Will be used to handle pulling in fresh transcript from database if present --
   onMount(() => {
-    console.log("Call component is being built")
-  })
+  //   console.log("Call component is being built")
+  //   if (//Databse function here) {
+  //   console.log("Retriving transcript from database");
+  //   // Placeholder for code that will pull transcript from database
+  //   } else {
+  //     console.log("No transcript found in database, starting new conversation");
+  //   }
+  });
 
   // — onDestroy called to wipe call session before user can move to another card, prevents multiple RTC sessions at once 
   onDestroy(() => {
@@ -155,16 +161,17 @@
 </script>
 
 <div class="chat-container max-h-[300px]">
-  <div class="transcript m-5">
-    <!--This is the reactive version of the code-->
+  <!-- <div class="transcript m-5">
+    This is the reactive version of the code-->
     <!-- {#each transcript as response}
     <p class="messageai">{response}</p>
     <br>
-    {/each} -->
+    {/each} 
+    </div>-->
 
     <!--This is the version that prints the full transcript post conversation-->
-  </div>
-  <div>
+    
+  <div> 
     {#if currentCall}
       <div class="flex flex-col gap-2 w-full">
         <button class="end-call py-2 px-4 rounded" on:click={endCall}>End Phone Call</button>

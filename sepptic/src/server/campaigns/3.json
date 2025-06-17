@@ -8,7 +8,8 @@
         "Briefing_Video": "/Harvesta_Video.mp4",
         "Success_Video": "",
         "Failure_Video": "",
-        "Final_Question": "What is the address of the new location?"
+        "Final_Question": "What is the address of the new location?",
+        "Final_Answer": "Grangeville"
     },
     "Characters": [
         {

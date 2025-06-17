@@ -70,11 +70,7 @@
         }))
     ];
     let fromContactId = userContacts[0].id;
-    let userFlag = '';
-    function handleFlagSubmit(flagValue) {
-    console.log('Flag entered also its passing:', flagValue);
-    // …do whatever verification or API call you need…
-  }
+
 
   let chatOrCall = $state("chat"); // Default to chat
 
@@ -311,10 +307,9 @@
                 </p>
                 
                 <CTFInputBox
-                    bind:flag={userFlag}
                     placeholder="Write answer here"
                     question={data.campaign.Campaign_Information.Final_Question}
-                    onSubmit={handleFlagSubmit}
+                    answer={data.campaign.Campaign_Information.Final_Answer}
                 />
 
                 <div class="flex flex-col flex-1 h-full bg-gray-50 dark:bg-gray-800 p-6">

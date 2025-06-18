@@ -1,6 +1,7 @@
 <script lang="ts">
     // We can specify Components in the lib/index.ts file to be imported using an Alias! pretty cool
     import { CampaignCard, LearnCard, Testimonial } from '$lib';
+	import ContactCard from '../../lib/components/molecules/ContactCard.svelte';
 </script>
 
 <!-- This is just listing out all of our components on the home page -->
@@ -21,7 +22,7 @@
     </div>
 </div>
 
-<!-- Testimonial section -->
-<div class="gap-6 mt-12 mb-12">
+<!-- Report and Contact section -->
+<!-- <div class="gap-6 mt-12 mb-12">
     <Testimonial />
-</div>
+</div> -->

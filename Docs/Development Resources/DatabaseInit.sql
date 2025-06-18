@@ -34,6 +34,14 @@ CREATE TABLE Message (
     FOREIGN KEY (Conversation_ID) REFERENCES Conversation(Conversation_ID) ON UPDATE RESTRICT
 );
 
+CREATE TABLE Transcription (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Transcription TEXT NOT NULL,
+    Timestamp DATETIME NOT NULL,
+    Conversation_ID INT NOT NULL,
+    FOREIGN KEY (Conversation_ID) REFERENCES Conversation(Conversation_ID) ON UPDATE RESTRICT
+)
+
 CREATE TABLE Session (
     Token VARCHAR(255) PRIMARY KEY,
     Expiration DATE NOT NULL,

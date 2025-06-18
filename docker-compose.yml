@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   mariadb:
     image: mariadb:latest
@@ -19,27 +21,24 @@ services:
     container_name: phpmyadmin
     environment:
       PMA_HOST: ${PMA_HOST}
-    networks:
-      - sepptic
-
-  nginx-proxy-manager:
-    image: 'jc21/nginx-proxy-manager:latest'
-    container_name: nginx-proxy-manager
-    restart: unless-stopped
     ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - proxy_data:/data
-      - proxy_letsencrypt:/etc/letsencrypt
+      - "8080:80"
     networks:
       - sepptic
+    
+  sepptic:
+    image: sepptic:latest
+    container_name: sepptic
+    environment:
+        OPENAI_API_KEY: ${OPENAI_API_KEY}
+        DATABASE_URL: ${DATABASE_URL}
+    ports:
+        - "3000:3000" 
+    networks:
+        - sepptic
 
 volumes:
   mariadb_data:
-  proxy_data:
-  proxy_letsencrypt:
-
 
 networks:
   sepptic:

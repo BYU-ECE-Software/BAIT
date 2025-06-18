@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { page } from '$app/state';
+    import { page } from '$app/stores';
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownHeader, DropdownItem,  DarkMode} from 'flowbite-svelte';
-    $: activeUrl = page.url.pathname;
-    $: email = page.data.email ?? "Unknown";
+    $: activeUrl = $page.url.pathname;
+    $: email = $page.data.email ?? "Unknown";
     import { invalidateAll } from '$app/navigation'; // To refresh the session
     import {signOut} from "$lib/auth.svelte";
 
@@ -51,9 +51,8 @@
     <!-- Navbar Items -->
     <NavUl {activeUrl} >
         <NavLi href="/main">Home</NavLi>
-        <NavLi href="/main/about">About</NavLi>
-        <NavLi href="/main/contact">Contact</NavLi>
-        <NavLi href="/main/campaigns">Campaigns</NavLi>
         <NavLi href="/main/learn">Learn</NavLi>
+        <NavLi href="/main/campaigns">Campaigns</NavLi>
+        <NavLi href="/main/contact">Contact</NavLi>
     </NavUl>
 </Navbar>

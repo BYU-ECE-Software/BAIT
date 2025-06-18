@@ -1,56 +1,38 @@
+
 <script>
     let teamMembers = [
+        
         {
-            name: "Ethan Beere",
-            role: "Team Manager",
-            bio: "Leads the team with vision and strategy.",
-            linkedin: "https://www.linkedin.com/in/ethan-beere/",
-            email: "ecb62@byu.edu",
+            name: "Jackson Knepper",
+            role: "Backend Engineer",
+            linkedin: "https://www.linkedin.com/in/jacksonknepper/",
         },
         {
-            name: "Elliot Delay",
-            role: "Storyboard and API Director",
-            bio: "Develops the campaigns and their stories.",
-            linkedin: "https://www.linkedin.com/in/elliot-delay-098ab5231/",
-            email: "delay0@byu.edu",
-        },
-        {
-            name: "Nicholas Hague",
-            role: "PoC and UI Developer",
-            bio: "Primary contact for our mentors/sponsers, and works on web development.",
-            linkedin: "https://www.linkedin.com/in/nicholashague8/",
-            email: "nickh8@byu.edu",
-        },
-        {
-            name: "Zachary Hansen",
-            role: "Database Developer",
-            bio: "Manages the Database and how it connects to other facets.",
-            linkedin: "https://www.linkedin.com/in/zachary-j-hansen/",
-            email: "zac99@byu.edu",
-        },
-        {
-            name: "Tyler Holland",
-            role: "Team Leader",
-            bio: "He works hard as our co-team leader and builds team moral.",
-            linkedin: "https://www.linkedin.com/in/tyler-holland-0a0459156/",
-            email: "tyho99@byu.edu",
-        },
-        {
-            name: "Matthew Taylor",
-            role: "Frontend Director",
-            bio: "Builds the frontend logic and connection to the database.",
-            linkedin: "#",
-            email: "mtaylo48@byu.edu",
-        },
-        {
-            name: "Garrett White",
+            name: "Spencer Smith",
             role: "Frontend Engineer",
-            bio: "Works with frontend development and builds pages and internal logic.",
-            linkedin: "https://www.linkedin.com/in/gmwhite/",
-            email: "gw263@byu.edu",
+            linkedin: "https://www.linkedin.com/in/spencer-smith2003",
         },
+        {
+            name: "Ezra Bradley",
+            role: "UI/UX Designer",
+            linkedin: "https://www.linkedin.com/in/ezra-bradley-63a062262",
+        },
+        {
+            name: "Jonathan Houston",
+            role: "Storyboard Developer",
+            linkedin: "https://www.linkedin.com/",
+        },
+        {
+            name: "Derek Hansen",
+            role: "Project Sponsor",
+            linkedin: "https://www.linkedin.com/",
+        },
+        {
+            name: "Benjamin Schooley",
+            role: "Project Sponsor",
+            linkedin: "https://www.linkedin.com/",
+        }
     ];
-    teamMembers = teamMembers.sort(() => Math.random() - 0.5);
 </script>
 
 <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -65,12 +47,17 @@
                         LinkedIn
                     </a>
                 {/if}
-                {#if member.email}
-                    <a href={`mailto:${member.email}`} class="text-seppticRed-500 dark:text-seppticRed-300 hover:underline">
-                        Email
-                    </a>
-                {/if}
             </div>
         </div>
     {/each}
+</div>
+<br>
+<div class="flex flex-col md:flex-column items-center justify-center gap-8 mx-auto text-center">
+    <div class="flex flex-col md:flex-row gap-4 mt-4">
+        <a href="https://qualtricsxm3w5lnt87l.qualtrics.com/jfe/form/SV_3pKSSQoGP2Zkl5Y" 
+           target="_blank" 
+           class="bg-red-500 hover:bg-red-700 text-white md:text-3xl font-bold py-10 px-10 rounded">
+            Report a Bug
+        </a>
+    </div>
 </div>

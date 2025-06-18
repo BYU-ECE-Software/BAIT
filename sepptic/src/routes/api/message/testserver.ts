@@ -1,5 +1,5 @@
 import getUserIdFromToken from '../../../server/utils/getUserIdFromToken';
-import dbCreateConversation from '../../../server/utils/dbCreateConversation';
+import dbCreateConversation from '../../../server/utils/dbCreateConversationtest';
 import dbGetMessages from '../../../server/utils/dbGetMessages';
 import aiSendMessage from '../../../server/utils/aiSendMessage';
 import dbCreateMessages from '../../../server/utils/dbCreateMessage';
@@ -8,108 +8,88 @@ import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
 
 export async function POST(event: RequestEvent) {
-  try {
+    // Authenticate and get user ID
     const body = await event.request.json();
     const cookies = cookie.parse(event.request.headers.get('cookie') || '');
     const token = cookies.token;
-
     if (!token) {
-      return new Response(JSON.stringify({ message: 'No token provided' }), { status: 400 });
+        return new Response(JSON.stringify({ message: 'No token provided', status: 400 }), { status: 400 });
     }
-
     const userIdResponse = await getUserIdFromToken(token);
     if (!userIdResponse.success || !userIdResponse.userId) {
-      return new Response(
-        JSON.stringify({ message: userIdResponse.message }),
-        { status: userIdResponse.status }
-      );
+        return new Response(JSON.stringify({ message: userIdResponse.message, status: userIdResponse.status }), { status: userIdResponse.status });
     }
 
+    // Get request data
     const userId = userIdResponse.userId;
-    const { campaignId, characterId, message } = body;
+    const campaignId = body.campaignId;
+    const characterId = body.characterId;
+    const message = body.message;
+    const sentfrom = body.sentfrom;
 
-    if (!campaignId || !characterId || !message) {
-      console.warn('❗ Missing fields:', { campaignId, characterId, message });
-      return new Response(
-        JSON.stringify({ message: 'Missing campaignId, characterId, or message' }),
-        { status: 400 }
-      );
-    }
-
-    const conversationResult = await dbCreateConversation(userId, campaignId, characterId);
+    // Create conversation if not exists. Get conversation ID either way.
+    const conversationResult = await dbCreateConversation(userId, campaignId, characterId, sentfrom);
     if (conversationResult.status !== 200 || !conversationResult.conversationId) {
-      console.error('❌ dbCreateConversation failed:', conversationResult);
-      return new Response(
-        JSON.stringify({ message: 'Error getting conversation', detail: conversationResult }),
-        { status: conversationResult.status }
-      );
+        return new Response("Error getting conversation: " + JSON.stringify(conversationResult), { status: conversationResult.status });
     }
-
     const conversationId = conversationResult.conversationId;
 
+    // Get conversation messages from database
     const messagesResponse = await dbGetMessages(conversationId);
-    if (messagesResponse.status !== 200 || !messagesResponse.messages) {
-      console.error('❌ dbGetMessages failed:', messagesResponse);
-      return new Response(
-        JSON.stringify({ message: 'Error getting messages', detail: messagesResponse }),
-        { status: messagesResponse.status }
-      );
+    if (messagesResponse.status !== 200) {
+        return new Response("Error getting messages: " + JSON.stringify(messagesResponse.message), { status: messagesResponse.status });
+    }
+    const messages = messagesResponse.messages;
+    if (!messages) {
+        return new Response("Error: messages not found", { status: 500 });
     }
 
+    // Get prompt from campaign
     const campaignResult = jsonGetCampaign(campaignId);
     if (campaignResult.status !== 200) {
-      console.error('❌ jsonGetCampaign failed:', campaignResult);
-      return new Response(
-        JSON.stringify({ message: 'Error getting campaign', detail: campaignResult }),
-        { status: campaignResult.status }
-      );
+        return new Response("Error getting campaign: " + JSON.stringify(campaignResult), { status: campaignResult.status });
     }
-
     const campaign = campaignResult.data;
     let campaignCharacters;
     if (typeof campaign !== 'string') {
-      campaignCharacters = campaign.Characters;
+        campaignCharacters = campaign.Characters;
     } else {
-      throw new Error('Campaign data is not valid');
+        return new Response("Error: campaign data is not valid", { status: 500 });
     }
-
-    const character = campaignCharacters.find((c) => c.ID === characterId);
-    if (!character || !character.Prompt) {
-      return new Response(
-        JSON.stringify({ message: 'Prompt not found for character' }),
-        { status: 400 }
-      );
+    let prompt = '';
+    for (const character of campaignCharacters) {
+        if (character.ID === characterId) {
+            prompt = character.Prompt;
+            break;
+        }
     }
+    prompt += '\n\nYou are being contacted by ';
+    prompt += sentfrom;
+    prompt += ' pretend you are talking to them.';
 
-    const aiResponse = await aiSendMessage(messagesResponse.messages, message, character.Prompt);
-    const aiMessage = aiResponse?.choices?.[0]?.message?.content;
+    // Send messages to AI
+    const aiResponse = await aiSendMessage(messages, message, prompt);
+    const aiMessage = aiResponse.choices[0].message.content;
     if (!aiMessage) {
-      throw new Error('AI response is missing or malformed');
+        return new Response("AI Message Error: " + aiMessage, { status: 500 });
     }
 
+    // Add AI response to conversation in DB
     const dbMessageCreationResponse = await dbCreateMessages(conversationId, message, aiMessage);
     if (dbMessageCreationResponse.status !== 200) {
-      console.error('❌ dbCreateMessages failed:', dbMessageCreationResponse);
-      return new Response(
-        JSON.stringify({ message: 'Error storing messages', detail: dbMessageCreationResponse }),
-        { status: dbMessageCreationResponse.status }
-      );
+        return new Response("Error storing messages: " + JSON.stringify(dbMessageCreationResponse.message), { status: dbMessageCreationResponse.status });
     }
 
+    // Return AI response
     return new Response(
-      JSON.stringify({ content: aiMessage }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    JSON.stringify({ content: aiMessage }),
+    {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+    }
     );
 
-  } catch (err) {
-    console.error('🔥 POST /api/message uncaught error:', err);
-    return new Response(
-      JSON.stringify({ message: 'Internal Server Error', error: String(err) }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
-  }
 }
-
 
 export async function GET(event: RequestEvent) {
   try {
@@ -121,7 +101,6 @@ export async function GET(event: RequestEvent) {
         { status: 401, headers: { 'Content-Type': 'application/json' } }
       );
     }
-    console.log("Parsed token:", cookies.token);
     const userResp = await getUserIdFromToken(cookies.token);
     if (!userResp.success || !userResp.userId) {
       return new Response(
@@ -129,13 +108,13 @@ export async function GET(event: RequestEvent) {
         { status: userResp.status, headers: { 'Content-Type': 'application/json' } }
       );
     }
-    console.log("User response:", userResp);
     const userId = userResp.userId;
 
     // — parse params —
     const url         = new URL(event.request.url);
     const campaignId  = Number(url.searchParams.get('campaignId'));
     const characterId = Number(url.searchParams.get('characterId'));
+    const sentfrom = String(url.searchParams.get('sentfrom'));
 
     if (isNaN(campaignId) || isNaN(characterId)) {
       return new Response(
@@ -144,19 +123,16 @@ export async function GET(event: RequestEvent) {
       );
     }
 
-    console.log("Calling dbCreateConversation", userId, campaignId, characterId);
     // — ensure conversation exists —
-    const convoRes = await dbCreateConversation(userId, campaignId, characterId);
+    const convoRes = await dbCreateConversation(userId, campaignId, characterId, sentfrom);
     if (convoRes.status !== 200 || !convoRes.conversationId) {
       return new Response(
         JSON.stringify({ message: 'No conversation found', detail: convoRes }),
         { status: convoRes.status, headers: { 'Content-Type': 'application/json' } }
       );
     }
-    console.log("Conversation result:", convoRes);
 
     // — fetch messages —
-    console.log("Fetching messages for convoId:", convoRes.conversationId);
     const msgsRes = await dbGetMessages(convoRes.conversationId);
     if (msgsRes.status !== 200 || !msgsRes.messages) {
       return new Response(
@@ -164,7 +140,6 @@ export async function GET(event: RequestEvent) {
         { status: msgsRes.status, headers: { 'Content-Type': 'application/json' } }
       );
     }
-    console.log("Messages result:", msgsRes);
 
     // — success →
     return new Response(

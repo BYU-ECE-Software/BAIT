@@ -41,11 +41,31 @@
   // — call management functions —
   let currentCall = 0; // 0 = no call, 1 = call in progress
 
+  // -- Timer management variables --
+  let start = 0;
+  let end = 0;
+
+
   // Declare pc at the component scope so both functions can access it
   let pc: RTCPeerConnection | null = null;
   let ms: MediaStream | null = null; // MediaStream for microphone input
 
   let transcript: string[] = [];
+
+  // -- Timer Functionality
+  let mm = 0;
+  let ss = 0;
+
+  function beginTimer() {
+    let start = Date.now();
+    setInterval(() => {
+      ss += 1;
+      if (ss == 60) {
+        mm += 1;
+        ss = 0;
+      }
+    }, 1000)
+  }
 
   async function startCall() {
     console.log('Starting call...');
@@ -125,6 +145,16 @@
       await pc.setRemoteDescription(answer);
       console.log('Call started successfully');
 
+      // Set call start variable
+      start = Date.now();
+
+      // Set maximum 5 minute call duration and display remaining time
+      beginTimer();
+      setTimeout(() => {
+        endCall();
+        console.log("5 minute timeout has been reached, call has been ended.")
+      }, 1000 * 60 * 5)
+      
       } catch (err) {
       console.error('Error starting call:', err);
     }
@@ -152,6 +182,12 @@
         ms?.getTracks().forEach((track) => track.stop()); // Iterate through and remove microphone individual tracks to free microphone
         ms = null; // Clear the MediaStream
         console.log('Call ended successfully');
+
+        //Set end time for call
+        end = Date.now();
+        console.log(`Call time was: ${((end - start))}`);
+
+
       } catch (err) {
         console.error('Error ending call:', err);
       }
@@ -187,6 +223,9 @@
         </div>
       </div>
     {/if}
+    <div>
+      <h2>{mm}:{ss}</h2>
+    </div>
   </div>
 </div>
 

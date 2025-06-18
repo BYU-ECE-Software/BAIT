@@ -209,16 +209,19 @@
                 <div class="w-1/4 flex-shrink-0 bg-white dark:bg-gray-900 border-r border-gray-300 overflow-y-auto">
                 {#each data.campaign.Characters as character}
                 {#if character.ID !== 99}
+                <div class="border-b border-gray-200 dark:border-gray-700">
                     <div
-                    class="flex items-center px-4 py-3 transition hover:bg-gray-100 dark:hover:bg-gray-700"
+                    class="flex items-center px-4 py-3 transition"
                     class:selected-character={$selectedCharacter?.ID === character.ID}
                     >
                     <img src={character.Image ?? '/placeholder.png'} alt={character.Name} class="w-10 h-10 rounded-full mr-3" />
                     <span class="text-gray-800 dark:text-gray-200">{character.Name}</span>
-                    <!--Insert the call and messsage buttons here and add onclicks that adjust a global value that an if/else stmt can use-->
-                    <img class="cursor-pointer" on:click={() => { setChat(); selectCharacter(character); }} src="/message_selected.png"/>
-                    <img class="cursor-pointer" on:click={() => { setCall(); selectCharacter(character); }} src="/call_selected.png"/>
+                        <div class="ml-auto flex space-x-2">
+                            <img class="cursor-pointer" on:click={() => { setChat(); selectCharacter(character); }} src="/message_selected.png"/>
+                            <img class="cursor-pointer" on:click={() => { setCall(); selectCharacter(character); }} src="/call_selected.png"/>
+                        </div>
                     </div>
+                </div>
                 {/if}
                 {/each}
                 </div>

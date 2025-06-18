@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, afterUpdate } from 'svelte';
+  import { createEventDispatcher, onMount, onDestroy } from 'svelte';
 	import postcssConfig from '../../../../postcss.config';
 
   // — the only props you need —
@@ -9,14 +9,42 @@
   export let prompt: string; // prompt for the AI model
   export let voice: string; // Base voice model for the AI
 
-  // — component state —
-  let messages: { sender: string; content: string; timestamp: string; isTyping?: boolean }[] = [];
-  let replyContent = '';
+  // -- Will be used to handle pulling in fresh transcript from database if present --
+  onMount(() => {
+  //   console.log("Call component is being built")
+  //   if (//Databse function here) {
+  //   console.log("Retriving transcript from database");
+  //   // Placeholder for code that will pull transcript from database
+  //   } else {
+  //     console.log("No transcript found in database, starting new conversation");
+  //   }
+  });
 
-  const dispatch = createEventDispatcher();
+  // — onDestroy called to wipe call session before user can move to another card, prevents multiple RTC sessions at once 
+  onDestroy(() => {
+    console.log("Call component is being destroyed")
+    try {
+      pc?.close(); // Clear the peer connection to OpenAI
+      pc = null; // Clear the peer connection variable
+      console.log('Peer connection closed');
+      ms?.getTracks().forEach((track) => track.stop()); // Iterate through and remove microphone tracks if they exists
+      ms = null; // Clear the MediaStream
+      console.log('Call ended successfully');
+      console.log()
+    }
+    catch(err) {
+      console.error("onDeestroy failed to end call:", err)
+    }
+  })
+
 
   // — call management functions —
   let currentCall = 0; // 0 = no call, 1 = call in progress
+
+  // -- Timer management variables --
+  let start = 0;
+  let end = 0;
+
 
   // Declare pc at the component scope so both functions can access it
   let pc: RTCPeerConnection | null = null;
@@ -24,8 +52,22 @@
 
   let transcript: string[] = [];
 
+  // -- Timer Functionality
+  let mm = 0;
+  let ss = 0;
+
+  function beginTimer() {
+    let start = Date.now();
+    setInterval(() => {
+      ss += 1;
+      if (ss == 60) {
+        mm += 1;
+        ss = 0;
+      }
+    }, 1000)
+  }
+
   async function startCall() {
-    // Placeholder for call functionality
     console.log('Starting call...');
     currentCall = 1; // Set current call state to indicate a call is in progress
     // Start a new API session
@@ -103,6 +145,16 @@
       await pc.setRemoteDescription(answer);
       console.log('Call started successfully');
 
+      // Set call start variable
+      start = Date.now();
+
+      // Set maximum 5 minute call duration and display remaining time
+      beginTimer();
+      setTimeout(() => {
+        endCall();
+        console.log("5 minute timeout has been reached, call has been ended.")
+      }, 1000 * 60 * 5)
+      
       } catch (err) {
       console.error('Error starting call:', err);
     }
@@ -127,9 +179,15 @@
         pc.close(); // Clear the peer connection to OpenAI
         pc = null; // Clear the peer connection variable
         console.log('Peer connection closed');
-        await ms?.removeTrack(ms.getTracks()[0]); // Remove the microphone track if it exists
+        ms?.getTracks().forEach((track) => track.stop()); // Iterate through and remove microphone individual tracks to free microphone
         ms = null; // Clear the MediaStream
         console.log('Call ended successfully');
+
+        //Set end time for call
+        end = Date.now();
+        console.log(`Call time was: ${((end - start))}`);
+
+
       } catch (err) {
         console.error('Error ending call:', err);
       }
@@ -139,13 +197,17 @@
 </script>
 
 <div class="chat-container max-h-[300px]">
-  <div class="transcript m-5">
-    {#each transcript as response}
+  <!-- <div class="transcript m-5">
+    This is the reactive version of the code-->
+    <!-- {#each transcript as response}
     <p class="messageai">{response}</p>
     <br>
-    {/each}
-  </div>
-  <div>
+    {/each} 
+    </div>-->
+
+    <!--This is the version that prints the full transcript post conversation-->
+    
+  <div> 
     {#if currentCall}
       <div class="flex flex-col gap-2 w-full">
         <button class="end-call py-2 px-4 rounded" on:click={endCall}>End Phone Call</button>
@@ -161,6 +223,9 @@
         </div>
       </div>
     {/if}
+    <div>
+      <h2>{mm}:{ss}</h2>
+    </div>
   </div>
 </div>
 

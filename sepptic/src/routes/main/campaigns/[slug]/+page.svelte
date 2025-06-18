@@ -334,6 +334,7 @@
                     <!-- Chat area fills all remaining space -->
                     <div class="flex-grow overflow-y-auto">
                         <Chat
+                            size={1}
                             class="h-full"
                             characterId={99}
                             contactName={"Randy"}

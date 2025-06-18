@@ -5,6 +5,7 @@
   export let characterId: number;          // numeric ID for your API
   export let contactName: string;          // human-readable display name
   export let campaignId: number | string;  // campaign identifier
+  export let size: int = 0;
 
   let messagesContainer: HTMLDivElement | null = null;
 
@@ -176,8 +177,8 @@
     cursor: pointer;
   }
 </style>
-
-<div class="chat-container max-h-[300px]">
+{#if size == 0}
+  <div class="chat-container">
   <div class="messages" bind:this={messagesContainer}>
     {#if messages.length}
       {#each messages as msg}
@@ -209,3 +210,39 @@
     <button on:click={sendReply}>Send</button>
   </div>
 </div>
+  {/if}
+
+  {#if size == 1}
+  <div class="chat-container max-h-[300px]">
+  <div class="messages" bind:this={messagesContainer}>
+    {#if messages.length}
+      {#each messages as msg}
+        <div class="message {msg.sender === 'You' ? 'user' : 'ai'} {msg.isTyping ? 'typing' : ''}">
+          <strong>{msg.sender}:</strong> {msg.content}
+          {#if !msg.isTyping}
+            <div class="text-xs text-gray-500">
+              {new Date(msg.timestamp).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}
+            </div>
+          {/if}
+        </div>
+      {/each}
+    {:else}
+      <p class="text-gray-500">No messages yet.</p>
+    {/if}
+  </div>
+  <div class="input-area">
+      <textarea
+        bind:value={replyContent}
+        rows="2"
+        placeholder="Type a message..."
+        on:keydown={(e) => {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendReply();
+          }
+      }}
+      ></textarea>
+    <button on:click={sendReply}>Send</button>
+  </div>
+</div>
+  {/if}

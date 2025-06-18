@@ -148,12 +148,12 @@
       // Set call start variable
       start = Date.now();
 
-      // Set maximum 5 minute call duration and display remaining time
+      // Set maximum call duration and display remaining time based on Call Limit
       beginTimer();
       setTimeout(() => {
         endCall();
-        console.log("5 minute timeout has been reached, call has been ended.")
-      }, 1000 * 60 * 5)
+        console.log("Timeout has been reached, call has been ended.")
+      }, 1000 * 60 * 5) // <-- Replace with CallLimit
       
       } catch (err) {
       console.error('Error starting call:', err);

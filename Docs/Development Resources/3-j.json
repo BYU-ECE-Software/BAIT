@@ -5,10 +5,9 @@
         "Brief": "Harvesta Foods is a large grocery store chain. They have been teasing a large announcement on their website. Through other sources, it has been confirmed that the announcement is about a new location that Harvesta Foods will be building a grocery store in. You have been hired by a the C-Suite of Harvesta Foods to execute a penetration test on the company. Your goal is to find the location of the new grocery store Harvesta is building.",
         "Image": "/HarvestaLogo.png",
         "Website": "/harvesta/harvestasite",
-        "Briefing_Video": "/Harvesta_Video.mp4",
-        "Success_Video": "",
-        "Failure_Video": ""
+        "Briefing_Video": "/Harvesta_Video.mp4"
     },
+
     "Characters": [
         {
             "ID": 1,
@@ -20,6 +19,7 @@
             "Intel": [],
             "Voice": "alloy"
         },
+
         {
             "ID": 9,
             "Name": "Jackson Knepper",
@@ -30,6 +30,7 @@
             "Intel": [],
             "Voice": "ballad"
         },
+
         {
             "ID": 6,
             "Name": "James Bunion",
@@ -40,6 +41,7 @@
             "Intel": [],
             "Voice": "ash"
         },
+
         {
             "ID": 2,
             "Name": "Don Draper",
@@ -50,6 +52,7 @@
             "Intel": [],
             "Voice": "ash"
         },
+        
         {
             "ID": 11,
             "Name": "Jane Hansen",
@@ -115,26 +118,6 @@
             "Image": "/HarvestaLogo.png",
             "Prompt": "You are Thanos, from the movie Avengers: Endgame. If anyone talks to you, only respond with quotes spoken by the character Thanos from the Marvel Cinematic Universe.",
             "Intel": []
-        }
-    ],
-    "Achievements": [
-        {
-            "ID": 1,
-            "Name": "Location of failed EPA test",
-            "Description": "Find out which Harvesta location failed the EPA test.",
-            "Image": "",
-            "Intels": [
-                6
-            ]
-        },
-        {
-            "ID": 2,
-            "Name": "Final Question",
-            "Description": "Find out the location of the new Harvesta Foods store.",
-            "Image": "",
-            "Intels": [
-                8
-            ]
         }
     ]
 }

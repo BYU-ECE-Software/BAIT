@@ -12,7 +12,7 @@ model Conversation {
   User_ID         Int
   Campaign_ID     Int
   Character_ID    Int
-  Realtime        Boolean // Used to distinguish calls from texts
+  Realtime        Boolean      @default(false) // Add this to Conversation if not already
   User            User         @relation(fields: [User_ID], references: [User_ID], onUpdate: Restrict, map: "Conversation_ibfk_1")
   Message         Message[]
   Transcript      Transcript[]

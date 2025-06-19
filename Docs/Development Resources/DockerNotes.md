@@ -10,3 +10,5 @@ MYSQL_PASSWORD=
 
 PMA_HOST="mariadb"
 ```
+
+If things start breaking too bad with the DB in dvelopment, run `docker-compose down -v` then rebuild the DB and run the initialization script again as root. Log in as root with `mariadb -p` on the containers exec menu

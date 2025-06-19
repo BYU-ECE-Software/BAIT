@@ -30,7 +30,6 @@ CREATE TABLE Message (
     User_Sent BOOLEAN DEFAULT FALSE,
     Message TEXT NOT NULL,
     Timestamp DATETIME NOT NULL,
-    Transcription BOOLEAN NOT NULL,
     Conversation_ID INT NOT NULL,
     FOREIGN KEY (Conversation_ID) REFERENCES Conversation(Conversation_ID) ON UPDATE RESTRICT
 );

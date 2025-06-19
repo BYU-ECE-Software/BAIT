@@ -27,7 +27,7 @@ async function writeConversation(userId: number, campaignId: number, characterId
                 User_ID: userId,
                 Campaign_ID: campaignId,
                 Character_ID: characterId,
-                Realtime: false // ✅ ADD THIS HERE
+                //Realtime: false // ✅ ADD THIS HERE
             }
         });
         return {

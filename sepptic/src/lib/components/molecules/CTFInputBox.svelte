@@ -20,15 +20,14 @@
   
   // Just log if the value includes the answer
   function checkFlag(value: string): void {
-    const result = value.includes(answer);
-    console.log(`Checking flag: "${value}" contains "${answer}"? →`, result);
-    if (result) {
+  const result = value.toLowerCase().includes(answer.toLowerCase());
+  console.log(`Checking flag: "${value}" contains "${answer}"? →`, result);
+  if (result) {
     showModal = true;
-  }
-  if (!result) {
+  } else {
     failshowModal = true;
   }
-  }
+}
 
   function handleSubmit(e: Event) {
     e.preventDefault();

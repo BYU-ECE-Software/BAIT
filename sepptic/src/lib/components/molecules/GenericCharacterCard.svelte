@@ -11,8 +11,6 @@
 
   let {
     character,
-    characterProgress,
-    userIntels,
     campaignId,
     updateIntel,
     messageData = {}
@@ -24,9 +22,6 @@
   const characterId = character.ID;
   const description = character.Description;
 
-  if (characterProgress === undefined) {
-    characterProgress = 0;
-  }
 </script>
 
 <!-- For an 8×8 rem square, stack content top-to-bottom -->

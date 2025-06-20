@@ -19,19 +19,10 @@
   console.log("data = ", data);
 
   let selectedTab = $state('Mission');
-  let userIntels = $state(data?.userIntels ?? {});
 
-  function updateIntel(characterId: number, intelId: number) {
-    if (!userIntels[characterId]) {
-        userIntels[characterId] = {};
-    }
-    userIntels[characterId][intelId] = true;
-    userIntels = { ...userIntels }; // trigger reactivity
-    }
+  const selectedCharacter = writable(data.campaign.Characters[0]);
 
-    const selectedCharacter = writable(data.campaign.Characters[0]);
-
-    function selectCharacter(character) {
+  function selectCharacter(character) {
         console.log("Selected character:", character);
         selectedCharacter.set({ ...character });
     }

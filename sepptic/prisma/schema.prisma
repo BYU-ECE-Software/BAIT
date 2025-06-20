@@ -20,17 +20,6 @@ model Conversation {
   @@index([User_ID], map: "User_ID")
 }
 
-model Intel {
-  Intel_Record_ID Int  @id @default(autoincrement())
-  Campaign_ID     Int
-  Character_ID    Int
-  Intel_ID        Int
-  User_ID         Int
-  User            User @relation(fields: [User_ID], references: [User_ID], onUpdate: Restrict, map: "Intel_ibfk_1")
-
-  @@index([User_ID], map: "User_ID")
-}
-
 model Message {
   Message_ID      Int          @id @default(autoincrement())
   User_Sent       Boolean?     @default(false)
@@ -67,6 +56,5 @@ model User {
   Name         String         @db.VarChar(100)
   Email        String         @unique(map: "Email") @db.VarChar(255)
   Conversation Conversation[]
-  Intel        Intel[]
   Session      Session[]
 }

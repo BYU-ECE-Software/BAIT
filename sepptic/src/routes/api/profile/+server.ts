@@ -2,7 +2,6 @@ import { dbUpdateEmail, dbUpdateName, dbUpdatePassword } from "../../../server/u
 import getUserIdFromToken from "../../../server/utils/getUserIdFromToken";
 import { dbDeleteUserSessions } from "../../../server/utils/dbDeleteSession";
 import dbGetUser from "../../../server/utils/dbGetUser";
-import calculateAchievements from "../../../server/utils/calculateAchievements";
 import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
 
@@ -24,19 +23,12 @@ export async function GET(event: RequestEvent) {
     }
     const user = userResponse.user;
 
-    // Get achievements
-    const achievementsResponse = await calculateAchievements(User_ID);
-    if (achievementsResponse.status !== 200) {
-        return new Response(JSON.stringify({ message: achievementsResponse.message, status: achievementsResponse.status }), { status: achievementsResponse.status });
-    }
-    const achievements = achievementsResponse.achievements;
 
     // Send profile with achievements
     return new Response(JSON.stringify({
         userId: user.User_ID,
         email: user.Email,
         name: user.Name,
-        achievements: achievements
     }), { status: 200 });
 }
 

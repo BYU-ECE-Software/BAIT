@@ -82,7 +82,7 @@
 <div class="block">
     <div style="display: flex;">
     <!-- Vertical Tabs -->
-    <div class="flex flex-col w-[250px] min-w-[250px] max-w-[250px] border-r border-gray-300 h-screen flex-shrink-0">
+    <div class="flex flex-col w-[250px] min-w-[250px] max-w-[250px] border-r border-gray-300 dark:border-gray-700 h-screen flex-shrink-0">
   <p class="font-semibold text-xs text-gray-500 ml-4">Social Engineering</p>
   <h4 class="font-bold text-gray-700 dark:text-gray-300 ml-4 text-xl">{data.campaign.Campaign_Information.Name}</h4>
   <hr class="border-t border-gray-300 dark:border-gray-700 mb-4 ml-4 mr-4" />

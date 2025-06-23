@@ -4,6 +4,8 @@ import dbGetMessages from '../../../server/utils/dbGetMessages';
 import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
 
+
+// *******NEEDS TO BE UPDATED TO HANDLE REALTIME ROW IN CONVERSATION TABLE*******
 export async function POST(event: RequestEvent) {
     // Authenticate and get user ID
     const cookies = cookie.parse(event.request.headers.get('cookie') || '');

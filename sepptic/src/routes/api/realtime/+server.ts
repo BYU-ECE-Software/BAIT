@@ -1,5 +1,23 @@
 import { json, RequestEvent } from "@sveltejs/kit";
 
+
+
+export async function GET(event: RequestEvent) {
+  console.log("Fetching cost info from OpenAI");
+  try {
+    const response = await fetch("https://api.openai.com/v1/organization/costs", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${process.env.ADMIN_API_KEY}`, // This will require an **ADMIN API KEY** 
+        "Content-Type": "application/json"
+      }
+    })
+
+    console.log(response);
+  } catch (err) {
+    console.error("Error getting Cost info from OpenAI:", err);
+  }
+}
 // An endpoint which would work with the client code above - it returns
 // the contents of a REST API request to this protected endpoint
 export async function POST(event: RequestEvent) {

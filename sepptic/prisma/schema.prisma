@@ -12,6 +12,7 @@ model Conversation {
   User_ID         Int
   Campaign_ID     Int
   Character_ID    Int
+  Realtime        Boolean?  @default(false)
   User            User      @relation(fields: [User_ID], references: [User_ID], onUpdate: Restrict, map: "Conversation_ibfk_1")
   Message         Message[]
 

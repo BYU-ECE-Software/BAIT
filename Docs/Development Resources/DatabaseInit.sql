@@ -13,6 +13,7 @@ CREATE TABLE Conversation (
     User_ID INT NOT NULL,
     Campaign_ID INT NOT NULL,
     Character_ID INT NOT NULL,
+    Realtime BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (User_ID) REFERENCES User(User_ID) ON UPDATE RESTRICT
 );
 

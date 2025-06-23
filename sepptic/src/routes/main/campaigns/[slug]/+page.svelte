@@ -280,6 +280,7 @@
                             campaignId={data.slug}
                             prompt={$selectedCharacter.Prompt}
                             voice={$selectedCharacter.Voice}
+                            CallLimit={$selectedCharacter.CallLimit}
                         />
                         {/key}
                     </div>

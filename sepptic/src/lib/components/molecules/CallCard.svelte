@@ -8,6 +8,7 @@
   export let campaignId: number | string;  // campaign identifier
   export let prompt: string; // prompt for the AI model
   export let voice: string; // Base voice model for the AI
+  export let CallLimit: number; // Call limit for timeout in miliseconds (60000 per minute)
 
   // -- Will be used to handle pulling in fresh transcript from database if present --
   onMount(() => {
@@ -153,7 +154,7 @@
       setTimeout(() => {
         endCall();
         console.log("Timeout has been reached, call has been ended.")
-      }, 1000 * 60 * 5) // <-- Replace with CallLimit
+      }, CallLimit) // <-- Replace with CallLimit
       
       } catch (err) {
       console.error('Error starting call:', err);

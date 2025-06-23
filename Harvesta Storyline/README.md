@@ -50,7 +50,7 @@ The solution is Vernal, Utah.
 
 Intended Path to Solution
 The player must deduce the final location after collectiing scattered bits of information from each of the characters, which will allow them to piece together the complete picture. 
-These bits of information are as follows: 
+These bits of critical information are as follows: 
 1. "The C-suite mandates the least overall expensive location." - Jackson Knepper
 2. "The Salt Lake City location failed because the building had lead paint and would be too expensive to remodel." - Tony Flagg
 3. "The Park City location's owner doesn't want to sell to a large corporation" - Ann Gunn
@@ -64,3 +64,8 @@ Specifically, the player must Social Engineer at minimum:
 - Ann Gunn, for the location that failed because of seller holdout (Park City)
 - Tony Flagg, for the location that failed because of lead paint (Salt Lake City)
 
+## Other Plot Details
+1. Elara and Jane are designed to be easy to engineer "pointer" characters who can direct the player to other characters and provide useful tips on how to social engineer them. 
+2. James is a red herring character; he doesn't know any information of direct relevance. However, he has some hints that can be used to social engineer Don. 
+3. Don Draper is the hardest to social engineer, but has a critical piece of information: all the names of the three locations. 
+4. Ann Gunn, Tony Flagg, and Jackson Knepper are meant to be medium difficulty to social engineer, while Elara and Jane are meant to be easy. 

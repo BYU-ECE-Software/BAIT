@@ -136,6 +136,8 @@ export async function GET(event: RequestEvent) {
     const url         = new URL(event.request.url);
     const campaignId  = Number(url.searchParams.get('campaignId'));
     const characterId = Number(url.searchParams.get('characterId'));
+    const call = Boolean(url.searchParams.get('call')) // Sets Realtime true or not
+    console.log(`This is the value of call before dbCreateConversation ${call}`)
 
     if (isNaN(campaignId) || isNaN(characterId)) {
       return new Response(
@@ -146,7 +148,7 @@ export async function GET(event: RequestEvent) {
 
     console.log("Calling dbCreateConversation", userId, campaignId, characterId);
     // — ensure conversation exists —
-    const convoRes = await dbCreateConversation(userId, campaignId, characterId);
+    const convoRes = await dbCreateConversation(userId, campaignId, characterId, call);
     if (convoRes.status !== 200 || !convoRes.conversationId) {
       return new Response(
         JSON.stringify({ message: 'No conversation found', detail: convoRes }),

@@ -16,7 +16,7 @@ export async function POST(event: RequestEvent) {
         return new Response(JSON.stringify({ message: userIdResponse.message, status: userIdResponse.status }), { status: userIdResponse.status });
     }
     const userId = userIdResponse.userId;
-
+ 
     // Create conversation
     const body = await event.request.json();
     const campaignId = body.campaignId;

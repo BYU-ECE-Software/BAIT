@@ -11,14 +11,24 @@
   export let CallLimit: number; // Call limit for timeout in miliseconds (60000 per minute)
 
   // -- Will be used to handle pulling in fresh transcript from database if present --
-  onMount(() => {
-  //   console.log("Call component is being built")
-  //   if (//Databse function here) {
-  //   console.log("Retriving transcript from database");
-  //   // Placeholder for code that will pull transcript from database
-  //   } else {
-  //     console.log("No transcript found in database, starting new conversation");
-  //   }
+  onMount(async () => {
+  console.log('Fetching call transcript for', { campaignId, characterId});
+    try {
+      const res = await fetch(
+        `/api/message?campaignId=${campaignId}&characterId=${characterId}&call=true`,
+        { credentials: 'include' }
+      );
+      console.log('GET /api/message status', res.status);
+      if (res.ok) {
+        console.log("Transcript aquired");
+      } else if (res.status === 404) {
+        console.log('No history found (404)');
+      } else {
+        console.error('Fetch error:', res.statusText);
+      }
+    } catch (err) {
+      console.error('Network error:', err);
+    }
   });
 
   // — onDestroy called to wipe call session before user can move to another card, prevents multiple RTC sessions at once 

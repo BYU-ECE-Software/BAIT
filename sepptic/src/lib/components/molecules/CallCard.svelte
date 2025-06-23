@@ -57,16 +57,16 @@
   let mm = 0;
   let ss = 0;
 
-  function beginTimer() {
-    let start = Date.now();
-    setInterval(() => {
-      ss += 1;
-      if (ss == 60) {
-        mm += 1;
-        ss = 0;
-      }
-    }, 1000)
-  }
+  // function beginTimer() {
+  //   let start = Date.now();
+  //   setInterval(() => {
+  //     ss += 1;
+  //     if (ss == 60) {
+  //       mm += 1;
+  //       ss = 0;
+  //     }
+  //   }, 1000)
+  // } // Might adjust this and keep it in production, but it was mostly for testing the call timeout
 
   async function startCall() {
     console.log('Starting call...');
@@ -150,7 +150,7 @@
       start = Date.now();
 
       // Set maximum call duration and display remaining time based on Call Limit
-      beginTimer();
+      //beginTimer();
       setTimeout(() => {
         endCall();
         console.log("Timeout has been reached, call has been ended.")

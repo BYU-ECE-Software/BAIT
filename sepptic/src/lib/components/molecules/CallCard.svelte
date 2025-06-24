@@ -8,16 +8,27 @@
   export let campaignId: number | string;  // campaign identifier
   export let prompt: string; // prompt for the AI model
   export let voice: string; // Base voice model for the AI
+  export let CallLimit: number; // Call limit for timeout in miliseconds (60000 per minute)
 
   // -- Will be used to handle pulling in fresh transcript from database if present --
-  onMount(() => {
-  //   console.log("Call component is being built")
-  //   if (//Databse function here) {
-  //   console.log("Retriving transcript from database");
-  //   // Placeholder for code that will pull transcript from database
-  //   } else {
-  //     console.log("No transcript found in database, starting new conversation");
-  //   }
+  onMount(async () => {
+  console.log('Fetching call transcript for', { campaignId, characterId});
+    try {
+      const res = await fetch(
+        `/api/message?campaignId=${campaignId}&characterId=${characterId}&call=true`,
+        { credentials: 'include' }
+      );
+      console.log('GET /api/message status', res.status);
+      if (res.ok) {
+        console.log("Transcript aquired");
+      } else if (res.status === 404) {
+        console.log('No history found (404)');
+      } else {
+        console.error('Fetch error:', res.statusText);
+      }
+    } catch (err) {
+      console.error('Network error:', err);
+    }
   });
 
   // — onDestroy called to wipe call session before user can move to another card, prevents multiple RTC sessions at once 
@@ -53,19 +64,19 @@
   let transcript: string[] = [];
 
   // -- Timer Functionality
-  let mm = 0;
-  let ss = 0;
+  // let mm = 0;
+  // let ss = 0;
 
-  function beginTimer() {
-    let start = Date.now();
-    setInterval(() => {
-      ss += 1;
-      if (ss == 60) {
-        mm += 1;
-        ss = 0;
-      }
-    }, 1000)
-  }
+  // // function beginTimer() {
+  // //   let start = Date.now();
+  // //   setInterval(() => {
+  // //     ss += 1;
+  // //     if (ss == 60) {
+  // //       mm += 1;
+  // //       ss = 0;
+  // //     }
+  // //   }, 1000)
+  // // } // Might adjust this and keep it in production, but it was mostly for testing the call timeout
 
   async function startCall() {
     console.log('Starting call...');
@@ -149,11 +160,11 @@
       start = Date.now();
 
       // Set maximum call duration and display remaining time based on Call Limit
-      beginTimer();
+      //beginTimer();
       setTimeout(() => {
         endCall();
         console.log("Timeout has been reached, call has been ended.")
-      }, 1000 * 60 * 5) // <-- Replace with CallLimit
+      }, CallLimit) // <-- Replace with CallLimit
       
       } catch (err) {
       console.error('Error starting call:', err);
@@ -223,9 +234,6 @@
         </div>
       </div>
     {/if}
-    <div>
-      <h2>{mm}:{ss}</h2>
-    </div>
   </div>
 </div>
 

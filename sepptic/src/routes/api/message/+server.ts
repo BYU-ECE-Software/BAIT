@@ -3,6 +3,7 @@ import dbCreateConversation from '../../../server/utils/dbCreateConversation';
 import dbGetMessages from '../../../server/utils/dbGetMessages';
 import aiSendMessage from '../../../server/utils/aiSendMessage';
 import dbCreateMessages from '../../../server/utils/dbCreateMessage';
+import dbGetTranscript from '../../../server/utils/dbGetTranscript';
 import { jsonGetCampaign } from '../../../server/utils/jsonGetCampaigns';
 import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
@@ -26,17 +27,18 @@ export async function POST(event: RequestEvent) {
     }
 
     const userId = userIdResponse.userId;
-    const { campaignId, characterId, message } = body;
+    const { campaignId, characterId, call, message} = body;
 
     if (!campaignId || !characterId || !message) {
       console.warn('❗ Missing fields:', { campaignId, characterId, message });
       return new Response(
-        JSON.stringify({ message: 'Missing campaignId, characterId, or message' }),
+        JSON.stringify({ message: 'Missing campaignId, characterId, message' }),
         { status: 400 }
       );
     }
 
-    const conversationResult = await dbCreateConversation(userId, campaignId, characterId);
+    // Currently only messages use this function so we can assume call is set to false for now
+    const conversationResult = await dbCreateConversation(userId, campaignId, characterId, call);
     if (conversationResult.status !== 200 || !conversationResult.conversationId) {
       console.error('❌ dbCreateConversation failed:', conversationResult);
       return new Response(
@@ -136,6 +138,8 @@ export async function GET(event: RequestEvent) {
     const url         = new URL(event.request.url);
     const campaignId  = Number(url.searchParams.get('campaignId'));
     const characterId = Number(url.searchParams.get('characterId'));
+    const call = Boolean(url.searchParams.get('call')) // Sets Realtime true or not
+    console.log(`This is the value of call before dbCreateConversation ${call}`)
 
     if (isNaN(campaignId) || isNaN(characterId)) {
       return new Response(
@@ -146,7 +150,7 @@ export async function GET(event: RequestEvent) {
 
     console.log("Calling dbCreateConversation", userId, campaignId, characterId);
     // — ensure conversation exists —
-    const convoRes = await dbCreateConversation(userId, campaignId, characterId);
+    const convoRes = await dbCreateConversation(userId, campaignId, characterId, call);
     if (convoRes.status !== 200 || !convoRes.conversationId) {
       return new Response(
         JSON.stringify({ message: 'No conversation found', detail: convoRes }),
@@ -155,25 +159,43 @@ export async function GET(event: RequestEvent) {
     }
     console.log("Conversation result:", convoRes);
 
-    // — fetch messages —
-    console.log("Fetching messages for convoId:", convoRes.conversationId);
-    const msgsRes = await dbGetMessages(convoRes.conversationId);
-    if (msgsRes.status !== 200 || !msgsRes.messages) {
+    if(call) {
+      console.log("Call is set as true, fetching transcript")
+      const trans = await dbGetTranscript(convoRes.conversationId);
+      if (trans.status === 404) {
+        return new Response(
+          JSON.stringify({message: "Error fetching transcript", detail: trans.message}),
+          { status: trans.status, headers: { 'Content-Type': 'application/json' } }
+        )
+      } else if (trans.status === 200) {
+      console.log("Transcript result:", trans);
       return new Response(
-        JSON.stringify({ message: 'Error fetching messages', detail: msgsRes.message }),
-        { status: msgsRes.status, headers: { 'Content-Type': 'application/json' } }
+        JSON.stringify({ messages: trans.transcript }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
+      }
+
+    } else if (!call) {
+      // — fetch messages —
+      console.log("Fetching messages for convoId:", convoRes.conversationId);
+      const msgsRes = await dbGetMessages(convoRes.conversationId);
+      if (msgsRes.status !== 200 || !msgsRes.messages) {
+        return new Response(
+          JSON.stringify({ message: 'Error fetching messages', detail: msgsRes.message }),
+          { status: msgsRes.status, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+      console.log("Messages result:", msgsRes);
+      // — success →
+      return new Response(
+        JSON.stringify({ messages: msgsRes.messages }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
       );
     }
-    console.log("Messages result:", msgsRes);
-
-    // — success →
-    return new Response(
-      JSON.stringify({ messages: msgsRes.messages }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
-    );
+    
 
   } catch (err) {
-    console.error('💥 GET /api/message error', err);
+    console.error('GET /api/message error', err);
     return new Response(
       JSON.stringify({ message: 'Internal server error', error: String(err) }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }

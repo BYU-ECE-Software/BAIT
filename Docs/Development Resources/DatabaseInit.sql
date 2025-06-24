@@ -13,6 +13,7 @@ CREATE TABLE Conversation (
     User_ID INT NOT NULL,
     Campaign_ID INT NOT NULL,
     Character_ID INT NOT NULL,
+    Realtime BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (User_ID) REFERENCES User(User_ID) ON UPDATE RESTRICT
 );
 
@@ -25,6 +26,14 @@ CREATE TABLE Intel (
     FOREIGN KEY (User_ID) REFERENCES User(User_ID) ON UPDATE RESTRICT
 );
 
+CREATE TABLE Transcript (
+    Transcript_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Text TEXT NOT NULL,
+    Timestamp DATETIME NOT NULL,
+    Conversation_ID INT NOT NULL,
+    FOREIGN KEY (Conversation_ID) REFERENCES Conversation(Conversation_ID) ON UPDATE RESTRICT
+)
+
 CREATE TABLE Message (
     Message_ID INT AUTO_INCREMENT PRIMARY KEY,
     User_Sent BOOLEAN DEFAULT FALSE,
@@ -33,14 +42,6 @@ CREATE TABLE Message (
     Conversation_ID INT NOT NULL,
     FOREIGN KEY (Conversation_ID) REFERENCES Conversation(Conversation_ID) ON UPDATE RESTRICT
 );
-
-CREATE TABLE Transcription (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
-    Transcription TEXT NOT NULL,
-    Timestamp DATETIME NOT NULL,
-    Conversation_ID INT NOT NULL,
-    FOREIGN KEY (Conversation_ID) REFERENCES Conversation(Conversation_ID) ON UPDATE RESTRICT
-)
 
 CREATE TABLE Session (
     Token VARCHAR(255) PRIMARY KEY,

@@ -26,6 +26,14 @@ CREATE TABLE Intel (
     FOREIGN KEY (User_ID) REFERENCES User(User_ID) ON UPDATE RESTRICT
 );
 
+CREATE TABLE Transcript (
+    Transcript_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Text TEXT NOT NULL,
+    Timestamp DATETIME NOT NULL,
+    Conversation_ID INT NOT NULL,
+    FOREIGN KEY (Conversation_ID) REFERENCES Conversation(Conversation_ID) ON UPDATE RESTRICT
+)
+
 CREATE TABLE Message (
     Message_ID INT AUTO_INCREMENT PRIMARY KEY,
     User_Sent BOOLEAN DEFAULT FALSE,

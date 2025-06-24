@@ -73,6 +73,7 @@
         body: JSON.stringify({
           campaignId: Number(campaignId),
           characterId,
+          call: false,
           message: text,
           role: 'user'
         })

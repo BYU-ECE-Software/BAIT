@@ -49,6 +49,7 @@ async function writeConversation(userId: number, campaignId: number, characterId
 
 // Main function to create a new conversation for a user in the database. Returns an object with the conversationId, message, and status.
 export default async function dbCreateConversation(userId: number, campaignId: number, characterId: number, call:boolean) {
+  
   if(call) {
     console.log('Creating realtime call for:', { userId, campaignId, characterId, call });
   }

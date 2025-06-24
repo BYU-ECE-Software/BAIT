@@ -27,7 +27,7 @@ export async function POST(event: RequestEvent) {
     }
 
     const userId = userIdResponse.userId;
-    const { campaignId, characterId, message} = body;
+    const { campaignId, characterId, call, message} = body;
 
     if (!campaignId || !characterId || !message) {
       console.warn('❗ Missing fields:', { campaignId, characterId, message });
@@ -37,7 +37,8 @@ export async function POST(event: RequestEvent) {
       );
     }
 
-    const conversationResult = await dbCreateConversation(userId, campaignId, characterId,);
+    // Currently only messages use this function so we can assume call is set to false for now
+    const conversationResult = await dbCreateConversation(userId, campaignId, characterId, call);
     if (conversationResult.status !== 200 || !conversationResult.conversationId) {
       console.error('❌ dbCreateConversation failed:', conversationResult);
       return new Response(
@@ -161,17 +162,18 @@ export async function GET(event: RequestEvent) {
     if(call) {
       console.log("Call is set as true, fetching transcript")
       const trans = await dbGetTranscript(convoRes.conversationId);
-      if (trans.status !== 200) {
+      if (trans.status === 404) {
         return new Response(
           JSON.stringify({message: "Error fetching transcript", detail: trans.message}),
           { status: trans.status, headers: { 'Content-Type': 'application/json' } }
         )
-      }
+      } else if (trans.status === 200) {
       console.log("Transcript result:", trans);
       return new Response(
-        JSON.stringify({ messages: trans.messages }),
+        JSON.stringify({ messages: trans.transcript }),
         { status: 200, headers: { 'Content-Type': 'application/json' } }
       );
+      }
 
     } else if (!call) {
       // — fetch messages —

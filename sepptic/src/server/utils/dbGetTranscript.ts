@@ -5,18 +5,37 @@ export default async function dbGetTranscript(conversationId: number) {
     const prisma = new PrismaClient();
 
     try {
-        const trans = await prisma.transcript.findFirst({
+        let trans = await prisma.transcript.findFirst({
             where: {
                 Conversation_ID: conversationId
             },
         })
 
-        console.log(trans.Transcript); 
-        return trans.Transcript
-
-        
+        if (trans === null) {
+            trans = await prisma.transcript.create({
+                data: {
+                    Text: "",
+                    Timestamp: new Date().toISOString(),
+                    Conversation_ID: conversationId,
+                }
+            })
+            return {
+                status: 200,
+                message: "No transcript found, empty transcript created"
+            }
+        } // creating blank transcript to prevent null return
+        else {
+            console.log(trans.Text); 
+            return {
+                status: 200,
+                message: "Transcript found successfully"
+            }
+        }
     } catch (err) {
-        console.error(`Error grabbing transcript from ${conversationId}`, err);
+        return {
+            message: 'Error creating messages: ' + err,
+            status: 500
+        };
     }
 
 }

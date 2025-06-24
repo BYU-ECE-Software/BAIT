@@ -27,9 +27,12 @@
 
 <Navbar color="dark">
     <NavBrand href="/">
-        <img src="/SEPPTIC.png" class="me-3 h-6 sm:h-9" alt="SEPPTIC logo" />
+            <!-- Light mode logo -->
+            <img src="/BAIT.png" class="me-3 h-6 sm:h-9 rounded-md dark:hidden" alt="SEPPTIC logo light" />
+            <!-- Dark mode logo -->
+            <img src="/BAIT-modified.png" class="me-3 h-6 sm:h-9 rounded-md hidden dark:block" alt="SEPPTIC logo dark" />
         <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-seppticRed-600 text-seppticRed-600">
-            SEPPTIC
+            BAIT
         </span>
     </NavBrand>
 

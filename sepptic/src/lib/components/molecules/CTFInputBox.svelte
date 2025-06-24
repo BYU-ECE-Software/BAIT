@@ -20,15 +20,14 @@
   
   // Just log if the value includes the answer
   function checkFlag(value: string): void {
-    const result = value.includes(answer);
-    console.log(`Checking flag: "${value}" contains "${answer}"? →`, result);
-    if (result) {
+  const result = value.toLowerCase().includes(answer.toLowerCase());
+  console.log(`Checking flag: "${value}" contains "${answer}"? →`, result);
+  if (result) {
     showModal = true;
-  }
-  if (!result) {
+  } else {
     failshowModal = true;
   }
-  }
+}
 
   function handleSubmit(e: Event) {
     e.preventDefault();
@@ -41,7 +40,7 @@ let failshowModal = false;
 </script>
 
 <!-- Container: blue box with padding and rounded corners -->
-<div class="bg-blue-500 border border-blue-500 rounded-lg p-6 mx-auto">
+<div class="bg-blue-500 border border-blue-500 rounded-lg p-6 mx-auto dark:bg-blue-600 dark:border-blue-600">
   <!-- Question at the top -->
   <p class="text-white font-semibold text-lg mb-4">{question}</p>
 
@@ -52,21 +51,23 @@ let failshowModal = false;
       type="text"
       bind:value={flag}
       placeholder={placeholder}
-      class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      class="w-full px-4 py-2 border border-blue-300 dark:border-blue-600 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
 
     <!-- Submit button -->
     <button
       type="submit"
-      class="max-w-sm px-4 py-2 bg-gray-800 text-white rounded-lg shadow hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      class="max-w-sm px-4 py-2 bg-gray-800 text-white rounded-lg shadow hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-300"
     >
       Submit
     </button>
   </form>
+
   {#if showModal}
-  <Congratulations onClose={() => (showModal = false)} show={true} />
+    <Congratulations onClose={() => (showModal = false)} show={true} />
   {/if}
+
   {#if failshowModal}
-  <Failure onClose={() => (failshowModal = false)} show={true} />
+    <Failure onClose={() => (failshowModal = false)} show={true} />
   {/if}
 </div>

@@ -1,7 +1,6 @@
 import type { PageServerLoad } from "./$types";
 import { error } from '@sveltejs/kit'
 
-
 export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const sessionToken = cookies.get('token');
     const slug = params.slug;
@@ -47,7 +46,5 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
             };
         }
     }
-    
-    return { campaign, user, slug, messagesByCharacter};
+    return { campaign, user, slug, messagesByCharacter };
 };
-

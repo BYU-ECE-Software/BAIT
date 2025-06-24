@@ -21,14 +21,16 @@ export default async function dbGetTranscript(conversationId: number) {
             })
             return {
                 status: 200,
-                message: "No transcript found, empty transcript created"
+                message: "No transcript found, empty transcript created",
+                data: trans.Text
             }
         } // creating blank transcript to prevent null return
         else {
             console.log(trans.Text); 
             return {
                 status: 200,
-                message: "Transcript found successfully"
+                message: "Transcript found successfully",
+                data: trans.Text
             }
         }
     } catch (err) {

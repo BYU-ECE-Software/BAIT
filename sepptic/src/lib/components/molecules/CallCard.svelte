@@ -178,18 +178,30 @@
   async function endCall() {
     // Placeholder for ending call functionality
     console.log('Ending call...');
-
-    // Implement logic to end the call session
     currentCall = 0;
 
+    //Remove timeout
     if (timeoutId !== null) {
       console.log("Timeout destroyed")
       clearTimeout(timeoutId);
       timeoutId = null;
     }
 
+    // Send transcript to DB through API
     try {
-      // Filler for code that will store transcript array in database
+      const response = fetch("/api/transcript", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          campaignId: Number(campaignId),
+          characterId,
+          call: true,
+          transcript: transcript
+        })
+      })
     } catch (err) {
       console.error("Error storing transcript in database:", err);
     }

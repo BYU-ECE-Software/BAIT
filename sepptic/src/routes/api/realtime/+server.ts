@@ -18,8 +18,8 @@ export async function GET(event: RequestEvent) {
     console.error("Error getting Cost info from OpenAI:", err);
   }
 }
-// An endpoint which would work with the client code above - it returns
-// the contents of a REST API request to this protected endpoint
+
+
 export async function POST(event: RequestEvent) {
 
   const body = await event.request.json();

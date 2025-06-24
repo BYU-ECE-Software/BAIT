@@ -37,7 +37,6 @@ export async function POST(event: RequestEvent) {
       );
     }
 
-    // Currently only messages use this function so we can assume call is set to false for now
     const conversationResult = await dbCreateConversation(userId, campaignId, characterId, call);
     if (conversationResult.status !== 200 || !conversationResult.conversationId) {
       console.error('❌ dbCreateConversation failed:', conversationResult);
@@ -159,6 +158,7 @@ export async function GET(event: RequestEvent) {
     }
     console.log("Conversation result:", convoRes);
 
+    // Realtime AI transcript logic
     if(call) {
       console.log("Call is set as true, fetching transcript")
       const trans = await dbGetTranscript(convoRes.conversationId);
@@ -170,7 +170,7 @@ export async function GET(event: RequestEvent) {
       } else if (trans.status === 200) {
       console.log("Transcript result:", trans);
       return new Response(
-        JSON.stringify({ messages: trans.transcript }),
+        JSON.stringify({ messages: trans.data }),
         { status: 200, headers: { 'Content-Type': 'application/json' } }
       );
       }

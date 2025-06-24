@@ -5,7 +5,7 @@
 
 {#if show}
   <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-2xl shadow-xl p-8 relative w-full max-w-md text-center">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 relative w-full max-w-md text-center">
       <!-- Close Button -->
       <button
         class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl font-bold"
@@ -16,8 +16,8 @@
       </button>
 
       <!-- Content -->
-      <h2 class="text-2xl font-bold mb-4 text-red-600">Failure</h2>
-      <p class="text-gray-700">You've failed to completed the task.</p>
+      <h2 class="text-2xl font-bold mb-4 dark:text-red-400 text-red-600">Failure</h2>
+      <p class="text-gray-700 dark:text-gray-300 ">The Address was not in your answer. Check your spelling.</p>
     </div>
   </div>
 {/if}

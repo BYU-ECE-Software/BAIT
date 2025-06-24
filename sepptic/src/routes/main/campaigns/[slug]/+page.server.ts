@@ -1,49 +1,5 @@
 import type { PageServerLoad } from "./$types";
-
-function calculateProgresses(userProgress: any, campaign: any, slug: string) {
-    let progresses: { campaign: number, characters: { [key: string]: number } } = {
-        'campaign': 0,
-        'characters': {}
-    };
-    if (!userProgress.intelByCampaign[slug]){
-        return progresses;
-    }
-    const userTotalIntel = userProgress.intelByCampaign[slug].length;
-    const totalCampaignIntel = campaign.Campaign_Information.Total_Intel;
-    const campaignProgress = Math.floor((userTotalIntel / totalCampaignIntel) * 100);
-    progresses['campaign'] = campaignProgress;
-    
-    let characterProgresses: { [key: string]: number } = {};
-    campaign.Characters.forEach((character: any) => {
-        const characterIntel = character.Total_Intel;
-        const userCharacterIntel = userProgress.intelByCampaign[slug].filter((intel: any) => intel.Character_ID === character.ID).length;
-        const characterProgress = Math.floor((userCharacterIntel / characterIntel) * 100);
-        characterProgresses[character.ID] = characterProgress;
-    });
-    progresses['characters'] = characterProgresses;
-    return progresses;
-}
-
-function checkIntel(userProgress: any, campaignId: string, characterId: number, intelId: number) {
-    if (!userProgress.intelByCampaign[campaignId]){
-        return false;
-    }
-    const intel = userProgress.intelByCampaign[campaignId].filter((intel: any) => intel.Character_ID === characterId && intel.Intel_ID === intelId);
-    return intel.length > 0;
-}
-
-function parseUserIntels(userProgress: any, campaignId: string, campaign: any) {
-    let userIntels: { [characterId: number]: { [intelId: number]: boolean } } = {};
-    campaign.Characters.forEach((character: any) => {
-        character.Intel.forEach((intel: any) => {
-            if (!userIntels[character.ID]){
-                userIntels[character.ID] = {};
-            }
-            userIntels[character.ID][intel.Intel_ID] = checkIntel(userProgress, campaignId, character.ID, intel.Intel_ID);
-        });
-    });
-    return userIntels;
-}
+import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const sessionToken = cookies.get('token');
@@ -57,33 +13,40 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
         headers: { 'Authorization': `Bearer ${sessionToken}` }
     });
 
-    const userProgressResponse = await fetch('/api/progress', {
-        headers: { 'Authorization': `Bearer ${sessionToken}` }
-    });
-
-    const userProgress = await userProgressResponse.json();
     const campaignJson = await campaignsResponse.json();
     const userJson = await userResponse.json();
+
+    // ❌ If campaign or Characters is missing, fail safely
+    if (!campaignJson?.data || !Array.isArray(campaignJson.data.Characters)) {
+        console.error("❌ Campaign data or characters missing:", campaignJson);
+        throw error(500, 'Campaign data malformed or missing.');
+    }
+
     const campaign = campaignJson.data;
     const user = userJson;
-    const progresses = calculateProgresses(userProgress, campaign, slug);
-    const userIntels = parseUserIntels(userProgress, slug, campaign);
 
     let messagesByCharacter: { [characterName: string]: { id: number, messages: any[] } } = {};
 
-    for (const character of campaign.Characters) {
-        const messagesResponse = await fetch(`/api/conversation?campaignId=${slug}&characterId=${character.ID}`, {
-            headers: { 'Authorization': `Bearer ${sessionToken}` }
-        });
+    for (const character of campaign.Characters ?? []) {
+        try {
+            const messagesResponse = await fetch(`/api/conversation?campaignId=${slug}&characterId=${character.ID}`, {
+                headers: { 'Authorization': `Bearer ${sessionToken}` }
+            });
 
-        const messagesJson = await messagesResponse.json();
+            const messagesJson = await messagesResponse.json();
 
-        messagesByCharacter[character.Name] = {
-            id: character.ID,
-            messages: messagesJson.messages || [] // ✅ Send all messages without filtering
-        };
+            messagesByCharacter[character.Name] = {
+                id: character.ID,
+                messages: messagesJson.messages || []
+            };
+        } catch (err) {
+            console.warn(`⚠️ Failed to load messages for character ${character.Name}:`, err);
+            messagesByCharacter[character.Name] = {
+                id: character.ID,
+                messages: []
+            };
+        }
     }
 
-    return { campaign, user, slug, progresses, userProgress, userIntels, messagesByCharacter };
+    return { campaign, user, slug, messagesByCharacter };
 };
-

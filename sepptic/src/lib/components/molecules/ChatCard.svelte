@@ -117,15 +117,17 @@
 </script>
 
 <style>
-  .call {
-    background: green;
-    color: white;
+  :global(.dark) .chat-container {
+    background-color: #1f2937; /* gray-800 */
+    color: #f9fafb; /* gray-50 */
   }
+
   .chat-container {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
+
   .messages {
     flex-grow: 1;
     display: flex;
@@ -136,31 +138,56 @@
     border-radius: 0.5rem;
     background: #f9f9f9;
   }
+
+  :global(.dark) .messages {
+    border-color: #4b5563; /* gray-600 */
+    background: #111827; /* gray-900 */
+  }
+
   .message {
     margin-bottom: 0.75rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
     max-width: 70%;
   }
+
   .message.user {
     align-self: flex-end;
     background: #d0f0fd;
     text-align: right;
     margin-left: auto;
   }
+
+  :global(.dark) .message.user {
+    background: #2563eb; /* blue-600 */
+    color: white;
+  }
+
   .message.ai {
     align-self: flex-start;
     background: #eee;
     margin-right: auto;
   }
+
+  :global(.dark) .message.ai {
+    background: #374151; /* gray-700 */
+    color: #f9fafb;
+  }
+
   .message.typing {
     font-style: italic;
     color: #888;
   }
+
+  :global(.dark) .message.typing {
+    color: #9ca3af; /* gray-400 */
+  }
+
   .input-area {
     display: flex;
     padding: 0.5rem 0;
   }
+
   .input-area textarea {
     flex-grow: 1;
     resize: none;
@@ -168,6 +195,13 @@
     border: 1px solid #ccc;
     border-radius: 0.25rem;
   }
+
+  :global(.dark) .input-area textarea {
+    background-color: #1f2937; /* gray-800 */
+    color: #f9fafb;
+    border-color: #4b5563; /* gray-600 */
+  }
+
   .input-area button {
     margin-left: 0.5rem;
     padding: 0.5rem 1rem;
@@ -177,7 +211,12 @@
     color: white;
     cursor: pointer;
   }
+
+  :global(.dark) .input-area button {
+    background: #2563eb; /* blue-600 */
+  }
 </style>
+
 {#if size == 0}
   <div class="chat-container">
   <div class="messages" bind:this={messagesContainer}>

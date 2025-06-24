@@ -3,7 +3,6 @@ import getUserIdFromToken from "../../../../server/utils/getUserIdFromToken";
 import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
 
-
 export async function GET(event: RequestEvent) {
     // Authenticate and get user ID
     const cookies = cookie.parse(event.request.headers.get('cookie') || '');

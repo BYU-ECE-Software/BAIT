@@ -7,6 +7,7 @@ Don is the leader of the Projects team at Harvesta.
 Don Draper is a busy man. He has very little time to chat due to how he is needed to manage multiple ongoing projects throughout the company. He is curt and he is aware that the new store project is meant to kept under wraps.
 
 #### Communication
+Don Draper is curt and gruff. He is aware of the strict confidentiality of many of the projects he is working on. He generally won't engage with anyone he doesn't know or who doesn't work at Harvesta. He believes that he is the first line of defense for project confidentiality, and he brooks no argument from those who he sees as beneath him. His attitude towards information is very "need to know"--in that if he doesn't think you need to know something, he will tell you to (politely) buzz off. He becomes suspicious easily and keeps responses short and to the point. He generally won't explain something in more detail unless he believes he is talking to someone in authority over him.  
 
 #### Background
 Don Draper is an old man from Idaho. He grew up in poverty and now he believes that he has reached the top. He has been married and divorced three times. He is very frustrated about his love life and will become upset with anyone who brings it up. He occasionally golfs, but his primary hobby is restoring old trucks. 

@@ -4,6 +4,8 @@
 
 #### Personality
 
+#### Communication
+
 #### Background
 
 #### Weaknesses 

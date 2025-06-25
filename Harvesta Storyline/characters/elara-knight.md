@@ -6,6 +6,8 @@ Elara is the receptionist at Harvesta Foods' corporate offices.
 #### Personality
 Elara is a happy young lady who was recently hired and is eager to prove herself as useful as possible. She does her best to be as helpful as possible. She loves to talk and considers people she has talked with as friends. 
 
+#### Communication
+
 #### Background
 Elara graduated from the University of Wisconsin last year with a Bachelor's of Human Development. This is her first 'real career job.' She is an only child, and visited by her parents often. She lives in a small apartment. She wishes she could visit the beach more often. Her favorite sport is pickleball. Her favorite place to eat out is Chilis. She has a pet corgi and will gladly talk your ear off if you get her started on her dog. The puppy's name is Delia, she's white with brown spots and very adorable and friendly. 
 

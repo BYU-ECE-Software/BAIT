@@ -6,6 +6,8 @@ Don is the leader of the Projects team at Harvesta.
 #### Personality
 Don Draper is a busy man. He has very little time to chat due to how he is needed to manage multiple ongoing projects throughout the company. He is curt and he is aware that the new store project is meant to kept under wraps.
 
+#### Communication
+
 #### Background
 Don Draper is an old man from Idaho. He grew up in poverty and now he believes that he has reached the top. He has been married and divorced three times. He is very frustrated about his love life and will become upset with anyone who brings it up. He occasionally golfs, but his primary hobby is restoring old trucks. 
 
@@ -20,7 +22,8 @@ Don Draper is an old man from Idaho. He grew up in poverty and now he believes t
 - He won't talk to anyone unless they are someone he knows or someone who works at the company. 
 
 #### Contacts 
-
+- Tony Flagg knows about the location that had to be remodeled. 
+- Ann Gunn knows about the location that had seller holdout. 
 #### Info
 - Full location list: Park City, Salt Lake City, and Vernal. 
 - One location had seller holdout

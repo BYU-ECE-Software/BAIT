@@ -67,7 +67,8 @@
   let pc: RTCPeerConnection | null = null;
   let ms: MediaStream | null = null; // MediaStream for microphone input
 
-  let transcript: string | null;
+  // Transcript storage variable
+  let transcript: string = "";
 
   function exitAudio() {
     const audio = document.createElement("audio");

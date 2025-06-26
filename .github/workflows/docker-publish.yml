@@ -40,7 +40,7 @@ jobs:
           DOCKER_BUILDKIT=1 docker build \
             --secret id=openai_key,src=openai_key.txt \
             --secret id=database_url,src=database_url.txt \
-            -t ghcr.io/BYU-ECE-Software/sepptic:latest .
+            -t ghcr.io/byu-ece-software/sepptic:latest .
 
       # Step 6: Delete secret files
       - name: Delete Secret Files
@@ -51,7 +51,7 @@ jobs:
       # Step 7: Push the Docker image to GHCR
       - name: Push Docker image to GHCR
         run: |
-          docker push ghcr.io/BYU-ECE-Software/sepptic:latest
+          docker push ghcr.io/byu-ece-software/sepptic:latest
 
       # Step 8: Stop any previously running container (optional)
       - name: Stop and remove previous container (if any)
@@ -66,4 +66,4 @@ jobs:
             --network sepptic_sepptic \
             -e DATABASE_URL=${{ secrets.CONTAINER_DATABASE_URL }} \
             -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
-            ghcr.io/BYU-ECE-Software/sepptic:latest
+            ghcr.io/byu-ece-software/sepptic:latest

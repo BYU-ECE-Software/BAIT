@@ -33,7 +33,12 @@
 
   // — onDestroy called to wipe call session before user can move to another card, prevents multiple RTC sessions at once 
   onDestroy(() => {
-    console.log("Call component is being destroyed")
+    console.log("Call component is being destroyed");
+    if (timeoutId !== null) {
+      console.log("Timeout destroyed");
+      clearTimeout(timeoutId);
+      timeoutId = null;
+    }
     try {
       pc?.close(); // Clear the peer connection to OpenAI
       pc = null; // Clear the peer connection variable
@@ -44,7 +49,7 @@
       console.log()
     }
     catch(err) {
-      console.error("onDeestroy failed to end call:", err)
+      console.error("onDestroy failed to end call:", err)
     }
   })
 
@@ -55,28 +60,21 @@
   // -- Timer management variables --
   let start = 0;
   let end = 0;
+  let timeoutId: ReturnType<typeof setTimeout> | null;
 
 
   // Declare pc at the component scope so both functions can access it
   let pc: RTCPeerConnection | null = null;
   let ms: MediaStream | null = null; // MediaStream for microphone input
 
-  let transcript: string[] = [];
+  let transcript: string | null;
 
-  // -- Timer Functionality
-  // let mm = 0;
-  // let ss = 0;
+  function exitAudio() {
+    const audio = document.createElement("audio");
+    audio.src = "/AshGoodbye.m4a";
+    audio.play().catch((e) => console.error("Audio goobye playback failed", e));
+  }
 
-  // // function beginTimer() {
-  // //   let start = Date.now();
-  // //   setInterval(() => {
-  // //     ss += 1;
-  // //     if (ss == 60) {
-  // //       mm += 1;
-  // //       ss = 0;
-  // //     }
-  // //   }, 1000)
-  // // } // Might adjust this and keep it in production, but it was mostly for testing the call timeout
 
   async function startCall() {
     console.log('Starting call...');
@@ -121,17 +119,26 @@
 
       // Set data channel for sending and receiving events
       const dc = pc.createDataChannel("realtime-chat");
+
       dc.addEventListener("message", (event) => {
+
         // Realtime server calls and responses logged in console here
         console.log(event);
+
         // Records AI output to transcript array to be use on DOM and stored when conversation ends
         const data = JSON.parse(event.data);
-        if (data.type === "response.audio_transcript.done"){
+        if (data.type === "response.audio_transcript.done") {
           console.log("Identified response end");
           let output = data.transcript;
-          transcript = [...transcript, output];
-          console.log("Current transcript array", transcript)
+          transcript = transcript + "/n" + output;
+          console.log("Current transcript array after response", transcript)
         }
+        // else if (data.type === "conversation.item.create") {
+        //   console.log("Identified User Input");
+        //   let input = data.content.text;
+        //   transcript = [...transcript, input];
+        //   console.log("Current Transcript after user input", transcript)
+        // } // A Failed attempt at capturing User input for the transcript. This will have to be done another way...
       });
 
       // Start the session using the Session Description Protocol (SDP)
@@ -159,12 +166,12 @@
       // Set call start variable
       start = Date.now();
 
-      // Set maximum call duration and display remaining time based on Call Limit
-      //beginTimer();
-      setTimeout(() => {
+      // Set maximum call duration 
+      timeoutId = setTimeout(() => {
         endCall();
         console.log("Timeout has been reached, call has been ended.")
-      }, CallLimit) // <-- Replace with CallLimit
+        exitAudio();
+      }, CallLimit)
       
       } catch (err) {
       console.error('Error starting call:', err);
@@ -174,11 +181,30 @@
   async function endCall() {
     // Placeholder for ending call functionality
     console.log('Ending call...');
-    // Implement logic to end the call session
     currentCall = 0;
 
+    //Remove timeout
+    if (timeoutId !== null) {
+      console.log("Timeout destroyed")
+      clearTimeout(timeoutId);
+      timeoutId = null;
+    }
+
+    // Send transcript to DB through API
     try {
-      // Filler for code that will store transcript array in database
+      const response = fetch("/api/transcript", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          campaignId: Number(campaignId),
+          characterId,
+          call: true,
+          transcript: transcript
+        })
+      })
     } catch (err) {
       console.error("Error storing transcript in database:", err);
     }
@@ -209,15 +235,11 @@
 
 <div class="chat-container max-h-[300px]">
   <!-- <div class="transcript m-5">
-    This is the reactive version of the code-->
-    <!-- {#each transcript as response}
+    {#each transcript as response}
     <p class="messageai">{response}</p>
     <br>
     {/each} 
-    </div>-->
-
-    <!--This is the version that prints the full transcript post conversation-->
-    
+  </div> -->
   <div> 
     {#if currentCall}
       <div class="flex flex-col gap-2 w-full">

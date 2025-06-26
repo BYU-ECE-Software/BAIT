@@ -26,7 +26,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_TOKEN }}
+          password: ${{ secrets.ECE_GHCR_TOKEN }}
 
       # Step 4: Create secret files for environment variables
       - name: Create Secret Files

@@ -3,7 +3,7 @@ import dbCreateConversation from '../../../server/utils/dbCreateConversation';
 import dbGetMessages from '../../../server/utils/dbGetMessages';
 import aiSendMessage from '../../../server/utils/aiSendMessage';
 import dbCreateMessages from '../../../server/utils/dbCreateMessage';
-import dbGetTranscript from '../../../server/utils/dbTranscript';
+import dbTranscript from '../../../server/utils/dbTranscript';
 import { jsonGetCampaign } from '../../../server/utils/jsonGetCampaigns';
 import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
@@ -161,18 +161,18 @@ export async function GET(event: RequestEvent) {
     // Realtime AI transcript logic
     if(call) {
       console.log("Call is set as true, fetching transcript")
-      const trans = await dbGetTranscript(convoRes.conversationId);
+      const trans = await dbTranscript(convoRes.conversationId);
       if (trans.status === 404) {
         return new Response(
           JSON.stringify({message: "Error fetching transcript", detail: trans.message}),
           { status: trans.status, headers: { 'Content-Type': 'application/json' } }
         )
       } else if (trans.status === 200) {
-      console.log("Transcript result:", trans);
-      return new Response(
-        JSON.stringify({ messages: trans.data }),
-        { status: 200, headers: { 'Content-Type': 'application/json' } }
-      );
+        console.log("Transcript result:", trans);
+        return new Response(
+          JSON.stringify({ data: trans.data }),
+          { status: 200, headers: { 'Content-Type': 'application/json' } }
+        );
       }
 
     } else if (!call) {

@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 export default async function dbTranscript(conversationId: number, transcript: string) {
-    console.log("Conversation Id that is passed into dbGetTranscripts", conversationId);
+    console.log("Conversation Id that is passed into dbTranscripts", conversationId);
     const prisma = new PrismaClient();
 
     try {

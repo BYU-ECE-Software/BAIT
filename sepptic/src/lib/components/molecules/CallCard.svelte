@@ -67,7 +67,7 @@
   let pc: RTCPeerConnection | null = null;
   let ms: MediaStream | null = null; // MediaStream for microphone input
 
-  let transcript: string[] = [];
+  let transcript: string | null;
 
   function exitAudio() {
     const audio = document.createElement("audio");
@@ -119,23 +119,26 @@
 
       // Set data channel for sending and receiving events
       const dc = pc.createDataChannel("realtime-chat");
+
       dc.addEventListener("message", (event) => {
+
         // Realtime server calls and responses logged in console here
         console.log(event);
+
         // Records AI output to transcript array to be use on DOM and stored when conversation ends
         const data = JSON.parse(event.data);
         if (data.type === "response.audio_transcript.done") {
           console.log("Identified response end");
           let output = data.transcript;
-          transcript = [...transcript, output];
+          transcript = transcript + "/n" + output;
           console.log("Current transcript array after response", transcript)
         }
-        else if (data.type === "conversation.item.create") {
-          console.log("Identified User Input");
-          let input = data.content.text;
-          transcript = [...transcript, input];
-          console.log("Current Transcript after user input", transcript)
-        } // A Failed attempt at capturing User input for the transcript. This will have to be done another way...
+        // else if (data.type === "conversation.item.create") {
+        //   console.log("Identified User Input");
+        //   let input = data.content.text;
+        //   transcript = [...transcript, input];
+        //   console.log("Current Transcript after user input", transcript)
+        // } // A Failed attempt at capturing User input for the transcript. This will have to be done another way...
       });
 
       // Start the session using the Session Description Protocol (SDP)
@@ -231,12 +234,12 @@
 </script>
 
 <div class="chat-container max-h-[300px]">
-  <div class="transcript m-5">
+  <!-- <div class="transcript m-5">
     {#each transcript as response}
     <p class="messageai">{response}</p>
     <br>
     {/each} 
-  </div>
+  </div> -->
   <div> 
     {#if currentCall}
       <div class="flex flex-col gap-2 w-full">

@@ -3,7 +3,7 @@ import dbCreateConversation from '../../../server/utils/dbCreateConversation';
 import dbGetMessages from '../../../server/utils/dbGetMessages';
 import aiSendMessage from '../../../server/utils/aiSendMessage';
 import dbCreateMessages from '../../../server/utils/dbCreateMessage';
-import dbGetTranscript from '../../../server/utils/dbGetTranscript';
+import dbGetTranscript from '../../../server/utils/dbTranscript';
 import { jsonGetCampaign } from '../../../server/utils/jsonGetCampaigns';
 import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';

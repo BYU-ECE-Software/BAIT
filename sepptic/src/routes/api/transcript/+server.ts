@@ -1,6 +1,6 @@
 import getUserIdFromToken from '../../../server/utils/getUserIdFromToken';
 import dbCreateConversation from '../../../server/utils/dbCreateConversation';
-import dbGetTranscript from '../../../server/utils/dbGetTranscript';
+import dbTranscript from '../../../server/utils/dbTranscript';
 import { jsonGetCampaign } from '../../../server/utils/jsonGetCampaigns';
 import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
@@ -27,9 +27,9 @@ export async function POST(event: RequestEvent) {
     const { campaignId, characterId, call, transcript} = body;
 
     if (!campaignId || !characterId || !transcript) {
-      console.warn('❗ Missing fields:', { campaignId, characterId, transcript });
+      console.warn('Missing fields:', { campaignId, characterId, transcript, call });
       return new Response(
-        JSON.stringify({ message: 'Missing campaignId, characterId, transcript' }),
+        JSON.stringify({ message: 'Missing campaignId, characterId, transcript, or call' }),
         { status: 400 }
       );
     }
@@ -45,12 +45,12 @@ export async function POST(event: RequestEvent) {
 
     const conversationId = conversationResult.conversationId;
 
-    // Sticking point here
-    const transResponse = await dbGetTranscript(conversationId);
+    // Sticking point here, Its failing because no data is being written to the transcript
+    const transResponse = await dbTranscript(conversationId, transcript);
     if (transResponse.status !== 200 || !transResponse.data) {
       console.error('dbGetTranscript failed:', transResponse);
       return new Response(
-        JSON.stringify({ message: 'Error getting messages', detail: transResponse }),
+        JSON.stringify({ message: 'Error getting transcript', detail: transResponse }),
         { status: transResponse.status }
       );
     }

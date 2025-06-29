@@ -53,13 +53,17 @@
 
     // Build once at component initialization
     const userContacts: Contact[] = [
-        { id: 1, name: 'You' },
-        // then map your Characters into contacts
-        ...data.campaign.Characters.map((c, i) => ({
-        id: i + 2,      // +2 because “You” is id=1
-        name: c.Name
+    { id: 1, name: 'You' },
+    // 1) drop any character with original ID 99
+    // 2) then map the rest into your Contact shape
+    ...data.campaign.Characters
+        .filter(c => c.ID !== 99)
+        .map((c, i) => ({
+            id: i + 2,    // +2 because “You” is id=1
+            name: c.Name
         }))
     ];
+
     let fromContactId = userContacts[0].id;
 
 

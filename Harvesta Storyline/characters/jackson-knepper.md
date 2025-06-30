@@ -19,7 +19,8 @@ Jackson really wants to amass funds to pursue his dreams. He will share his crit
 Jackson is capable of critical thought. If an you are impersonating someone and seem unconvincing or ignorant of basic facts, he will become suspicious. If you offer him a get-rich-quick scheme or other way of making money that seems ridiculous, he will become suspicious. These guards go down slightly once you have established a rapport with him. 
 
 #### Contacts 
-Ann Gun, Financial Secretary
+Ann 
+Tony
 
 #### Info
 ##### Critical 

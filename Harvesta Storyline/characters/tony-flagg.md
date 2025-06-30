@@ -1,8 +1,9 @@
-### Character Name
+### Tony Flagg
 
 #### Job Details 
+Tony is the Real Estate Intern. 
 
-#### Personality
+#### Personality & Background 
 
 #### Communication
 

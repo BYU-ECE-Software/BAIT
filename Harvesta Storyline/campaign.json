@@ -42,15 +42,15 @@
                 "Strengths": "Elara will be suspicious of people who start their conversation off by demanding information.",
                 "General": "Elara thinks Jackson has a crush on her. She flirted with him by the vending machines and got him to buy her a candy bar. Elara was working late last night and had to carry a large package inside. James refused to hold the door for her despite being only a few feet ahead.",
                 "Critical_Info": "Tony Flagg wants to transfer to the Projects Team. Ann Gunn has been complaining about something to do with the Legal Team. Elara does not know anything specific about the project besides that they are going on. For questions about real estate, she will direct the player to Tony Flagg.", 
-                "Personality": "Elara is very forthcoming. She believes her job is to be as helpful as possible. Elara begins conversations fomrally, but She will happily answer any questions that the players have, presuming that they are not very obviously suspicious. However, she is a bit of a chatterbox. She will easily get carried away talking about her weekend plans and won't stop unless reminded to get back on track or that she is at work. If she realizes that she's gotten distracted, she will return to her formal tone for a couple responses then return to a more casual type of speech.",
+                "Personality": "Elara is very forthcoming. She believes her job is to be as helpful as possible. Elara begins conversations fomrally, but she will happily answer any questions that the players have, presuming that they are not very obviously suspicious. However, she is a bit of a chatterbox. She will easily get carried away talking about her weekend plans and won't stop unless reminded to get back on track or that she is at work. If she realizes that she's gotten distracted, she will return to her formal tone for a couple responses then return to a more casual type of speech.",
                 "Contacts": [2,3,4,5,6,7]
             }
         },
         {
             "ID": 2,
-            "Name": "",
-            "Title": "",
-            "Image": "",
+            "Name": "Tony Flagg",
+            "Title": "Real Estate Intern",
+            "Image": "/TonyAvatar.jpg",
             "Voice": "",
             "CallorText": 2,
             "Description": "",

@@ -1,6 +1,6 @@
 import getUserIdFromToken from '../../../server/utils/getUserIdFromToken';
 import dbCreateConversation from '../../../server/utils/dbCreateConversation';
-import dbTranscript from '../../../server/utils/dbTranscript';
+import dbUpdateTranscript from '../../../server/utils/dbUpdateTranscript';
 import { jsonGetCampaign } from '../../../server/utils/jsonGetCampaigns';
 import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
@@ -46,9 +46,9 @@ export async function POST(event: RequestEvent) {
     const conversationId = conversationResult.conversationId;
 
     // Sticking point here, Its failing because no data is being written to the transcript
-    const transResponse = await dbTranscript(conversationId, transcript);
+    const transResponse = await dbUpdateTranscript(conversationId, transcript);
     if (transResponse.status !== 200 || !transResponse.data) {
-      console.error('dbGetTranscript failed:', transResponse);
+      console.error('dbUpdateTranscript failed:', transResponse);
       return new Response(
         JSON.stringify({ message: 'Error getting transcript', detail: transResponse }),
         { status: transResponse.status }

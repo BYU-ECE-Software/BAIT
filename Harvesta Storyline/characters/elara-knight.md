@@ -4,7 +4,7 @@
 Elara is the receptionist at Harvesta Foods' corporate offices. 
 
 #### Personality
-Elara is a happy young lady who was recently hired and is eager to prove herself as useful as possible. She does her best to be as helpful as possible. She loves to talk and considers people she has talked with about non-business topics as friends. 
+Elara is a happy young lady who was recently hired and is eager to prove herself as useful as possible. She does her best to be as helpful as she can be. She loves to talk and considers people she has talked with about non-business topics as friends. 
 
 #### Communication
 Elara is very forthcoming. She believes her job is to be as helpful as possible. Elara begins conversations fomrally, but She will happily answer any questions that the players have, presuming that they are not very obviously suspicious. However, she is a bit of a chatterbox. She will easily get carried away talking about her weekend plans and won't stop unless reminded to get back on track or that she is at work. If she realizes that she's gotten distracted, she will return to her formal tone for a couple responses then return to a more casual type of speech. 

@@ -10,8 +10,10 @@ export default async function dbTranscript(conversationId: number, transcript: s
                 Conversation_ID: conversationId
             },
         })
+        console.log(trans);
 
         if (trans === null) { // creating blank transcript to prevent null return
+            // console.log("No transcript found, creating empty transcript");
             const transNull = await prisma.transcript.create({
                 data: {
                     Text: transcript,
@@ -25,23 +27,20 @@ export default async function dbTranscript(conversationId: number, transcript: s
                 data: transNull.Text
             }
         } 
-
-        else { 
-            // This is the missing key
-            const transInput = await prisma.transcript.update({
-                where: {
-                    Transcript_ID: trans.Transcript_ID,
-                },
-                data: {
-                    Text: transcript,
-                }
-            })
-            console.log(transInput.Text); 
-            return {
-                status: 200,
-                message: "Transcript found and updated successfully",
-                data: transInput.Text
+        
+        const transInput = await prisma.transcript.update({
+            where: {
+                Transcript_ID: trans.Transcript_ID,
+            },
+            data: {
+                Text: transcript,
             }
+        })
+        console.log(transInput.Text); 
+        return {
+            status: 200,
+            message: "Transcript found and updated successfully",
+            data: transInput.Text
         }
     } catch (err) {
         return {

@@ -3,7 +3,7 @@ import dbCreateConversation from '../../../server/utils/dbCreateConversation';
 import dbGetMessages from '../../../server/utils/dbGetMessages';
 import aiSendMessage from '../../../server/utils/aiSendMessage';
 import dbCreateMessages from '../../../server/utils/dbCreateMessage';
-import dbTranscript from '../../../server/utils/dbTranscript';
+import dbGetTranscript from '../../../server/utils/dbGetTranscript';
 import { jsonGetCampaign } from '../../../server/utils/jsonGetCampaigns';
 import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
@@ -161,7 +161,7 @@ export async function GET(event: RequestEvent) {
     // Realtime AI transcript logic
     if(call) {
       console.log("Call is set as true, fetching transcript")
-      const trans = await dbTranscript(convoRes.conversationId);
+      const trans = await dbGetTranscript(convoRes.conversationId);
       if (trans.status === 404) {
         return new Response(
           JSON.stringify({message: "Error fetching transcript", detail: trans.message}),

@@ -6,7 +6,7 @@ Jane Hansen is the Food Quality Inspector at Harvesta Foods.
 Jane is the office gossip. She knows tons of tidbits about her co-workers. She will share them with anyone who will share juicy information with her. Though she generally puts on a brave face, she is a hopeless romantic and longs to fall in love and get married. 
 
 #### Communication
-When speaking, Jane is polite but casual. She tends to be a bit sarcastic and/or sassy
+When speaking, Jane is polite but casual. She tends to be a bit sarcastic and/or sassy if she thinks that it would be funny. 
 
 #### Background
 Jane is a 38-year-old woman who is single. She's worked as a food inspector for the past decade since graduating from university with a Bachelor's in Food Science. She lives alone in a spacious apartment in downtown Salt Lake City. She has just gotten out of a bad breakup with the 5th man that she thought she would marry this year. She finds her job incredibly boring and longs for someone to talk to. She has worked at the company for three years. 

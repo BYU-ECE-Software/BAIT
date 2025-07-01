@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, onMount, onDestroy } from 'svelte';
 	import postcssConfig from '../../../../postcss.config';
+	import { stringify } from 'postcss';
 
   // — the only props you need —
   export let characterId: number;          // numeric ID for your API
@@ -21,6 +22,14 @@
       // console.log('GET /api/message status', res.status);
       if (res.ok) {
         // console.log("Transcript aquired");
+        const data = await res.json();
+        console.log(data)
+        // CRITICAL The following if-stmt sets the transcript variable to start with the transcript from the DB. Allows for conversation history
+        if (data && data.data) {
+          transcript = data.data;
+          console.log("Loaded transcript:", transcript);
+          formatTranscript(transcript); // For DOM printing
+        }
       } else if (res.status === 404) {
         // console.log('No history found (404)');
       } else {
@@ -67,7 +76,14 @@
   let pc: RTCPeerConnection | null = null;
   let ms: MediaStream | null = null; // MediaStream for microphone input
 
-  let transcript: string | null;
+  // Transcript storage variable
+  let transcript: string = "";
+  let formattedTrans : string[] = [];
+
+  function formatTranscript(transcript: string) {
+    formattedTrans = transcript.split("\n");
+  }
+
 
   function exitAudio() {
     const audio = document.createElement("audio");
@@ -224,6 +240,8 @@
         end = Date.now();
         // console.log(`Call time was: ${((end - start))}`);
 
+        formatTranscript(transcript);
+
 
       } catch (err) {
         console.error('Error ending call:', err);
@@ -234,12 +252,11 @@
 </script>
 
 <div class="chat-container max-h-[300px]">
-  <!-- <div class="transcript m-5">
-    {#each transcript as response}
-    <p class="messageai">{response}</p>
-    <br>
+  <div class="transcript m-5">
+    {#each formattedTrans as line}
+    <p>{line}</p>
     {/each} 
-  </div> -->
+  </div>
   <div> 
     {#if currentCall}
       <div class="flex flex-col gap-2 w-full">
@@ -285,9 +302,12 @@
     border-radius: 0.5rem;
     background: #f9f9f9;
   }
-  .messageai {
-    align-self: flex-start;
-    background: #eee;
-    margin-right: auto;
+
+  .transcriptLine {
+    border-radius: 0.25rem;
+    border-bottom: 1px solid #333;
+    border-top: 1px solid #333;
+    background: #e0f7fa; /* Light cyan background for better readability */
+    color: #333; /* Dark text for contrast */
   }
 </style>

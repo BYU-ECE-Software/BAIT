@@ -3,7 +3,7 @@ import dbCreateConversation from '../../../server/utils/dbCreateConversation';
 import dbGetMessages from '../../../server/utils/dbGetMessages';
 import aiSendMessage from '../../../server/utils/aiSendMessage';
 import dbCreateMessages from '../../../server/utils/dbCreateMessage';
-import dbGetTranscript from '../../../server/utils/dbTranscript';
+import dbGetTranscript from '../../../server/utils/dbGetTranscript';
 import { jsonGetCampaign } from '../../../server/utils/jsonGetCampaigns';
 import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
@@ -206,11 +206,11 @@ export async function GET(event: RequestEvent) {
           { status: trans.status, headers: { 'Content-Type': 'application/json' } }
         )
       } else if (trans.status === 200) {
-      console.log("Transcript result:", trans);
-      return new Response(
-        JSON.stringify({ messages: trans.data }),
-        { status: 200, headers: { 'Content-Type': 'application/json' } }
-      );
+        console.log("Transcript result:", trans);
+        return new Response(
+          JSON.stringify({ data: trans.data }),
+          { status: 200, headers: { 'Content-Type': 'application/json' } }
+        );
       }
 
     } else if (!call) {

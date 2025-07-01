@@ -62,6 +62,9 @@
     }
   })
 
+  // -- Timer management variables --
+  let mm: string = "00"; // Minutes for timer display
+  let ss: string = "00"; // Seconds for timer display
 
   // — call management variables —
   let currentCall = 0; // 0 = no call, 1 = call in progress
@@ -277,6 +280,7 @@
         <button class="end-call py-2 px-4 rounded" on:click={endCall}>End Phone Call</button>
         <div>
           <p class="text-gray-500">Call in progress...</p>
+          <p>{mm}:{ss}</p>
         </div>
       </div>
     {:else}

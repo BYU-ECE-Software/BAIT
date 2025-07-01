@@ -11,19 +11,19 @@
   const activeTab = writable('tab1');
 
   function switchTab(tab: string) {
-    console.log(`Switching to ${tab}`);
+    // console.log(`Switching to ${tab}`);
     activeTab.set(tab);
   }
 
   let { data } = $props();
-  console.log("data = ", data);
+  // console.log("data = ", data);
 
   let selectedTab = $state('Mission');
 
   const selectedCharacter = writable(data.campaign.Characters[0]);
 
   function selectCharacter(character) {
-        console.log("Selected character:", character);
+        // console.log("Selected character:", character);
         selectedCharacter.set({ ...character });
     }
 // TEXTING FUNCTIONS
@@ -53,13 +53,17 @@
 
     // Build once at component initialization
     const userContacts: Contact[] = [
-        { id: 1, name: 'You' },
-        // then map your Characters into contacts
-        ...data.campaign.Characters.map((c, i) => ({
-        id: i + 2,      // +2 because “You” is id=1
-        name: c.Name
+    { id: 1, name: 'You' },
+    // 1) drop any character with original ID 99
+    // 2) then map the rest into your Contact shape
+    ...data.campaign.Characters
+        .filter(c => c.ID !== 99)
+        .map((c, i) => ({
+            id: i + 2,    // +2 because “You” is id=1
+            name: c.Name
         }))
     ];
+
     let fromContactId = userContacts[0].id;
 
 
@@ -67,13 +71,13 @@
 
   function setCall() {
     chatOrCall = "call";
-    console.log("Opening call window");
-    console.log(chatOrCall);
+    // console.log("Opening call window");
+    // console.log(chatOrCall);
   }
     function setChat() {
     chatOrCall = "chat";
-    console.log("Opening chat window");
-    console.log(chatOrCall);
+    // console.log("Opening chat window");
+    // console.log(chatOrCall);
   }
   
 </script>
@@ -287,7 +291,7 @@
                                 contactName={$selectedCharacter.Name}
                                 campaignId={data.slug}
                                 on:messageSent={e => {
-                                console.log('new message for', e.detail.characterId, e.detail.message);
+                                // console.log('new message for', e.detail.characterId, e.detail.message);
                                 }}
                             />
                             {/key}
@@ -353,7 +357,7 @@
                             contactName={"Randy"}
                             campaignId={data.slug}
                             on:messageSent={e => {
-                            console.log('new message for', e.detail.characterId, e.detail.message);
+                            // console.log('new message for', e.detail.characterId, e.detail.message);
                             }}
                         />
                     </div>

@@ -43,7 +43,7 @@
             });
 
             if (response.ok) {
-                console.log('Registration successful');
+                // console.log('Registration successful');
                 errorMessage = ''; // Clear error messages on success
                 // Handle successful registration (e.g., redirect to login page)
                 await handleLogin();
@@ -69,7 +69,7 @@
             });
             if (response.ok){
                 const responseData = await response.json();
-                console.log('Login successful', responseData);
+                // console.log('Login successful', responseData);
                 signIn();
             } else {
                 const errorData = await response.json();

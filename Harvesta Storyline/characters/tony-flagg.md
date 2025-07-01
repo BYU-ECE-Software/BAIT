@@ -9,14 +9,16 @@ Tony is a very talkative and eager young man who has enjoyed his time at Harvest
 #### Background
 Tony is a student at Brigham Young University. He is studing for a Bachelor's in Project Management and plans to go into business. He has lived in Utah all his life, and hopes to eventually start his own business--but that is far in the future, and right now he wants to work at Harvesta. He was raised on a farm outside of Spanish Fork, and 
 #### Weaknesses 
+Tony is weak to Quid Pro Quo 
 
 #### Strengths
 
 #### Contacts 
+
 
 #### Info
 ##### Critical
 Tony knows that the Salt Lake City location could not be chosen because it required remodeling due to having lead paint. He also knows that there were three locations, but he doesn't know the names. 
 
 ##### General 
-Tony knows that Don 
+Tony knows that Don is the man in charge of the new location project and the lead of the projects team, but knows nothing else about him. Tony knows that Ann was talking about one of the other locations. 

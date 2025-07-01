@@ -18,6 +18,13 @@
       <!-- Content -->
       <h2 class="text-2xl font-bold mb-4 dark:text-red-400 text-red-600">Failure</h2>
       <p class="text-gray-700 dark:text-gray-300 ">The Address was not in your answer. Check your spelling.</p>
+      <a
+        href="https://qualtricsxm997pm86gx.qualtrics.com/jfe/form/SV_00YGmv8m4F9fSYK"
+        target="_blank"
+        class="inline-block mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition dark:bg-blue-500 dark:hover:bg-blue-600"
+      >
+        Take Survey
+      </a>
     </div>
   </div>
 {/if}

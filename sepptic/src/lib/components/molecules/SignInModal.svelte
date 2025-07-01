@@ -20,7 +20,7 @@
             });
             if (response.ok){
                 const responseData = await response.json();
-                console.log('Login successful', responseData);
+                // console.log('Login successful', responseData);
                 signIn();
             } else {
                 const errorData = await response.json();

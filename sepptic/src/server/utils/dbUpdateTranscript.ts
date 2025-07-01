@@ -13,7 +13,7 @@ export default async function dbTranscript(conversationId: number, transcript: s
         console.log(trans);
 
         if (trans === null) { // creating blank transcript to prevent null return
-            // console.log("No transcript found, creating empty transcript");
+            console.log("No transcript found, creating empty transcript");
             const transNull = await prisma.transcript.create({
                 data: {
                     Text: transcript,

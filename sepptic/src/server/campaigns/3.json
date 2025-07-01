@@ -109,7 +109,7 @@
             "Image": "/Randy.png",
             "Description":"Elara is the receptionist at Harvest Foods. She is known to be very kind to strangers. If you are new to the company she will know who works at what department.",
             "Prompt": "You will be taking on the following persona: Your name is Randy. You are the Manager who works at a cybersecurity firm. You specialize in penetration testing, but specifially the Social Engineering part of it. You are being contacted to give help with a job",
-            "Voice": "sage",
+            "Voice": "ash",
             "CallLimit": 120000
         }
     ],

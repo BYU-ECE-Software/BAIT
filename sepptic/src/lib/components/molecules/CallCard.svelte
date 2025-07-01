@@ -63,8 +63,10 @@
   })
 
 
-  // — call management functions —
+  // — call management variables —
   let currentCall = 0; // 0 = no call, 1 = call in progress
+  let responseInProgress = false; // Flag to indicate if a response is currently being processed
+  let timeOutReached = false; // Flag to indicate if the call timeout has been reached
 
   // -- Timer management variables --
   let start = 0;
@@ -155,6 +157,20 @@
         //   transcript = [...transcript, input];
         //   console.log("Current Transcript after user input", transcript)
         // } // A Failed attempt at capturing User input for the transcript. This will have to be done another way...
+        else if (data.type === "output_audio_buffer.started") {
+          responseInProgress = true; // Set a flag to indicate that a response is in progress
+          console.log("Response in progress");
+        }
+        else if (data.type === "output_audio_buffer.stopped") {
+          responseInProgress = false; // Reset the flag when the response is done
+          console.log("Response done");
+
+          if (timeOutReached) {
+            console.log("Response done, but timeout reached, ending call...");
+            endCall();
+            exitAudio();
+          }
+        }
       });
 
       // Start the session using the Session Description Protocol (SDP)
@@ -184,9 +200,15 @@
 
       // Set maximum call duration 
       timeoutId = setTimeout(() => {
-        endCall();
-        console.log("Timeout has been reached, call has been ended.")
-        exitAudio();
+        timeOutReached = true;
+        console.log("Call limit reached, waiting for response to end...");
+
+        if (!responseInProgress) {
+          console.log("Response is not in progress, ending call immediately.");
+          endCall();
+          exitAudio();
+          return;
+        }
       }, CallLimit)
       
       } catch (err) {

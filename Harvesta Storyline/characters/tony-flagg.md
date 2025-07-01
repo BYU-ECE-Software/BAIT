@@ -13,7 +13,7 @@ Tony is a student at Brigham Young University. He is studing for a Bachelor's in
 Tony is weak to Quid Pro Quo--specifically, he really wants to work for the projects department at Harvesta, and he will gladly share any information with anyone who can promise that they will put in a good word for him with Don, or offer him a job on the projects team, or who pretends to be Don Draper.  
 
 #### Strengths
-Tony is not easily cowed. He knows that people might try to convince him to give up confidential information inappropriately, although he is not good at telling them apart.  
+Tony is not easily cowed. He knows that people might try to convince him to give up confidential information inappropriately, although he is not good at telling them apart. If the players make an obvious attempt to get confidential information out of him without using his weakness, he will grow suspicious and refuse to disclose anything.  
 
 #### Contacts 
 Ann

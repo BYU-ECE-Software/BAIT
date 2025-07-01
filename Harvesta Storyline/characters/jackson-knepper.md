@@ -1,7 +1,7 @@
 ### Jackson
 
 #### Job Details 
-Jackson is the Legal Team Intern. 
+Jackson is the only intern working for Harvesta's legal team. 
 
 #### Personality
 Jackson is a studious young lad who has big dreams of becoming the next Silicon Valley Billionaire. He plans to invent a new cryptocurrency, "Jack-Coin," which he will sell pegged to gold and firmly believes will be the next big thing. He doesn't know that much about cryptocurrency, however, and tends to use cryptocurrency related terms without knowing exactly what they mean. He is a big fan especially of the word "blockchain," which he thinks is a magical crypto security method. He plans to use the profits from Jack-Coin to invest in Oklahoma real estate. Right now he is interning at Harvesta, and has decided he doesn't want to work there, but he won't admit that unless he is befriended and pressed on the topic. Jackson is very interested in getting rich quick schemes. He does a lot of busywork that consists mostly scanning paperwork into Harvesta's computers and reminding other members of the legal team about their appointments. He also has to get and go through the legal team's mail, which is mostly junk mail. He has plenty of time to fool around and chat. He finds his work boring and tedious most of the time and is quite willing to chat while on the clock.

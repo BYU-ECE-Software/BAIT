@@ -26,7 +26,7 @@ export async function POST(event: RequestEvent) {
     const userId = userIdResponse.userId;
     const { campaignId, characterId, call, transcript} = body;
 
-    if (!campaignId || !characterId || !transcript) {
+    if (!campaignId || !characterId) {
       console.warn('Missing fields:', { campaignId, characterId, transcript, call });
       return new Response(
         JSON.stringify({ message: 'Missing campaignId, characterId, transcript, or call' }),
@@ -47,12 +47,15 @@ export async function POST(event: RequestEvent) {
 
     // Sticking point here, Its failing because no data is being written to the transcript
     const transResponse = await dbUpdateTranscript(conversationId, transcript);
-    if (transResponse.status !== 200 || !transResponse.data) {
+    if (transResponse.status !== 200) {
       console.error('dbUpdateTranscript failed:', transResponse);
       return new Response(
         JSON.stringify({ message: 'Error getting transcript', detail: transResponse }),
         { status: transResponse.status }
       );
+    }
+    else if (transResponse.status == 200 && transResponse.data === '') {
+      console.warn('Transcript is empty, but no error occurred');
     }
 
     const campaignResult = jsonGetCampaign(campaignId);

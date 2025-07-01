@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 export default async function dbTranscript(conversationId: number, transcript: string) {
-    console.log("Conversation Id that is passed into dbTranscripts", conversationId);
+    console.log("Conversation Id that is passed into dbUpdateTranscripts", conversationId);
     const prisma = new PrismaClient();
 
     try {
@@ -13,7 +13,7 @@ export default async function dbTranscript(conversationId: number, transcript: s
         console.log(trans);
 
         if (trans === null) { // creating blank transcript to prevent null return
-            // console.log("No transcript found, creating empty transcript");
+            console.log("No transcript found, creating empty transcript");
             const transNull = await prisma.transcript.create({
                 data: {
                     Text: transcript,

@@ -21,7 +21,7 @@
         You've successfully completed the Social Engineering campaign. Great job leveraging multiple social engineering tactics to reach your goal!
       </p>
       <a
-        href="https://your-survey-link.com"
+        href="https://qualtricsxm997pm86gx.qualtrics.com/jfe/form/SV_00YGmv8m4F9fSYK"
         target="_blank"
         class="inline-block mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition dark:bg-blue-500 dark:hover:bg-blue-600"
       >

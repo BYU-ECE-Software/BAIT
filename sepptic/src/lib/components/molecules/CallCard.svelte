@@ -12,17 +12,17 @@
 
   // -- Will be used to handle pulling in fresh transcript from database if present --
   onMount(async () => {
-  console.log('Fetching call transcript for', { campaignId, characterId});
+  // console.log('Fetching call transcript for', { campaignId, characterId});
     try {
       const res = await fetch(
         `/api/message?campaignId=${campaignId}&characterId=${characterId}&call=true`,
         { credentials: 'include' }
       );
-      console.log('GET /api/message status', res.status);
+      // console.log('GET /api/message status', res.status);
       if (res.ok) {
-        console.log("Transcript aquired");
+        // console.log("Transcript aquired");
       } else if (res.status === 404) {
-        console.log('No history found (404)');
+        // console.log('No history found (404)');
       } else {
         console.error('Fetch error:', res.statusText);
       }
@@ -33,20 +33,20 @@
 
   // — onDestroy called to wipe call session before user can move to another card, prevents multiple RTC sessions at once 
   onDestroy(() => {
-    console.log("Call component is being destroyed");
+    // console.log("Call component is being destroyed");
     if (timeoutId !== null) {
-      console.log("Timeout destroyed");
+      // console.log("Timeout destroyed");
       clearTimeout(timeoutId);
       timeoutId = null;
     }
     try {
       pc?.close(); // Clear the peer connection to OpenAI
       pc = null; // Clear the peer connection variable
-      console.log('Peer connection closed');
+      // console.log('Peer connection closed');
       ms?.getTracks().forEach((track) => track.stop()); // Iterate through and remove microphone tracks if they exists
       ms = null; // Clear the MediaStream
-      console.log('Call ended successfully');
-      console.log()
+      // console.log('Call ended successfully');
+      // console.log()
     }
     catch(err) {
       console.error("onDestroy failed to end call:", err)
@@ -77,7 +77,7 @@
 
 
   async function startCall() {
-    console.log('Starting call...');
+    // console.log('Starting call...');
     currentCall = 1; // Set current call state to indicate a call is in progress
     // Start a new API session
     try {
@@ -100,7 +100,7 @@
       }
 
       const session = await response.json();
-      console.log('Session data:', session);
+      // console.log('Session data:', session);
 
       // Handling session data
       const EPHEMERAL_KEY = session.client_secret.value;
@@ -123,21 +123,21 @@
       dc.addEventListener("message", (event) => {
 
         // Realtime server calls and responses logged in console here
-        console.log(event);
+        // console.log(event);
 
         // Records AI output to transcript array to be use on DOM and stored when conversation ends
         const data = JSON.parse(event.data);
         if (data.type === "response.audio_transcript.done") {
-          console.log("Identified response end");
+          // console.log("Identified response end");
           let output = data.transcript;
           transcript = transcript + "/n" + output;
-          console.log("Current transcript array after response", transcript)
+          // console.log("Current transcript array after response", transcript)
         }
         // else if (data.type === "conversation.item.create") {
-        //   console.log("Identified User Input");
+        //   // console.log("Identified User Input");
         //   let input = data.content.text;
         //   transcript = [...transcript, input];
-        //   console.log("Current Transcript after user input", transcript)
+        //   // console.log("Current Transcript after user input", transcript)
         // } // A Failed attempt at capturing User input for the transcript. This will have to be done another way...
       });
 
@@ -161,7 +161,7 @@
         sdp: await sdpResponse.text(),
       };
       await pc.setRemoteDescription(answer);
-      console.log('Call started successfully');
+      // console.log('Call started successfully');
 
       // Set call start variable
       start = Date.now();
@@ -169,7 +169,7 @@
       // Set maximum call duration 
       timeoutId = setTimeout(() => {
         endCall();
-        console.log("Timeout has been reached, call has been ended.")
+        // console.log("Timeout has been reached, call has been ended.")
         exitAudio();
       }, CallLimit)
       
@@ -180,12 +180,12 @@
 
   async function endCall() {
     // Placeholder for ending call functionality
-    console.log('Ending call...');
+    // console.log('Ending call...');
     currentCall = 0;
 
     //Remove timeout
     if (timeoutId !== null) {
-      console.log("Timeout destroyed")
+      // console.log("Timeout destroyed")
       clearTimeout(timeoutId);
       timeoutId = null;
     }
@@ -212,17 +212,17 @@
     if (pc) {
       // Close the peer connection and clean up
       try {
-        console.log('Closing peer connection...');
+        // console.log('Closing peer connection...');
         pc.close(); // Clear the peer connection to OpenAI
         pc = null; // Clear the peer connection variable
-        console.log('Peer connection closed');
+        // console.log('Peer connection closed');
         ms?.getTracks().forEach((track) => track.stop()); // Iterate through and remove microphone individual tracks to free microphone
         ms = null; // Clear the MediaStream
-        console.log('Call ended successfully');
+        // console.log('Call ended successfully');
 
         //Set end time for call
         end = Date.now();
-        console.log(`Call time was: ${((end - start))}`);
+        // console.log(`Call time was: ${((end - start))}`);
 
 
       } catch (err) {

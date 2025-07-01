@@ -12,7 +12,7 @@
 
             if (res.ok) {
                 await invalidateAll(); // Refresh session data
-                console.log('invalidate session');
+                // console.log('invalidate session');
                 signOut();
 
             } else {

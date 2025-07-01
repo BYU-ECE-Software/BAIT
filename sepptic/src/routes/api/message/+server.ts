@@ -107,6 +107,7 @@ export async function POST(event: RequestEvent) {
 
     const fullPrompt = `You will be taking on the folllowing persona with the following traits. 
                         Your name is ${character.Name} 
+                        Only speak in English
                         You know this general infomration ${campaign.Campaign_Information.Campaign_Knowledge}.
                         These are some of the types of social engineering attacks that people will use against you ${Full_Attack_Knowledge}.
                         Your role is that of ${character.Title}.

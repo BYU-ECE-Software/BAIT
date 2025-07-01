@@ -20,14 +20,14 @@
 
     onMount(() => {
         if (thread) {
-            console.log("EmailView thread received:", thread);
-            console.log("EmailView mounted:", $state.snapshot(thread));
+            // console.log("EmailView thread received:", thread);
+            // console.log("EmailView mounted:", $state.snapshot(thread));
             updateMessages();
         }
     });
 
     onDestroy(() => {
-        console.log("EmailView unmounted!");
+        // console.log("EmailView unmounted!");
     });
 
     async function sendReply() {

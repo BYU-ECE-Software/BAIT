@@ -5,7 +5,6 @@
 
   // — the only props you need —
   export let characterId: number;          // numeric ID for your API
-  export let contactName: string;          // human-readable display name
   export let campaignId: number | string;  // campaign identifier
   export let prompt: string; // prompt for the AI model
   export let voice: string; // Base voice model for the AI
@@ -140,22 +139,22 @@
       dc.addEventListener("message", (event) => {
 
         // Realtime server calls and responses logged in console here
-        // console.log(event);
+        console.log(event);
 
         // Records AI output to transcript array to be use on DOM and stored when conversation ends
         const data = JSON.parse(event.data);
         if (data.type === "response.audio_transcript.done") {
-          // console.log("Identified response end");
+          console.log("Identified response end");
           let output = data.transcript;
           transcript = transcript + "/n" + output;
           // console.log("Current transcript array after response", transcript)
         }
-        // else if (data.type === "conversation.item.create") {
-        //   console.log("Identified User Input");
-        //   let input = data.content.text;
-        //   transcript = [...transcript, input];
-        //   console.log("Current Transcript after user input", transcript)
-        // } // A Failed attempt at capturing User input for the transcript. This will have to be done another way...
+        else if (data.type === "conversation.item.input_audio_transcription.completed") {
+          console.log("Identified User Input");
+          let input = data.transcript;
+          transcript = transcript + "/n" + input;
+          console.log("Current Transcript after user input", transcript)
+        } // A Failed attempt at capturing User input for the transcript. This will have to be done another way...
         else if (data.type === "output_audio_buffer.started") {
           responseInProgress = true; // Set a flag to indicate that a response is in progress
           // console.log("Response in progress");

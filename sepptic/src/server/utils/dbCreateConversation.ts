@@ -2,14 +2,15 @@ import { PrismaClient } from '@prisma/client';
 import validateCharacter from './validateCharacter';
 
 // Function to check if a conversation already exists for this user/character pair.
-async function checkExistingConversation(userId: number, campaignId: number, characterId: number) {
+async function checkExistingConversation(userId: number, campaignId: number, characterId: number, call:boolean) {
     const prisma = new PrismaClient();
     try {
         const conversation = await prisma.conversation.findFirst({
             where: {
                 User_ID: userId,
                 Campaign_ID: campaignId,
-                Character_ID: characterId
+                Character_ID: characterId,
+                Realtime: call // Identifies the Realtime convo vs the text convo
             }
         });
         return conversation;
@@ -19,15 +20,16 @@ async function checkExistingConversation(userId: number, campaignId: number, cha
 }
 
 // Function to write a new conversation to the database.
-async function writeConversation(userId: number, campaignId: number, characterId: number) {
+async function writeConversation(userId: number, campaignId: number, characterId: number, call: boolean) {
     const prisma = new PrismaClient();
+
     try {
         const conversation = await prisma.conversation.create({
             data: {
                 User_ID: userId,
                 Campaign_ID: campaignId,
                 Character_ID: characterId,
-                Realtime: false // ✅ ADD THIS HERE
+                Realtime: call
             }
         });
         return {
@@ -46,12 +48,20 @@ async function writeConversation(userId: number, campaignId: number, characterId
 
 
 // Main function to create a new conversation for a user in the database. Returns an object with the conversationId, message, and status.
-export default async function dbCreateConversation(userId: number, campaignId: number, characterId: number) {
-  console.log('📥 Creating conversation for:', { userId, campaignId, characterId });
+export default async function dbCreateConversation(userId: number, campaignId: number, characterId: number, call:boolean) {
+  
+  if(call) {
+    console.log('Creating realtime call for:', { userId, campaignId, characterId, call });
+  }
+  else {
+    console.log('Creating conversation for:', { userId, campaignId, characterId, call });
+  }
 
-  const existingConversation = await checkExistingConversation(userId, campaignId, characterId);
+
+  const existingConversation = await checkExistingConversation(userId, campaignId, characterId, call);
+
   if (existingConversation) {
-    console.log('🔁 Found existing conversation:', existingConversation.Conversation_ID);
+    console.log('Found existing conversation:', existingConversation.Conversation_ID);
     return {
       conversationId: existingConversation.Conversation_ID,
       message: 'Conversation already exists',
@@ -70,7 +80,7 @@ export default async function dbCreateConversation(userId: number, campaignId: n
     };
   }
 
-  const response = await writeConversation(userId, campaignId, characterId);
+  const response = await writeConversation(userId, campaignId, characterId, call);
   console.log('📝 Write conversation result:', response);
   return response;
 }

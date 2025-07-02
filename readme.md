@@ -1,12 +1,12 @@
-# SEPPTIC
+# BAIT
 
-The Social Engineering Practice Platform for Teaching Information Compromise
+Behavioral Attack & Influence Training Platform
 
-![SEPPTIC Homepage](Docs/Media/homepage.png)
+![BAIT Homepage](Docs/Media/homepage.png)
 
 ## Documentation
 
-### Using Sepptic
+### Using BAIT
 - [Project Overview](Docs/Final%20Design%20Package/Overview.md)
 - [Deployment Instructions](Docs/Final%20Design%20Package/Deployment%20Instructions.md)
 - [Campaign Creation Instructions](Docs/Final%20Design%20Package/Campaign%20Creation%20Instructions.md)
@@ -22,10 +22,10 @@ The Social Engineering Practice Platform for Teaching Information Compromise
 - [User Feedback](Docs/Final%20Design%20Package/User%20Feedback.md)
 - [Potential Improvements](Docs/Final%20Design%20Package/Potential%20Improvements.md)
 
-## What is SEPPTIC?
+## What is BAIT?
 
-SEPPTIC is an AI-powered platform for teaching social engineering in a safe and ethical way. It includes a learn section where users can learn about various social engineering tactics, and a campaigns section where users can practice what they learned with AI-powered characters in a simulated realistic environment.
+BAIT is an AI-powered platform for teaching social engineering in a safe and ethical way. It includes a learn section where users can learn about various social engineering tactics, and a campaigns section where users can practice what they learned with AI-powered characters in a simulated realistic environment.
 
 ![Capstone Team](Docs/Media/team.jpg)
 
-SEPPTIC was created as a Capstone project for Brigham Young University's Cybersecurity program. Team members (from left to right): Ethan Beere, Garrett White, Elliot Delay, Matthew Taylor, Tyler Holland, Zac Hansen, and Nicholas Hague. Coached by Dr. Ben Schooley.
+BAIT is currently a work in progress and was formerly known as SEPPTIC; created as a Capstone project for Brigham Young University's Cybersecurity program. Former team members (from left to right): Ethan Beere, Garrett White, Elliot Delay, Matthew Taylor, Tyler Holland, Zac Hansen, and Nicholas Hague. Coached by Dr. Ben Schooley.

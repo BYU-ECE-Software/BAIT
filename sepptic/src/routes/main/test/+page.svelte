@@ -5,7 +5,7 @@
 
   let activeTab = 'tab1';
   let { data } = $props();
-    console.log("data = ", data);
+    // console.log("data = ", data);
 
   let selectedTab = $state('Mission');
   let userIntels = $state(data?.userIntels ?? {});

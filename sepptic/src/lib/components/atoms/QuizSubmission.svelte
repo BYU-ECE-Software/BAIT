@@ -5,7 +5,7 @@
     campaignId = Number(campaignId);
 
     async function checkAnswer(userAnswer: string) {
-        console.log(campaignId, characterId, intelId, userAnswer);
+        // console.log(campaignId, characterId, intelId, userAnswer);
         const response = await fetch('/api/quiz', {
             method: 'POST',
             headers: {
@@ -20,13 +20,13 @@
         });
 
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         if (data.correct) {
             correctAnswer();
-            console.log('Correct!');
+            // console.log('Correct!');
         }
         else {
-            console.log('Not quite, keep trying!');
+            // console.log('Not quite, keep trying!');
         }
     }
 </script>

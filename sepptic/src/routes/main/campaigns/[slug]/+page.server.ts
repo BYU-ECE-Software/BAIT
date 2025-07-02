@@ -1,5 +1,5 @@
 import type { PageServerLoad } from "./$types";
-import { error } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit'
 
 export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const sessionToken = cookies.get('token');
@@ -16,10 +16,9 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
     const campaignJson = await campaignsResponse.json();
     const userJson = await userResponse.json();
 
-    // ❌ If campaign or Characters is missing, fail safely
     if (!campaignJson?.data || !Array.isArray(campaignJson.data.Characters)) {
-        console.error("❌ Campaign data or characters missing:", campaignJson);
-        throw error(500, 'Campaign data malformed or missing.');
+        console.error(" Campaign data or characters missing:", campaignJson)
+        throw error(500, 'Campaign data malformed or missing');
     }
 
     const campaign = campaignJson.data;
@@ -47,6 +46,5 @@ export const load: PageServerLoad = async ({ params, fetch, cookies }) => {
             };
         }
     }
-
     return { campaign, user, slug, messagesByCharacter };
 };

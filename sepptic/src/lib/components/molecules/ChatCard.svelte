@@ -24,13 +24,13 @@
 
   // — onMount lives inside the <script>, right after your state & props —
   onMount(async () => {
-    console.log('🔍 fetching history for', { campaignId, characterId });
+    // console.log('🔍 fetching history for', { campaignId, characterId });
     try {
       const res = await fetch(
         `/api/message?campaignId=${campaignId}&characterId=${characterId}`,
         { credentials: 'include' }
       );
-      console.log('GET /api/message status', res.status);
+      // console.log('GET /api/message status', res.status);
       if (res.ok) {
         const payload = await res.json();
         const incoming = payload.messages;
@@ -40,7 +40,7 @@
           timestamp: m.timestamp
         }));
       } else if (res.status === 404) {
-        console.log('No history found (404)');
+        // console.log('No history found (404)');
       } else {
         console.error('Fetch error:', res.statusText);
       }
@@ -73,6 +73,7 @@
         body: JSON.stringify({
           campaignId: Number(campaignId),
           characterId,
+          call: false,
           message: text,
           role: 'user'
         })

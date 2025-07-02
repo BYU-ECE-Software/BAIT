@@ -96,10 +96,6 @@
   async function startCall() {
     console.log('Starting call...');
     currentCall = 1; // Set current call state to indicate a call is in progress
-    // console.log("prompt:", prompt);
-    // console.log("voice:", voice);
-    // console.log("characterId:", characterId);
-    // console.log("campaignId:", campaignId);
     // Start a new API session
     try {
       const response = await fetch('/api/realtime', {

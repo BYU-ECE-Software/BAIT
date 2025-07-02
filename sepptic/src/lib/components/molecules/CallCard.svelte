@@ -13,25 +13,25 @@
 
   // -- Will be used to handle pulling in fresh transcript from database if present --
   onMount(async () => {
-  console.log('Fetching call transcript for', { campaignId, characterId});
+  // console.log('Fetching call transcript for', { campaignId, characterId});
     try {
       const res = await fetch(
         `/api/message?campaignId=${campaignId}&characterId=${characterId}&call=true`,
         { credentials: 'include' }
       );
-      console.log('GET /api/message status', res.status);
+      // console.log('GET /api/message status', res.status);
       if (res.ok) {
-        console.log("Transcript aquired");
+        // console.log("Transcript aquired");
         const data = await res.json();
-        console.log(data)
+        // console.log(data)
         // CRITICAL The following if-stmt sets the transcript variable to start with the transcript from the DB. Allows for conversation history
         if (data && data.data) {
           transcript = data.data;
-          console.log("Loaded transcript:", transcript);
+          // console.log("Loaded transcript:", transcript);
           formatTranscript(transcript); // For DOM printing
         }
       } else if (res.status === 404) {
-        console.log('No history found (404)');
+        // console.log('No history found (404)');
       } else {
         console.error('Fetch error:', res.statusText);
       }
@@ -42,20 +42,20 @@
 
   // — onDestroy called to wipe call session before user can move to another card, prevents multiple RTC sessions at once 
   onDestroy(() => {
-    console.log("Call component is being destroyed");
+    // console.log("Call component is being destroyed");
     if (timeoutId !== null) {
-      console.log("Timeout destroyed");
+      // console.log("Timeout destroyed");
       clearTimeout(timeoutId);
       timeoutId = null;
     }
     try {
       pc?.close(); // Clear the peer connection to OpenAI
       pc = null; // Clear the peer connection variable
-      console.log('Peer connection closed');
+      // console.log('Peer connection closed');
       ms?.getTracks().forEach((track) => track.stop()); // Iterate through and remove microphone tracks if they exists
       ms = null; // Clear the MediaStream
-      console.log('Call ended successfully');
-      console.log()
+      // console.log('Call ended successfully');
+      // console.log()
     }
     catch(err) {
       console.error("onDestroy failed to end call:", err)
@@ -94,7 +94,7 @@
 
 
   async function startCall() {
-    console.log('Starting call...');
+    // console.log('Starting call...');
     currentCall = 1; // Set current call state to indicate a call is in progress
     // Start a new API session
     try {
@@ -117,7 +117,7 @@
       }
 
       const session = await response.json();
-      console.log('Session data:', session);
+      // console.log('Session data:', session);
 
       // Handling session data
       const EPHEMERAL_KEY = session.client_secret.value;
@@ -140,15 +140,15 @@
       dc.addEventListener("message", (event) => {
 
         // Realtime server calls and responses logged in console here
-        console.log(event);
+        // console.log(event);
 
         // Records AI output to transcript array to be use on DOM and stored when conversation ends
         const data = JSON.parse(event.data);
         if (data.type === "response.audio_transcript.done") {
-          console.log("Identified response end");
+          // console.log("Identified response end");
           let output = data.transcript;
           transcript = transcript + "/n" + output;
-          console.log("Current transcript array after response", transcript)
+          // console.log("Current transcript array after response", transcript)
         }
         // else if (data.type === "conversation.item.create") {
         //   console.log("Identified User Input");
@@ -158,14 +158,14 @@
         // } // A Failed attempt at capturing User input for the transcript. This will have to be done another way...
         else if (data.type === "output_audio_buffer.started") {
           responseInProgress = true; // Set a flag to indicate that a response is in progress
-          console.log("Response in progress");
+          // console.log("Response in progress");
         }
         else if (data.type === "output_audio_buffer.stopped") {
           responseInProgress = false; // Reset the flag when the response is done
-          console.log("Response done");
+          // console.log("Response done");
 
           if (timeOutReached) {
-            console.log("Response done, but timeout reached, ending call...");
+            // console.log("Response done, but timeout reached, ending call...");
             setTimeout(() => {
               endCall();
               exitAudio();
@@ -194,15 +194,15 @@
         sdp: await sdpResponse.text(),
       };
       await pc.setRemoteDescription(answer);
-      console.log('Call started successfully');
+      // console.log('Call started successfully');
 
       // Set maximum call duration 
       timeoutId = setTimeout(() => {
         timeOutReached = true;
-        console.log("Call limit reached, waiting for response to end...");
+        // console.log("Call limit reached, waiting for response to end...");
 
         if (!responseInProgress) {
-          console.log("Response is not in progress, ending call immediately.");
+          // console.log("Response is not in progress, ending call immediately.");
           endCall();
           exitAudio();
           return;
@@ -216,12 +216,12 @@
 
   async function endCall() {
     // Placeholder for ending call functionality
-    console.log('Ending call...');
+    // console.log('Ending call...');
     currentCall = 0;
 
     //Remove timeout
     if (timeoutId !== null) {
-      console.log("Timeout destroyed")
+      // console.log("Timeout destroyed")
       clearTimeout(timeoutId);
       timeoutId = null;
     }
@@ -248,13 +248,13 @@
     if (pc) {
       // Close the peer connection and clean up
       try {
-        console.log('Closing peer connection...');
+        // console.log('Closing peer connection...');
         pc.close(); // Clear the peer connection to OpenAI
         pc = null; // Clear the peer connection variable
-        console.log('Peer connection closed');
+        // console.log('Peer connection closed');
         ms?.getTracks().forEach((track) => track.stop()); // Iterate through and remove microphone individual tracks to free microphone
         ms = null; // Clear the MediaStream
-        console.log('Call ended successfully');
+        // console.log('Call ended successfully');
 
         // Format the transcript for display
         formatTranscript(transcript);

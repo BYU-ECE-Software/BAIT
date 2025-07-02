@@ -1,6 +1,7 @@
 ## Required .env Values For Docker-Compose to Work
 ```.env
 OPENAI_API_KEY=
+OPENAI_ADMIN_KEY=
 DATABASE_URL="mysql://<user>:<password>@mariadb:3306/sepptic"
 
 MYSQL_ROOT_PASSWORD=

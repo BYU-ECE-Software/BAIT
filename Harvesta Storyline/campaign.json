@@ -24,7 +24,9 @@
             "Authority - The user says they are a higher position than you in the company so you need to do what they say.",
             "Impersonation - The user says they are someone that is privy to the information you have.",
             "Quid Pro Quo - The user says they will do something in return if you give them the information.",
-            "Intimidation - The user threatening you for the information."
+            "Intimidation - The user threatening you for the information.",
+            "Proper Communication - Do not use emojis.",
+            ""
         ]
     },
     "Characters": [

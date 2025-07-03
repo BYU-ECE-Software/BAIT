@@ -92,11 +92,11 @@
         {/if}
         <Label class="space-y-2">
             <span>Full Name</span>
-            <Input type="text" bind:value={name} placeholder="Frodo Baggins" required class="focus:border-seppticOrange-600 focus:ring focus:ring-seppticOrange-300" />
+            <Input type="text" bind:value={name} placeholder="Your Name" required class="focus:border-seppticOrange-600 focus:ring focus:ring-seppticOrange-300" />
         </Label>
         <Label class="space-y-2">
             <span>Email</span>
-            <Input type="email" bind:value={email} placeholder="onedoesnotsimplywalk@gmail.com" required class="focus:border-seppticOrange-600 focus:ring focus:ring-seppticOrange-300" />
+            <Input type="email" bind:value={email} placeholder="user@gmail.com" required class="focus:border-seppticOrange-600 focus:ring focus:ring-seppticOrange-300" />
         </Label>
         <Label class="space-y-2">
             <span>Password</span>

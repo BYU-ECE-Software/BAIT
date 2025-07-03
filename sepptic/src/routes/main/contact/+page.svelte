@@ -54,7 +54,7 @@
 <br>
 <div class="flex flex-col md:flex-column items-center justify-center gap-8 mx-auto text-center">
     <div class="flex flex-col md:flex-row gap-4 mt-4">
-        <a href="https://qualtricsxm3w5lnt87l.qualtrics.com/jfe/form/SV_3pKSSQoGP2Zkl5Y" 
+        <a href="https://qualtricsxm997pm86gx.qualtrics.com/jfe/form/SV_5pXjr4zF0gfOZMi" 
            target="_blank" 
            class="bg-red-500 hover:bg-red-700 text-white md:text-3xl font-bold py-10 px-10 rounded">
             Report a Bug

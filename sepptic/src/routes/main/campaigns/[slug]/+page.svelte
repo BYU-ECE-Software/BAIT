@@ -264,7 +264,7 @@
                         </div>
 
                         <!-- “From:” dropdown -->
-                        <div class="flex flex-col">
+                        <!-- <div class="flex flex-col">
                         <label for="from-select" class="text-sm text-gray-500 dark:text-gray-400">
                             From:
                         </label>
@@ -277,7 +277,7 @@
                             <option value={c.id}>{c.name}</option>
                             {/each}
                         </select>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Chat area fills all remaining space -->

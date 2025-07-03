@@ -103,7 +103,11 @@ export async function POST(event: RequestEvent) {
       body: JSON.stringify({
         model: "gpt-4o-realtime-preview-2025-06-03",
         voice: voiceType,
-        instructions: fullPrompt
+        instructions: fullPrompt,
+        input_audio_transcription: {
+          model: "whisper-1",
+          language: "en", // Set the language to English
+        } // Enable input audio transcription for tracking user input
       }),
     });
 
@@ -117,5 +121,9 @@ export async function POST(event: RequestEvent) {
     return json(data);
   } catch(err) {
     console.log("Realtime Session Creation Failed", err)
+    return new Response(
+      JSON.stringify({ message: "Realtime Session Creation Failed", detail: err }),
+      { status: 500 }
+    );
   }
 }

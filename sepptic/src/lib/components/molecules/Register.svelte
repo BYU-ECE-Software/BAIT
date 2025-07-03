@@ -92,7 +92,7 @@
         {/if}
         <Label class="space-y-2">
             <span>Full Name</span>
-            <Input type="text" bind:value={name} placeholder="Your Name" required class="focus:border-seppticOrange-600 focus:ring focus:ring-seppticOrange-300" />
+            <Input type="text" bind:value={name} placeholder="John Smith" required class="focus:border-seppticOrange-600 focus:ring focus:ring-seppticOrange-300" />
         </Label>
         <Label class="space-y-2">
             <span>Email</span>

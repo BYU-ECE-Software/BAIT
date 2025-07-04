@@ -143,11 +143,11 @@
                     <Accordion class="justify-center"
                     activeClass="bg-gray-200 hover:bg-gray-300 text-black focus:ring-4 focus:ring-gray-400 focus:outline-none w-full"
                     inactiveClass="text-black-500 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800">
-                        <AccordionItem>
+                        <AccordionItem open>
                             <span slot="header">Pen test onboarding</span>
 
                             <div class="space-y-4">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                <p class="whitespace-pre-line text-sm text-gray-500 dark:text-gray-400">
                                 {data.campaign.Campaign_Information.Brief}
                                 </p>
 

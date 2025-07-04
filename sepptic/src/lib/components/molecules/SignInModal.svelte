@@ -38,10 +38,10 @@
         {#if errorMessage}
             <div class="text-red-600 dark:text-red-400 text-sm">{errorMessage}</div>
         {/if}
-        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Sign in to SEPPTIC</h3>
+        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Sign in to BAIT</h3>
         <Label class="space-y-2">
-            <span>Email</span>
-            <Input class="focus:border-seppticOrange-600 focus:ring focus:ring-seppticOrange-300" type="email" bind:value={email} placeholder="onedoesnotsimplywalk@gmail.com" required />
+            <span>Your Email</span>
+            <Input class="focus:border-seppticOrange-600 focus:ring focus:ring-seppticOrange-300" type="email" bind:value={email} placeholder="user@gmail.com" required />
         </Label>
         <Label class="space-y-2">
             <span>Your password</span>

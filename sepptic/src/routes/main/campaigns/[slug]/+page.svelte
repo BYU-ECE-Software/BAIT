@@ -176,7 +176,7 @@
                             <span slot="header">Gathered Intel on Employees</span>
                             <div class="space-y-4">
                                 <p class="text-sm text-gray-800 dark:text-gray-400">
-                                This is the information that we have been able to gather on the Employees of [Insert Company Name]. Use this info to decide things like who to contact or learn more about the companies hierarchy. We weren't able to find out everything about everyone, so you may need ask around. 
+                                Gather Intel on Employees: Below is some information that I gathered about the {data.campaign.Campaign_Information.Name} employees. I wasn't able to find out everything about everyone, so you may need ask around to learn more. Happy sleuthing. - Randy 
                                 </p>
                                       <div class="grid grid-cols-3 gap-4 p-4">
                                         {#each data.campaign.Characters as character, index}
@@ -319,9 +319,7 @@
             <div class="w-full max-w-4xl mx-auto font-semibold space-y-5">
                 <h4 class="text-black-500 mb-2">Progress Dashboard</h4>
                 <p class="text-sm text-gray-500 dark:text-gray-400">
-                 {data.campaign.Campaign_Information.Brief}
-                 Learn about the company by viewing the <strong class="text-gray-900 dark:text-white font-bold">Mission Documents.</strong> Use the <strong class="text-gray-900 dark:text-white font-bold">Chat Portal</strong> to social engineer your way to the information. If you get stuck, chat with <strong class="text-gray-900 dark:text-white font-bold">Randy</strong> below. Good Luck!
-                </p>
+                 As I mentioned in the Pen testing onboarding section of the Mission Documents, our goal is to identify the city where the new Harvesta grocery store will be located. I'm happy to help out in the chat below if you get stuck. Also, please don't enter the wrong location below! It will make us look pretty bad as a penetration testing company. I want to impress Dave (Harvesta's CISO) so he'll want to hire us again. Good luck!</p>
                 
                 <CTFInputBox
                     placeholder="Write answer here"

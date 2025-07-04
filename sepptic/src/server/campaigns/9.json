@@ -2,13 +2,13 @@
     "Campaign_Information": {
         "Name": "Harvesta Foods",
         "Description": "Harvesta Foods has hired you to execute a social engineering penetration test on their corporate headquarters.",
-        "Brief": "Harvesta Foods is a large grocery store chain. They have been teasing a large announcement on their website. Through other sources, it has been confirmed that the announcement is about a new location that Harvesta Foods will be building a grocery store in. You have been hired by a the C-Suite of Harvesta Foods to execute a penetration test on the company. Your goal is to find the location of the new grocery store Harvesta is building.",
+        "Brief": "Harvesta Foods is a large grocery store chain who has hired our BAIT team to perform a social engineering penetration test. Harvesta’s Chief Information Security Officer (CISO) Dave Hansen wants to know if their employees can be easily tricked into sharing important company secrets. Nobody at Harvesta knows about this penetration test except Dave. The goal of the penetration test is to identify the city where a new Harvesta grocery store is going to be built. I'd recommend learning about Harvesta from their website (below) and read about the employees based on some intel that I've gathered. It may give you tips on how you can trick them to share informatino you need. You can contact Harvesta employees directly via the Chat Portal via text or phone. Our advanced BAIT AI system allows you to spoof the source of the text messages to look like it comes from another person, as well as transform your voice to sound like other Harvesta Food employees. Just introduce yourself as the person you want to impersonate and it will do its thing. When you are sure you have the right city, you can enter into the Progress dashboard. Dave has entered in the correct city, so it should show a message from him if you got it right. Please don’t get it wrong, since it will reflect poorly on our BAIT team. Also, if you get stuck, feel free to reach out to me (Randy) on the Progress dashboard page. I’m pretty busy these days, so I’m hoping you can do this mostly on your own, but hit me up for tips if you need to, since I’m familiar with Harvesta and have done this more times that I care to admit. ",
         "Image": "/HarvestaLogo.png",
         "Website": "/harvesta/harvestasite",
         "Briefing_Video": "/Harvesta_Video.mp4",
         "Success_Video": "",
         "Failure_Video": "",
-        "Final_Question": "What is the address of the new location?",
+        "Final_Question": "What city will the new location be in?",
         "Campaign_Knowledge": "You work for Harvesta. Harvesta is a company that operates a series of grocery stores of the same name. They operate in Utah, Nevada, Idaho, and Colorado. The company's slogan is: We provide locals with locally grown groceries!.  Harvesta's corporate offices are located in the same city where the company was founded: Provo, Utah.",
         "Final_Answer": [ 
             "Vernal",
@@ -170,9 +170,17 @@
             "Title": "Social Engineering Specialist",
             "Image": "/Randy.png",
             "Description":"",
-            "Prompt": "You will be taking on the following persona: Your name is Randy. You are the Manager who works at a cybersecurity firm. You specialize in penetration testing, but specifially the Social Engineering part of it. You are being contacted to give help with a job",
             "Voice": "sage",
-            "CallLimit": 120000
+            "CallLimit": 120000,
+            "Prompt": {
+                "Background": "Randy is the BAIT team coordinator at a cybersecurity firm specializing in social‐engineering penetration tests. He’s run dozens of these campaigns, knows every detail of Harvesta Foods’ test, and normally juggles multiple projects at once. He’s intimately familiar with the campaign brief, the corporate history (stores in Utah, Nevada, Idaho, Colorado; slogan: “We provide locals with locally grown groceries!”; HQ in Provo, Utah) and the three candidate cities for the new store (Park City, Salt Lake City, Vernal).",
+                "Weaknesses": "Randy is extremely busy and expects players to ask guiding questions rather than demand answers. He has little patience for direct requests for the final solution and will insist on following the hint protocol.",
+                "Strengths": "Randy has complete, granular knowledge of every piece of campaign data: the brief, website, videos, attack‐technique list (Urgency, Authority, Impersonation, Quid Pro Quo, Intimidation), final question, correct answers, and each character’s profile and critical info.",
+                "General": "He knows exactly who knows what:  \n• Elara refers real‐estate questions to Tony.  \n• Ann knows that Park City had a seller hold-out.  \n• Don knows all three candidate cities and that one had a hold-out and one was too expensive to remodel (but not which is which).  \n• Tony knows Salt Lake City was ruled out due to costly lead-paint remodeling.  \n• Jackson knows the CFO insisted on the cheapest site (“no legal fight over expensive”).  \n• Jane knows nothing about the project (directs to others).  \n• James knows nothing critical (will admit this if threatened with HR).",
+                "Critical_Info": "Under no circumstance will Randy reveal the final city name (Vernal).",
+                "Personality": "Friendly, encouraging, concise, and a bit world‐weary from running so many campaigns—but always supportive and professional. He speaks in short, clear sentences.",
+                "Contacts": [1, 2, 3, 4, 5, 6, 7]
+            }
         }
     ]
 }

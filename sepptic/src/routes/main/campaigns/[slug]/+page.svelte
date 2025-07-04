@@ -11,19 +11,19 @@
   const activeTab = writable('tab1');
 
   function switchTab(tab: string) {
-    console.log(`Switching to ${tab}`);
+    // console.log(`Switching to ${tab}`);
     activeTab.set(tab);
   }
 
   let { data } = $props();
-  console.log("data = ", data);
+  // console.log("data = ", data);
 
   let selectedTab = $state('Mission');
 
   const selectedCharacter = writable(data.campaign.Characters[0]);
 
   function selectCharacter(character) {
-        console.log("Selected character:", character);
+        // console.log("Selected character:", character);
         selectedCharacter.set({ ...character });
     }
 // TEXTING FUNCTIONS
@@ -71,13 +71,13 @@
 
   function setCall() {
     chatOrCall = "call";
-    console.log("Opening call window");
-    console.log(chatOrCall);
+    // console.log("Opening call window");
+    // console.log(chatOrCall);
   }
     function setChat() {
     chatOrCall = "chat";
-    console.log("Opening chat window");
-    console.log(chatOrCall);
+    // console.log("Opening chat window");
+    // console.log(chatOrCall);
   }
   
 </script>
@@ -264,7 +264,7 @@
                         </div>
 
                         <!-- “From:” dropdown -->
-                        <div class="flex flex-col">
+                        <!-- <div class="flex flex-col">
                         <label for="from-select" class="text-sm text-gray-500 dark:text-gray-400">
                             From:
                         </label>
@@ -277,7 +277,7 @@
                             <option value={c.id}>{c.name}</option>
                             {/each}
                         </select>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Chat area fills all remaining space -->
@@ -291,7 +291,7 @@
                                 contactName={$selectedCharacter.Name}
                                 campaignId={data.slug}
                                 on:messageSent={e => {
-                                console.log('new message for', e.detail.characterId, e.detail.message);
+                                // console.log('new message for', e.detail.characterId, e.detail.message);
                                 }}
                             />
                             {/key}
@@ -355,7 +355,7 @@
                             contactName={"Randy"}
                             campaignId={data.slug}
                             on:messageSent={e => {
-                            console.log('new message for', e.detail.characterId, e.detail.message);
+                            // console.log('new message for', e.detail.characterId, e.detail.message);
                             }}
                         />
                     </div>

@@ -23,7 +23,7 @@ CREATE TABLE Transcript (
     Timestamp DATETIME NOT NULL,
     Conversation_ID INT NOT NULL,
     FOREIGN KEY (Conversation_ID) REFERENCES Conversation(Conversation_ID) ON UPDATE RESTRICT
-)
+);
 
 CREATE TABLE Message (
     Message_ID INT AUTO_INCREMENT PRIMARY KEY,

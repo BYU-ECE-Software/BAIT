@@ -211,6 +211,9 @@ export async function GET(event: RequestEvent) {
           JSON.stringify({ data: trans.data }),
           { status: 200, headers: { 'Content-Type': 'application/json' } }
         );
+      } else {
+        console.error("Error fetching transcript", trans);
+        return new Response("Error fetching transcript", { status: trans.status || 500, headers: { 'Content-Type': 'application/json' } });
       }
 
     } else if (!call) {

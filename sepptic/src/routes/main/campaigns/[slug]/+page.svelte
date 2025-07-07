@@ -114,8 +114,8 @@
       <div class="absolute top-0 left-0 w-full h-1 rounded-t-md bg-gray-400 dark:bg-gray-600"></div>
     {/if}
     <div class="flex flex-col">
-      <span class="font-semibold text-md">Chat Portal</span>
-      <p class="text-xs text-gray-500 dark:text-gray-400">Contact Cards and Info</p>
+      <span class="font-semibold text-md">Contact Portal</span>
+      <p class="text-xs text-gray-500 dark:text-gray-400">Chat and Call targets</p>
     </div>
   </button>
 
@@ -128,8 +128,8 @@
       <div class="absolute top-0 left-0 w-full h-1 rounded-t-md bg-gray-400 dark:bg-gray-600"></div>
     {/if}
     <div class="flex flex-col">
-      <span class="font-semibold text-md">Progress dashboard</span>
-      <p class="text-xs text-gray-500 dark:text-gray-400">Progress Bar and Hints</p>
+      <span class="font-semibold text-md">Mission Control</span>
+      <p class="text-xs text-gray-500 dark:text-gray-400">Submission and Hints</p>
     </div>
   </button>
 </div>
@@ -317,7 +317,7 @@
         {/if}
         {#if $activeTab === 'tab3'}
             <div class="w-full max-w-4xl mx-auto font-semibold space-y-5">
-                <h4 class="text-black-500 mb-2">Progress Dashboard</h4>
+                <h4 class="text-black-500 mb-2">Mission Control</h4>
                 <p class="text-sm text-gray-500 dark:text-gray-400">
                  As I mentioned in the Pen testing onboarding section of the Mission Documents, our goal is to identify the city where the new Harvesta grocery store will be located. I'm happy to help out in the chat below if you get stuck. Also, please don't enter the wrong location below! It will make us look pretty bad as a penetration testing company. I want to impress Dave (Harvesta's CISO) so he'll want to hire us again. Good luck!</p>
                 

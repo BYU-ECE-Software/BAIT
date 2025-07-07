@@ -25,12 +25,12 @@
 
 </script>
 
-<Navbar color="dark">
+<nav class="w-full flex justify-between items-center bg-gray-50 pl-4 pr-2 py-3 text-black">
     <NavBrand href="/">
             <!-- Light mode logo -->
-            <img src="/BAIT.png" class="me-3 h-6 sm:h-9 rounded-md dark:hidden" alt="SEPPTIC logo light" />
+            <!-- <img src="/BAIT.png" class="me-3 h-6 sm:h-9 rounded-md dark:hidden" alt="SEPPTIC logo light" /> -->
             <!-- Dark mode logo -->
-            <img src="/BAIT-modified.png" class="me-3 h-6 sm:h-9 rounded-md hidden dark:block" alt="SEPPTIC logo dark" />
+            <!-- <img src="/BAIT-modified.png" class="me-3 h-6 sm:h-9 rounded-md hidden dark:block" alt="SEPPTIC logo dark" /> -->
         <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-seppticRed-600 text-seppticRed-600">
             BAIT
         </span>
@@ -58,4 +58,4 @@
         <NavLi href="/main/campaigns">Campaigns</NavLi>
         <NavLi href="/main/contact">Contact</NavLi>
     </NavUl>
-</Navbar>
+</nav>

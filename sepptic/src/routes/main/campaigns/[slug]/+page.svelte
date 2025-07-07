@@ -197,6 +197,16 @@
 
                         <AccordionItem>
                             <span slot="header">Other</span>
+                            <p class="text-sm text-gray-800 dark:text-gray-400">
+                                Take this survey at the end.
+                                </p>
+                            <a
+                                href="https://qualtricsxm997pm86gx.qualtrics.com/jfe/form/SV_00YGmv8m4F9fSYK"
+                                target="_blank"
+                                class="inline-block mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition dark:bg-blue-500 dark:hover:bg-blue-600"
+                            >
+                                Take Survey
+                            </a>
                         </AccordionItem>
                     </Accordion>
                 </div>

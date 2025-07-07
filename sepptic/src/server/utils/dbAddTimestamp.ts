@@ -6,16 +6,23 @@ export default async function dbAddTimestamp(user: number, name: string,) {
 
     const currTime = new Date().toISOString();
 
-    await prisma.userEventLog.create({
+    const result = await prisma.userEventLog.create({
         data: {
             User_ID: user,
             Event_Name: name,
             Timestamp: currTime
         }
     })
-
-    return {
-        message: `Timestamp on ${event} successfully added to DB`,
-        status: 200
+    if (result) {
+        return {
+            message: `Timestamp on ${name} successfully added to DB`,
+            status: 200
+        }
+    } else {
+        return {
+            message: `Issue making timestamp on ${name}`,
+            status: 500
+        }
     }
+    
 }

@@ -171,7 +171,7 @@
   <div>
     {#if currentCall}
       <div class="flex flex-col gap-2 w-full">
-        <button class="end-call py-2 px-4 rounded" on:click={endCall}>End Phone Call</button>
+        <button class="end-call py-2 px-4 rounded" onclick={endCall}>End Phone Call</button>
         <div>
           <p class="text-gray-500">Call in progress...</p>
           <p>{mm}:{ss}</p>
@@ -179,7 +179,7 @@
       </div>
     {:else}
       <div class="flex flex-col gap-2 w-full">
-        <button class="start-call py-2 px-4 rounded" on:click={startCall}>Start Phone Call</button>
+        <button class="start-call py-2 px-4 rounded" onclick={startCall}>Start Phone Call</button>
         <div>
           <p class="text-gray-500">No active call...</p>
         </div>

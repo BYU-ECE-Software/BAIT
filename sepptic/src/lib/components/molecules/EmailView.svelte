@@ -118,7 +118,7 @@
         </div>
         <div class="mt-4">
             <textarea bind:value={replyContent} placeholder="Reply..." class="w-full p-2 border rounded"></textarea>
-            <button class="mt-2 bg-blue-500 text-white px-4 py-2 rounded" on:click={sendReply}>
+            <button class="mt-2 bg-blue-500 text-white px-4 py-2 rounded" onclick={sendReply}>
                 Send Reply
             </button>
         </div>

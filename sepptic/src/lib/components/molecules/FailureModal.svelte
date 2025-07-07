@@ -9,7 +9,7 @@
       <!-- Close Button -->
       <button
         class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl font-bold"
-        on:click={onClose}
+        onclick={onClose}
         aria-label="Close"
       >
         &times;

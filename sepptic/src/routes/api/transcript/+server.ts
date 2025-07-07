@@ -45,7 +45,6 @@ export async function POST(event: RequestEvent) {
 
     const conversationId = conversationResult.conversationId;
 
-    // Sticking point here, Its failing because no data is being written to the transcript
     const transResponse = await dbUpdateTranscript(conversationId, transcript);
     if (transResponse.status !== 200) {
       console.error('dbUpdateTranscript failed:', transResponse);

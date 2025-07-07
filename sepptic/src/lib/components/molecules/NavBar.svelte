@@ -48,7 +48,7 @@
             <!-- <span class="block text-sm">Script Kiddie</span> -->
             <span class="block truncate text-sm font-medium">{email}</span>
         </DropdownHeader>
-        <DropdownItem on:click={logOut}>Sign out</DropdownItem>
+        <DropdownItem onclick={logOut}>Sign out</DropdownItem>
     </Dropdown>
 
     <!-- Navbar Items -->

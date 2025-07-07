@@ -93,7 +93,7 @@
 
   <!-- Button 1 -->
   <button
-    on:click={() => activeTab.set('tab1')}
+    onclick={() => activeTab.set('tab1')}
     class="py-3 px-2 mb-3 mx-4 text-left rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 relative"
   >
     {#if $activeTab === 'tab1'}
@@ -107,7 +107,7 @@
 
   <!-- Button 2 -->
   <button
-    on:click={() => activeTab.set('tab2')}
+    onclick={() => activeTab.set('tab2')}
     class="py-3 px-2 mb-3 mx-4 text-left rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 relative"
   >
     {#if $activeTab === 'tab2'}
@@ -121,7 +121,7 @@
 
   <!-- Button 3 -->
   <button
-    on:click={() => activeTab.set('tab3')}
+    onclick={() => activeTab.set('tab3')}
     class="py-3 px-2 mb-3 mx-4 text-left rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 relative"
   >
     {#if $activeTab === 'tab3'}
@@ -224,7 +224,7 @@
                         <button
                             type="button"
                             class="flex-1 aspect-square p-0 bg-transparent border-none cursor-pointer"
-                            on:click={() => { setChat(); selectCharacter(character); }}
+                            onclick={() => { setChat(); selectCharacter(character); }}
                         >
                             <img src="/message_selected.png" alt="Message" class="w-full h-full object-contain" />
                         </button>
@@ -232,7 +232,7 @@
                         <button
                             type="button"
                             class="flex-1 aspect-square p-0 bg-transparent border-none cursor-pointer"
-                            on:click={() => { setCall(); selectCharacter(character); }}
+                            onclick={() => { setCall(); selectCharacter(character); }}
                         >
                             <img src="/call_selected.png" alt="Call" class="w-full h-full object-contain" />
                         </button>
@@ -325,6 +325,8 @@
                     placeholder="Write answer here"
                     question={data.campaign.Campaign_Information.Final_Question}
                     answer={data.campaign.Campaign_Information.Final_Answer}
+                    userId={data.user.userId}
+
                 />
 
                 <div class="flex flex-col flex-1 h-full bg-gray-50 dark:bg-gray-800 p-6">
@@ -468,13 +470,13 @@
 
 
   <BottomNav position="fixed" classInner="grid-cols-3" activeUrl="/" style="bottom-0: left-0 right-0 z-10">
-      <BottomNavItem btnName="Mission" on:click={() => selectedTab = 'Mission'}>
+      <BottomNavItem btnName="Mission" onclick={() => selectedTab = 'Mission'}>
           <WalletSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
       </BottomNavItem>
-      <BottomNavItem btnName="Dashboard" on:click={() => selectedTab = 'Dashboard'}>
+      <BottomNavItem btnName="Dashboard" onclick={() => selectedTab = 'Dashboard'}>
           <AdjustmentsVerticalOutline class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
       </BottomNavItem>
-      <BottomNavItem btnName="Progress" on:click={() => selectedTab = 'Progress'}>
+      <BottomNavItem btnName="Progress" onclick={() => selectedTab = 'Progress'}>
           <UserCircleSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
       </BottomNavItem>
   </BottomNav>

@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 
 
-export default async function dbAddTimestamp(user: number, event: string,) {
+export default async function dbAddTimestamp(user: number, name: string,) {
     const prisma = new PrismaClient();
 
     const currTime = new Date().toISOString();
@@ -9,7 +9,7 @@ export default async function dbAddTimestamp(user: number, event: string,) {
     await prisma.userEventLog.create({
         data: {
             User_ID: user,
-            Event_Name: event,
+            Event_Name: name,
             Timestamp: currTime
         }
     })

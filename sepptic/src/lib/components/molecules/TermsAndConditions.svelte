@@ -22,6 +22,7 @@
         <ul class="list-disc pl-5 text-gray-700 dark:text-gray-300 text-sm space-y-2">
             <li>Your data may be used for testing and improving our social engineering practice platform.</li>
             <li>The platform uses GPT-based APIs. Do not provide sensitive or confidential information.</li>
+            
         </ul>
         <div class="flex justify-end">
             <button

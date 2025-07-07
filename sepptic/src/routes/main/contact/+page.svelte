@@ -52,7 +52,7 @@
     {/each}
 </div>
 <br>
-<div class="flex flex-col md:flex-column items-center justify-center gap-8 mx-auto text-center">
+<div class="pb-20 flex flex-col md:flex-column items-center justify-center gap-8 mx-auto text-center">
     <div class="flex flex-col md:flex-row gap-4 mt-4">
         <a href="https://qualtricsxm997pm86gx.qualtrics.com/jfe/form/SV_5pXjr4zF0gfOZMi" 
            target="_blank" 

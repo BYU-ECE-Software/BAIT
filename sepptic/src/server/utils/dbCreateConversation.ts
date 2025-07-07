@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import validateCharacter from './validateCharacter';
 
 // Function to check if a conversation already exists for this user/character pair.
-async function checkExistingConversation(userId: number, campaignId: number, characterId: number, call:boolean) {
+async function checkExistingConversation(userId: number, campaignId: number, characterId: number, call:boolean, fromid: number) {
     const prisma = new PrismaClient();
     try {
         const conversation = await prisma.conversation.findFirst({
@@ -10,7 +10,8 @@ async function checkExistingConversation(userId: number, campaignId: number, cha
                 User_ID: userId,
                 Campaign_ID: campaignId,
                 Character_ID: characterId,
-                Realtime: call // Identifies the Realtime convo vs the text convo
+                Realtime: call, // Identifies the Realtime convo vs the text convo
+                From_ID: fromid
             }
         });
         return conversation;
@@ -48,17 +49,19 @@ async function writeConversation(userId: number, campaignId: number, characterId
 
 
 // Main function to create a new conversation for a user in the database. Returns an object with the conversationId, message, and status.
-export default async function dbCreateConversation(userId: number, campaignId: number, characterId: number, call:boolean) {
+export default async function dbCreateConversation(userId: number, campaignId: number, characterId: number, call:boolean, fromid: number) {
   
+  /*
   if(call) {
     console.log('Creating realtime call for:', { userId, campaignId, characterId, call });
   }
   else {
     console.log('Creating conversation for:', { userId, campaignId, characterId, call });
-  }
+  } 
+  */
 
 
-  const existingConversation = await checkExistingConversation(userId, campaignId, characterId, call);
+  const existingConversation = await checkExistingConversation(userId, campaignId, characterId, call, fromid);
 
   if (existingConversation) {
     console.log('Found existing conversation:', existingConversation.Conversation_ID);

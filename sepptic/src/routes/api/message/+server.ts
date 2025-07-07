@@ -172,9 +172,12 @@ export async function GET(event: RequestEvent) {
     const userId = userResp.userId;
 
     // — parse params —
+    console.log('Recieving Data');
     const url         = new URL(event.request.url);
     const campaignId  = Number(url.searchParams.get('campaignId'));
     const characterId = Number(url.searchParams.get('characterId'));
+    const fromid = Number(url.searchParams.get('fromid'));
+    const fromname = String(url.searchParams.get('fromname'));
     const call = Boolean(url.searchParams.get('call')) // Sets Realtime true or not
     console.log(`This is the value of call before dbCreateConversation ${call}`)
 
@@ -186,8 +189,10 @@ export async function GET(event: RequestEvent) {
     }
 
     console.log("Calling dbCreateConversation", userId, campaignId, characterId);
+    console.log("FromID:", fromid);
+    console.log("fromname:", fromname);
     // — ensure conversation exists —
-    const convoRes = await dbCreateConversation(userId, campaignId, characterId, call);
+    const convoRes = await dbCreateConversation(userId, campaignId, characterId, call, fromid);
     if (convoRes.status !== 200 || !convoRes.conversationId) {
       return new Response(
         JSON.stringify({ message: 'No conversation found', detail: convoRes }),

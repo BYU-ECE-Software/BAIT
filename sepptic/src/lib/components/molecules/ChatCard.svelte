@@ -6,6 +6,8 @@
   export let contactName: string;          // human-readable display name
   export let campaignId: number | string;  // campaign identifier
   export let size: int = 0;
+  export let fromid: number;
+  export let fromname: string;
 
   let messagesContainer: HTMLDivElement | null = null;
 
@@ -24,10 +26,13 @@
 
   // — onMount lives inside the <script>, right after your state & props —
   onMount(async () => {
-    // console.log('🔍 fetching history for', { campaignId, characterId });
+    console.log('🔍 fetching history for', { campaignId, characterId });
+    console.log('Sending FromID to backend');
+    console.log(fromid);
+    console.log(fromname);
     try {
       const res = await fetch(
-        `/api/message?campaignId=${campaignId}&characterId=${characterId}`,
+        `/api/message?campaignId=${campaignId}&characterId=${characterId}&fromid=${fromid}&fromname=${fromname}`,
         { credentials: 'include' }
       );
       // console.log('GET /api/message status', res.status);

@@ -32,11 +32,11 @@ model Message {
 }
 
 model Transcript {
-  Transcript_ID   Int      @id @default(autoincrement())
-  Text            String   @db.Text
+  Transcript_ID   Int          @id @default(autoincrement())
+  Text            String       @db.Text
   Timestamp       DateTime
   Conversation_ID Int
-  Conversation Conversation @relation(fields: [Conversation_ID], references: [Conversation_ID], onUpdate: Restrict, map: "Transcript_ibfk_1")
+  Conversation    Conversation @relation(fields: [Conversation_ID], references: [Conversation_ID], onUpdate: Restrict, map: "Transcript_ibfk_1")
 
   @@index([Conversation_ID], map: "Conversation_ID")
 }
@@ -57,4 +57,15 @@ model User {
   Email        String         @unique(map: "Email") @db.VarChar(255)
   Conversation Conversation[]
   Session      Session[]
+  UserEventLog UserEventLog[]
+}
+
+model UserEventLog {
+  Event_ID   Int      @id @default(autoincrement())
+  User_ID    Int
+  Event_Name String   @db.VarChar(50)
+  Timestamp  DateTime
+  User       User     @relation(fields: [User_ID], references: [User_ID], onUpdate: Restrict, map: "UserEventLog_ibfk_1")
+
+  @@index([User_ID], map: "User_ID")
 }

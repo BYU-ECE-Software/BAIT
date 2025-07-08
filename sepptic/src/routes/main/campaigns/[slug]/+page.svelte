@@ -1,12 +1,40 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { AccordionItem, Accordion } from 'flowbite-svelte';
   import { writable } from 'svelte/store';
   import { Avatar, Card, Progressbar, BottomNav, BottomNavItem } from 'flowbite-svelte';
-  import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid } from 'flowbite-svelte-icons';
+  import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, UserSolid, UserHeadsetOutline } from 'flowbite-svelte-icons';
   import { GenericVideoCard, GenericCharacterCard, AchievementCard } from '$lib';
   import Chat from '../../../../lib/components/molecules/ChatCard.svelte'; // Import EmailView
   import Call from '../../../../lib/components/molecules/CallCard.svelte'; // Import Realtime Call Card
   import CTFInputBox from '../../../../lib/components/molecules/CTFInputBox.svelte';
+  import dbAddTimestamp from '../../../../server/utils/dbAddTimestamp';
+
+  let firstLoad: number = 0;
+  onMount(async () => { // This is likely not very scalable once multiple campaigns are made. This also won't work perfectly with incognito windows
+    const name: string = "Campaign Start";
+    const user = data.user.userId;
+    const logKey = `campaignStarted - ${user}`
+    if(!localStorage.getItem(logKey)) { // Only adds a starting timestamp if page has never been accessed before on this browser
+        // This should eventually be tracked per user persistently somehow?
+        try {
+            const response = await fetch("/api/timestamp", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ user, name })
+            });
+            
+            if (response.ok) {
+                localStorage.setItem(logKey, "true"); 
+            }
+        } catch (err) {
+        console.log("Error creating flag submission timestamp", err);
+        }
+    }
+    firstLoad += 1;
+  })
 
   const activeTab = writable('tab1');
 

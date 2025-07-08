@@ -21,7 +21,7 @@ async function checkExistingConversation(userId: number, campaignId: number, cha
 }
 
 // Function to write a new conversation to the database.
-async function writeConversation(userId: number, campaignId: number, characterId: number, call: boolean) {
+async function writeConversation(userId: number, campaignId: number, characterId: number, call: boolean, fromid: number) {
     const prisma = new PrismaClient();
 
     try {
@@ -30,7 +30,8 @@ async function writeConversation(userId: number, campaignId: number, characterId
                 User_ID: userId,
                 Campaign_ID: campaignId,
                 Character_ID: characterId,
-                Realtime: call
+                Realtime: call,
+                From_ID: fromid
             }
         });
         return {
@@ -60,7 +61,7 @@ export default async function dbCreateConversation(userId: number, campaignId: n
   } 
   */
 
-
+  console.log("FromID iN CREATCONVERSTAION IS", fromid);
   const existingConversation = await checkExistingConversation(userId, campaignId, characterId, call, fromid);
 
   if (existingConversation) {
@@ -73,7 +74,7 @@ export default async function dbCreateConversation(userId: number, campaignId: n
   }
 
   const characterValidationResponse = await validateCharacter(campaignId, characterId);
-  console.log('✅ Character validation result:', characterValidationResponse);
+  // console.log('✅ Character validation result:', characterValidationResponse);
 
   if (characterValidationResponse.status !== 200) {
     return {
@@ -83,7 +84,7 @@ export default async function dbCreateConversation(userId: number, campaignId: n
     };
   }
 
-  const response = await writeConversation(userId, campaignId, characterId, call);
-  console.log('📝 Write conversation result:', response);
+  const response = await writeConversation(userId, campaignId, characterId, call, fromid);
+  // console.log('📝 Write conversation result:', response);
   return response;
 }

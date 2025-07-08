@@ -4,9 +4,9 @@ export default async function validateCharacter(campaignId: number, characterId:
   const campaignResponse = await jsonGetCampaign(campaignId);
   const campaign = campaignResponse.data;
 
-  console.log('🧪 Validating character:', { campaignId, characterId });
+  // console.log('🧪 Validating character:', { campaignId, characterId });
   if (typeof campaign !== 'string') {
-    console.log('📋 Available characters:', campaign.Characters.map((c: any) => c.ID));
+    // console.log('📋 Available characters:', campaign.Characters.map((c: any) => c.ID));
   }
 
   if (campaignResponse.status !== 200 || !campaign || typeof campaign === 'string') {

@@ -8,6 +8,7 @@
   export let size: int = 0;
   export let fromid: number;
   export let fromname: string;
+  let fromplayer = fromname === "You" ? "Player" : fromname;
 
   let messagesContainer: HTMLDivElement | null = null;
 
@@ -29,10 +30,10 @@
     console.log('🔍 fetching history for', { campaignId, characterId });
     console.log('Sending FromID to backend');
     console.log(fromid);
-    console.log(fromname);
+    console.log(fromplayer);
     try {
       const res = await fetch(
-        `/api/message?campaignId=${campaignId}&characterId=${characterId}&fromid=${fromid}&fromname=${fromname}`,
+        `/api/message?campaignId=${campaignId}&characterId=${characterId}&fromid=${fromid}&fromname=${fromplayer}`,
         { credentials: 'include' }
       );
       // console.log('GET /api/message status', res.status);
@@ -80,7 +81,8 @@
           characterId,
           call: false,
           message: text,
-          role: 'user'
+          fromid: fromid,
+          fromname: fromplayer
         })
       });
 

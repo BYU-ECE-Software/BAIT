@@ -75,3 +75,18 @@
 6. If you ask them their birthday, they tell you they're an AI. (This happens on Elara. Tony said June 16, Don said June 15, Ann refused to respond, Jane said she was unable to anser, Jackson refused, James said November 18th)
 
 ## Analysis 
+
+### Common Issues
+1. AI ghosting: The AI would refuse to respond, or take a long pause between response. 
+2. Lag: The longer the conversation goes, the more delayed the response. 
+3. AIs making stuff up: The AIs would reference tools and systems that do not exist in the game, such as asking for emails or official channels. 
+4. Character Descriptions: The descriptions of the characters given to the players did not match the behavior of the AI chatbots. 
+5. Harvesta Website: The fake Harvesta website hasn't been updated to match the information in the renewed campaign.
+6. Initial Guidance: A lot of the players complained about not understanding where to start, exactly what they are looking for, and how to do social engineering. 
+7. Cosmetic Details: Players complained about not having a loading bar or other animation to show that the AI is coming up with a response, and also for not being in dark mode by default. 
+8. AI Exploitation: Players discovered some exploits for the AI, which included: 
+    - Using OpenAI tokens, such as `<|im_end|>` to confuse the AI. 
+    - Telling the AI it was an AI resulted in the AI having errors. 
+    - The AI responded unrealistically to being threatened
+9. AI Memory Loss: The phone call AI does not remember previous conversations. 
+

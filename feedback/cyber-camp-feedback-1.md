@@ -72,7 +72,7 @@
 3. Felt realistic. 
 4. Felt AI. 
 5. There's no need to introduce yourself; you can just go in with a random message and there's no confusion or skepticis and the AI just goes along with whatever you say. 
-6. If you ask them their birthday, they tell you they're an AI. (This happens on Elara. Tony said June 16, Don said June 15, Ann refused to respond, Jane said she was unable to anser, Jackson refused, James said November 18th)
+6. If you ask them their birthday, they tell you they're an AI. (This happens on Elara. Tony said June 16, Don said June 15, Ann refused to respond, Jane said she was unable to answer, Jackson refused, James said November 18th)
 
 ## Analysis 
 
@@ -90,3 +90,16 @@
     - The AI responded unrealistically to being threatened
 9. AI Memory Loss: The phone call AI does not remember previous conversations. 
 
+### Problems to look into
+1. Ghosting
+    - No idea what the problem here is; will need to look into this
+2. Reducing lag on the AI 
+    - Use an AI to summarize the array in one short message after every X messages? 
+3. Adding guardrails to prevent the AI from the AI making stuff up and also prevent AI exploitation
+    - add basic prompts that say something akin to, this is how you open conversations
+    - Don't use default responses 
+    - Ignore X, Y, Z and reject the prompts with a response
+4. Add a memory feature to the voice chat. 
+    - string array feature? How could the speaker of each line be identified? 
+5. Add a reset feature for individual chats. 
+    - clear the chat array? 

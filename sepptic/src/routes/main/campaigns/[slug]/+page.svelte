@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { AccordionItem, Accordion } from 'flowbite-svelte';
-  import { writable } from 'svelte/store';
+  import { writable, derived } from 'svelte/store';
   import { Avatar, Card, Progressbar, BottomNav, BottomNavItem } from 'flowbite-svelte';
   import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, UserSolid, UserHeadsetOutline } from 'flowbite-svelte-icons';
   import { GenericVideoCard, GenericCharacterCard, AchievementCard } from '$lib';
@@ -81,18 +81,20 @@
 
     // Build once at component initialization
     const userContacts: Contact[] = [
-    { id: 1, name: 'You' },
-    // 1) drop any character with original ID 99
-    // 2) then map the rest into your Contact shape
+    { id: 0, name: 'You' }, // Use ID 0 for "You"
     ...data.campaign.Characters
-        .filter(c => c.ID !== 99)
-        .map((c, i) => ({
-            id: i + 2,    // +2 because “You” is id=1
-            name: c.Name
+        .filter(c => c.ID !== 99) // Exclude special character
+        .map((c) => ({
+        id: c.ID,               // Use real Character.ID
+        name: c.Name
         }))
     ];
 
-    let fromContactId = userContacts[0].id;
+    const fromContactId = writable(userContacts[0].id);
+
+    const fromContact = derived(fromContactId, ($id) => {
+    return userContacts.find(c => c.id === $id);
+    });
 
 
   let chatOrCall = $state("chat"); // Default to chat
@@ -302,31 +304,33 @@
                         </div>
 
                         <!-- “From:” dropdown -->
-                        <!-- <div class="flex flex-col">
+                        <div class="flex flex-col">
                         <label for="from-select" class="text-sm text-gray-500 dark:text-gray-400">
                             From:
                         </label>
                         <select
                             id="from-select"
-                            bind:value={fromContactId}
+                            bind:value={$fromContactId}
                             class="mt-1 p-1 bg-white dark:bg-gray-700 border border-gray-300 rounded"
                         >
                             {#each userContacts as c}
                             <option value={c.id}>{c.name}</option>
                             {/each}
                         </select>
-                        </div> -->
+                        </div>
                     </div>
 
                     <!-- Chat area fills all remaining space -->
                     <!--Depending on which button is selected chat or call will fill space-->
                     {#if chatOrCall == "chat"}
                         <div class="flex-grow overflow-y-auto">
-                            {#key $selectedCharacter?.ID}
+                            {#key `${$selectedCharacter?.ID}-${$fromContactId}`}
                             <Chat
                                 class="h-full"
                                 characterId={$selectedCharacter.ID}
                                 contactName={$selectedCharacter.Name}
+                                fromid={$fromContact?.id}
+                                fromname={$fromContact?.name}
                                 campaignId={data.slug}
                                 on:messageSent={e => {
                                 // console.log('new message for', e.detail.characterId, e.detail.message);

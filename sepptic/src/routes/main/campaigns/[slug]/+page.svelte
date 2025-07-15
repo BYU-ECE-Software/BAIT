@@ -1,12 +1,40 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { AccordionItem, Accordion } from 'flowbite-svelte';
   import { writable } from 'svelte/store';
   import { Avatar, Card, Progressbar, BottomNav, BottomNavItem } from 'flowbite-svelte';
-  import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid } from 'flowbite-svelte-icons';
+  import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, UserSolid, UserHeadsetOutline } from 'flowbite-svelte-icons';
   import { GenericVideoCard, GenericCharacterCard, AchievementCard } from '$lib';
   import Chat from '../../../../lib/components/molecules/ChatCard.svelte'; // Import EmailView
   import Call from '../../../../lib/components/molecules/CallCard.svelte'; // Import Realtime Call Card
   import CTFInputBox from '../../../../lib/components/molecules/CTFInputBox.svelte';
+  import dbAddTimestamp from '../../../../server/utils/dbAddTimestamp';
+
+  let firstLoad: number = 0;
+  onMount(async () => { // This is likely not very scalable once multiple campaigns are made. This also won't work perfectly with incognito windows
+    const name: string = "Campaign Start";
+    const user = data.user.userId;
+    const logKey = `campaignStarted - ${user}`
+    if(!localStorage.getItem(logKey)) { // Only adds a starting timestamp if page has never been accessed before on this browser
+        // This should eventually be tracked per user persistently somehow?
+        try {
+            const response = await fetch("/api/timestamp", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ user, name })
+            });
+            
+            if (response.ok) {
+                localStorage.setItem(logKey, "true"); 
+            }
+        } catch (err) {
+        console.log("Error creating flag submission timestamp", err);
+        }
+    }
+    firstLoad += 1;
+  })
 
   const activeTab = writable('tab1');
 
@@ -93,7 +121,7 @@
 
   <!-- Button 1 -->
   <button
-    on:click={() => activeTab.set('tab1')}
+    onclick={() => activeTab.set('tab1')}
     class="py-3 px-2 mb-3 mx-4 text-left rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 relative"
   >
     {#if $activeTab === 'tab1'}
@@ -107,7 +135,7 @@
 
   <!-- Button 2 -->
   <button
-    on:click={() => activeTab.set('tab2')}
+    onclick={() => activeTab.set('tab2')}
     class="py-3 px-2 mb-3 mx-4 text-left rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 relative"
   >
     {#if $activeTab === 'tab2'}
@@ -121,7 +149,7 @@
 
   <!-- Button 3 -->
   <button
-    on:click={() => activeTab.set('tab3')}
+    onclick={() => activeTab.set('tab3')}
     class="py-3 px-2 mb-3 mx-4 text-left rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 relative"
   >
     {#if $activeTab === 'tab3'}
@@ -234,7 +262,7 @@
                         <button
                             type="button"
                             class="flex-1 aspect-square p-0 bg-transparent border-none cursor-pointer"
-                            on:click={() => { setChat(); selectCharacter(character); }}
+                            onclick={() => { setChat(); selectCharacter(character); }}
                         >
                             <img src="/message_selected.png" alt="Message" class="w-full h-full object-contain" />
                         </button>
@@ -242,7 +270,7 @@
                         <button
                             type="button"
                             class="flex-1 aspect-square p-0 bg-transparent border-none cursor-pointer"
-                            on:click={() => { setCall(); selectCharacter(character); }}
+                            onclick={() => { setCall(); selectCharacter(character); }}
                         >
                             <img src="/call_selected.png" alt="Call" class="w-full h-full object-contain" />
                         </button>
@@ -335,6 +363,8 @@
                     placeholder="Write answer here"
                     question={data.campaign.Campaign_Information.Final_Question}
                     answer={data.campaign.Campaign_Information.Final_Answer}
+                    userId={data.user.userId}
+
                 />
 
                 <div class="flex flex-col flex-1 h-full bg-gray-50 dark:bg-gray-800 p-6">
@@ -478,13 +508,13 @@
 
 
   <BottomNav position="fixed" classInner="grid-cols-3" activeUrl="/" style="bottom-0: left-0 right-0 z-10">
-      <BottomNavItem btnName="Mission" on:click={() => selectedTab = 'Mission'}>
+      <BottomNavItem btnName="Mission" onclick={() => selectedTab = 'Mission'}>
           <WalletSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
       </BottomNavItem>
-      <BottomNavItem btnName="Dashboard" on:click={() => selectedTab = 'Dashboard'}>
+      <BottomNavItem btnName="Dashboard" onclick={() => selectedTab = 'Dashboard'}>
           <AdjustmentsVerticalOutline class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
       </BottomNavItem>
-      <BottomNavItem btnName="Progress" on:click={() => selectedTab = 'Progress'}>
+      <BottomNavItem btnName="Progress" onclick={() => selectedTab = 'Progress'}>
           <UserCircleSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
       </BottomNavItem>
   </BottomNav>

@@ -27,7 +27,7 @@
             <button
                     type="button"
                     class="text-primary-600 hover:underline"
-                    on:click={closeModal}>
+                    onclick={closeModal}>
                 Close
             </button>
         </div>

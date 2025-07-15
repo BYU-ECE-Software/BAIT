@@ -3,7 +3,7 @@
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownHeader, DropdownItem,  DarkMode} from 'flowbite-svelte';
     $: activeUrl = $page.url.pathname;
     $: email = $page.data.email ?? "Unknown";
-    import { invalidateAll } from '$app/navigation'; // To refresh the session
+    import { invalidateAll, goto } from '$app/navigation'; // To refresh the session
     import {signOut} from "$lib/auth.svelte";
 
     async function logOut() {
@@ -14,6 +14,7 @@
                 await invalidateAll(); // Refresh session data
                 // console.log('invalidate session');
                 signOut();
+                goto('/main'); // Forces redirect back to main for better UI after logout
 
             } else {
                 console.error("Logout failed");
@@ -48,7 +49,7 @@
             <!-- <span class="block text-sm">Script Kiddie</span> -->
             <span class="block truncate text-sm font-medium">{email}</span>
         </DropdownHeader>
-        <DropdownItem on:click={logOut}>Sign out</DropdownItem>
+        <DropdownItem onclick={logOut}>Sign out</DropdownItem>
     </Dropdown>
 
     <!-- Navbar Items -->

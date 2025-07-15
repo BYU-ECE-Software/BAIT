@@ -240,14 +240,14 @@
         bind:value={replyContent}
         rows="2"
         placeholder="Type a message..."
-        on:keydown={(e) => {
+        onkeydown={(e) => {
           if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             sendReply();
           }
       }}
       ></textarea>
-    <button on:click={sendReply}>Send</button>
+    <button onclick={sendReply}>Send</button>
   </div>
 </div>
   {/if}
@@ -275,14 +275,14 @@
         bind:value={replyContent}
         rows="2"
         placeholder="Type a message..."
-        on:keydown={(e) => {
+        onkeydown={(e) => {
           if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             sendReply();
           }
       }}
       ></textarea>
-    <button on:click={sendReply}>Send</button>
+    <button onclick={sendReply}>Send</button>
   </div>
 </div>
   {/if}

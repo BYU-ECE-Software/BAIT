@@ -33,5 +33,5 @@
 
 <div class="flex space-x-4" style="padding: 1rem;">
     <Input bind:value={inputValue} class="focus:border-seppticOrange-600 focus:ring focus:ring-seppticOrange-300" style="padding: 1rem;" placeholder="answer" />
-    <Button on:click={() => checkAnswer(inputValue)}>Submit</Button>
+    <Button onclick={() => checkAnswer(inputValue)}>Submit</Button>
 </div>

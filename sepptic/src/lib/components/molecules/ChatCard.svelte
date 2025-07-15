@@ -96,8 +96,8 @@
         };
         messages = [...messages, typingBubble];
 
-        // random delay under 4 seconds
-        const delay = Math.random() * 4000;
+        // random delay under 2 seconds
+        const delay = Math.random() * 2000;
         setTimeout(() => {
           // remove typing bubble
           messages = messages.filter(msg => msg !== typingBubble);

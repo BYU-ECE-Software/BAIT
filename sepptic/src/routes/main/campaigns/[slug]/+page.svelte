@@ -8,6 +8,7 @@
   import Chat from '../../../../lib/components/molecules/ChatCard.svelte'; // Import EmailView
   import Call from '../../../../lib/components/molecules/CallCard.svelte'; // Import Realtime Call Card
   import CTFInputBox from '../../../../lib/components/molecules/CTFInputBox.svelte';
+  import ResetCampaign from '../../../../lib/components/molecules/ResetCampaign.svelte';
   import dbAddTimestamp from '../../../../server/utils/dbAddTimestamp';
 
   let firstLoad: number = 0;
@@ -367,6 +368,12 @@
 
                 />
 
+                <div class="flex justify-end mt-2">
+                    <ResetCampaign 
+                    campaignId={data.slug}
+                    />
+                </div>
+
                 <div class="flex flex-col flex-1 h-full bg-gray-50 dark:bg-gray-800 p-6">
                     <!-- Header + selectors go here… -->
                     <div class="flex items-center justify-between mb-4">
@@ -411,113 +418,6 @@
 <!-- Content to display on screens 1023px wide or smaller START-->
  <!-- 
 <div class="block lg:hidden">
-
-  {#if selectedTab === 'Mission'}
-      <div style="display: flex; align-items: center;">
-          <ArrowUpRightFromSquareOutline/>
-          <span style="margin-left: 0.5rem;">Click <a href="{data.campaign.Campaign_Information.Website}" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
-      </div>
-      <div style="width: 75vw; margin: auto;">
-         <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
-    </div>
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-          <b>Intro Video:</b>
-          Watch the video to learn more about Harvesta Foods and their expansion efforts.
-      </p>
-
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        Watch the video to learn more about {data.campaign.Campaign_Information.Name}.
-      </p>
-
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        {data.campaign.Campaign_Information.Brief}
-      </p>
-
-  {:else if selectedTab === 'Dashboard'}
-      <div>
-        {#each data.campaign.Characters as character, index}
-            <div class="content">
-                <div class="block max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <GenericCharacterCard messageData={data.messagesByCharacter} updateIntel={(updatedCharacterId: number, updatedIntelId: number) => {updateIntel(updatedCharacterId, updatedIntelId)}} character={character} campaignId={data.slug} characterProgress={data.progresses.characters[character.ID]} userIntels = {userIntels[character.ID]} />
-                </div>
-            </div>
-        {/each}
-      </div>
-
-  {:else if selectedTab === 'Progress'}
-      <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-          <div class="flex items-center space-x-4 rtl:space-x-reverse" style="margin: auto; width:60vw;">
-              <Avatar>
-                  <UserCircleOutline />
-              </Avatar>
-              <div class="space-y-1 font-medium dark:text-white">
-                  <div>{data.user.name}</div>
-              </div>
-          </div>
-      </div>
-      <div class="grid gap-4 w-full" style="padding: 1rem; margin-bottom: 1rem;">
-          <div class="flex overflow-x-auto space-x-4 w-full" style="padding: 1rem; margin-bottom: 1rem;">
-            {#each data.user.achievements as achievement, index}
-              {#if achievement.Campaign_ID == data.slug}
-                <Card style="width: 30vw;">
-                  <div class="flex flex-col items-center">
-                    <AchievementCard title={achievement.Name} description={achievement.Description}/>
-                  </div>
-                </Card>
-              {/if}
-            {/each}
-          </div>
-      </div>
-      Progress
-      <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-          <Progressbar progress={data.progresses.campaign} size="h-4" labelInside/>
-      </div>
-
-      {#each data.campaign.Characters as character, index}
-        <hr class="my-4">
-        <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-            <Avatar>
-                <img src={character.Image} alt={character.Name} />
-            </Avatar>
-            <div class="space-y-1 font-medium dark:text-white" style="width: 250px;">
-                <div>{character.Name}</div> 
-                <div class="text-sm text-gray-500 dark:text-gray-400">{character.Title}</div> 
-            </div>
-        </div>
-        <div class="space-y-1 font-medium dark:text-white">
-            {#each character.Intel as intel, index}
-                {#if userIntels[character.ID][intel.Intel_ID]}
-                    <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                        <div class="flex items-center">
-                            <BadgeCheckOutline/>
-                            <p style="padding: 1rem; margin-left: 1rem;">{intel.Intel_Description}</p>
-                        </div>
-                    </div>
-                {:else}
-                    <div class="flex space-x-4" style="padding: 1rem; margin-top: 1rem;">
-                        <div class="flex items-center">
-                            <p style="padding: 1rem; margin-left: 1rem;">{intel.Quiz}</p>
-                        </div>
-                    </div>
-                {/if}
-            {/each}
-        </div>
-      {/each}
-
-  {/if}
-
-
-  <BottomNav position="fixed" classInner="grid-cols-3" activeUrl="/" style="bottom-0: left-0 right-0 z-10">
-      <BottomNavItem btnName="Mission" onclick={() => selectedTab = 'Mission'}>
-          <WalletSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
-      </BottomNavItem>
-      <BottomNavItem btnName="Dashboard" onclick={() => selectedTab = 'Dashboard'}>
-          <AdjustmentsVerticalOutline class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
-      </BottomNavItem>
-      <BottomNavItem btnName="Progress" onclick={() => selectedTab = 'Progress'}>
-          <UserCircleSolid class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
-      </BottomNavItem>
-  </BottomNav>
 
 </div>
 

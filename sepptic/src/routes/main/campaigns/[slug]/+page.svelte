@@ -110,7 +110,7 @@
     // console.log("Opening chat window");
     // console.log(chatOrCall);
   }
-  
+  let chatKey = 0;
 </script>
 
 <!-- Content to display on screens 1024px wide or larger START-->
@@ -375,6 +375,9 @@
                 <div class="flex justify-end mt-2">
                     <ResetCampaign 
                     campaignId={data.slug}
+                    on:reset={() => {
+                        chatKey += 1; // this will force the Chat component to re-render
+                    }}
                     />
                 </div>
 
@@ -398,18 +401,20 @@
                     </div>
 
                     <!-- Chat area fills all remaining space -->
+                    {#key chatKey}
                     <div class="flex-grow overflow-y-auto">
-                        <Chat
-                            size={1}
-                            class="h-full"
-                            characterId={99}
-                            contactName={"Randy"}
-                            campaignId={data.slug}
-                            on:messageSent={e => {
-                            // console.log('new message for', e.detail.characterId, e.detail.message);
-                            }}
-                        />
+                    <Chat
+                        size={1}
+                        class="h-full"
+                        characterId={99}
+                        contactName={"Randy"}
+                        campaignId={data.slug}
+                        on:messageSent={e => {
+                        // ...
+                        }}
+                    />
                     </div>
+                    {/key}
                 </div>
 
             </div>

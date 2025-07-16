@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+
   export let campaignId: number | string;
+  const dispatch = createEventDispatcher();
 
   async function handleReset() {
     try {
@@ -14,6 +17,8 @@
 
       if (!res.ok) {
         console.error('Failed to reset campaign');
+      } else {
+        dispatch('reset'); // ✅ Notify parent to refresh chat
       }
     } catch (err) {
       console.error('Network error deleting campaign data:', err);

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { Modal, Input, Button, Label, Select } from "flowbite-svelte";
+    import { Modal, Input, Button, Label, Select, Fileupload, Helper } from "flowbite-svelte";
 
     let blocked = false;
     let showModal = true;
@@ -22,6 +22,32 @@
     onMount(() => {
         blocked = true;
     });
+
+    let charactersSelected = false;
+    let characterNum = 0;
+    function revealCharacters() {
+        charactersSelected = true;
+        // initializing character with empty placeholders
+        characters = Array(Number(characterNum)).map((_, index) => ({
+            ID: index + 1,
+            Name: "",
+            Title: "",
+            Voice: "",
+            CallorText: 0,
+            Description: "",
+            CallLimit: 0
+        }));
+    }
+
+    type Character = {
+        ID: number,
+        Name: string,
+        Title: string,
+        Voice: string,
+        CallorText: number,
+        Description: string,
+        CallLimit: number
+    }
 
     let selected = "";
     let description = "";
@@ -60,6 +86,16 @@
         { value: "240000", name: "4 Minutes"},
         { value: "300000", name: "5 Minutes"},
     ]
+    let nums = [
+        { value: 1, name: "1"},
+        { value: 2, name: "2"},
+        { value: 3, name: "3"},
+        { value: 4, name: "4"},
+        { value: 5, name: "5"},
+        { value: 6, name: "6"}
+    ]
+
+    let characters: Character[] = []
 
     function createJson() {
         const campaignData = {
@@ -73,17 +109,7 @@
                 Question: question,
                 Final_Answer: finalAnswers.split(',').map(ans => ans.trim())
             },
-            Characters: [
-                {
-                    ID: 1,
-                    Name: characterName,
-                    Title: jobTitle,
-                    Voice: characterVoice,
-                    CallorText: callOrText,
-                    Description: characterDescription,
-                    CallLimit: timeLimit
-                }
-            ]
+            Characters: characters
         };
         console.log(JSON.stringify(campaignData, null, 2));
     }
@@ -135,89 +161,110 @@
             />
         </div>
 
-        <form on:submit|preventDefault={createJson} class="campaign-info">
-            <Label for="description" class="block mb-2">Campaign Description</Label>
-            <Input
-                id="description"
-                type="text"
-                placeholder="Enter campaign description"
-                class="mb-4 w-full"
-                bind:value={description}
-            />
-            <!-- Make a text box -->
-            <Label for="briefing" class="block mb-2">Campaign Briefing</Label>
-            <Input
-                id="briefing"
-                type="text"
-                placeholder="Enter campaign briefing"
-                class="mb-4 w-full"
-                bind:value={briefing}
-            />
-            <Label for="question" class="block mb-2">Campaign Question</Label>
-            <Input
-                id="question"
-                type="text"
-                placeholder="Enter question to solve in campaign"
-                class="mb-4 w-full"
-                bind:value={question}
-            />
-            <Label for="finalAnswers" class="block mb-2">Final Answers</Label>
-            <Input
-                id="finalAnswers"
-                type="text"
-                placeholder="Enter valid campaign solutions (Comma Separated)"
-                class="mb-4 w-full"
-                bind:value={finalAnswers}
-            />
-
-            <h3>Character Information</h3>
-
-            <Label for="characterName" class="block mb-2">Character Name</Label>
-            <Input
-                id="characterName"
-                type="text"
-                placeholder="Enter character name"
-                class="mb-4 w-full"
-                bind:value={characterName}
-            />
-            <Label for="jobTitle" class="block mb-2">Job Title</Label>
-            <Input
-                id="jobTitle"
-                type="text"
-                placeholder="Enter job title"
-                class="mb-4 w-full"
-                bind:value={jobTitle}
-            />
-            <Label for="characterVoice" class="block mb-2">Character Voice</Label>
-            <Select
-                class="mb-4 w-full" 
-                items={voices}
-                bind:value={characterVoice}
+        <form on:submit|preventDefault={createJson}>
+            <div class="campaign-container">
+                <Label for="description" class="block mb-2">Campaign Description</Label>
+                <Input
+                    id="description"
+                    type="text"
+                    placeholder="Enter campaign description"
+                    class="mb-4 w-full"
+                    bind:value={description}
                 />
-            <Label for="callOrText" class="block mb-2">Call or Text?</Label>
-            <Select
-                class="mb-4 w-full" 
-                items={callOrTextOptions}
-                bind:value={callOrText}
+                <Label for="briefing" class="block mb-2">Campaign Briefing</Label>
+                <Input
+                    id="briefing"
+                    type="text"
+                    placeholder="Enter campaign briefing"
+                    class="mb-4 w-full"
+                    bind:value={briefing}
                 />
-            <Label for="timeLimit" class="block mb-2">Call Time Limit</Label>
-            <Select
-                class="mb-4 w-full" 
-                items={timeLimits}
-                bind:value={timeLimit}
+                <!-- I think this is broken for now -->
+                <Label for="campaignLogo" class="block mb-2">Campaign Logo</Label>
+                <Fileupload
+                    id="campaignLogo"
+                    class="mb-4 w-full"
                 />
-            <Label for="characterDescription" class="block mb-2">Character Description</Label>
-            <Input
-                id="characterDescription"
-                type="text"
-                placeholder="Enter character description"
-                class="mb-4 w-full"
-                bind:value={characterDescription}
-            />
-            <Button type="submit" class="primary">Create Campaign</Button>
+                <Label for="question" class="block mb-2">Campaign Question</Label>
+                <Input
+                    id="question"
+                    type="text"
+                    placeholder="Enter question to solve in campaign"
+                    class="mb-4 w-full"
+                    bind:value={question}
+                />
+                <Label for="finalAnswers" class="block mb-2">Final Answers</Label>
+                <Input
+                    id="finalAnswers"
+                    type="text"
+                    placeholder="Enter valid campaign solutions (Comma Separated)"
+                    class="mb-4 w-full"
+                    bind:value={finalAnswers}
+                />
+            </div>
+            {#if !charactersSelected}
+                <div>
+                    <Label for="characterNumber" class="block mb-2">Select Character Number</Label>
+                    <Select
+                    class="mb-4 w-full"
+                    items={nums}
+                    bind:value={characterNum} />
+                    <Button on:click={revealCharacters} class="primary">Confirm Number of Characters</Button>
+                </div>
+            {:else}
+                {#each characters as character, index}
+                    <div class="character-form mb-8">
+                        <h4 class="text-lg font-semibold mb-4">Character {index + 1}</h4>
+                        <div class="character-container">
+                            <Label for="characterName{index}" class="block mb-2">Character Name</Label>
+                            <Input
+                                id="characterName{index}"
+                                type="text"
+                                placeholder="Enter character name"
+                                class="mb-4 w-full"
+                                bind:value={character.Name}
+                            />
+                            <Label for="jobTitle{index}" class="block mb-2">Job Title</Label>
+                            <Input
+                                id="jobTitle{index}"
+                                type="text"
+                                placeholder="Enter job title"
+                                class="mb-4 w-full"
+                                bind:value={character.Title}
+                            />
+                            <Label for="characterVoice{index}" class="block mb-2">Character Voice</Label>
+                            <Select
+                                class="mb-4 w-full" 
+                                items={voices}
+                                bind:value={character.Voice}
+                            />
+                            <Label for="callOrText{index}" class="block mb-2">Call or Text?</Label>
+                            <Select
+                                class="mb-4 w-full" 
+                                items={callOrTextOptions}
+                                bind:value={character.CallorText}
+                            />
+                            <Label for="timeLimit{index}" class="block mb-2">Call Time Limit</Label>
+                            <Select
+                                class="mb-4 w-full" 
+                                items={timeLimits}
+                                bind:value={character.CallLimit}
+                            />
+                            <Label for="characterDescription{index}" class="block mb-2">Character Description</Label>
+                            <Input
+                                id="characterDescription{index}"
+                                type="text"
+                                placeholder="Enter character description"
+                                class="mb-4 w-full"
+                                bind:value={character.Description}
+                            />
+                        </div>
+                    </div>
+                {/each}  
+                <Button type="submit" class="primary">Create Campaign</Button>
+            {/if}
         </form>
     </div>
-
 {/if}
 
 <style>
@@ -229,6 +276,14 @@
     }
     .main-container {
         padding: 2rem;
+    }
+    .campaign-container {
+        border-bottom: 1rem;
+    }
+    .character-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
     h3 {
         margin-bottom: 1rem;

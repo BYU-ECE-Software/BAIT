@@ -6,6 +6,7 @@
 3. Reduce prompt size within reason
 4. Look into AI suggestions for prompt size reduction and refinement
 5. Try to find a way to allow an AI to 'hang up.' 
+6. Prevent the AI from having default responses. 
 
 # 1. Remove Endless Redirects and Referrals
 Add to AI prompt: 
@@ -23,4 +24,6 @@ Do not make up tools that the player could use. Do not talk about the tools the 
 # 3. Reduce Prompt Size (within reason)
 1. Cut out unnecessary information about social engineering
 2. Simplify weaknesses to fit the main aspects of SE 
-3. 
+3. Review the instructions for clarity
+4. Remove redundant segments of the prompt
+

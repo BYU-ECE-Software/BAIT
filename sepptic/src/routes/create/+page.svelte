@@ -26,27 +26,64 @@
     let selected = "";
     let description = "";
     let briefing = "";
+    let image = "";
+    let website = "";
+    let video = "";
     let question = "";
     let finalAnswers = "";
-    let name = "";
-    let voices = [
-        { value: "alloy", label: "Female" },
-        { value: "ash", label: "Deep Male" },
-        { value: "ballad", label: "Female" },
-        { value: "coral", label: "Soft Female" },
-        { value: "echo", label: "Male" },
-        { value: "sage", label: "Firm Female" },
-        { value: "shimmer", label: "Male" },
-        { value: "verse", label: "Soft Male" }
+    let campaignName = "";
+    let characterName = "";
+    let jobTitle = "";
+    let characterDescription = "";
+    let characterVoice = "";
+    let callOrText = "";
+    let timeLimit = "";
+    let callOrTextOptions = [
+        { value: "0", name: "Call" },
+        { value: "1", name: "Text" },
+        { value: "2", name: "Both" }
     ];
+    let voices = [
+        { value: "alloy", name: "Female" },
+        { value: "ash", name: "Deep Male" },
+        { value: "ballad", name: "Female" },
+        { value: "coral", name: "Soft Female" },
+        { value: "echo", name: "Male" },
+        { value: "sage", name: "Firm Female" },
+        { value: "shimmer", name: "Male" },
+        { value: "verse", name: "Soft Male" }
+    ];
+    let timeLimits = [
+        { value: "60000", name: "1 Minute"},
+        { value: "120000", name: "2 Minutes"},
+        { value: "180000", name: "3 Minutes"},
+        { value: "240000", name: "4 Minutes"},
+        { value: "300000", name: "5 Minutes"},
+    ]
 
     function createJson() {
         const campaignData = {
-            Name: name,
-            Description: description,
-            Brief: briefing,
-            Final_Question: question,
-            Final_Answer: finalAnswers.split(',').map(ans => ans.trim())
+            Campaign_Information: {
+                Name: campaignName,
+                Description: description,
+                Brief: briefing,
+                Image: image,
+                Website: website,
+                Briefing_Video: video,
+                Question: question,
+                Final_Answer: finalAnswers.split(',').map(ans => ans.trim())
+            },
+            Characters: [
+                {
+                    ID: 1,
+                    Name: characterName,
+                    Title: jobTitle,
+                    Voice: characterVoice,
+                    CallorText: callOrText,
+                    Description: characterDescription,
+                    CallLimit: timeLimit
+                }
+            ]
         };
         console.log(JSON.stringify(campaignData, null, 2));
     }
@@ -81,18 +118,20 @@
 
 {#if !blocked}
     <div class="top-container">
-        <h1>Create a Campaign</h1>
+        <h1 class="w-auto">Create a Campaign</h1>
     </div>
     <div class="main-container">
+
         <h3>Campaign Information</h3>
+
         <div class="mb-4">
-            <Label for="campaign" class="block mb-2">Campaign Name</Label>
+            <Label for="campaignName" class="block mb-2">Campaign Name</Label>
             <Input
-                id="campaign"
+                id="campaignName"
                 type="text"
                 placeholder="Enter campaign name"
                 class="mb-4 w-full"
-                bind:value={name}
+                bind:value={campaignName}
             />
         </div>
 
@@ -149,11 +188,24 @@
                 class="mb-4 w-full"
                 bind:value={jobTitle}
             />
-            <Label for="voice" class="block mb-2">Character Voice</Label>
+            <Label for="characterVoice" class="block mb-2">Character Voice</Label>
             <Select
-                id="voice"
-                bind:value={selected}
-                class="mb-4 w-full" />
+                class="mb-4 w-full" 
+                items={voices}
+                bind:value={characterVoice}
+                />
+            <Label for="callOrText" class="block mb-2">Call or Text?</Label>
+            <Select
+                class="mb-4 w-full" 
+                items={callOrTextOptions}
+                bind:value={callOrText}
+                />
+            <Label for="timeLimit" class="block mb-2">Call Time Limit</Label>
+            <Select
+                class="mb-4 w-full" 
+                items={timeLimits}
+                bind:value={timeLimit}
+                />
             <Label for="characterDescription" class="block mb-2">Character Description</Label>
             <Input
                 id="characterDescription"
@@ -161,14 +213,6 @@
                 placeholder="Enter character description"
                 class="mb-4 w-full"
                 bind:value={characterDescription}
-            />
-            <Label for="finalAnswers" class="block mb-2">Final Answers</Label>
-            <Input
-                id="finalAnswers"
-                type="text"
-                placeholder="Enter valid campaign solutions (Comma Separated)"
-                class="mb-4 w-full"
-                bind:value={finalAnswers}
             />
             <Button type="submit" class="primary">Create Campaign</Button>
         </form>

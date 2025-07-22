@@ -49,7 +49,7 @@
     }
   });
 
-  // — your sendReply function, now with typing indicator —
+  // — sendReply function, now with typing indicator —
   async function sendReply() {
     const text = replyContent.trim();
     if (!text) return;

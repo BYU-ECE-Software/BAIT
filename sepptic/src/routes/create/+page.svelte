@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Character, Prompt } from "../../server/utils/types/create";
     import { onMount } from "svelte";
-    import { Modal, Input, Button, Label, Select, Fileupload, Helper } from "flowbite-svelte";
+    import { Modal, Input, Button, Label, Select, Fileupload } from "flowbite-svelte";
 
     let blocked = false;
     let showModal = true;
@@ -26,6 +26,8 @@
 
     let charactersSelected = false;
     let characterNum = 0;
+    let showPromptModal = false;
+    let currentCharacter: Character
     function revealCharacters() {
         charactersSelected = true;
         // initializing character with empty placeholders
@@ -48,6 +50,11 @@
                 Contacts: []
             }
         }));
+    }
+
+    function openPromptModal(character: Character) {
+        showPromptModal = true;
+        currentCharacter = character;
     }
 
     //let selected = "";
@@ -296,6 +303,38 @@
                                                     bind:value={character.Description}
                                                 />
                                             </div>
+                                            <div>
+                                                <Button type="button" class="mt-4 w-full" on:click={() => openPromptModal(character)}>
+                                                    Edit Character Prompt
+                                                </Button>
+                                            </div>
+                                            {#if showPromptModal}
+                                                <Modal
+                                                    title="Edit Character Prompt"
+                                                    open={showPromptModal}
+                                                    outsideclose={true}
+                                                    on:close={() => showPromptModal = false}
+                                                >
+                                                    <div class="p-6">
+                                                        <!-- Prompt fields -->
+                                                        <div class="space-y-4">
+                                                            <Label for="background">Background</Label>
+                                                            <Input id="background" type="text" bind:value={currentCharacter.Prompt.Background} />
+                                                            <Label for="weaknesses">Weaknesses</Label>
+                                                            <Input id="weaknesses" type="text" bind:value={currentCharacter.Prompt.Weaknesses} />
+                                                            <Label for="strengths">Strengths</Label>
+                                                            <Input id="strengths" type="text" bind:value={currentCharacter.Prompt.Strengths} />
+                                                            <Label for="general">General Info</Label>
+                                                            <Input id="general" type="text" bind:value={currentCharacter.Prompt.General} />
+                                                            <Label for="criticalInfo">Critical Info</Label>
+                                                            <Input id="criticalInfo" type="text" bind:value={currentCharacter.Prompt.Critical_Info} />
+                                                            <Label for="personality">Personality</Label>
+                                                            <Input id="personality" type="text" bind:value={currentCharacter.Prompt.Personality} />
+                                                        </div>
+                                                        <Button class="mt-4 w-full sm:w-auto" on:click={() => showPromptModal = false}>Save</Button>
+                                                    </div>
+                                                </Modal>
+                                            {/if}
                                         </div>
                                     </div>
                                 {/each}

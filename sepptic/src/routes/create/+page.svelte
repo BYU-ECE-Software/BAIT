@@ -28,7 +28,7 @@
     function revealCharacters() {
         charactersSelected = true;
         // initializing character with empty placeholders
-        characters = Array(Number(characterNum)).map((_, index) => ({
+        characters = Array(Number(characterNum)).fill(null).map((_, index) => ({
             ID: index + 1,
             Name: "",
             Title: "",

@@ -105,7 +105,7 @@
 
     let characters: Character[] = []
 
-    function createJson() {
+    async function createJson() {
         const campaignData = {
             Campaign_Information: {
                 Name: campaignName,
@@ -119,7 +119,26 @@
             },
             Characters: characters
         };
-        console.log(JSON.stringify(campaignData, null, 2));
+        let data = JSON.stringify(campaignData, null, 2);
+        console.log(data);
+        try {
+            const response = await fetch('/api/saveCampaign', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: data
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to save campaign');
+            }
+            console.log("Campaign saved successfully");
+            // Optionally, redirect or show a success message
+        } catch (error) {
+            console.error("Error saving campaign:", error);
+        }
+        // save data as a file in server/campaigns
     }
 </script>
 
@@ -200,6 +219,19 @@
                             <Label for="campaignLogo" class="block mb-2">Campaign Logo</Label>
                             <Fileupload
                                 id="campaignLogo"
+                                class="mb-4 w-full"
+                            />
+                            <Label for="campaignWebsite" class="block mb-2">Campaign Website</Label>
+                            <Input
+                                id="campaignWebsite"
+                                type="text"
+                                placeholder="Enter campaign website URL"
+                                class="mb-4 w-full"
+                                bind:value={website}
+                            />
+                            <Label for="campaignVideo" class="block mb-2">Campaign Video</Label>
+                            <Fileupload
+                                id="campaignVideo"
                                 class="mb-4 w-full"
                             />
                             <Label for="question" class="block mb-2">Campaign Question</Label>

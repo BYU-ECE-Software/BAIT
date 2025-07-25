@@ -23,3 +23,6 @@ export async function POST(event: RequestEvent) {
         return new Response("Error saving campaign", { status: 500 });
     }
 }
+
+// Need to set up image handling and find out how to see new created files here in VS code so I can track them
+// Also need to make sure unique file names are generated, preferrably incrementally larger numbers or timestamps

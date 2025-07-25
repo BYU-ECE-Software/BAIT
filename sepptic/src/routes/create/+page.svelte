@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Character, Prompt } from "../../server/utils/types/create";
+    import type { Character } from "../../server/utils/types/create";
     import { onMount } from "svelte";
     import { Modal, Input, Button, Label, Select, Fileupload } from "flowbite-svelte";
 
@@ -147,23 +147,31 @@
         title="Authentication Required"
         open={showModal}
         outsideclose={false}
+        class="max-w-md mx-auto"
     >
-        <div class="text-center">
-            <form on:submit|preventDefault={checkPassword} class="flex flex-col space-y-4">
-                <div>
-                    <Label for="password" class="mb-2">Password:</Label>
+        <div class="px-6 py-4">
+            <form on:submit|preventDefault={checkPassword} class="space-y-4">
+                <div class="space-y-2">
+                    <Label for="password" class="block font-medium text-gray-700 dark:text-gray-300">
+                        Password:
+                    </Label>
                     <Input
                         id="password"
                         type="password"
                         bind:value={password}
                         placeholder="Enter password"
+                        class="w-full rounded-md shadow-sm"
                         required
                     />
                 </div>
                 {#if errorMessage}
-                    <p class="text-red-500 text-sm">{errorMessage}</p>
+                    <p class="text-sm text-red-600 dark:text-red-500">{errorMessage}</p>
                 {/if}
-                <Button type="submit" class="primary">Submit</Button>
+                <div class="pt-2">
+                    <Button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition-colors">
+                        Submit
+                    </Button>
+                </div>
             </form>
         </div>
     </Modal>

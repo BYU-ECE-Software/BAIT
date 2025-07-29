@@ -2,6 +2,7 @@
     import type { Character } from "../../server/utils/types/create";
     import { onMount } from "svelte";
     import { Modal, Input, Button, Label, Select, Fileupload } from "flowbite-svelte";
+	import { goto } from "$app/navigation";
 
     let blocked = false;
     let showModal = true;
@@ -19,8 +20,15 @@
         }
     }
 
+    export let data; // from the layout.svelte
+
     // Prevent access until authenticated
     onMount(() => {
+        //Redirects to /main so there isn't a double modal
+        if (!data.isLoggedIn) {
+            goto("/main");
+            return;
+        }
         blocked = true;
     });
 
@@ -183,6 +191,9 @@
         <div class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Create a Campaign</h1>
+                <a href="/main" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                    Back to Main
+                </a>
             </div>
         </div>
 

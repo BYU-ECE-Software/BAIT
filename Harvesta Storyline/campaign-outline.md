@@ -17,7 +17,7 @@ There are a total of 7 characters. Here's a table, describing what their purpose
 | Ann Gunn              | Financial Secretary   | Knows that the Park City location had seller holdout.                                               | | Weak to impersonation and doesn't verify credentials |
 | Jackson Knepper       | Legal Intern          | Knows that the C-suite mandated the cheapeast overall location                            | | Weak to money |
 | Don Draper            | Projects Team Lead    | Knows the location list and both problems                                                 | Hardest to engineer | Weak to authority --  pretending to be the C-Suite |
-| James Bunion          | Security Guard        | James is a red herring, who will pretend he knows important info, but actually does not.  | He has some hints for how to social engineer Don Draper if the player looks hard enough  | Threatening him with a report to HR will get him to turn belly up. | 
+| James Bunion          | Security Guard        | James is a red herring. He will pretend he knows important info, but does not.  | He has some hints for how to social engineer Don Draper if the player looks hard enough  | Threatening him with a report to HR will get him to turn belly up. | 
 
 # Intended Path
 1. Players approach Elara or Jane. 

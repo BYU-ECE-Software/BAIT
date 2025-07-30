@@ -15,8 +15,12 @@ jobs:
       # Step 0: Troubleshooting (comment out when not in use)
 
       # Check which user is using the program. This is useful for troubleshooting permissions issues. 
-      #- name: Show current user
-      #  run: whoami
+      - name: Show current user
+        run: whoami
+
+      # Get the user's user ID 
+      - name: Show current UID
+        run: id -u
 
       # Check if you have docker permissions 
       - name: Check Docker access

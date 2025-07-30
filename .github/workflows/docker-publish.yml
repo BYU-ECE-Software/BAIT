@@ -12,6 +12,10 @@ jobs:
     runs-on: [self-hosted]  # This specifies to use the self-hosted runner
 
     steps:
+      # Step 0: Check which user is using the program. This is useful for troubleshooting permissions issues. 
+      - name: Show current user
+        run: whoami
+
       # Step 1: Checkout the code
       - name: Checkout repository
         uses: actions/checkout@v3

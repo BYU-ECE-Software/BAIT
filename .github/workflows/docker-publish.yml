@@ -15,29 +15,29 @@ jobs:
     steps:
       # Step 0: Troubleshooting (comment out when not in use)
 
-      # Check which user is using the program. This is useful for troubleshooting permissions issues. 
-      - name: Show current user
-        run: whoami
+      # # Check which user is using the program. This is useful for troubleshooting permissions issues. 
+      # - name: Show current user
+      #   run: whoami
 
-      # Get the user's user ID 
-      - name: Show current UID
-        run: id -u
+      # # Get the user's user ID 
+      # - name: Show current UID
+      #   run: id -u
 
-      # Get user's groups 
-      - name: Show user groups
-        run: id -Gn
+      # # Get user's groups 
+      # - name: Show user groups
+      #   run: id -Gn
 
-      # Get the host name
-      - name: Show hostname
-        run: hostname
+      # # Get the host name
+      # - name: Show hostname
+      #   run: hostname
 
-      # Print working directory 
-      - name: Print working directory 
-        run: pwd
+      # # Print working directory 
+      # - name: Print working directory 
+      #   run: pwd
       
-      # Check if you have docker permissions (Do this last of the troubleshooting steps)
-      - name: Check Docker access
-        run: docker ps
+      # # Check if you have docker permissions (Do this last of the troubleshooting steps)
+      # - name: Check Docker access
+      #   run: docker ps
 
       # Step 1: Checkout the code
       - name: Checkout repository

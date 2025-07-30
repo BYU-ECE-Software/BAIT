@@ -33,8 +33,6 @@ jobs:
       # Print working directory 
       - name: Print working directory 
         run: pwd
- 
-     
       
       # Check if you have docker permissions (Do this last of the troubleshooting steps)
       - name: Check Docker access

@@ -22,7 +22,21 @@ jobs:
       - name: Show current UID
         run: id -u
 
-      # Check if you have docker permissions 
+      # Get user's groups 
+      - name: Show user groups
+        run: id -Gn
+
+      # Get the host name
+      - name: Show hostname
+        run: hostname
+
+      # Print working directory 
+      - name: Print working directory 
+        run: pwd
+ 
+     
+      
+      # Check if you have docker permissions (Do this last of the troubleshooting steps)
       - name: Check Docker access
         run: docker ps
 

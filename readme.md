@@ -24,7 +24,7 @@ Behavioral Attack & Influence Training Platform
 
 ## What is BAIT?
 
-BAIT is an AI-powered platform for teaching social engineering in a safe and ethical way. It includes a learn section where users can learn about various social engineering tactics, and a campaigns section where users can practice what they learned with AI-powered characters in a simulated realistic environment.
+BAIT is an AI-powered platform for teaching social engineering in a safe and ethical way. It includes a learn section where users can learn about various social engineering tactics, and a campaigns section where users can practice what they learned with AI-powered characters in a simulated realistic environment. 
 
 ![Capstone Team](Docs/Media/team.jpg)
 

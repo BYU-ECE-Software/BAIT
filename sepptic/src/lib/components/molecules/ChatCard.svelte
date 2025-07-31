@@ -5,7 +5,7 @@
   export let characterId: number;          // numeric ID for your API
   export let contactName: string;          // human-readable display name
   export let campaignId: number | string;  // campaign identifier
-  export let size: int = 0;
+  export let size: number = 0;
   export let fromid: number = 0;
   export let fromname: string = "You";
   let fromplayer = fromname === "You" ? "Player" : fromname;

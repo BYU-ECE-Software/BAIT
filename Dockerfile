@@ -19,7 +19,7 @@ EXPOSE 3000
 
 # Add a health check
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD wget --quiet --spider http://localhost:3000 || exit 1
+  CMD wget --quiet --spider http://0.0.0.0:3000 || exit 1
 
 # Set environment variables for Prisma
 RUN npm run build

@@ -28,4 +28,4 @@ BAIT is an AI-powered platform for teaching social engineering in a safe and eth
 
 ![Capstone Team](Docs/Media/team.jpg)
 
-BAIT is currently a work in progress and was formerly known as SEPPTIC; created as a Capstone project for Brigham Young University's Cybersecurity program. Former team members (from left to right): Ethan Beere, Garrett White, Elliot Delay, Matthew Taylor, Tyler Holland, Zac Hansen, and Nicholas Hague. Coached by Dr. Ben Schooley.
+BAIT is currently a work in progress and was formerly known as SEPPTIC; created as a Capstone project for Brigham Young University's Cybersecurity program. Former team members (from left to right): Ethan Beere, Garrett White, Elliot Delay, Matthew Taylor, Tyler Holland, Zac Hansen, and Nicholas Hague. Coached by Dr. Ben Schooley. 

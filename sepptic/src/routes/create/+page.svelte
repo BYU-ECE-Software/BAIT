@@ -65,6 +65,22 @@
         currentCharacter = character;
     }
 
+
+    let files: FileList;
+
+    // File upload logic
+    async function uploadImage(files: FileList) {
+        const form = new FormData();
+        form.append("file", files[0]);
+
+        const response = await fetch("/api/image", {
+            method: "POST",
+            body: form
+        });
+        console.log(response.status);
+        console.log(files[0]);
+    }
+
     //let selected = "";
     let description = "";
     let briefing = "";
@@ -74,12 +90,7 @@
     let question = "";
     let finalAnswers = "";
     let campaignName = "";
-    // let characterName = "";
-    // let jobTitle = "";
-    // let characterDescription = "";
-    // let characterVoice = "";
-    // let callOrText = "";
-    // let timeLimit = "";
+    
     let callOrTextOptions = [
         { value: "0", name: "Call" },
         { value: "1", name: "Text" },
@@ -114,6 +125,8 @@
     let characters: Character[] = []
 
     async function createJson() {
+        uploadImage(files)
+
         const campaignData = {
             Campaign_Information: {
                 Name: campaignName,
@@ -236,9 +249,13 @@
                             />
                             <!-- I think this is broken for now -->
                             <Label for="campaignLogo" class="block mb-2">Campaign Logo</Label>
-                            <Fileupload
-                                id="campaignLogo"
-                                class="mb-4 w-full"
+                            <input 
+                                id="campaignLogo" 
+                                type="file" 
+                                accept="image/png, image/jpeg"
+                                bind:files={files}
+                                placeholder="Select campaign image" 
+                                class="mb-4 w-full" 
                             />
                             <Label for="campaignWebsite" class="block mb-2">Campaign Website</Label>
                             <Input

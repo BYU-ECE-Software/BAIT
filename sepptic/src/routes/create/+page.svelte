@@ -67,6 +67,7 @@
 
 
     let files: FileList;
+    let fileTooLarge = false;
 
     // File upload logic
     async function uploadImage(files: FileList) {
@@ -81,8 +82,15 @@
             },
             body: file
         });
-        console.log(response.status);
-        console.log(files[0]);
+        const data = await response.json();
+        const url = data.url;
+        image = url;
+        // else if () {
+        //     //Eventually implement a catch for when the message is too big to display error message on front end
+        //     fileTooLarge = true;
+        // }
+        
+        console.log(url);
     }
 
     //let selected = "";
@@ -129,7 +137,7 @@
     let characters: Character[] = []
 
     async function createJson() {
-        uploadImage(files)
+        await uploadImage(files)
 
         const campaignData = {
             Campaign_Information: {
@@ -275,6 +283,9 @@
                                 class="mb-4 w-full"
                             />
                             <small> Size limit is 512KB </small>
+                            {#if fileTooLarge}
+                                <p> Your file was too big! </p>
+                            {/if}
                             <Label for="question" class="block mb-2">Campaign Question</Label>
                             <Input
                                 id="question"

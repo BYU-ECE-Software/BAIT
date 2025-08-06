@@ -1,4 +1,4 @@
-import { writeFile } from 'fs/promises';
+import { writeFile, chmod } from 'fs/promises';
 import { join } from 'path';
 import { mkdirSync } from 'fs';
 import type { RequestEvent } from '@sveltejs/kit';

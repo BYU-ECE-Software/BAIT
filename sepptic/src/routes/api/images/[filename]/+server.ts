@@ -31,11 +31,12 @@ export async function POST(event: RequestEvent) { // event is not the same as a 
         url: `/api/images/${filename}`
     });
 }
+// TODO: There should likely be better security features on this POST handler at somepoint
 
 
-// src/routes/api/images/[filename]/+server.ts
+// allows images to be aquired with <img src={/api/images/[filename]}/>
 export async function GET({ params }) {
-  const filename = params.filename.replace(/[^\w.\-]+/g, '_');
+  const filename = params.filename.replace(/[^\w.\-]+/g, '_'); // Escapes dangerous file names
   const filePath = join(process.cwd(), 'uploads', 'images', filename);
 
   try {

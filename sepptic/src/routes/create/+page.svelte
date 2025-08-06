@@ -36,6 +36,7 @@
     let characterNum = 0;
     let showPromptModal = false;
     let currentCharacter: Character
+    let characterFiles: FileList[] = []
     function revealCharacters() {
         charactersSelected = true;
         // initializing character with empty placeholders
@@ -58,6 +59,8 @@
                 Contacts: []
             }
         }));
+        characterFiles = Array(Number(characterNum)).fill(null); // Initializes the FileList array just like the characters array
+    
     }
 
     function openPromptModal(character: Character) {
@@ -87,6 +90,26 @@
         image = url;
         console.log(url);
     }
+
+    async function uploadCharacterImages(characterFiles: FileList[]) {
+        for (let index = 0; index < characterFiles.length; index++) {
+            const files = characterFiles[index];
+            if (!files || files.length === 0) continue; // skip if no file selected
+
+            const file = files[0];
+            const response = await fetch(`/api/images/${file.name}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/octet-stream",
+                    "X-Filename": file.name
+                },
+                body: file
+            });
+            const data = await response.json();
+            characters[index].Image = data.url;
+        }
+    }
+
 
     //let selected = "";
     let description = "";
@@ -133,6 +156,7 @@
 
     async function createJson() {
         await uploadImage(files)
+        await uploadCharacterImages(characterFiles);
 
         const campaignData = {
             Campaign_Information: {
@@ -264,6 +288,10 @@
                                 placeholder="Select campaign image" 
                                 class="mb-4 w-full" 
                             />
+                            <small> Size limit is 512KB </small>
+                            {#if fileTooLarge}
+                                <p> Your file was too big! </p>
+                            {/if}
                             <Label for="campaignWebsite" class="block mb-2">Campaign Website</Label>
                             <Input
                                 id="campaignWebsite"
@@ -273,14 +301,10 @@
                                 bind:value={website}
                             />
                             <Label for="campaignVideo" class="block mb-2">Campaign Video</Label>
-                            <Fileupload
+                            <Fileupload disabled
                                 id="campaignVideo"
                                 class="mb-4 w-full"
                             />
-                            <small> Size limit is 512KB </small>
-                            {#if fileTooLarge}
-                                <p> Your file was too big! </p>
-                            {/if}
                             <Label for="question" class="block mb-2">Campaign Question</Label>
                             <Input
                                 id="question"
@@ -343,10 +367,18 @@
                                             </div>
                                             <div>
                                                 <Label for="characterImage{index}">Character Image</Label>
-                                                <Fileupload
-                                                    id="characterImage{index}"
-                                                    class="mb-4 w-full"
+                                                <input 
+                                                    id="characterImage{index}" 
+                                                    type="file" 
+                                                    accept="image/png, image/jpeg"
+                                                    bind:files={characterFiles[index]}
+                                                    placeholder="Select campaign image" 
+                                                    class="mb-4 w-full" 
                                                 />
+                                                <small> Size limit is 512KB </small>
+                                                {#if fileTooLarge}
+                                                    <p> Your file was too big! </p>
+                                                {/if}
                                             </div>
                                             <div>
                                                 <Label for="characterVoice{index}">Character Voice</Label>

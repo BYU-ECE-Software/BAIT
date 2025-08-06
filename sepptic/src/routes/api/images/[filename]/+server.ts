@@ -1,8 +1,9 @@
-import { writeFile, chmod } from 'fs/promises';
+import { writeFile, readFile } from 'fs/promises';
 import { join } from 'path';
 import { mkdirSync } from 'fs';
 import type { RequestEvent } from '@sveltejs/kit';
 import { json } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
 export async function POST(event: RequestEvent) { // event is not the same as a DOM event here. It is a svelteKit abstraction
     console.log("Image upload hit");
@@ -14,7 +15,7 @@ export async function POST(event: RequestEvent) { // event is not the same as a 
     }
 
     const buffer = Buffer.from(file);
-    const uploadsDir = join(process.cwd(), 'static', 'images');
+    const uploadsDir = join(process.cwd(), 'uploads', 'images');
 
     mkdirSync(uploadsDir, { recursive: true }); // ensure dir exists
 
@@ -27,6 +28,20 @@ export async function POST(event: RequestEvent) { // event is not the same as a 
     return json({
         success: true,
         filename,
-        url: `/images/${filename}`
+        url: `/api/images/${filename}`
     });
+}
+
+
+// src/routes/api/images/[filename]/+server.ts
+export async function GET({ params }) {
+  const filename = params.filename.replace(/[^\w.\-]+/g, '_');
+  const filePath = join(process.cwd(), 'uploads', 'images', filename);
+
+  try {
+    const data = await readFile(filePath);
+    return new Response(data, { headers: { 'Content-Type': 'image/*' } });
+  } catch {
+    throw error(404, 'Not found');
+  }
 }

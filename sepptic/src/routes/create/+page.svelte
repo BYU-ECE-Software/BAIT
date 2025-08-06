@@ -74,7 +74,7 @@
         
        const file = files[0]
 
-        const response = await fetch("/api/image", {
+        const response = await fetch(`/api/images/${file.name}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/octet-stream", // basically any binary file
@@ -85,11 +85,6 @@
         const data = await response.json();
         const url = data.url;
         image = url;
-        // else if () {
-        //     //Eventually implement a catch for when the message is too big to display error message on front end
-        //     fileTooLarge = true;
-        // }
-        
         console.log(url);
     }
 

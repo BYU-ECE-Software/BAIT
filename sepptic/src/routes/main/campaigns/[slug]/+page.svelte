@@ -3,7 +3,7 @@
   import { AccordionItem, Accordion } from 'flowbite-svelte';
   import { writable, derived } from 'svelte/store';
   import { Avatar, Card, Progressbar, BottomNav, BottomNavItem } from 'flowbite-svelte';
-  import { UserCircleOutline, BadgeCheckOutline, ArrowUpRightFromSquareOutline, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, UserSolid, UserHeadsetOutline } from 'flowbite-svelte-icons';
+  import { ArrowUpRightFromSquareOutline } from 'flowbite-svelte-icons';
   import { GenericVideoCard, GenericCharacterCard, AchievementCard } from '$lib';
   import Chat from '../../../../lib/components/molecules/ChatCard.svelte'; // Import EmailView
   import Call from '../../../../lib/components/molecules/CallCard.svelte'; // Import Realtime Call Card
@@ -110,7 +110,7 @@
     // console.log("Opening chat window");
     // console.log(chatOrCall);
   }
-  let chatKey = 0;
+  let chatKey = $state(0);
 </script>
 
 <!-- Content to display on screens 1024px wide or larger START-->

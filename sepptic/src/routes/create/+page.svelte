@@ -70,12 +70,16 @@
 
     // File upload logic
     async function uploadImage(files: FileList) {
-        const form = new FormData();
-        form.append("file", files[0]);
+        
+       const file = files[0]
 
         const response = await fetch("/api/image", {
             method: "POST",
-            body: form
+            headers: {
+                "Content-Type": "application/octet-stream", // basically any binary file
+                "X-Filename": file.name
+            },
+            body: file
         });
         console.log(response.status);
         console.log(files[0]);
@@ -270,6 +274,7 @@
                                 id="campaignVideo"
                                 class="mb-4 w-full"
                             />
+                            <small> Size limit is 512KB </small>
                             <Label for="question" class="block mb-2">Campaign Question</Label>
                             <Input
                                 id="question"

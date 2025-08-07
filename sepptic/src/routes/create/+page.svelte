@@ -139,14 +139,14 @@
         { value: "2", name: "Both" }
     ];
     let voices = [
-        { value: "alloy", name: "Female" },
+        { value: "alloy", name: "Deep Female" },
         { value: "ash", name: "Deep Male" },
-        { value: "ballad", name: "Female" },
-        { value: "coral", name: "Soft Female" },
+        { value: "ballad", name: "British Male" },
+        { value: "coral", name: "Bright Female" },
         { value: "echo", name: "Male" },
-        { value: "sage", name: "Firm Female" },
-        { value: "shimmer", name: "Male" },
-        { value: "verse", name: "Soft Male" }
+        { value: "sage", name: "Soft Female" },
+        { value: "shimmer", name: "Female" },
+        { value: "verse", name: "Bright Male" }
     ];
     let timeLimits = [
         { value: "60000", name: "1 Minute"},
@@ -361,7 +361,7 @@
                                         <div class="grid gap-6">
                                             <!-- Character form fields -->
                                             <div>
-                                                <Label for="characterName{index}">Character Name</Label>
+                                                <Label for="characterName{index}" class="block mb-2">Character Name</Label>
                                                 <Input
                                                     id="characterName{index}"
                                                     type="text"

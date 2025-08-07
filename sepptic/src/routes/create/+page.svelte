@@ -8,15 +8,27 @@
     let showModal = true;
     let password = "";
     let errorMessage = "";
-    const CORRECT_PASSWORD = "password"; // In production, this should come from environment variables or server
 
-    function checkPassword() {
-        if (password === CORRECT_PASSWORD) {
-            showModal = false;
-            blocked = false;
-        } else {
-            errorMessage = "Incorrect password";
-            password = "";
+
+    async function checkPassword() { // Temporary auth method for this page until admin tokens are set up 
+        try {
+            const response = await fetch('/api/check-password', {
+                method: "POST",
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify({ password }),
+            });
+
+            const data = await response.json();
+            
+            if (data.success) {
+                showModal = false;
+                blocked = false;
+            } else {
+                errorMessage = "Incorrect password";
+                password = "";
+            }
+        } catch (err) {
+            console.log("The server cannot handle this request right now")
         }
     }
 
@@ -36,6 +48,7 @@
     let characterNum = 0;
     let showPromptModal = false;
     let currentCharacter: Character
+    let characterFiles: FileList[] = []
     function revealCharacters() {
         charactersSelected = true;
         // initializing character with empty placeholders
@@ -58,12 +71,57 @@
                 Contacts: []
             }
         }));
+        characterFiles = Array(Number(characterNum)).fill(null); // Initializes the FileList array just like the characters array
+    
     }
 
     function openPromptModal(character: Character) {
         showPromptModal = true;
         currentCharacter = character;
     }
+
+
+    let files: FileList;
+    let fileTooLarge = false;
+
+    // File upload logic
+    async function uploadImage(files: FileList) {
+        
+       const file = files[0]
+
+        const response = await fetch(`/api/images/${file.name}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/octet-stream", // basically any binary file
+                "X-Filename": file.name
+            },
+            body: file
+        });
+        const data = await response.json();
+        const url = data.url;
+        image = url;
+        console.log(url);
+    }
+
+    async function uploadCharacterImages(characterFiles: FileList[]) {
+        for (let index = 0; index < characterFiles.length; index++) {
+            const files = characterFiles[index];
+            if (!files || files.length === 0) continue; // skip if no file selected
+
+            const file = files[0];
+            const response = await fetch(`/api/images/${file.name}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/octet-stream",
+                    "X-Filename": file.name
+                },
+                body: file
+            });
+            const data = await response.json();
+            characters[index].Image = data.url;
+        }
+    }
+
 
     //let selected = "";
     let description = "";
@@ -74,26 +132,21 @@
     let question = "";
     let finalAnswers = "";
     let campaignName = "";
-    // let characterName = "";
-    // let jobTitle = "";
-    // let characterDescription = "";
-    // let characterVoice = "";
-    // let callOrText = "";
-    // let timeLimit = "";
+    
     let callOrTextOptions = [
         { value: "0", name: "Call" },
         { value: "1", name: "Text" },
         { value: "2", name: "Both" }
     ];
     let voices = [
-        { value: "alloy", name: "Female" },
+        { value: "alloy", name: "Deep Female" },
         { value: "ash", name: "Deep Male" },
-        { value: "ballad", name: "Female" },
-        { value: "coral", name: "Soft Female" },
+        { value: "ballad", name: "British Male" },
+        { value: "coral", name: "Bright Female" },
         { value: "echo", name: "Male" },
-        { value: "sage", name: "Firm Female" },
-        { value: "shimmer", name: "Male" },
-        { value: "verse", name: "Soft Male" }
+        { value: "sage", name: "Soft Female" },
+        { value: "shimmer", name: "Female" },
+        { value: "verse", name: "Bright Male" }
     ];
     let timeLimits = [
         { value: "60000", name: "1 Minute"},
@@ -114,6 +167,9 @@
     let characters: Character[] = []
 
     async function createJson() {
+        await uploadImage(files)
+        await uploadCharacterImages(characterFiles);
+
         const campaignData = {
             Campaign_Information: {
                 Name: campaignName,
@@ -123,7 +179,10 @@
                 Website: website,
                 Briefing_Video: video,
                 Question: question,
-                Final_Answer: finalAnswers.split(',').map(ans => ans.trim())
+                Final_Answer: finalAnswers.split(',').map(ans => ans.trim()),
+                Attack_Knowledge: [ 
+                    "This is a test" 
+                ]
             },
             Characters: characters
         };
@@ -236,10 +295,18 @@
                             />
                             <!-- I think this is broken for now -->
                             <Label for="campaignLogo" class="block mb-2">Campaign Logo</Label>
-                            <Fileupload
-                                id="campaignLogo"
-                                class="mb-4 w-full"
+                            <input 
+                                id="campaignLogo" 
+                                type="file" 
+                                accept="image/png, image/jpeg"
+                                bind:files={files}
+                                placeholder="Select campaign image" 
+                                class="mb-4 w-full" 
                             />
+                            <small> Size limit is 512KB </small>
+                            {#if fileTooLarge}
+                                <p> Your file was too big! </p>
+                            {/if}
                             <Label for="campaignWebsite" class="block mb-2">Campaign Website</Label>
                             <Input
                                 id="campaignWebsite"
@@ -249,7 +316,7 @@
                                 bind:value={website}
                             />
                             <Label for="campaignVideo" class="block mb-2">Campaign Video</Label>
-                            <Fileupload
+                            <Fileupload disabled
                                 id="campaignVideo"
                                 class="mb-4 w-full"
                             />
@@ -294,7 +361,7 @@
                                         <div class="grid gap-6">
                                             <!-- Character form fields -->
                                             <div>
-                                                <Label for="characterName{index}">Character Name</Label>
+                                                <Label for="characterName{index}" class="block mb-2">Character Name</Label>
                                                 <Input
                                                     id="characterName{index}"
                                                     type="text"
@@ -315,10 +382,18 @@
                                             </div>
                                             <div>
                                                 <Label for="characterImage{index}">Character Image</Label>
-                                                <Fileupload
-                                                    id="characterImage{index}"
-                                                    class="mb-4 w-full"
+                                                <input 
+                                                    id="characterImage{index}" 
+                                                    type="file" 
+                                                    accept="image/png, image/jpeg"
+                                                    bind:files={characterFiles[index]}
+                                                    placeholder="Select campaign image" 
+                                                    class="mb-4 w-full" 
                                                 />
+                                                <small> Size limit is 512KB </small>
+                                                {#if fileTooLarge}
+                                                    <p> Your file was too big! </p>
+                                                {/if}
                                             </div>
                                             <div>
                                                 <Label for="characterVoice{index}">Character Voice</Label>

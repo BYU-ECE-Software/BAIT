@@ -8,7 +8,8 @@ const config: PlaywrightTestConfig = {
 		command: 'npm run build && npm run preview',
 		port: 4173,
 		env: {
-			OPENAI_API_KEY: process.env.OPENAI_API_KEY,  // Ensures it's available in the web server environment
+			OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+			CREATE_PASSWORD: process.env.CREATE_PASSWORD  // Ensures it's available in the web server environment
 		},
 	},
 	testDir: 'tests',

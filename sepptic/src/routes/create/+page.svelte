@@ -8,15 +8,27 @@
     let showModal = true;
     let password = "";
     let errorMessage = "";
-    const CORRECT_PASSWORD = "password"; // In production, this should come from environment variables or server
 
-    function checkPassword() {
-        if (password === CORRECT_PASSWORD) {
-            showModal = false;
-            blocked = false;
-        } else {
-            errorMessage = "Incorrect password";
-            password = "";
+
+    async function checkPassword() { // Temporary auth method for this page until admin tokens are set up 
+        try {
+            const response = await fetch('/api/check-password', {
+                method: "POST",
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify({ password }),
+            });
+
+            const data = await response.json();
+            
+            if (data.success) {
+                showModal = false;
+                blocked = false;
+            } else {
+                errorMessage = "Incorrect password";
+                password = "";
+            }
+        } catch (err) {
+            console.log("The server cannot handle this request right now")
         }
     }
 
@@ -167,7 +179,10 @@
                 Website: website,
                 Briefing_Video: video,
                 Question: question,
-                Final_Answer: finalAnswers.split(',').map(ans => ans.trim())
+                Final_Answer: finalAnswers.split(',').map(ans => ans.trim()),
+                Attack_Knowledge: [ 
+                    "This is a test" 
+                ]
             },
             Characters: characters
         };

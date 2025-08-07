@@ -93,4 +93,5 @@ jobs:
             --network sepptic_sepptic \
             -e DATABASE_URL=${{ secrets.CONTAINER_DATABASE_URL }} \
             -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
+            -e CREATE_PASSWORD=${{ secrets.CREATE_PASSWORD }} \
             ghcr.io/byu-ece-software/sepptic:latest

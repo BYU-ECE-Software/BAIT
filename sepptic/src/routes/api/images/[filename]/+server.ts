@@ -7,7 +7,7 @@ import { error } from '@sveltejs/kit';
 import { requireAdmin } from '../../../../server/utils/authGuards';
 
 export async function POST(event: RequestEvent) { // event is not the same as a DOM event here. It is a svelteKit abstraction
-    requireAdmin(event)
+    await requireAdmin(event)
     console.log("Image upload hit");
     const fileName = event.request.headers.get("X-Filename")
     const file = await event.request.arrayBuffer();

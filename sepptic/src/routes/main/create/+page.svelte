@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Character } from "../../server/utils/types/create";
+    import type { Character } from "../../../server/utils/types/create";
     import { onMount } from "svelte";
     import { Modal, Input, Button, Label, Select, Fileupload } from "flowbite-svelte";
 	import { goto } from "$app/navigation";
@@ -250,9 +250,6 @@
         <div class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Create a Campaign</h1>
-                <a href="/main" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-                    Back to Main
-                </a>
             </div>
         </div>
 
@@ -260,25 +257,25 @@
         <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
                 <h3 class="text-xl font-semibold mb-6 text-gray-900 dark:text-white">Campaign Information</h3>
-
-                <!-- Campaign Name -->
+                
                 <div class="space-y-6">
-                    <div>
-                        <Label for="campaignName" class="text-sm font-medium text-gray-700 dark:text-gray-300">Campaign Name</Label>
-                        <Input
-                            id="campaignName"
-                            type="text"
-                            placeholder="Enter campaign name"
-                            class="mt-1"
-                            bind:value={campaignName}
-                        />
-                    </div>
-
                     <!-- Campaign Form -->
                     <form on:submit|preventDefault={createJson} class="space-y-6">
+                        <div>
+                            <Label for="campaignName" class="text-sm font-medium text-gray-700 dark:text-gray-300">Campaign Name</Label>
+                            <Input
+                                required
+                                id="campaignName"
+                                type="text"
+                                placeholder="Enter campaign name"
+                                class="mt-1"
+                                bind:value={campaignName}
+                            />
+                        </div>
                         <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg space-y-6">
                             <Label for="description" class="block mb-2">Campaign Description</Label>
                             <Input
+                                required
                                 id="description"
                                 type="text"
                                 placeholder="Enter campaign description"
@@ -292,6 +289,7 @@
                                 placeholder="Enter campaign briefing"
                                 class="mb-4 w-full"
                                 bind:value={briefing}
+                                required
                             />
                             <!-- I think this is broken for now -->
                             <Label for="campaignLogo" class="block mb-2">Campaign Logo</Label>
@@ -302,6 +300,7 @@
                                 bind:files={files}
                                 placeholder="Select campaign image" 
                                 class="mb-4 w-full" 
+                                required
                             />
                             <small> Size limit is 512KB </small>
                             {#if fileTooLarge}
@@ -314,6 +313,7 @@
                                 placeholder="Enter campaign website URL"
                                 class="mb-4 w-full"
                                 bind:value={website}
+                                required
                             />
                             <Label for="campaignVideo" class="block mb-2">Campaign Video</Label>
                             <Fileupload disabled
@@ -327,6 +327,7 @@
                                 placeholder="Enter question to solve in campaign"
                                 class="mb-4 w-full"
                                 bind:value={question}
+                                required
                             />
                             <Label for="finalAnswers" class="block mb-2">Final Answers</Label>
                             <Input
@@ -335,6 +336,7 @@
                                 placeholder="Enter valid campaign solutions (Comma Separated)"
                                 class="mb-4 w-full"
                                 bind:value={finalAnswers}
+                                required
                             />
                         </div>
 
@@ -346,6 +348,7 @@
                                     class="w-full"
                                     items={nums}
                                     bind:value={characterNum}
+                                    required
                                 />
                                 <Button on:click={revealCharacters} class="w-full sm:w-auto">
                                     Confirm Number of Characters
@@ -368,6 +371,7 @@
                                                     placeholder="Enter character name"
                                                     class="mt-1"
                                                     bind:value={character.Name}
+                                                    required
                                                 />
                                             </div>
                                             <div>
@@ -378,6 +382,7 @@
                                                     placeholder="Enter job title"
                                                     class="mt-1"
                                                     bind:value={character.Title}
+                                                    required
                                                 />
                                             </div>
                                             <div>
@@ -388,7 +393,8 @@
                                                     accept="image/png, image/jpeg"
                                                     bind:files={characterFiles[index]}
                                                     placeholder="Select campaign image" 
-                                                    class="mb-4 w-full" 
+                                                    class="mb-4 w-full"
+                                                    required 
                                                 />
                                                 <small> Size limit is 512KB </small>
                                                 {#if fileTooLarge}
@@ -401,6 +407,7 @@
                                                     class="mb-4 w-full" 
                                                     items={voices}
                                                     bind:value={character.Voice}
+                                                    required
                                                 />
                                             </div>
                                             <div>
@@ -409,6 +416,7 @@
                                                     class="mb-4 w-full" 
                                                     items={callOrTextOptions}
                                                     bind:value={character.CallorText}
+                                                    required
                                                 />
                                             </div>
                                             <div>
@@ -417,6 +425,7 @@
                                                     class="mb-4 w-full" 
                                                     items={timeLimits}
                                                     bind:value={character.CallLimit}
+                                                    required
                                                 />
                                             </div>
                                             <div>
@@ -427,6 +436,7 @@
                                                     placeholder="Enter character description"
                                                     class="mb-4 w-full"
                                                     bind:value={character.Description}
+                                                    required
                                                 />
                                             </div>
                                             <div>
@@ -445,17 +455,17 @@
                                                         <!-- Prompt fields -->
                                                         <div class="space-y-4">
                                                             <Label for="background">Background</Label>
-                                                            <Input id="background" type="text" bind:value={currentCharacter.Prompt.Background} />
+                                                            <Input required id="background" type="text" bind:value={currentCharacter.Prompt.Background} />
                                                             <Label for="weaknesses">Weaknesses</Label>
-                                                            <Input id="weaknesses" type="text" bind:value={currentCharacter.Prompt.Weaknesses} />
+                                                            <Input required id="weaknesses" type="text" bind:value={currentCharacter.Prompt.Weaknesses} />
                                                             <Label for="strengths">Strengths</Label>
-                                                            <Input id="strengths" type="text" bind:value={currentCharacter.Prompt.Strengths} />
+                                                            <Input required id="strengths" type="text" bind:value={currentCharacter.Prompt.Strengths} />
                                                             <Label for="general">General Info</Label>
-                                                            <Input id="general" type="text" bind:value={currentCharacter.Prompt.General} />
+                                                            <Input required id="general" type="text" bind:value={currentCharacter.Prompt.General} />
                                                             <Label for="criticalInfo">Critical Info</Label>
-                                                            <Input id="criticalInfo" type="text" bind:value={currentCharacter.Prompt.Critical_Info} />
+                                                            <Input required id="criticalInfo" type="text" bind:value={currentCharacter.Prompt.Critical_Info} />
                                                             <Label for="personality">Personality</Label>
-                                                            <Input id="personality" type="text" bind:value={currentCharacter.Prompt.Personality} />
+                                                            <Input required id="personality" type="text" bind:value={currentCharacter.Prompt.Personality} />
                                                         </div>
                                                         <Button class="mt-4 w-full sm:w-auto" on:click={() => showPromptModal = false}>Save</Button>
                                                     </div>

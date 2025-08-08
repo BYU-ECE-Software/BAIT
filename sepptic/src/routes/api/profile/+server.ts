@@ -6,7 +6,6 @@ import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
 
 export async function GET(event: RequestEvent) {
-    console.log("Auth check")
     // Authenticate and get user
     const cookies = cookie.parse(event.request.headers.get('cookie') || '');
     const token = cookies.token;

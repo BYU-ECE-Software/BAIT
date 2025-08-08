@@ -1,5 +1,5 @@
 # Campaign Creation Documentation
-*How to create a campaign that works with the BAIT system.*
+*A guide for creating a campaign that works with the BAIT system.*
 
 ## Campaign JSON File 
 In the following filepath in this directory, the campaign JSON files can be found. They must be named an integer (1, 2, 3, etc). 

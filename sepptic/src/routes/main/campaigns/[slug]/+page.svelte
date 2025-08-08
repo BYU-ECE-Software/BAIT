@@ -91,6 +91,7 @@
         }))
     ];
 
+
     const fromContactId = writable(userContacts[0].id);
 
     const fromContact = derived(fromContactId, ($id) => {
@@ -111,6 +112,13 @@
     // console.log(chatOrCall);
   }
   let chatKey = $state(0);
+  const videoSrc = data?.campaign?.Campaign_Information?.Briefing_Video;
+  const website = data?.campaign?.Campaign_Information?.Website;
+
+  // filter out the selectedCharacter from the From list
+    let filteredFromContacts = $derived(
+    userContacts.filter(c => c.id !== $selectedCharacter.ID)
+  );
 </script>
 
 <!-- Content to display on screens 1024px wide or larger START-->
@@ -181,26 +189,28 @@
                                 <p class="whitespace-pre-line text-sm text-gray-500 dark:text-gray-400">
                                 {data.campaign.Campaign_Information.Brief}
                                 </p>
-
-                                <p class="text-sm text-gray-500 dark:text-gray-400">
-                                <b>Intro Video:</b> Watch the video to learn more about {data.campaign.Campaign_Information.Name}.
-                                </p>
-
-                                <div class="overflow-hidden w-full">
-                                <div class="w-full max-w-full px-2">
-                                    <GenericVideoCard src={data.campaign.Campaign_Information.Briefing_Video} />
-                                </div>
-                                </div>
+                                {#if videoSrc}
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                                    <b>Intro Video:</b> Watch the video to learn more about {data.campaign.Campaign_Information.Name}.
+                                    </p>
+                                    <div class="overflow-hidden w-full">
+                                        <div class="w-full max-w-full px-2">
+                                            <GenericVideoCard src={videoSrc} />
+                                        </div>
+                                    </div>
+                                {/if}
                             </div>
                         </AccordionItem>
 
-                        <AccordionItem>
-                            <span slot="header">Harvesta Website</span>
-                            <div style="display: flex; align-items: center;">
-                                <ArrowUpRightFromSquareOutline/>
-                                <span style="margin-left: 0.5rem;">Click <a href="{data.campaign.Campaign_Information.Website}" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
-                            </div>
-                        </AccordionItem>
+                        {#if website}
+                            <AccordionItem>
+                                <span slot="header">{data.campaign.Campaign_Information.Name} Website</span>
+                                <div style="display: flex; align-items: center;">
+                                    <ArrowUpRightFromSquareOutline/>
+                                    <span style="margin-left: 0.5rem;">Click <a href="{data.campaign.Campaign_Information.Website}" target="_blank" rel="noopener noreferrer" style="color: blue;">here</a> to open the company website in a new tab.</span>
+                                </div>
+                            </AccordionItem>
+                        {/if}
 
 
                         <AccordionItem>
@@ -310,13 +320,13 @@
                             From:
                         </label>
                         <select
-                            id="from-select"
-                            bind:value={$fromContactId}
-                            class="mt-1 p-1 bg-white dark:bg-gray-700 border border-gray-300 rounded"
+                        id="from-select"
+                        bind:value={$fromContactId}
+                        class="mt-1 p-1 bg-white dark:bg-gray-700 border border-gray-300 rounded"
                         >
-                            {#each userContacts as c}
+                        {#each filteredFromContacts as c}
                             <option value={c.id}>{c.name}</option>
-                            {/each}
+                        {/each}
                         </select>
                         </div>
                     </div>

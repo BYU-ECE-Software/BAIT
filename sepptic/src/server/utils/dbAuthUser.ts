@@ -55,6 +55,6 @@ export default async function dbAuthUser(email: string, password: string): Promi
         success: true,
         message: 'User authenticated successfully',
         status: 200,
-        userId: user.User_ID
+        userId: user.User_ID,
     }
 }

@@ -15,7 +15,6 @@ export const handle: Handle = async ({ event, resolve }) => {
       const { userId } = await getUserIdFromToken(token);
       if (userId) {
         const userRes = await dbGetUser(userId);
-        console.log(userRes);
         // minimal shape exposed internally
         event.locals.user = {
           id: userId,

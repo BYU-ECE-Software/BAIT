@@ -3,6 +3,7 @@
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownHeader, DropdownItem,  DarkMode} from 'flowbite-svelte';
     $: activeUrl = $page.url.pathname;
     $: email = $page.data.email ?? "Unknown";
+    $: role = $page.data.role
     import { invalidateAll, goto } from '$app/navigation'; // To refresh the session
     import {signOut} from "$lib/auth.svelte";
 
@@ -58,6 +59,8 @@
         <NavLi href="/main/learn">Learn</NavLi>
         <NavLi href="/main/campaigns">Campaigns</NavLi>
         <NavLi href="/main/about">About</NavLi>
-        <NavLi href="/admin">Admin</NavLi>
+        {#if role === "admin"}
+            <NavLi href="/admin">Admin</NavLi>
+        {/if}
     </NavUl>
 </nav>

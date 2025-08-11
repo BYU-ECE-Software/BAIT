@@ -29,6 +29,7 @@ export async function GET(event: RequestEvent) {
         userId: user.User_ID,
         email: user.Email,
         name: user.Name,
+        role: user.Role
     }), { status: 200 });
 }
 

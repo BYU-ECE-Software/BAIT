@@ -189,7 +189,7 @@
         let data = JSON.stringify(campaignData, null, 2);
         console.log(data);
         try {
-            const response = await fetch('/api/saveCampaign', {
+            const response = await fetch('/api/campaigns', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

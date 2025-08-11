@@ -66,7 +66,7 @@
         </a>
     </div>
     <div class="flex md:flex-row gap-4 mt-4">
-        <a href="/main/create" 
+        <a href="/create" 
            class="bg-blue-500 hover:bg-blue-700 text-white md:text-3xl font-bold py-10 px-10 rounded">
             Create a Campaign
         </a>

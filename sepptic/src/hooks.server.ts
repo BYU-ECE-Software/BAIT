@@ -1,35 +1,32 @@
-// // // src/hooks.server.ts
-// // export const handle = async ({ event, resolve }) => {
-// //   console.log('origin header:', event.request.headers.get('origin'));
-// //   console.log('url.origin:', event.url.origin);
-// //   return resolve(event);
-// // };
-// // Used to test for CSRF issues and same-origin mismatches
-// import type { Handle } from '@sveltejs/kit'
-// import dbGetUser from './server/utils/dbGetUser';
-// import getUserIdFromToken from './server/utils/getUserIdFromToken'
+import type { Handle } from '@sveltejs/kit';
+import cookie from 'cookie';
+import getUserIdFromToken from "./server/utils/getUserIdFromToken";
+import dbGetUser from "./server/utils/dbGetUser";
 
-// export const handle: Handle = async({ event, resolve }) => {
-//     const allCookies = event.cookies.getAll();
-//     console.log('All cookies:', allCookies);
-//     const token = event.cookies.get("token");
-//     console.log('Token cookie:', token);
-//     if (!token) {
-//         event.locals.role = null;
-//         return resolve(event);
-//     }
-//     const tokenResponse = await getUserIdFromToken(token); 
-//     if (!tokenResponse.success || tokenResponse.userId) {
-//         event.locals.role = null
-//         return resolve(event)
-//     }
-//     const userId = tokenResponse.userId;
-//     const userResponse = await dbGetUser(userId);
-//     if (userResponse.status !== 200|| !userResponse.user) {
-//         event.locals.role = null
-//         return resolve(event)
-//     }
-//     event.locals.role = userResponse.user.Role;
-//     console.log('User role:', event.locals.role)
-//     return resolve(event);
-// }
+export const handle: Handle = async ({ event, resolve }) => {
+  const cookies = cookie.parse(event.request.headers.get('cookie') || '');
+  const token = cookies.token;
+  console.log("This is the token from the hook: ", token);
+
+  event.locals.user = null; // default
+
+  if (token) {
+    try {
+      const { userId } = await getUserIdFromToken(token);
+      if (userId) {
+        const userRes = await dbGetUser(userId);
+        console.log(userRes);
+        // minimal shape exposed internally
+        event.locals.user = {
+          id: userId,
+          role: userRes.user.Role?.toLowerCase() ?? 'user',
+          email: userRes.user.email
+        };
+      }
+    } catch {
+      // bad token: leave user null
+    }
+  }
+
+  return resolve(event);
+};

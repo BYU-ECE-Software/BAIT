@@ -4,44 +4,44 @@
     import { Modal, Input, Button, Label, Select, Fileupload } from "flowbite-svelte";
 	import { goto } from "$app/navigation";
 
-    let blocked = false;
-    let showModal = true;
-    let password = "";
-    let errorMessage = "";
+    // let blocked = false;
+    // let showModal = true;
+    // let password = "";
+    // let errorMessage = "";
 
 
-    async function checkPassword() { // Temporary auth method for this page until admin tokens are set up 
-        try {
-            const response = await fetch('/api/check-password', {
-                method: "POST",
-                headers: { "Content-Type": "application/json"},
-                body: JSON.stringify({ password }),
-            });
+    // async function checkPassword() { // Temporary auth method for this page until admin tokens are set up 
+    //     try {
+    //         const response = await fetch('/api/check-password', {
+    //             method: "POST",
+    //             headers: { "Content-Type": "application/json"},
+    //             body: JSON.stringify({ password }),
+    //         });
 
-            const data = await response.json();
+    //         const data = await response.json();
             
-            if (data.success) {
-                showModal = false;
-                blocked = false;
-            } else {
-                errorMessage = "Incorrect password";
-                password = "";
-            }
-        } catch (err) {
-            console.log("The server cannot handle this request right now")
-        }
-    }
+    //         if (data.success) {
+    //             showModal = false;
+    //             blocked = false;
+    //         } else {
+    //             errorMessage = "Incorrect password";
+    //             password = "";
+    //         }
+    //     } catch (err) {
+    //         console.log("The server cannot handle this request right now")
+    //     }
+    // }
 
     export let data; // from the layout.svelte
 
     // Prevent access until authenticated
-    onMount(() => {
+    onMount((e) => {
         //Redirects to /main so there isn't a double modal
         if (!data.isLoggedIn) {
             goto("/main");
             return;
         }
-        blocked = true;
+        // blocked = true;
     });
 
     let charactersSelected = false;
@@ -209,7 +209,7 @@
     }
 </script>
 
-{#if showModal}
+<!-- {#if showModal}
     <Modal
         title="Authentication Required"
         open={showModal}
@@ -242,9 +242,8 @@
             </form>
         </div>
     </Modal>
-{/if}
+{/if} -->
 
-{#if !blocked}
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
         <!-- Header -->
         <div class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
@@ -484,7 +483,6 @@
             </div>
         </div>
     </div>
-{/if}
 
 <style>
     /* We can remove most custom CSS and keep only what's absolutely necessary */

@@ -3,10 +3,9 @@ import { writeFile } from "fs/promises";
 import { join } from "path";
 import type { RequestEvent } from "@sveltejs/kit";
 import { json } from "@sveltejs/kit";
-import { requireAdmin } from "../../../server/utils/authGuards";
 
 export async function POST(event: RequestEvent) {
-	await requireAdmin(event);
+	// Could be good to add an auth guard here
 	try {
 		const data = await event.request.json();
 		const campaignsDir = join(process.cwd(), 'src', 'server', 'campaigns');

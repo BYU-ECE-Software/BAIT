@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export default async function DeleteMessagesForConversations(campaignId: number) {
+export default async function deleteCampaign(campaignId: number) {
     try {
         // Step 1: Get matching conversation IDs
         const conversations = await prisma.conversation.findMany({
@@ -20,6 +20,7 @@ export default async function DeleteMessagesForConversations(campaignId: number)
             return {
                 messCount: 0,
                 transCount: 0,
+                convoCount: 0,
                 message: 'No matching conversations found',
                 status: 200
             };
@@ -43,9 +44,17 @@ export default async function DeleteMessagesForConversations(campaignId: number)
             }
         })
 
+        // Step 4: Delete conversations linked to campaign ID
+        const convoResult = await prisma.conversation.deleteMany({
+            where: {
+                Campaign_ID: campaignId,
+            }
+        })
+
         return {
             messCount: messResult.count,
             transCount: transResult.count,
+            convoResult: convoResult.count,
             message: 'Messages and transcripts deleted successfully',
             status: 200
         };

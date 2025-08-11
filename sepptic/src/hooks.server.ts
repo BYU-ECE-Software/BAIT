@@ -6,7 +6,7 @@ import dbGetUser from "./server/utils/dbGetUser";
 export const handle: Handle = async ({ event, resolve }) => {
   const cookies = cookie.parse(event.request.headers.get('cookie') || '');
   const token = cookies.token;
-  console.log("This is the token from the hook: ", token);
+//   console.log("This is the token from the hook: ", token);
 
   event.locals.user = null; // default
 

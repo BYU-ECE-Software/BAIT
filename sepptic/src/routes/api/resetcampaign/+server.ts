@@ -1,5 +1,5 @@
 import getUserIdFromToken from '../../../server/utils/getUserIdFromToken';
-import DeleteCampaign from '../../../server/utils/dbDeleteCampaigndata';
+import DeleteCampaign from '../../../server/utils/dbUserDeleteCampaigndata';
 import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
 export async function POST(event: RequestEvent) {

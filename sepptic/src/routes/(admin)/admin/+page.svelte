@@ -64,7 +64,7 @@ async function submitDelete(id: string) {
         {#each campaigns as campaign (campaign.id)}
           <div class="flex items-center justify-between rounded-md border border-gray-200 p-3 hover:bg-gray-50">
             <Label class="text-gray-800">{campaign.name}</Label>
-            <Button size="xs" color="red" on:click={() => submitDelete(campaign.id)}>
+            <Button size="s" color="red" on:click={() => submitDelete(campaign.id)}>
               Delete
             </Button>
           </div>

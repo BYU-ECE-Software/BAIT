@@ -58,5 +58,6 @@
         <NavLi href="/main/learn">Learn</NavLi>
         <NavLi href="/main/campaigns">Campaigns</NavLi>
         <NavLi href="/main/about">About</NavLi>
+        <NavLi href="/admin">Admin</NavLi>
     </NavUl>
 </nav>

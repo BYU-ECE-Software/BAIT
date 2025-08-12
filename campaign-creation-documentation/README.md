@@ -1,5 +1,10 @@
 # Campaign Creation Documentation
-*A guide for creating a campaign that works with the BAIT system.*
+*A guide for creating a campaign that works with the BAIT system. Also, documentation of how the first campaign, Harvesta, was created.*
+
+## Files 
+`character-sheets` - contains individual files that define the characters found in the Harvesta campaign. 
+`harvesta-overview` - an explanation of the campaign, intended outcomes, and ways to get the solution. 
+`harvesta-walkthrough` - a concise explanation of how to find the solution. 
 
 ## Campaign JSON File 
 In the following filepath in this directory, the campaign JSON files can be found. They must be named an integer (1, 2, 3, etc). 
@@ -24,7 +29,7 @@ The file is split into two major sections, Campaign Information and Characters.
 |**Final Question**|This holds the text of the final campaign question.|
 |**Campaign Knowledge**|This is information about the campaign that all the characters are meant to know in character.|
 |**Final Answer**|This holds an array of strings that are considered valid answers for that final question.|
-|**Attack Knowledge**|This is for the information that the AIs know but the characters are not neccessarily aware of.|
+|**Attack Knowledge**|This is for the information that the AIs know but the characters are not neccessarily aware of. You can put all sorts of information here, from awareness of social engineering attacks to prompts designed to prevent prompt engineering.|
 
 ### Characters
 

@@ -9,7 +9,10 @@ export default async function aiSendMessage(message: string, prompt: string) {
         model: 'gpt-5',
         instructions: prompt,
         input: message,
-        store: true
+        store: true,
+        reasoning: {
+            effort: "low", // Prevents GPT-5 from taking forever to respond
+        }
     })
 
     console.log(response.output_text);

@@ -117,7 +117,7 @@ export async function POST(event: RequestEvent) {
                         Your background is ${character.Prompt.Background}.
                         Your Weaknesses are ${character.Prompt.Weaknesses}.
                         Your Strengths are ${character.Prompt.Strengths}.
-                        The Criticial Info that you don't give out without people exploiting your weaknesses is ${character.Prompt.Critical_Info}.
+                        The Critical Info that you don't give out without people exploiting your weaknesses is ${character.Prompt.Critical_Info}.
                         The other People you know are ${summaries}.
                         `;
     console.log(fullPrompt);

@@ -18,10 +18,4 @@
 			/>
 		</div>
 	{/each}
-	<div class="flex w-full justify-center md:w-1/2">
-		<WasteManagementCard />
-	</div>
-	<div class="flex w-full justify-center md:w-1/2">
-		<ComputerChipCoCard />
-	</div>
 </div>

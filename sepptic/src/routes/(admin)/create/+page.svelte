@@ -3,45 +3,16 @@
     import { onMount } from "svelte";
     import { Modal, Input, Button, Label, Select, Fileupload } from "flowbite-svelte";
 	import { goto } from "$app/navigation";
-
-    let blocked = false;
-    let showModal = true;
-    let password = "";
-    let errorMessage = "";
-
-
-    async function checkPassword() { // Temporary auth method for this page until admin tokens are set up 
-        try {
-            const response = await fetch('/api/check-password', {
-                method: "POST",
-                headers: { "Content-Type": "application/json"},
-                body: JSON.stringify({ password }),
-            });
-
-            const data = await response.json();
-            
-            if (data.success) {
-                showModal = false;
-                blocked = false;
-            } else {
-                errorMessage = "Incorrect password";
-                password = "";
-            }
-        } catch (err) {
-            console.log("The server cannot handle this request right now")
-        }
-    }
-
     export let data; // from the layout.svelte
 
     // Prevent access until authenticated
-    onMount(() => {
+    onMount((e) => {
         //Redirects to /main so there isn't a double modal
         if (!data.isLoggedIn) {
             goto("/main");
             return;
         }
-        blocked = true;
+        // blocked = true;
     });
 
     let charactersSelected = false;
@@ -189,7 +160,7 @@
         let data = JSON.stringify(campaignData, null, 2);
         console.log(data);
         try {
-            const response = await fetch('/api/saveCampaign', {
+            const response = await fetch('/api/campaigns', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -208,43 +179,6 @@
         // save data as a file in server/campaigns
     }
 </script>
-
-{#if showModal}
-    <Modal
-        title="Authentication Required"
-        open={showModal}
-        outsideclose={false}
-        class="max-w-md mx-auto"
-    >
-        <div class="px-6 py-4">
-            <form on:submit|preventDefault={checkPassword} class="space-y-4">
-                <div class="space-y-2">
-                    <Label for="password" class="block font-medium text-gray-700 dark:text-gray-300">
-                        Password:
-                    </Label>
-                    <Input
-                        id="password"
-                        type="password"
-                        bind:value={password}
-                        placeholder="Enter password"
-                        class="w-full rounded-md shadow-sm"
-                        required
-                    />
-                </div>
-                {#if errorMessage}
-                    <p class="text-sm text-red-600 dark:text-red-500">{errorMessage}</p>
-                {/if}
-                <div class="pt-2">
-                    <Button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition-colors">
-                        Submit
-                    </Button>
-                </div>
-            </form>
-        </div>
-    </Modal>
-{/if}
-
-{#if !blocked}
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
         <!-- Header -->
         <div class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
@@ -484,7 +418,6 @@
             </div>
         </div>
     </div>
-{/if}
 
 <style>
     /* We can remove most custom CSS and keep only what's absolutely necessary */

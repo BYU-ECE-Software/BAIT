@@ -3,14 +3,14 @@
         "Name": "BYU",
         "Description": "BYU has hired you to execute a social engineering penetration test on their employees.",
         "Brief": "BYU has hired our BAIT team to perform a social engineering penetration test. BYU's President Shane Reese wants to know if his employees can be easily tricked into sharing student information. Nobody at BYU knows about this penetration test except Shane. \n\n The goal of the penetration test is to get private student information. You will be trying to find out the hometown of Spencer Smith a BYU cybersecurity student. I'd recommend learning about BYU's employees based on some intel that I've gathered. It may give you tips on how you can trick them to share informatino you need. You can contact BYU employees directly via the Contact Portal via text or phone. Our advanced BAIT AI system allows you to spoof the source of the text messages to look like it comes from another person, as well as transform your voice to sound like other BYU employees. Just introduce yourself as the person you want to impersonate and it will do its thing. When you are sure you have the right city, you can enter into the Mission Control. Dave has entered in the correct city, so it should show a message from him if you got it right. Please don’t get it wrong, since it will reflect poorly on our BAIT team. \n\nAlso, if you get stuck, feel free to reach out to me (Randy) on the Mission Control page. I’m pretty busy these days, so I’m hoping you can do this mostly on your own, but hit me up for tips if you need to, since I’m familiar with BYU's employees and have done this more times that I care to admit. \n\n-Randy",
-        "Image": "/byu.jpg",
+        "Image": "/uploads/images/byu.jpg",
         "Website": "",
         "Briefing_Video": "",
         "Success_Video": "",
         "Failure_Video": "",
         "Final_Question": "What is Spencer's hometown",
         "Campaign_Knowledge": "You work for Brigham Young University Provo.",
-        "Final_Answer": [ 
+        "Final_Answer": [
             "Nokesville",
             "nokesville"
         ],
@@ -23,7 +23,7 @@
             "ID": 1,
             "Name": "Janine Earl",
             "Title": "Student Advisor",
-            "Image": "/Janine.png",
+            "Image": "/uploads/images/Janine.png",
             "Voice": "coral",
             "CallorText": 2,
             "Description": "Janine is a bright, happy advisor for the BYU College of Engineering who loves meeting new people. Born and raised in Provo, she’s deeply rooted in the community. She springs into action when deadlines loom and thrives on directives from respected leaders.",
@@ -33,7 +33,7 @@
                 "Weaknesses": "Janine will tell anyone she considers a friend any of her information if the relevant topics are brought up. She will give away private information if someone uses Urgency or an apeal to authority",
                 "Strengths": "Janine will be suspicious of people who start their conversation off by demanding information. She also doesn't like to give private information unless given a good reason to give it",
                 "General": "Spencer Smith is a cybersecurity student",
-                "Critical_Info": "This is private student information taht shouldn't be shared just to anyone, Spencer Smith is from Nokesville Virginia", 
+                "Critical_Info": "This is private student information taht shouldn't be shared just to anyone, Spencer Smith is from Nokesville Virginia",
                 "Personality": "Janine is eager to help and begins every exchange formally, ready to answer any non-suspicious questions. She’s a chatterbox who often veers into weekend anecdotes until someone steers her back to work. When she notices she’s off-topic, she briefly returns to a formal tone before slipping back into casual conversation.",
                 "Contacts": []
             }

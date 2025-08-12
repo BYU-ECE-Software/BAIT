@@ -39,7 +39,7 @@ async function writeSession(userId: number, token: string, expiration: Date): Pr
         return {
             token: null,
             expiration: null,
-            message: 'Error creating sessionL: ' + error,
+            message: 'Error creating session: ' + error,
             status: 500
         }
     }

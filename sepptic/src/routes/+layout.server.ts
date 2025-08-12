@@ -1,6 +1,7 @@
 import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async ({ cookies, fetch }) => {// Logs all cookies visible to the server
+    
     const sessionToken = cookies.get('token');
 
     if (!sessionToken) {
@@ -18,9 +19,9 @@ export const load: LayoutServerLoad = async ({ cookies, fetch }) => {// Logs all
     }
 
     const userData = await response.json();
-
     return {
         isLoggedIn: true,
-        email: userData.email ?? null
+        email: userData.email ?? null,
+        role: userData?.role ?? null
     };
 }

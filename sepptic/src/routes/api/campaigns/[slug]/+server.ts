@@ -7,6 +7,7 @@ export async function GET(event: RequestEvent) {
     // Authenticate and get user ID
     const cookies = cookie.parse(event.request.headers.get('cookie') || '');
     const token = cookies.token;
+    console.log(token)
     if (!token) {
         return new Response(JSON.stringify({ message: 'No token provided', status: 400 }), { status: 400 });
     }

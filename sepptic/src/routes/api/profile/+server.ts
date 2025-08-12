@@ -6,7 +6,6 @@ import type { RequestEvent } from '@sveltejs/kit';
 import cookie from 'cookie';
 
 export async function GET(event: RequestEvent) {
-    console.log("Auth check")
     // Authenticate and get user
     const cookies = cookie.parse(event.request.headers.get('cookie') || '');
     const token = cookies.token;
@@ -30,6 +29,7 @@ export async function GET(event: RequestEvent) {
         userId: user.User_ID,
         email: user.Email,
         name: user.Name,
+        role: user.Role
     }), { status: 200 });
 }
 

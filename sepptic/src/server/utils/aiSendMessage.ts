@@ -17,16 +17,8 @@ export default async function aiSendMessage(message: string, prompt: string) {
         },
         previous_response_id: previousId
     })
-
-    console.log("The previous id is: ", previousId)
-
+    
     previousId = response.id;
 
-    console.log("The current id: ", response.id);
-
-    console.log("The previous id has been set to: ", previousId);
-    
-
     return response.output_text;
-    
 }

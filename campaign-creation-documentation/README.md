@@ -179,3 +179,4 @@ In both of these files, the prompt is created through this method:
                         The other People you know are ${summaries}.
                         `;
 ```
+The fullPrompt variable is then submitted to the AI. 

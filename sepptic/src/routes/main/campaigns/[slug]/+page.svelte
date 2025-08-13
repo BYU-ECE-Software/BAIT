@@ -17,7 +17,7 @@
     const user = data.user.userId;
     const logKey = `campaignStarted - ${user}`
     if(!localStorage.getItem(logKey)) { // Only adds a starting timestamp if page has never been accessed before on this browser
-        // This should eventually be tracked per user persistently somehow?
+        // This should eventually be tracked per user persistently somehow
         try {
             const response = await fetch("/api/timestamp", {
                 method: "POST",

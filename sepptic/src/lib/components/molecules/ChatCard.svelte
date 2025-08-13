@@ -19,7 +19,7 @@
     }
   });
 
-  // — component state —
+  // — component state — 
   let messages: { sender: string; content: string; timestamp: string; isTyping?: boolean }[] = [];
   let replyContent = '';
 

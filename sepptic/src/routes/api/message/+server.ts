@@ -120,10 +120,8 @@ export async function POST(event: RequestEvent) {
                         The Critical Info that you don't give out without people exploiting your weaknesses is ${character.Prompt.Critical_Info}.
                         The other People you know are ${summaries}.
                         `;
-    console.log(fullPrompt);
-    const aiResponse = await aiSendMessage(messagesResponse.messages, message, fullPrompt);
+    const aiMessage = await aiSendMessage(message, fullPrompt);
 
-    const aiMessage = aiResponse?.choices?.[0]?.message?.content;
     if (!aiMessage) {
       throw new Error('AI response is missing or malformed');
     }

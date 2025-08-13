@@ -26,7 +26,7 @@ export default async function DeleteMessagesForConversations(userId: number, cam
         }
 
         // Step 2: Delete messages linked to those conversations
-        const deleteResult = await prisma.message.deleteMany({
+        const deleteMessage = await prisma.message.deleteMany({
             where: {
                 Conversation_ID: {
                     in: conversationIds
@@ -34,16 +34,25 @@ export default async function DeleteMessagesForConversations(userId: number, cam
             }
         });
 
+        // Step 3: Delete transcripts linked to conversations
+        const deleteTranscript = await prisma.transcript.deleteMany({
+            where: {
+                Conversation_ID: {
+                    in: conversationIds
+                }
+            }
+        })
+
         return {
-            deletedCount: deleteResult.count,
-            message: 'Messages deleted successfully',
+            deletedCount: deleteMessage.count + deleteTranscript.count,
+            message: 'Messages & Transcripts deleted successfully',
             status: 200
         };
     } catch (error) {
         console.error('Error deleting messages:', error);
         return {
             deletedCount: 0,
-            message: 'Failed to delete messages',
+            message: 'Failed to delete messages & transcripts',
             status: 500
         };
     }

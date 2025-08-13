@@ -49,7 +49,7 @@
   let ss: string = "00";
 
   // — call management variables —
-  let currentCall = 0;
+  let callActive = false;
   let responseInProgress = false;
   let timeOutReached = false;
   let timeoutId: ReturnType<typeof setTimeout> | null;
@@ -71,7 +71,7 @@
   }
 
   async function startCall() {
-    currentCall = 1;
+    callActive = true;
     try {
       const response = await fetch('/api/realtime', {
         method: 'POST',
@@ -127,7 +127,7 @@
 
       timeoutId = setTimeout(() => {
         timeOutReached = true;
-        if (!responseInProgress) {
+        if (!responseInProgress && callActive) {
           endCall();
           exitAudio();
         }
@@ -139,7 +139,7 @@
   }
 
   async function endCall() {
-    currentCall = 0;
+    callActive = false;
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
       timeoutId = null;
@@ -169,12 +169,12 @@
     {/each}
   </div>
   <div>
-    {#if currentCall}
+    {#if callActive}
       <div class="flex flex-col gap-2 w-full">
         <button class="end-call py-2 px-4 rounded" onclick={endCall}>End Phone Call</button>
         <div>
           <p class="text-gray-500">Call in progress...</p>
-          <p>{mm}:{ss}</p>
+          <!-- <p>{mm}:{ss}</p> -->
         </div>
       </div>
     {:else}

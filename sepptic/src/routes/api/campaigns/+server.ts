@@ -1,6 +1,7 @@
 import { jsonGetCampaigns } from "../../../server/utils/jsonGetCampaigns";
 import getUserIdFromToken from "../../../server/utils/getUserIdFromToken";
 import deleteCampaign from "../../../server/utils/dbDeleteFullCampaign"
+import dbCreateJson from "../../../server/utils/dbCreateJson";
 import deleteJson from "../../../server/utils/deleteJson"
 import cookie from 'cookie';
 import type { RequestEvent } from '@sveltejs/kit';
@@ -53,6 +54,15 @@ export async function POST(event: RequestEvent) {
 		const filePath = join(campaignsDir, filename);
 		await writeFile(filePath, JSON.stringify(data, null, 2));
         console.log("File with ID: ", nextId, " written")
+		
+		// Also, write json file with id to DB for more permant storage
+		const campaignRes = await dbCreateJson(nextId, JSON.stringify(data, null, 2));
+		if (!campaignRes.success) {
+			return json({
+				message: "Unable to store campaign to DB",
+				success: false
+			})
+		}
 
 		return json({
 			success: true,
@@ -85,7 +95,6 @@ export async function DELETE(event: RequestEvent) {
 			success: false
 		});
 	}
-
 	return json({
 		message: "Campaign and json deleted successfully",
 		success: true

@@ -51,8 +51,8 @@ CREATE TABLE Session (
 );
 
 CREATE TABLE Campaign (
-    id INT NOT NULL PRIMARY KEY,
-    data MEDIUMTEXT NOT NULL
+    Id INT NOT NULL PRIMARY KEY,
+    Data MEDIUMTEXT NOT NULL
 );
 
 -- Indexes for foreign key optimization

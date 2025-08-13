@@ -56,10 +56,15 @@ model User {
   Password     String         @db.VarChar(255)
   Name         String         @db.VarChar(100)
   Email        String         @unique(map: "Email") @db.VarChar(255)
-  Role         String         @db.VarChar(255) @default("user")
+  Role         String         @default("user") @db.VarChar(255)
   Conversation Conversation[]
   Session      Session[]
   UserEventLog UserEventLog[]
+}
+
+model Campaign {
+  Id   Int    @id
+  Data String @db.MediumText
 }
 
 model UserEventLog {

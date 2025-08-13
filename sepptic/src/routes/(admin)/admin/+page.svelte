@@ -27,18 +27,27 @@ async function getCampaigns() {
 }
 
 async function submitDelete(id: string) {
-    const response = await fetch("/api/campaigns", {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ campaignId: id })
-    })
-    if (!response.ok) {
-        console.error("Failed to delete campaign");
-        return;
-    }
-    console.log("Campaign deleted successfully: ", response.status);
+
+  //const campaign = await dbReadJSON(); // Pull JSON file from DB
+  
+  // const imageRes = await fetch("/api/images", {
+  //   method: "DELETE",
+  //   // Send filename are a url parameter or something like that
+  //   // Check that the image was deleted
+  // })
+
+  const campaignRes = await fetch("/api/campaigns", {
+      method: "DELETE",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ campaignId: id })
+  })
+  if (!campaignRes.ok) {
+      console.error("Failed to delete campaign");
+      return;
+  }
+  console.log("Campaign deleted successfully: ", campaignRes.status);
 
 }
 </script>

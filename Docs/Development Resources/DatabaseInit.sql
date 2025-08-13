@@ -50,6 +50,11 @@ CREATE TABLE Session (
     FOREIGN KEY (User_ID) REFERENCES User(User_ID) ON UPDATE RESTRICT
 );
 
+CREATE TABLE Campaign (
+    id INT NOT NULL PRIMARY KEY,
+    data MEDIUMTEXT NOT NULL
+);
+
 -- Indexes for foreign key optimization
 CREATE INDEX idx_user_id_conversation ON Conversation(User_ID);
 CREATE INDEX idx_user_id_intel ON Intel(User_ID);

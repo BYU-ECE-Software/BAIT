@@ -169,7 +169,7 @@
     {/each}
   </div>
   <div>
-    {#if currentCall}
+    {#if callActive}
       <div class="flex flex-col gap-2 w-full">
         <button class="end-call py-2 px-4 rounded" onclick={endCall}>End Phone Call</button>
         <div>

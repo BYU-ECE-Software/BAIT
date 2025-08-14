@@ -2,6 +2,7 @@ import type { Handle } from '@sveltejs/kit';
 import cookie from 'cookie';
 import getUserIdFromToken from "./server/utils/getUserIdFromToken";
 import dbGetUser from "./server/utils/dbGetUser";
+import { syncCampaignsFromDisk } from './server/utils/campaignSync';
 
 export const handle: Handle = async ({ event, resolve }) => {
   const cookies = cookie.parse(event.request.headers.get('cookie') || '');
@@ -29,3 +30,5 @@ export const handle: Handle = async ({ event, resolve }) => {
 
   return resolve(event);
 };
+
+syncCampaignsFromDisk(); // Syncs all campaigns stored in repo with DB on server startup

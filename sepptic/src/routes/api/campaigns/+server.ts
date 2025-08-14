@@ -3,6 +3,7 @@ import getUserIdFromToken from "../../../server/utils/getUserIdFromToken";
 import deleteCampaign from "../../../server/utils/dbDeleteFullCampaign"
 import dbCreateJson from "../../../server/utils/dbCreateJson";
 import deleteJson from "../../../server/utils/deleteJson"
+import dbDeleteJson from "../../../server/utils/dbDeleteJson";
 import cookie from 'cookie';
 import type { RequestEvent } from '@sveltejs/kit';
 import { readdir } from "fs/promises";
@@ -95,6 +96,15 @@ export async function DELETE(event: RequestEvent) {
 			success: false
 		});
 	}
+
+	const dbResult = await dbDeleteJson(campaignId);
+	if (!dbResult.success) {
+		return json({
+			message: "Deleting JSON from DB failed",
+			success: false
+		})
+	} 
+
 	return json({
 		message: "Campaign and json deleted successfully",
 		success: true

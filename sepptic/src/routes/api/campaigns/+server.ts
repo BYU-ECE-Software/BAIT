@@ -10,7 +10,6 @@ import { readdir } from "fs/promises";
 import { writeFile } from "fs/promises";
 import { join } from "path";
 import { json } from "@sveltejs/kit";
-import { error } from "@sveltejs/kit"
 
 export async function GET(event: RequestEvent) {
     // Authenticate user and get User ID
@@ -52,19 +51,20 @@ export async function POST(event: RequestEvent) {
 
 		// Create filename and write
 		const filename = `${nextId}.json`;
-		const filePath = join(campaignsDir, filename);
-		await writeFile(filePath, JSON.stringify(data, null, 2));
-        console.log("File with ID: ", nextId, " written")
+		// const filePath = join(campaignsDir, filename);
+		// await writeFile(filePath, JSON.stringify(data, null, 2));
+        
 		
-		// Also, write json file with id to DB for more permant storage
+		// Write json file with id to DB for more permant storage
 		const campaignRes = await dbCreateJson(nextId, JSON.stringify(data, null, 2));
+
 		if (!campaignRes.success) {
 			return json({
 				message: "Unable to store campaign to DB",
 				success: false
 			})
 		}
-
+		console.log("File with ID: ", nextId, " stored")
 		return json({
 			success: true,
 			message: "Campaign saved successfully",

@@ -58,7 +58,7 @@ export async function POST(event: RequestEvent) {
       );
     }
 
-    const campaignResult = jsonGetCampaign(campaignId);
+    const campaignResult = await jsonGetCampaign(campaignId);
     if (campaignResult.status !== 200) {
       console.error('❌ jsonGetCampaign failed:', campaignResult);
       return new Response(

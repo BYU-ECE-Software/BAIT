@@ -47,7 +47,7 @@ export async function jsonGetCampaign(id: string | number) {
                 Id: id
             }
         })
-        console.log(row);
+        // console.log(row);
 
         if (!row) {
             return { status: 404, id: id, data: "Campaign not found" }
@@ -55,7 +55,7 @@ export async function jsonGetCampaign(id: string | number) {
 
         try {
             const parsed: campaign = JSON.parse(row.Data);
-            console.log(parsed);
+            // console.log(parsed);
             return { status: 200, id: row.Id, data: parsed };
         } catch {
             return { status: 500, id: row.Id, data: "Error parsing campaign JSON" }

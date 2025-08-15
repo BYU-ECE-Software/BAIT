@@ -37,26 +37,26 @@ export async function POST(event: RequestEvent) {
     // if (event.locals.user.role !== "admin") throw error(403, "Admins only");
     try {
 		const data = await event.request.json();
-		const campaignsDir = join(process.cwd(), 'src', 'server', 'campaigns');
+		// const campaignsDir = join(process.cwd(), 'src', 'campaign-seeds');
 
-		// Get all filenames in the campaigns directory
-		const files = await readdir(campaignsDir);
+		// // Get all filenames in the campaigns directory
+		// const files = await readdir(campaignsDir);
 
-		// Extract numbers and find the highest one
-		const numbers = files.map(file => {
-			const match = file.match(/(\d+)\.json$/);
-			return match ? parseInt(match[1], 10) : 0;
-		});
-		const nextId = Math.max(0, ...numbers) + 1;
+		// // Extract numbers and find the highest one
+		// const numbers = files.map(file => {
+		// 	const match = file.match(/(\d+)\.json$/);
+		// 	return match ? parseInt(match[1], 10) : 0;
+		// });
+		// const nextId = Math.max(0, ...numbers) + 1;
 
-		// Create filename and write
-		const filename = `${nextId}.json`;
+		// // Create filename and write
+		// const filename = `${nextId}.json`;
 		// const filePath = join(campaignsDir, filename);
 		// await writeFile(filePath, JSON.stringify(data, null, 2));
         
 		
 		// Write json file with id to DB for more permant storage
-		const campaignRes = await dbCreateJson(nextId, JSON.stringify(data, null, 2));
+		const campaignRes = await dbCreateJson(JSON.stringify(data, null, 2));
 
 		if (!campaignRes.success) {
 			return json({
@@ -64,11 +64,10 @@ export async function POST(event: RequestEvent) {
 				success: false
 			})
 		}
-		console.log("File with ID: ", nextId, " stored")
+		console.log("File stored")
 		return json({
 			success: true,
-			message: "Campaign saved successfully",
-			filename
+			message: "Campaign saved successfully"
 		});
 	} catch (error) {
 		console.error("Error saving campaign:", error);
@@ -89,13 +88,13 @@ export async function DELETE(event: RequestEvent) {
 		});
 	}
 
-	const jsonResult = await deleteJson(campaignId);
-	if (jsonResult.status !== 200) {
-		return json({
-			message: "JSON campaign file deletion failed",
-			success: false
-		});
-	}
+	// const jsonResult = await deleteJson(campaignId);
+	// if (jsonResult.status !== 200) {
+	// 	return json({
+	// 		message: "JSON campaign file deletion failed",
+	// 		success: false
+	// 	});
+	// }
 
 	const dbResult = await dbDeleteJson(campaignId);
 	if (!dbResult.success) {

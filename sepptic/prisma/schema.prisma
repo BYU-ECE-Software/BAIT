@@ -63,7 +63,7 @@ model User {
 }
 
 model Campaign {
-  Id   Int    @id
+  Id   Int    @id @default(autoincrement())
   Data String @db.MediumText
 }
 

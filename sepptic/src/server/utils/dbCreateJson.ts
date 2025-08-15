@@ -1,11 +1,10 @@
 import { PrismaClient } from '@prisma/client';
-import { json } from "@sveltejs/kit"
 
 type Result =
   | { success: true; message: string }
   | { success: false; message: string; error?: string };
 
-export default async function dbCreateJson(id: number, jsonFile: string): Promise<Result> {
+export default async function dbCreateJson(jsonFile: string): Promise<Result> {
     const prisma = new PrismaClient();
 
   // Validate it's valid JSON
@@ -17,14 +16,14 @@ export default async function dbCreateJson(id: number, jsonFile: string): Promis
 
   try {
     // 2) Check existence using PK
-    const existing = await prisma.campaign.findUnique({ where: { Id: id } });
-    if (existing) {
-      return { success: true, message: 'Campaign JSON already exists' };
-    }
+    // const existing = await prisma.campaign.findUnique({ where: { Id: id } });
+    // if (existing) {
+    //   return { success: true, message: 'Campaign JSON already exists' };
+    // } // I could hash the json and compare hases here to prevent duplicates in the future should this become a bigger project
 
     // 3) Create
     await prisma.campaign.create({
-      data: { Id: id, Data: jsonFile },
+      data: { Data: jsonFile },
     });
 
     return { success: true, message: 'Campaign JSON stored successfully' };

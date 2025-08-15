@@ -31,4 +31,4 @@ export const handle: Handle = async ({ event, resolve }) => {
   return resolve(event);
 };
 
-syncCampaignsFromDisk(); // Syncs all campaigns stored in repo with DB on server startup
+await syncCampaignsFromDisk(); // Syncs all campaigns stored in repo with DB on server startup

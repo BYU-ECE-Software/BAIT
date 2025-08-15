@@ -25,16 +25,43 @@ async function getCampaigns() {
     console.log(campaigns[0]);
 }
 
+async function getCharImages(id: string) {
+  const res = await fetch(`/api/campaigns/${id}`, {
+    method: "GET"
+  })
+  if (!res.ok) {
+    console.error("Failed to grab campaign data");
+    return;
+  }
+  const jsonRes = await res.json();
+  console.log("Campaign chars: ", jsonRes.data.Characters)
+
+  return jsonRes.data.Characters;
+}
+
+
+
 async function submitDelete(id: string, image: string) {
-  
-  console.log("Image string: ", image);
-  
-  const imageRes = await fetch(`/api/images/${encodeURIComponent(image)}`, {
+
+  const campaignImageRes = await fetch(image, {
     method: "DELETE",
   });
 
-  if (!imageRes.ok) {
-    console.warn("Delete failed, continuing to delete campaign: ", imageRes.statusText)
+  if (!campaignImageRes.ok) {
+    console.warn("Delete failed on campaign image, continuing to delete campaign: ", campaignImageRes.statusText)
+  }
+  
+  const chars = await getCharImages(id);
+
+  // The minus one is to prevent randy from being check because his image is a static asset accross campaigns
+  for (let i = 0; i < chars.length - 1; i++) {
+    const charImageRes = await fetch(chars[i].Image, {
+      method: "DELETE"
+    }); 
+
+    if (!charImageRes.ok) {
+      console.warn("Delete failed on character image, continuing to delete campaign json: ", charImageRes.statusText)
+    }
   }
 
   const campaignRes = await fetch("/api/campaigns", {

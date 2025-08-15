@@ -1,10 +1,8 @@
 import { writeFile, readFile, mkdir, rm } from 'fs/promises';
 import { join } from 'path';
-import { mkdirSync } from 'fs';
 import type { RequestEvent } from '@sveltejs/kit';
 import { json } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
-import dbGetCampaign from '../../../../server/utils/dbGetCampaign.js';
 
 export async function POST(event: RequestEvent) { // event is not the same as a DOM event here. It is a svelteKit abstraction
   // Could be good to add an auth guard here
@@ -52,10 +50,10 @@ export async function GET({ params }) {
 
 export async function DELETE({params}) {
 
-  // const campaign = await dbGetCampaign() // Pull JSON file from DB
 
   const filename = params.filename.replace(/[^\w.\-]+/g, '_');
   const filePath = join(process.cwd(), 'images', filename);
+  console.log("Image to be deleted: ", filePath)
 
   try {
     await rm(filePath, {force: true});

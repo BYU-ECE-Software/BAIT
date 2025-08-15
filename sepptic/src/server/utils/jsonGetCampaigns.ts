@@ -1,4 +1,3 @@
-import { describe } from 'vitest';
 import type { campaign } from './types/campaign';
 import { PrismaClient } from '@prisma/client';
 

@@ -155,7 +155,7 @@
             "ID": 99,
             "Name": "Randy",
             "Title": "Social Engineering Specialist",
-            "Image": "/api/images/Randy.png",
+            "Image": "/Randy.png",
             "Description":"",
             "Voice": "sage",
             "CallLimit": 120000,

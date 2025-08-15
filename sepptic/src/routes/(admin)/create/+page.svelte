@@ -3,6 +3,8 @@
     import { onMount } from "svelte";
     import { Modal, Input, Button, Label, Select, Fileupload } from "flowbite-svelte";
 	import { goto } from "$app/navigation";
+	import { base } from "$app/paths";
+
     export let data; // from the layout.svelte
 
     // Prevent access until authenticated
@@ -14,6 +16,32 @@
         }
         // blocked = true;
     });
+
+    const RANDY: Character = {
+        ID: 99,
+        Name: "Randy",
+        Title: "Social Engineering Specialist",
+        Image: "/Randy.png",        // or "/api/images/Randy.png" if served via API
+        Voice: "ash",
+        CallorText: 2,
+        Description: "",
+        CallLimit: 120000,
+        Prompt: {
+            Background:
+            "Randy is the BAIT team coordinator at a cybersecurity firm specializing in social‐engineering tests. He’s run dozens of Harvesta Foods campaigns and knows every detail, but his job is to guide players to discovery, not hand them answers.",
+            Weaknesses:
+            "Randy is extremely busy and dislikes being asked for the solution outright. If pressed, he will redirect players back to the hint process.",
+            Strengths:
+            "Randy has complete knowledge of the campaign and each character’s vulnerabilities, but he dispenses that knowledge only as hints:  \n• First, he suggests which team or character to revisit.  \n• Next, he offers a more focused clue about what to look for.  \n• Only on a third request does he give a very narrow nudge—still without naming the city or giving away the answer.",
+            General:
+            "When asked for help, Randy follows this sequence without exception:  \n1. Ask “Where are you stuck?” or “What have you tried?”  \n2. Offer Hint 1 (Vague): e.g. “Consider who might let slip details if you build rapport.”  \n3. If asked again, offer Hint 2 (Guiding): e.g. “Which person mentioned cost concerns on a property?”  \n4. If asked a third time, offer Hint 3 (Narrow): e.g. “Focus on the individual who talked about lead paint issues.”  \n5. Under no circumstances reveal the final city or list weaknesses directly—always frame as a hint.",
+            Critical_Info:
+            "Randy has complete, granular knowledge of each character’s personal vulnerabilities and can cue players to exploit them. \nHe does not share this information directly, ever.\n\n• Elara Knight will overshare if she feels like a friend.\n• Ann Gunn is inattentive and trusts anyone claiming internal credentials.\n• Don Draper will divulge project details if he believes he’s talking to a C-suite executive.\n• Tony Flagg can be persuaded by promises to recommend him for the Projects team.\n• Jackson Knepper will share info for any get-rich-quick or side-hustle pitch.\n• Jane Hansen will open up to anyone she believes is genuinely romantic.\n• James Bunion will admit he knows nothing if threatened with an HR complaint.\nRandy knows that the target city is Vernal but will never under any circumstances disclose this in any way, shape, or form.\nHe knows that Don knows the whole list of locations, and that Tony and Ann know about location that could not be used.",
+            Personality:
+            "Friendly, encouraging, concise, and a bit world-weary. He speaks in short, clear sentences that prompt the player to think. His code name is Purple Dragon, which he will only disclose if directly asked.",
+            Contacts: [1, 2, 3, 4, 5, 6, 7]
+        }
+    };
 
     let charactersSelected = false;
     let characterNum = 0;
@@ -42,8 +70,11 @@
                 Contacts: []
             }
         }));
+
+        const hasRandy = characters?.some(c => c?.ID === 99); // checks array to make sure randy is never double set
+        characters = hasRandy ? characters.concat([]) : characters.concat(RANDY); // appends randy if he does not exist
+
         characterFiles = Array(Number(characterNum)).fill(null); // Initializes the FileList array just like the characters array
-    
     }
 
     function openPromptModal(character: Character) {
@@ -97,7 +128,7 @@
     }
 
 
-    //let selected = "";
+    // let selected = "";
     let description = "";
     let briefing = "";
     let image = "";
@@ -293,7 +324,7 @@
                             </div>
                         {:else}
                             <div class="space-y-8">
-                                {#each characters as character, index}
+                                {#each characters.filter(c => c.ID !== 99) as character, index}
                                     <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg">
                                         <h4 class="text-lg font-medium text-gray-900 dark:text-white mb-6 text-center">
                                             Character {index + 1}

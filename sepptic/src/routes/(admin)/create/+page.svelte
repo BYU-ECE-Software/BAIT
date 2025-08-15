@@ -6,7 +6,7 @@
     export let data; // from the layout.svelte
 
     // Prevent access until authenticated
-    onMount((e) => {
+    onMount(() => {
         //Redirects to /main so there isn't a double modal
         if (!data.isLoggedIn) {
             goto("/main");
@@ -68,7 +68,10 @@
             },
             body: file
         });
+        
         const data = await response.json();
+        if (!data?.url) throw new Error("Upload missing response url");
+
         const url = data.url;
         image = url;
         console.log(url);
@@ -158,7 +161,7 @@
             Characters: characters
         };
         let data = JSON.stringify(campaignData, null, 2);
-        console.log(data);
+        // console.log(data);
         try {
             const response = await fetch('/api/campaigns', {
                 method: 'POST',
@@ -172,7 +175,7 @@
                 throw new Error('Failed to save campaign');
             }
             console.log("Campaign saved successfully");
-            // Optionally, redirect or show a success message
+            // Optionally, redirect or show a success message eventually
         } catch (error) {
             console.error("Error saving campaign:", error);
         }

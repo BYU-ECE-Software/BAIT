@@ -1,4 +1,3 @@
-
 <script lang="ts">
 
 import { Button, Modal, Label } from "flowbite-svelte";
@@ -26,15 +25,17 @@ async function getCampaigns() {
     console.log(campaigns[0]);
 }
 
-async function submitDelete(id: string) {
-
-  //const campaign = await dbReadJSON(); // Pull JSON file from DB
+async function submitDelete(id: string, image: string) {
   
-  // const imageRes = await fetch("/api/images", {
-  //   method: "DELETE",
-  //   // Send filename are a url parameter or something like that
-  //   // Check that the image was deleted
-  // })
+  console.log("Image string: ", image);
+  
+  const imageRes = await fetch(`/api/images/${encodeURIComponent(image)}`, {
+    method: "DELETE",
+  });
+
+  if (!imageRes.ok) {
+    console.warn("Delete failed, continuing to delete campaign: ", imageRes.statusText)
+  }
 
   const campaignRes = await fetch("/api/campaigns", {
       method: "DELETE",
@@ -73,7 +74,7 @@ async function submitDelete(id: string) {
         {#each campaigns as campaign (campaign.id)}
           <div class="flex items-center justify-between rounded-md border border-gray-200 p-3 hover:bg-gray-50">
             <Label class="text-gray-800">{campaign.name}</Label>
-            <Button size="xs" color="red" on:click={() => submitDelete(campaign.id)}>
+            <Button size="xs" color="red" on:click={() => submitDelete(campaign.id, campaign.image)}>
               Delete
             </Button>
           </div>

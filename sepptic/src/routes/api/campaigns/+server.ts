@@ -37,6 +37,7 @@ export async function POST(event: RequestEvent) {
     // if (event.locals.user.role !== "admin") throw error(403, "Admins only");
     try {
 		const data = await event.request.json();
+		// THIS WAS ALL NECESSARY WHEN JSONs USE TO BE STORED ON FILE TREE NOT DB
 		// const campaignsDir = join(process.cwd(), 'src', 'campaign-seeds');
 
 		// // Get all filenames in the campaigns directory
@@ -94,7 +95,7 @@ export async function DELETE(event: RequestEvent) {
 	// 		message: "JSON campaign file deletion failed",
 	// 		success: false
 	// 	});
-	// }
+	// } // Used when this used to store JSONs in files not DB
 
 	const dbResult = await dbDeleteJson(campaignId);
 	if (!dbResult.success) {

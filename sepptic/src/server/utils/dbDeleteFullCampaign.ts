@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export default async function deleteCampaign(campaignId: number) {
+export default async function dbDeleteCampaign(campaignId: number) {
     try {
         // Step 1: Get matching conversation IDs
         const conversations = await prisma.conversation.findMany({
@@ -51,11 +51,26 @@ export default async function deleteCampaign(campaignId: number) {
             }
         })
 
+        // Step 5: Delete Campaign JSON 
+        try {
+        const campResult = await prisma.campaign.delete({
+            where: {
+                Id: campaignId
+            }
+        });
+
+        } catch (err: any) {
+            if (err.code === 'P2025') {
+                return { message: "Campaign not found", success: false };
+            }
+            return { message: "Internal error on JSON delete", success: false, error: err?.message };
+        }
+
         return {
             messCount: messResult.count,
             transCount: transResult.count,
             convoResult: convoResult.count,
-            message: 'Messages and transcripts deleted successfully',
+            message: `Campaign Messages, Transcripts and JSON deleted successfully`,
             status: 200
         };
     } catch (error) {

@@ -1,6 +1,6 @@
 import { jsonGetCampaigns } from "../../../server/utils/jsonGetCampaigns";
 import getUserIdFromToken from "../../../server/utils/getUserIdFromToken";
-import deleteCampaign from "../../../server/utils/dbDeleteFullCampaign"
+import dbDeleteCampaign from "../../../server/utils/dbDeleteFullCampaign"
 import dbCreateJson from "../../../server/utils/dbCreateJson";
 import deleteJson from "../../../server/utils/deleteJson"
 import dbDeleteJson from "../../../server/utils/dbDeleteJson";
@@ -81,29 +81,13 @@ export async function DELETE(event: RequestEvent) {
 	const { campaignId } = await event.request.json();
 	console.log("ID: ", campaignId)
 
-    const cResult = await deleteCampaign(Number(campaignId));
+    const cResult = await dbDeleteCampaign(Number(campaignId));
 	if (cResult.status !== 200) {
 		return json({
 			message: "Campaign deletion failed",
 			success: false
 		});
 	}
-
-	// const jsonResult = await deleteJson(campaignId);
-	// if (jsonResult.status !== 200) {
-	// 	return json({
-	// 		message: "JSON campaign file deletion failed",
-	// 		success: false
-	// 	});
-	// } // Used when this used to store JSONs in files not DB
-
-	const dbResult = await dbDeleteJson(campaignId);
-	if (!dbResult.success) {
-		return json({
-			message: "Deleting JSON from DB failed",
-			success: false
-		})
-	} 
 
 	return json({
 		message: "Campaign and json deleted successfully",

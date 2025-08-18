@@ -3,19 +3,6 @@
     import CampaignForm from "$lib/components/molecules/CampaignForm.svelte";
 	import { goto } from "$app/navigation";
 
-    export let data; // from the layout.svelte
-
-    // Prevent access until authenticated
-    onMount(() => {
-        //Redirects to /main so there isn't a double modal
-        if (!data.isLoggedIn) {
-            goto("/main");
-            return;
-        }
-
-        // Load initial campaign data for creation
-    });
-
 </script>
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
         <!-- Header -->

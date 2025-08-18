@@ -272,7 +272,7 @@
             bind:files={files}
             placeholder="Select campaign image" 
             class="mb-4 w-full" 
-            { ...(mode === 'create' ? {required: true} : {})} 
+            required={mode == 'create'}
         />
         <small> Size limit is 512KB </small>
         {#if fileTooLarge}
@@ -366,7 +366,7 @@
                                 bind:files={characterFiles[index]}
                                 placeholder="Select campaign image" 
                                 class="mb-4 w-full"
-                                required 
+                                required={mode == 'create'}
                             />
                             <small> Size limit is 512KB </small>
                             {#if fileTooLarge}

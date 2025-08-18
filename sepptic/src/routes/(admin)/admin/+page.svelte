@@ -1,5 +1,7 @@
 <script lang="ts">
 
+	import { goto } from "$app/navigation";
+import { redirect } from "@sveltejs/kit";
 import { Button, Modal, Label } from "flowbite-svelte";
 import { onMount } from "svelte"
 
@@ -83,7 +85,6 @@ async function submitDelete(id: string, image: string) {
 <main class="p-6 space-y-4">
   <div class="flex gap-4">
     <Button color="blue" href="/create">Create a Campaign</Button>
-    <Button color="green" href="/edit">Edit a Campaign</Button>
     <Button color="red" on:click={() => (deleteModal = true)}>Delete a Campaign</Button>
   </div>
 
@@ -100,9 +101,10 @@ async function submitDelete(id: string, image: string) {
         <p class="text-sm italic text-gray-500">No campaigns found.</p>
       {:else}
         {#each campaigns as campaign (campaign.id)}
-          <div class="flex items-center justify-between rounded-md border border-gray-200 p-3 hover:bg-gray-50">
-            <Label class="text-gray-800">{campaign.name}</Label>
-            <Button size="xs" color="red" on:click={() => submitDelete(campaign.id, campaign.image)}>
+          <div class="flex items-center gap-3 rounded-md border border-gray-200 p-3 hover:bg-gray-50">
+            <Label class="text-gray-800 flex-shrink-0 w-1/3 truncate">{campaign.name}</Label>
+            <Button class="w-24" size="xs" color="green" on:click={() => goto(`/edit/${campaign.id}`)}>Edit</Button>
+            <Button class="w-24" size="xs" color="red" on:click={() => submitDelete(campaign.id, campaign.image)}>
               Delete
             </Button>
           </div>

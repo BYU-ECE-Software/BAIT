@@ -1,20 +1,8 @@
 <script lang="ts">
-    import { onMount } from "svelte";
     import CampaignForm from "$lib/components/molecules/CampaignForm.svelte";
-	import { goto } from "$app/navigation";
+    import type { PageData } from "./$types";
 
-    export let data; // from the layout.svelte
-
-    // Prevent access until authenticated
-    onMount(() => {
-        //Redirects to /main so there isn't a double modal
-        if (!data.isLoggedIn) {
-            goto("/main");
-            return;
-        }
-
-        // Load initial campaign data for creation
-    });
+    export let data: PageData;
 
 </script>
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -31,7 +19,7 @@
                 <h3 class="text-xl font-semibold mb-6 text-gray-900 dark:text-white">Campaign Information</h3>
                 <div class="space-y-6">
                     <!-- Campaign Form and props -->
-                    <CampaignForm mode="create"/>
+                    <CampaignForm mode="edit" initial={data.campaign} id={data.id}/>
                 </div>
             </div>
         </div>

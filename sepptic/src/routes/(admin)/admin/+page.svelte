@@ -83,6 +83,7 @@ async function submitDelete(id: string, image: string) {
 <main class="p-6 space-y-4">
   <div class="flex gap-4">
     <Button color="blue" href="/create">Create a Campaign</Button>
+    <Button color="green" href="/edit">Edit a Campaign</Button>
     <Button color="red" on:click={() => (deleteModal = true)}>Delete a Campaign</Button>
   </div>
 

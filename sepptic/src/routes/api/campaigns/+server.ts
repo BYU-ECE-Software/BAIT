@@ -35,25 +35,6 @@ export async function POST(event: RequestEvent) {
     // if (event.locals.user.role !== "admin") throw error(403, "Admins only");
     try {
 		const data = await event.request.json();
-		// THIS WAS ALL NECESSARY WHEN JSONs USE TO BE STORED ON FILE TREE NOT DB
-		// const campaignsDir = join(process.cwd(), 'src', 'campaign-seeds');
-
-		// // Get all filenames in the campaigns directory
-		// const files = await readdir(campaignsDir);
-
-		// // Extract numbers and find the highest one
-		// const numbers = files.map(file => {
-		// 	const match = file.match(/(\d+)\.json$/);
-		// 	return match ? parseInt(match[1], 10) : 0;
-		// });
-		// const nextId = Math.max(0, ...numbers) + 1;
-
-		// // Create filename and write
-		// const filename = `${nextId}.json`;
-		// const filePath = join(campaignsDir, filename);
-		// await writeFile(filePath, JSON.stringify(data, null, 2));
-        
-		
 		// Write json file with id to DB for more permant storage
 		const campaignRes = await dbCreateJson(JSON.stringify(data, null, 2));
 

@@ -35,6 +35,7 @@ export async function POST(event: RequestEvent) {
     // if (event.locals.user.role !== "admin") throw error(403, "Admins only");
     try {
 		const data = await event.request.json();
+	
 		// Write json file with id to DB for more permant storage
 		const campaignRes = await dbCreateJson(JSON.stringify(data, null, 2));
 

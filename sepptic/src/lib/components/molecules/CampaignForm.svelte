@@ -6,7 +6,7 @@
   // Props for controlling edit vs create logic
   export let mode: 'create' | 'edit';
   export let initial: campaign | undefined = undefined;
-  export let id: number | undefined = undefined;
+  export let id: number | undefined = undefined; // There is a problem here
 
   // ----- helpers -----
   const RANDY_ID = 99;
@@ -224,7 +224,9 @@
         body: JSON.stringify(payload)
       });
 
-      if (!res.ok) throw new Error('Failed to save campaign');
+      if (!res.ok) {
+        console.error("Internal Error: ", res.statusText);
+      }
       // TODO: toast + navigate maybe?
     } catch (e) {
       console.error(e);

@@ -2,8 +2,6 @@ import { jsonGetCampaigns } from "../../../server/utils/jsonGetCampaigns";
 import getUserIdFromToken from "../../../server/utils/getUserIdFromToken";
 import dbDeleteCampaign from "../../../server/utils/dbDeleteFullCampaign"
 import dbCreateJson from "../../../server/utils/dbCreateJson";
-import deleteJson from "../../../server/utils/deleteJson"
-import dbDeleteJson from "../../../server/utils/dbDeleteJson";
 import cookie from 'cookie';
 import type { RequestEvent } from '@sveltejs/kit';
 import { readdir } from "fs/promises";

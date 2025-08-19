@@ -186,5 +186,5 @@ The fullPrompt variable is then submitted to the AI.
 
 In the website, there is a tool that you can use to create a custom campaign. This tool allows for you to customize all aspects of the campaign except for uploading image or video files. Once created, it will show up on the campaign selection screen and be available to the public. However, at the time of this writing, there is an issue: should a new commit be made to this repository and uploaded to the main branch on Github, the web server will be rebuilt and your custom campaign will be deleted.
 
-In its current state, this creation tool is best used for rapidly creating and testing custom campaigns. However, if you want to implement a campaign that remains between commits, it is best to commit this repository to main with the custom campaign's JSON file saved in the appropriate location. 
+In its current state, this creation tool is best used for rapidly creating and testing custom campaigns while run l. However, if you want to implement a campaign that remains between commits, it is best to commit this repository to main with the custom campaign's JSON file saved in the appropriate location. 
 

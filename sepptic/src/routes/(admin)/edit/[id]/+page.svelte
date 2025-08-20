@@ -3,6 +3,7 @@
     import type { PageData } from "./$types";
 
     export let data: PageData;
+    // console.log("Campaign ID passed into edit page: ", data.campaignId)
 
 </script>
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -19,7 +20,7 @@
                 <h3 class="text-xl font-semibold mb-6 text-gray-900 dark:text-white">Campaign Information</h3>
                 <div class="space-y-6">
                     <!-- Campaign Form and props -->
-                    <CampaignForm mode="edit" initial={data.campaign} id={data.id}/>
+                    <CampaignForm mode="edit" initial={data.campaign} id={data.campaignId}/>
                 </div>
             </div>
         </div>

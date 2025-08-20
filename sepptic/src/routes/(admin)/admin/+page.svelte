@@ -20,11 +20,11 @@ async function getCampaigns() {
         return;
     }
     const data = await response.json();
-    console.log("Campaigns: ", data)
+   // console.log("Campaigns: ", data)
     for (const c of data) {
         campaigns.push(c);
     }
-    console.log(campaigns[0]);
+    //console.log(campaigns[0]);
 }
 
 async function getCharImages(id: string) {
@@ -36,7 +36,7 @@ async function getCharImages(id: string) {
     return;
   }
   const jsonRes = await res.json();
-  console.log("Campaign chars: ", jsonRes.data.Characters)
+  //console.log("Campaign chars: ", jsonRes.data.Characters)
 
   return jsonRes.data.Characters;
 }

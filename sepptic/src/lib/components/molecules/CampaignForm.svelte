@@ -7,6 +7,7 @@
   export let mode: 'create' | 'edit';
   export let initial: campaign | undefined = undefined;
   export let id: number | undefined = undefined; // There is a problem here
+  // console.log("Id passed into form component: ", id)
 
   // ----- helpers -----
   const RANDY_ID = 99;
@@ -156,7 +157,7 @@
     if (!data?.url) throw new Error("Upload missing response url");
 
     image = data.url;
-    console.log(image);
+    // console.log(image);
   }
 
   async function uploadCharacterImagesIfSelected(): Promise<void> {
@@ -215,6 +216,14 @@
       await uploadCharacterImagesIfSelected();
 
       const payload = buildPayload();
+
+      if (!payload) {
+        console.log("Payload is empty... aborting");
+        return;
+      }
+
+      // console.log("Payload going into req", payload);
+
       const url = mode === 'create' ? '/api/campaigns' : `/api/campaigns/${id}`;
       const method = mode === 'create' ? 'POST' : 'PUT';
 
@@ -224,12 +233,20 @@
         body: JSON.stringify(payload)
       });
 
+
       if (!res.ok) {
         console.error("Internal Error: ", res.statusText);
+        return;
       }
-      // TODO: toast + navigate maybe?
+      else {
+        const data = await res.json();
+        console.log(data.message);
+        // TODO: toast + navigate maybe?
+      }
+      
     } catch (e) {
       console.error(e);
+      return;
       // TODO: toast error maybe?
     }
   }

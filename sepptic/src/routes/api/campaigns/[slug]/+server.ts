@@ -28,17 +28,19 @@ export async function GET(event: RequestEvent) {
 export async function PUT(event: RequestEvent) {
     const cookies = cookie.parse(event.request.headers.get('cookie') || '');
     const token = cookies.token;
-
     if (!token) {
         return json({message: "No token provided", status: 400})
     }
 
     // Update campaign with new data from edit form
-    const campaignId = event.params.id;
-    const raw = event.request.body;
-    const campaignData = JSON.stringify(raw, null, 2);
+    const campaignId = event.params.slug;
+    const campaignData = await event.request.json(); // Takes JSON as input and then parses it to produce a JavaScript Object...
+    const payload = JSON.stringify(campaignData, null, 2); // Turns JS objects into JSON strings
+    // console.log("Made it into the PUT request with id: ", campaignId, "\n\n")
+    // console.log("Campaign data to update: ", campaignData);
+    // console.log("Payload to update: ", payload);
 
-    const update = await dbUpdateCampaign(campaignId, campaignData);
+    const update = await dbUpdateCampaign(campaignId, payload);
 
     if (!update.success) {
         return json({

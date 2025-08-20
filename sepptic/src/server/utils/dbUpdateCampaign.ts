@@ -12,7 +12,7 @@ export default async function dbUpdateCampaign(campaignId: string | undefined, n
 
         const input = Number(campaignId);
 
-        const updateUser = await prisma.campaign.update({
+        const updateCampaign = await prisma.campaign.update({
             where: {
                 Id: input
             },

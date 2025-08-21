@@ -1,3 +1,5 @@
+# NO LONGER RELEVANT
+
 # User Feedback
 This file will go over the general thoughts about SEPPTIC that were shared with the team.
 

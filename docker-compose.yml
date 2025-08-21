@@ -30,7 +30,6 @@ services:
     environment:
         OPENAI_API_KEY: ${OPENAI_API_KEY}
         DATABASE_URL: ${DATABASE_URL}
-        CREATE_PASSWORD: ${CREATE_PASSWORD}
     ports:
         - "3000:3000" 
     networks:

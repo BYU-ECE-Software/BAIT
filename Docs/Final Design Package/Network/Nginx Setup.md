@@ -35,7 +35,7 @@ services:
       - sepptic_sepptic
     environment:
       INITIAL_ADMIN_EMAIL: "bait@gmail.com"
-      INITIAL_ADMIN_PASSWORD: "SocialEngineeringRocks1!"
+      INITIAL_ADMIN_PASSWORD: <password> # These set the default account credentials; They can be changed anytime
 networks:
   sepptic_sepptic:
     external: true

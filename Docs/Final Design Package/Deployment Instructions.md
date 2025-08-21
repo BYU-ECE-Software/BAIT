@@ -33,16 +33,16 @@ This script will use the Dockerfile to build out the sepptic container and then 
 
 You will need the following containers within the same docker network for your production build to function properly:
 1. The main **sepptic** container (built by the GitHub action below on pushes to main)
-2. A **Mariadb** container; example docker-compose found [here](./Docker/docker-compose.yml).
+2. A **mariadb** container; example docker-compose found [here](./Docker/docker-compose.yml).
 3. A **phpmyadmin** container (only if you want a GUI for DB) included in the example mariadb compose [here](/mariadb/docker-compose.yml).
-4. A **Nginx Proxy Manager** for forwarding traffic (Example set up [here](./Network/Nginx%20Setup.md)).
+4. A **nginx-proxy-manager** for forwarding traffic (Example set up [here](./Network/Nginx%20Setup.md)).
 
 ### GitAub Actions
 A GitHub action has been setup to automatically build, publish, and deploy a new sepptic container each time a push is made to the main branch. The action is defined in `.github/workflows/docker-publish.yml`. The action does the following:
 
 1. Checks out the repository
 2. Sets up Docker Buildx allowing for multi-platform builds
-3. Logs into the GitHub Container Registry (GHCR) using the token stored as `GHCR_TOKEN` in repository secrets
+3. Logs into the GitHub Container Registry (GHCR) using the token stored as `ECE_GHCR_TOKEN` in repository secrets
 4. Temporarily saves environment variables from the repository secrets `OPENAI_API_KEY` and `DATABASE_URL` to files for later use
 5. Builds the docker image with the environment variables
 6. Deletes the temporary environment variable files

@@ -1,3 +1,4 @@
+// Campaign type definition
 type campaign = {
     Campaign_Information: {
         Name: string;
@@ -7,26 +8,40 @@ type campaign = {
         Website: string;
         Briefing_Video: string;
         Failure_Video: string;
+        Final_Question: string;
+        Final_Answer: string;
     };
     Characters: {
-        ID: number;
-        Name: string;
-        Title: string;
-        Image: string;
-        Prompt: string;
-        Intel: {
-            Intel_ID: number;
-            Intel_Description: string;
-            Unlocks_Character_ID?: number;
-            Quiz: string;
-            Answer: string;
-        }[];
+        ID: number,
+        Name: string,
+        Title: string,
+        Voice: string,
+        Image: string,
+        CallorText: number,
+        Description: string,
+        CallLimit: number,
+        Prompt: Prompt
+        
     }[];
-    Achievements: {
-        ID: number;
-        Name: string;
-        Description: string;
-        Image: string;
-        Intels: number[];
-    }[];
+}
+
+type Character = {
+    ID: number,
+    Name: string,
+    Title: string,
+    Voice: string,
+    Image: string,
+    CallorText: number,
+    Description: string,
+    CallLimit: number,
+    Prompt: Prompt
+}
+type Prompt = {
+    Background: string,
+    Weaknesses: string,
+    Strengths: string,
+    General: string,
+    Critical_Info: string,
+    Personality: string,
+    Contacts: number[]
 }

@@ -1,6 +1,5 @@
-import { writeFile, readFile } from 'fs/promises';
+import { writeFile, readFile, mkdir, rm } from 'fs/promises';
 import { join } from 'path';
-import { mkdirSync } from 'fs';
 import type { RequestEvent } from '@sveltejs/kit';
 import { json } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
@@ -16,15 +15,15 @@ export async function POST(event: RequestEvent) { // event is not the same as a 
     }
 
     const buffer = Buffer.from(file);
-    const uploadsDir = join(process.cwd(), 'uploads', 'images');
+    const uploadsDir = join(process.cwd(), 'images');
 
-    mkdirSync(uploadsDir, { recursive: true }); // ensure dir exists
+    await mkdir(uploadsDir, { recursive: true });
 
     const filename = `${Date.now()}-${fileName}`;
     const filePath = join(uploadsDir, filename);
 
     await writeFile(filePath, buffer);
-    console.log("File", buffer, "written to", filePath)
+    console.log("File written to", filePath)
 
     return json({
         success: true,
@@ -35,15 +34,31 @@ export async function POST(event: RequestEvent) { // event is not the same as a 
 // TODO: There should likely be better security features on this POST handler at somepoint
 
 
-// allows images to be aquired with <img src={/api/images/[filename]}/>
+// Allows images to be acquired with <img src={/api/images/[filename]}/>
 export async function GET({ params }) {
+  console.log("Image GET hit")
   const filename = params.filename.replace(/[^\w.\-]+/g, '_'); // Escapes dangerous file names
-  const filePath = join(process.cwd(), 'uploads', 'images', filename);
+  const filePath = join(process.cwd(), 'images', filename);
 
   try {
     const data = await readFile(filePath);
     return new Response(data, { headers: { 'Content-Type': 'image/*' } });
   } catch {
     throw error(404, 'Not found');
+  }
+}
+
+export async function DELETE({params}) {
+
+
+  const filename = params.filename.replace(/[^\w.\-]+/g, '_');
+  const filePath = join(process.cwd(), 'images', filename);
+  console.log("Image to be deleted: ", filePath)
+
+  try {
+    await rm(filePath, {force: true});
+    return json({ success: true, message: "Image deleted", filename})
+  } catch {
+    throw error(500, "Unable to delete image")
   }
 }

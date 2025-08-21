@@ -11,9 +11,9 @@ export async function POST(event: RequestEvent) {
   let campaignId = body.campaignId; // The campaign ID to use for the AI
   let characterId = body.characterId; // The character ID to use for the AI
 
-const campaignResult = jsonGetCampaign(campaignId);
+const campaignResult = await jsonGetCampaign(campaignId);
     if (campaignResult.status !== 200) {
-      console.error('❌ jsonGetCampaign failed:', campaignResult);
+      console.error('❌ jsonGetCampaign failed in realtime:', campaignResult);
       return new Response(
         JSON.stringify({ message: 'Error getting campaign', detail: campaignResult }),
         { status: campaignResult.status }

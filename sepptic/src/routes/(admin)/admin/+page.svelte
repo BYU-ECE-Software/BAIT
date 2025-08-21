@@ -1,6 +1,7 @@
-
 <script lang="ts">
 
+	import { goto } from "$app/navigation";
+import { redirect } from "@sveltejs/kit";
 import { Button, Modal, Label } from "flowbite-svelte";
 import { onMount } from "svelte"
 
@@ -19,26 +20,64 @@ async function getCampaigns() {
         return;
     }
     const data = await response.json();
-    console.log("Campaigns: ", data)
+   // console.log("Campaigns: ", data)
     for (const c of data) {
         campaigns.push(c);
     }
-    console.log(campaigns[0]);
+    //console.log(campaigns[0]);
 }
 
-async function submitDelete(id: string) {
-    const response = await fetch("/api/campaigns", {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ campaignId: id })
-    })
-    if (!response.ok) {
-        console.error("Failed to delete campaign");
-        return;
+async function getCharImages(id: string) {
+  const res = await fetch(`/api/campaigns/${id}`, {
+    method: "GET"
+  })
+  if (!res.ok) {
+    console.error("Failed to grab campaign data");
+    return;
+  }
+  const jsonRes = await res.json();
+  //console.log("Campaign chars: ", jsonRes.data.Characters)
+
+  return jsonRes.data.Characters;
+}
+
+
+
+async function submitDelete(id: string, image: string) {
+
+  const campaignImageRes = await fetch(image, {
+    method: "DELETE",
+  });
+
+  if (!campaignImageRes.ok) {
+    console.warn("Delete failed on campaign image, continuing to delete campaign: ", campaignImageRes.statusText)
+  }
+  
+  const chars = await getCharImages(id);
+
+  // The minus one is to prevent randy from being check because his image is a static asset accross campaigns
+  for (let i = 0; i < chars.length - 1; i++) {
+    const charImageRes = await fetch(chars[i].Image, {
+      method: "DELETE"
+    }); 
+
+    if (!charImageRes.ok) {
+      console.warn("Delete failed on character image, continuing to delete campaign json: ", charImageRes.statusText)
     }
-    console.log("Campaign deleted successfully: ", response.status);
+  }
+
+  const campaignRes = await fetch("/api/campaigns", {
+      method: "DELETE",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ campaignId: id })
+  })
+  if (!campaignRes.ok) {
+      console.error("Failed to delete campaign");
+      return;
+  }
+  console.log("Campaign deleted successfully: ", campaignRes.status);
 
 }
 </script>
@@ -62,9 +101,10 @@ async function submitDelete(id: string) {
         <p class="text-sm italic text-gray-500">No campaigns found.</p>
       {:else}
         {#each campaigns as campaign (campaign.id)}
-          <div class="flex items-center justify-between rounded-md border border-gray-200 p-3 hover:bg-gray-50">
-            <Label class="text-gray-800">{campaign.name}</Label>
-            <Button size="xs" color="red" on:click={() => submitDelete(campaign.id)}>
+          <div class="flex items-center gap-3 rounded-md border border-gray-200 p-3 hover:bg-gray-50">
+            <Label class="text-gray-800 flex-shrink-0 w-1/3 truncate">{campaign.name}</Label>
+            <Button class="w-24" size="xs" color="green" on:click={() => goto(`/edit/${campaign.id}`)}>Edit</Button>
+            <Button class="w-24" size="xs" color="red" on:click={() => submitDelete(campaign.id, campaign.image)}>
               Delete
             </Button>
           </div>

@@ -1,4 +1,7 @@
 # Potential Improvements
+
+**As of August 2025, we now track relevant future changes and improvements under the projects tab of the repository**
+
 This file is a list of any improvements that we think would be beneficial to the project. They are in no particular order, and are some things we noticed or wanted to do.
 
 - Better intel confirmation: Instead of having a quiz for each intel, have a more streamlined way to mark intel as found by user. For example, there should be a way to use ChatGPT functions that allow the AI to call a function that marks the intel automatically.

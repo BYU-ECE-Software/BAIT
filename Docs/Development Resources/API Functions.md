@@ -73,7 +73,7 @@ classDiagram
         success: boolean
     }
 
-    class API campaign/[campaignId] GET{
+    class API campaign[campaignId] GET{
         Token: string
         CampaignId: int
         -------------------
@@ -81,7 +81,7 @@ classDiagram
         message: string
     }
 
-    class API campaign/[campaignId] PUT{
+    class API campaign[campaignId] PUT{
         Token: string
         CampaignId: int
         campaignData: json
@@ -91,13 +91,13 @@ classDiagram
         success: boolean
     }
 
-    class API images/[filename] GET{
+    class API images[filename] GET{
         filename: string
         -------------------
         file: Buffer
     }
 
-    class API images/[filename] POST{
+    class API images[filename] POST{
         filename: string
         file: File
         -------------------
@@ -105,7 +105,7 @@ classDiagram
         success: boolean
     }
 
-    class API images/[filename] DELETE{
+    class API images[filename] DELETE{
         filename: string
         -------------------
         message: string
@@ -165,12 +165,12 @@ classDiagram
     style APIprofilePUT fill:#008,color:#FFF
     style APIcampaignGET fill:#008,color:#FFF
     style APIcampaignPOST fill:#008,color:#FFF
-    style APIcampaign/[campaignId]GET fill:#008,color:#FFF
-    style APIcampaign/[campaignId]PUT fill:#008,color:#FFF
+    style APIcampaign[campaignId]GET fill:#008,color:#FFF
+    style APIcampaign[campaignId]PUT fill:#008,color:#FFF
     style APIcampaignDELETE fill:#008,color:#FFF
-    style APIimages/[filename]GET fill:#008,color:#FFF
-    style APIimages/[filename]POST fill:#008,color:#FFF
-    style APIimages/[filename]DELETE fill:#008,color:#FFF
+    style APIimages[filename]GET fill:#008,color:#FFF
+    style APIimages[filename]POST fill:#008,color:#FFF
+    style APIimages[filename]DELETE fill:#008,color:#FFF
     style APImessageGET fill:#008,color:#FFF
     style APImessagePOST fill:#008,color:#FFF
     style APIrealtimePOST fill:#008,color:#FFF

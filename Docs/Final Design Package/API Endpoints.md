@@ -308,7 +308,7 @@ The `client_secret `value is what the frontend parses from the response for the 
 Request Body:
 ```json
 {
-    "fileData": "blob"
+    "file": "File"
 }
 ```
 Response Body:

@@ -7,7 +7,6 @@ export async function POST(event: RequestEvent) {
   const body = await event.request.json();
 
   let voiceType = body.voice; // The voice type to use for the AI response; comes from the CallCard request
-  let prompt = body.prompt; // The prompt to send to the AI
   let campaignId = body.campaignId; // The campaign ID to use for the AI
   let characterId = body.characterId; // The character ID to use for the AI
 
@@ -73,7 +72,7 @@ const campaignResult = await jsonGetCampaign(campaignId);
                         The other People you know are: ${summaries}.
                         `;
 
-  console.log("Full Prompt:", fullPrompt);
+  // console.log("Full Prompt:", fullPrompt);
   try {
     const response = await fetch("https://api.openai.com/v1/realtime/sessions", {
       method: "POST",

@@ -7,16 +7,15 @@ erDiagram
         Password varchar
         Name varchar
     }
+    UserEventLog {
+        Event_ID int PK
+        User_ID int FK
+        Event_Name text
+        Timestamp datetime
+    }
     Session {
         Token varchar PK
         Expiration date
-        User_ID int FK
-    }
-    Intel {
-        Intel_Record_ID int PK
-        Intel_ID int
-        Campaign_ID int
-        Character_ID int
         User_ID int FK
     }
     Conversation {
@@ -38,10 +37,15 @@ erDiagram
         Timestamp datetime
         Conversation_ID int FK
     }
+    Campaign {
+        Id int PK
+        Data mediumtext
+    }
 
     User ||--o{ Session : "has"
-    User }o--o{ Intel : "knows"
     User ||--o{ Conversation : "participates"
+    User ||--o{ UserEventLog : "has"
     Conversation ||--o{ Message : "contains"
     Conversation ||--o{ Transcription : "contains"
+
 ```

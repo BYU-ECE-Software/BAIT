@@ -20,7 +20,7 @@ The file is split into two major sections, Campaign Information and Characters.
 | Object Name | Description | 
 | --- | --- |
 |**Name**|The name of the campaign as shown practically everywhere|
-|Description|This is the description that is shown on the campaign selection screen.
+|**Description**|This is the description that is shown on the campaign selection screen.
 |**Brief**|This is the longer description that is shown on the campaign onboarding screen.|
 |**Image**|The filepath for the campaign image|
 |**Website**|The path for a website associated with the campaign, such as the fake Harvesta website|
@@ -184,7 +184,13 @@ The fullPrompt variable is then submitted to the AI.
 ## Campaign Creation Web Tool
 (This section may need to be revised as implementation changes.)
 
-In the website, there is a tool that you can use to create a custom campaign. This tool allows for you to customize all aspects of the campaign except for uploading image or video files. Once created, it will show up on the campaign selection screen and be available to the public. However, at the time of this writing, there is an issue: should a new commit be made to this repository and uploaded to the main branch on Github, the web server will be rebuilt and your custom campaign will be deleted.
+In the website, there is a tool that you can use to create a custom campaign. This tool allows for you to customize all aspects of the campaign except for uploading video files. Once created, it will show up on the campaign selection screen and be available to the public.
 
-In its current state, this creation tool is best used for rapidly creating and testing custom campaigns while run l. However, if you want to implement a campaign that remains between commits, it is best to commit this repository to main with the custom campaign's JSON file saved in the appropriate location. 
+### IMPORTANT: Note on Campaign Persistance
+Campaigns created using the web based creation tool are stored in the DB with an ID and JSON formatted campaign file (see DB Init script or Prisma scheme). This allows the Campaigns created through the web tool to persist past rebuilds of the bait container. As of this commit, images associated with campaigns built on the web are ***NOT*** automatically stored in any way that persists past a rebuild of the platform.
+
+If you want a campaign and its images to persist in a complete form, you will need to do the following:
+1. Store the images [in this folder](../../sepptic/images).
+2. Store the campaign json [in this folder](../../sepptic/src/campaign-seeds/). *When the BAIT platform container is built, a sync function found [here](../../sepptic/src/server/utils/campaignSync.ts) will automatically execute and sync any campaigns in the campaign-seed folder with the DB, restoring any that are missing.*
+3. In the actual json file for the campaign, you will also have to change the image url to be the direct path to the stored image rather than the api endpoint that is already there.
 

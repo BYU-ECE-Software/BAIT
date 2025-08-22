@@ -1,0 +1,35 @@
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: unless-stopped          # optional but recommended
+    environment:
+      MYSQL_ROOT_PASSWORD: <password> # WARNING: Will allow root login; could set up for DB user only for better security
+      MYSQL_USER: sepptic
+      MYSQL_PASSWORD: <password>
+      MYSQL_DATABASE: sepptic
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - sepptic_sepptic      # WARING: Make sure this is set as the same network sepptic & NPM use
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - mariadb
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+    networks:
+      - sepptic_sepptic
+    ports:
+      - "8080:80"   # host:container - You would expose port 80 on the proxy
+
+volumes:
+  mariadb_data:
+
+networks:
+  sepptic_sepptic:
+    external: true

@@ -50,23 +50,7 @@ classDiagram
         -------------------
         message: string
     }
-
-    class API progress GET{
-        Token: string
-        CampaignID: int
-        CharacterID: int
-        -------------------
-        progress: json list
-        message: string
-    }
-
-    class API progress POST{
-        Token: string
-        progress: json
-        -------------------
-        message: string
-    }
-
+    
     class API campaign GET{
         Token: string
         CampaignID: int
@@ -75,32 +59,124 @@ classDiagram
         message: string
     }
 
-    class API chat GET{
-        Token: string
-        ConversationId: int
+    class API campaign POST{
+        data: string
         -------------------
-        chat: json list
+        message: string
+        success: boolean
+    }
+
+    class API campaign DELETE{
+        CampaignID: int
+        -------------------
+        message: string
+        success: boolean
+    }
+
+    class API campaign_campaignId GET{
+        Token: string
+        CampaignId: int
+        -------------------
+        campaign: json
         message: string
     }
 
-    class API chat POST{
+    class API campaign_campaignId PUT{
         Token: string
-        ConversationId: int
-        message: string
+        CampaignId: int
+        campaignData: json
         -------------------
         message: string
+        status: number
+        success: boolean
     }
+
+    class API images_filename GET{
+        filename: string
+        -------------------
+        file: Buffer
+    }
+
+    class API images_filename POST{
+        filename: string
+        file: File
+        -------------------
+        message: string
+        success: boolean
+    }
+
+    class API images_filename DELETE{
+        filename: string
+        -------------------
+        message: string
+        success: boolean
+    }
+
+    class API message GET{
+        campaignId: string
+        characterId: string
+        fromid: string
+        fromname: string
+        call: boolean
+        -------------------
+        data: string
+        message: string
+    }
+
+    class API message POST{
+        filename: string
+        -------------------
+        message: string
+        success: boolean
+    }
+
+    class API realtime POST{
+        campaignId: string
+        charaterId: string
+        voiceType: string
+        --------------------
+        session.create: json
+        - EPHEMERAL_SESSION_TOKEN
+    }
+
+    class API resetCampaign POST{
+        campaignId: string
+    }
+
+    class API timestamp POST{
+        user: string
+        name: string
+    }
+
+    class API transcript POST{
+        campaignId: string
+        characterId: string
+        call: boolean
+        transcript: string
+        ---------------------
+        data: string
+    }
+
 
     style APIauthPOST fill:#008,color:#FFF
     style APIauthDELETE fill:#008,color:#FFF
     style APIregisterPOST fill:#008,color:#FFF
     style APIprofileGET fill:#008,color:#FFF
     style APIprofilePUT fill:#008,color:#FFF
-    style APIprogressGET fill:#008,color:#FFF
-    style APIprogressPOST fill:#008,color:#FFF
     style APIcampaignGET fill:#008,color:#FFF
-    style APIchatGET fill:#008,color:#FFF
-    style APIchatPOST fill:#008,color:#FFF
+    style APIcampaignPOST fill:#008,color:#FFF
+    style APIcampaign_campaignIdGET fill:#008,color:#FFF
+    style APIcampaign_campaignIdPUT fill:#008,color:#FFF
+    style APIcampaignDELETE fill:#008,color:#FFF
+    style APIimages_filenameGET fill:#008,color:#FFF
+    style APIimages_filenamePOST fill:#008,color:#FFF
+    style APIimages_filenameDELETE fill:#008,color:#FFF
+    style APImessageGET fill:#008,color:#FFF
+    style APImessagePOST fill:#008,color:#FFF
+    style APIrealtimePOST fill:#008,color:#FFF
+    style APIresetCampaignPOST fill:#008,color:#FFF
+    style APItimestampPOST fill:#008,color:#FFF
+    style APItranscriptPOST fill:#008,color:#FFF
 
     class DB createUser{
         email: string
@@ -169,49 +245,6 @@ classDiagram
         status: int
     }
 
-    class DB purgeSessions{
-        -------------------
-        message: string
-        status: int
-    }
-
-    class DB AddIntel{
-        userId: int
-        campaignId: int
-        characterId: int
-        intelId: int
-        -------------------
-        message: string
-        status: int
-    }
-
-    class DB GetIntel{
-        userId: int
-        campaignId: int
-        characterId: int
-        -------------------
-        message: string
-        status: int
-        intelIds: int list
-    }
-
-    class DB GetCampaignIntel{
-        userId: int
-        campaignId: int
-        -------------------
-        message: string
-        status: int
-        intelIds: int list
-    }
-
-    class DB GetAllIntel{
-        userId: int
-        -------------------
-        message: string
-        status: int
-        intelIds: int list
-    }
-
     class DB GetConversation{
         userId: int
         campaignId: int
@@ -241,21 +274,24 @@ classDiagram
         status: int
     }
 
+    class DB GetTranscript{
+        conversationId: int
+        -------------------
+        transcript: string
+        status: int
+    }
+
     style DBcreateUser fill:#F00,color:#FFF
     style DBupdateUser fill:#F00,color:#FFF
     style DBgetUser fill:#F00,color:#FFF
     style DBcreateSession fill:#F00,color:#FFF
     style DBdeleteSession fill:#F00,color:#FFF
     style DBgetSession fill:#F00,color:#FFF
-    style DBpurgeSessions fill:#F00,color:#FFF
-    style DBAddIntel fill:#F00,color:#FFF
-    style DBGetIntel fill:#F00,color:#FFF
     style DBGetConversation fill:#F00,color:#FFF
     style DBAddMessage fill:#F00,color:#FFF
     style DBGetMessages fill:#F00,color:#FFF
     style DBauthUser fill:#F00,color:#FFF
-    style DBGetAllIntel fill:#F00,color:#FFF
-    style DBGetCampaignIntel fill:#F00,color:#FFF
+    style DBGetTranscript fill:#F00,color:#FFF
 
     class JSON Get{
         -------------------
@@ -285,13 +321,6 @@ classDiagram
     }
 
     style QueryAI fill:#0A0,color:#FFF
-
-
-
-
-
-
-
 
     class HashPassword{
         password: string
@@ -368,32 +397,12 @@ classDiagram
     APIprofilePUT --|> GetUserIdFromToken
     APIprofilePUT --|> HashPassword
     APIprofilePUT --|> DBupdateUser
-    APIprogressGET --|> GetUserIdFromToken
-    APIprogressGET --|> CalculateAchievements
-    APIprogressGET --|> DBGetAllIntel
-    APIprogressGET --|> DBGetCampaignIntel
-    APIprogressGET --|> DBGetIntel
-    CalculateAchievements --|> DBGetAllIntel
-    ValidateProgress --|> JSONGetCampaign
-    APIprogressPOST --|> GetUserIdFromToken
-    APIprogressPOST --|> ValidateProgress
-    APIprogressPOST --|> DBAddIntel
     GetUserIdFromToken --|> DBgetSession
-    APIauthPOST --|> DBpurgeSessions
     APIcampaignGET --|> JSONGetCampaign
-    APIchatGET --|> GetUserIdFromToken
-    APIchatGET --|> ValidateConversation
     ValidateConversation --|> DBGetConversation
-    APIchatGET --|> GetConversationHistory
-    APIchatGET --|> DBGetMessages
-    APIchatPOST --|> GetUserIdFromToken
-    APIchatPOST --|> ValidateConversation
-    APIchatPOST --|> DBAddMessage
-    APIchatPOST --|> HandleAiMessage
     HandleAiMessage --|> QueryAI
     HandleAiMessage --|> DBAddMessage
     HandleAiMessage --|> GetConversationHistory
-
-
+    APImessageGET --|> DBGetTranscript
 
 ```

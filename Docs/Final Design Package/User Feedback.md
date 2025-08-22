@@ -1,6 +1,5 @@
-# NO LONGER RELEVANT
 
-# User Feedback
+# User Feedback - Capstone Testing
 This file will go over the general thoughts about SEPPTIC that were shared with the team.
 
 ## Post Experience
@@ -92,3 +91,7 @@ Future teams should focus on fixing the obscured information on the mobile view,
 
 ### Report Copies
 Copies of the surveys can be found in the [User Feedback Reports](../Final%20Design%20Package/User%20Feedback%20Reports/) folder.
+
+# User Feedback - IMMERSE Cyber Camps Testing
+
+The testing done during the IMMERSE program was preformed with the BYU Cyber Camps groups. This group consisted of high school and middle school aged students. The results and their feedback are found [here](../Final%20Design%20Package/User%20Feedback%20/Reports/) in the User Feedback folder

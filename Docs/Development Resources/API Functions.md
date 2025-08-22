@@ -397,28 +397,9 @@ classDiagram
     APIprofilePUT --|> GetUserIdFromToken
     APIprofilePUT --|> HashPassword
     APIprofilePUT --|> DBupdateUser
-    APIprogressGET --|> GetUserIdFromToken
-    APIprogressGET --|> CalculateAchievements
-    APIprogressGET --|> DBGetAllIntel
-    APIprogressGET --|> DBGetCampaignIntel
-    APIprogressGET --|> DBGetIntel
-    CalculateAchievements --|> DBGetAllIntel
-    ValidateProgress --|> JSONGetCampaign
-    APIprogressPOST --|> GetUserIdFromToken
-    APIprogressPOST --|> ValidateProgress
-    APIprogressPOST --|> DBAddIntel
     GetUserIdFromToken --|> DBgetSession
-    APIauthPOST --|> DBpurgeSessions
     APIcampaignGET --|> JSONGetCampaign
-    APIchatGET --|> GetUserIdFromToken
-    APIchatGET --|> ValidateConversation
     ValidateConversation --|> DBGetConversation
-    APIchatGET --|> GetConversationHistory
-    APIchatGET --|> DBGetMessages
-    APIchatPOST --|> GetUserIdFromToken
-    APIchatPOST --|> ValidateConversation
-    APIchatPOST --|> DBAddMessage
-    APIchatPOST --|> HandleAiMessage
     HandleAiMessage --|> QueryAI
     HandleAiMessage --|> DBAddMessage
     HandleAiMessage --|> GetConversationHistory

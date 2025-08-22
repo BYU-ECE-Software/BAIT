@@ -274,6 +274,13 @@ classDiagram
         status: int
     }
 
+    class DB GetTranscript{
+        conversationId: int
+        -------------------
+        transcript: string
+        status: int
+    }
+
     style DBcreateUser fill:#F00,color:#FFF
     style DBupdateUser fill:#F00,color:#FFF
     style DBgetUser fill:#F00,color:#FFF
@@ -284,6 +291,7 @@ classDiagram
     style DBAddMessage fill:#F00,color:#FFF
     style DBGetMessages fill:#F00,color:#FFF
     style DBauthUser fill:#F00,color:#FFF
+    style DBGetTranscript fill:#F00,color:#FFF
 
     class JSON Get{
         -------------------
@@ -414,7 +422,6 @@ classDiagram
     HandleAiMessage --|> QueryAI
     HandleAiMessage --|> DBAddMessage
     HandleAiMessage --|> GetConversationHistory
-
-
+    APImessageGET --|> DBGetTranscript
 
 ```

@@ -61,6 +61,8 @@ const campaignResult = await jsonGetCampaign(campaignId);
     const fullPrompt = `You will be taking on the following persona with the following traits:
                         Your name is ${character.Name}.
                         Only speak in English.
+                        You are being contacted by "${fromname}". If you are being contacted by "player" act like you are being contacted by a low level employee in your company. If you are being contacted by anyone else use the knowledge that you have about them to continue the conversation.
+                        You are being contacted over the phone from an in-house number. 
                         You know this general information ${campaign.Campaign_Information.Campaign_Knowledge}.
                         These are some of the types of social engineering attacks that people will use against you: ${Full_Attack_Knowledge}.
                         Your role: ${character.Title}.

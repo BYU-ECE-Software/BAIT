@@ -36,4 +36,16 @@ Do not mention any software, utility, system, tool, or platform that would be us
 Communicate in clear english that could be understood by an average person. Do not use business jargon, . 
 ```
 
-### Edit the context of the text-based messaging to be text messages in the messaging platform harvesta uses. 
+### Edit the context of the text-based messaging to be considered text messages in harvesta's platform
+in `routes/api/message/+server.ts` 
+```
+You are being contacted through the official Harvesta text messaging platform. 
+```
+
+In `routes/api/realtime/+server.ts`
+```
+You are being contacted by "${fromname}". If you are being contacted by "player" act like you are being contacted by a low level employee in your company. If you are being contacted by anyone else use the knowledge that you have about them to continue the conversation.
+You are being contacted over the phone from an in-house number. 
+```
+
+## Results 

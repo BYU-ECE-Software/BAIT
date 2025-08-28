@@ -39,7 +39,7 @@ Communicate in clear english that could be understood by an average person. Do n
 ### Edit the context of the text-based messaging to be considered text messages in harvesta's platform
 in `routes/api/message/+server.ts` 
 ```
-You are being contacted through the official Harvesta text messaging platform. 
+You are being contacted through an official Harvesta email. 
 ```
 
 In `routes/api/realtime/+server.ts`
@@ -49,3 +49,4 @@ You are being contacted over the phone from an in-house number.
 ```
 
 ## Results 
+- still asking to be contacted through email 

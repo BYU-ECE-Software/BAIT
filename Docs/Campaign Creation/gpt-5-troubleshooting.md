@@ -49,4 +49,9 @@ You are being contacted over the phone from an in-house number.
 ```
 
 ## Results 
-- still asking to be contacted through email 
+- still asking to be contacted through email with CCs, etc, but can be told that they are and it will believe it 
+- business jargon was not completely cut out but decently reduced 
+- mentions of external programs reduced but not gone 
+
+Overall, this was reasonably successful, but not as much as I had originally hoped. 
+Honestly, we would likely be better off switching back to the GPT-4o model than continuing to add additional guardrails to prevent the AI from misbehaving.

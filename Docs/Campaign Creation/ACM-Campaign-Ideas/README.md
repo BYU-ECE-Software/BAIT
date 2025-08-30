@@ -10,4 +10,4 @@
 Todo 
 - image 
 - fill out all char sheets
-- json file 
+- fill out the rest of the json file 

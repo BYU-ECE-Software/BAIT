@@ -13,7 +13,7 @@ export default async function aiSendMessage(message: string, prompt: string) {
         input: message,
         store: true,
         reasoning: {
-            effort: "low", // Prevents GPT-5 from taking forever to respond
+            effort: "high", // Prevents GPT-5 from taking forever to respond
         },
         previous_response_id: previousId
     })

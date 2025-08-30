@@ -11,3 +11,8 @@ Todo
 - image 
 - fill out all char sheets
 - fill out the rest of the json file 
+
+Done
+- added a ton of guardrails
+- tested the high reasoning gpt5 to no real result 
+- concluded going back to gpt-4o might be better

@@ -55,3 +55,7 @@ You are being contacted over the phone from an in-house number.
 
 Overall, this was reasonably successful, but not as much as I had originally hoped. 
 Honestly, we would likely be better off switching back to the GPT-4o model than continuing to add additional guardrails to prevent the AI from misbehaving.
+
+## 9-19-25 update
+GPT 5 is rampantly misbehaving as it is deployed in a classroom setting. I recommend reverting it back to gpt-4o. 
+GPT changes must be made in `sepptic/src/server/utils/aiSendMessage.ts`. I'm going to check with Jackson to see if this will cause issues with the chat array change. 

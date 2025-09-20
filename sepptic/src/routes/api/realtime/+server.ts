@@ -9,6 +9,8 @@ export async function POST(event: RequestEvent) {
   let voiceType = body.voice; // The voice type to use for the AI response; comes from the CallCard request
   let campaignId = body.campaignId; // The campaign ID to use for the AI
   let characterId = body.characterId; // The character ID to use for the AI
+  let fromname = body.fromname || "player"; // The name of the person calling the character
+  console.log("The name of supposed character:", fromname)
 
 const campaignResult = await jsonGetCampaign(campaignId);
     if (campaignResult.status !== 200) {

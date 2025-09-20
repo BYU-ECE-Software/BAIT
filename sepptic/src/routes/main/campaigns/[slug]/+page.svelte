@@ -359,6 +359,7 @@
                             campaignId={data.slug}
                             prompt={$selectedCharacter.Prompt}
                             voice={$selectedCharacter.Voice}
+                            fromname={$fromContact?.name}
                             CallLimit={$selectedCharacter.CallLimit}
                         />
                         {/key}

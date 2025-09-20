@@ -57,6 +57,5 @@ CREATE TABLE Campaign (
 
 -- Indexes for foreign key optimization
 CREATE INDEX idx_user_id_conversation ON Conversation(User_ID);
-CREATE INDEX idx_user_id_intel ON Intel(User_ID);
 CREATE INDEX idx_conversation_id_message ON Message(Conversation_ID);
 CREATE INDEX idx_user_id_session ON Session(User_ID);

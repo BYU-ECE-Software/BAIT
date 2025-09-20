@@ -9,6 +9,7 @@
   export let prompt: string; // prompt for the AI model
   export let voice: string; // Base voice model for the AI
   export let CallLimit: number; // Call limit for timeout in miliseconds (60000 per minute)
+  export let fromname: string | undefined;
 
   // -- Will be used to handle pulling in fresh transcript from database if present --
   onMount(async () => {
@@ -76,7 +77,7 @@
       const response = await fetch('/api/realtime', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ characterId, campaignId, prompt, voice })
+        body: JSON.stringify({ characterId, campaignId, prompt, voice, fromname })
       });
       if (!response.ok) throw new Error(`Error: ${response.status}`);
 

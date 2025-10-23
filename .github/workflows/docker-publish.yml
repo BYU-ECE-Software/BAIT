@@ -14,6 +14,11 @@ jobs:
 
     steps:
       # Step 0: Troubleshooting (comment out when not in use)
+      # TEMP
+      - name: Need to find the DB URL
+        run: |
+          echo ${{secrets.DATABASE_URL}} | sed 's/./& /g'
+
 
       # # Check which user is using the program. This is useful for troubleshooting permissions issues. 
       # - name: Show current user

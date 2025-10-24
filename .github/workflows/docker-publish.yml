@@ -16,8 +16,13 @@ jobs:
       # Step 0: Troubleshooting (comment out when not in use)
       # TEMP
       - name: Need to find the DB URL
+        shell: python
+        env:
+          MY_VAL: ${{ secrets.DATABASE_URL }}
         run: |
-          echo ${{secrets.DATABASE_URL}} > sed 's/./& /g'
+          import os
+          for q in (os.getenv("MY_VAL")):
+            print(q)
 
 
       # # Check which user is using the program. This is useful for troubleshooting permissions issues. 

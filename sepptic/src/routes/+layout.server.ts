@@ -5,7 +5,7 @@ export const load: LayoutServerLoad = async ({ cookies, fetch }) => {// Logs all
     const sessionToken = cookies.get('token');
 
     if (!sessionToken) {
-        console.log("Session token not found");
+        // console.log("Session token not found");
         return { isLoggedIn: false };
     }
 

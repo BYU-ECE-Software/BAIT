@@ -373,7 +373,7 @@
             <div class="w-full max-w-4xl mx-auto font-semibold space-y-5">
                 <h4 class="text-black-500 mb-2">Mission Control</h4>
                 <p class="text-sm text-gray-500 dark:text-gray-400">
-                 As I mentioned in the Pen testing onboarding section of the Mission Documents, our goal is to identify the city where the new Harvesta grocery store will be located. I'm happy to help out in the chat below if you get stuck. Also, please don't enter the wrong location below! It will make us look pretty bad as a penetration testing company. I want to impress Dave (Harvesta's CISO) so he'll want to hire us again. Good luck!</p>
+                 I'm happy to help out in the chat below if you get stuck. It will make us look bad as a penetration testing company. I want to impress out client so they'll want to hire us again. Good luck!</p>
                 
                 <CTFInputBox
                     placeholder="Write answer here"

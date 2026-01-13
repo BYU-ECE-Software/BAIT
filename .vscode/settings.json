@@ -7,5 +7,6 @@
         "Harvesta",
         "headshot",
         "Listgroup"
-    ]
+    ],
+    "prisma.pinToPrisma6": true
 }
